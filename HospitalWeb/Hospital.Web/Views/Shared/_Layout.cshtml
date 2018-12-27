@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 
+    @RenderSection("css", required: false)
 </head>
 <body>
     <div class="k-header">
@@ -35,27 +36,31 @@
         </div>
     </div>
     <div class="container menu-content">
-            <div id="responsive-panel">
-                @(Html.Kendo().Menu()
-                    .Name("Menu")
-                    .Items(items =>
-                    {
-                        items.Add()
-                            .Text("Home")
-                            .Action("Index", "Home");
-                        items.Add()
-                            .Text("About")
-                            .Action("About", "Home");
-                        items.Add()
-                            .Text("Contact")
-                            .Action("Contact", "Home");
-                        items.Add().Text("Disabled item").Enabled(false);
-                    })
-                )
-            </div>
-            <button id="configure" class="k-rpanel-toggle k-button k-primary btn-toggle"><span class="k-icon k-i-hbars"></span></button>
+        <div id="responsive-panel">
+            @(Html.Kendo().Menu()
+                        .Name("Menu")
+                        .Items(items =>
+                        {
+                            items.Add()
+                                .Text("Home")
+                                .Action("Index", "Home");
+                            items.Add()
+                                .Text("About")
+                                .Action("About", "Home");
+                            items.Add()
+                                .Text("Contact")
+                                .Action("Contact", "Home");
+                            items.Add().Text("Disabled item").Enabled(false);
+                        })
+            )
         </div>
+        <button id="configure" class="k-rpanel-toggle k-button k-primary btn-toggle"><span class="k-icon k-i-hbars"></span></button>
+    </div>
     <div class="container body-content">
+        @Html.Kendo().DateTimePicker().Name("testdp1")
+
+        <kendo-datetimepicker name='testdp2' />
+
         @RenderBody()
         <footer class="footer">
             <span class="text-muted">Copyright © @DateTime.Now.Year Progress Software Corporation and/or its subsidiaries or affiliates.</span>
