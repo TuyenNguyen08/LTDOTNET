@@ -497,7 +497,6 @@ body
     float: left;
     width: 516px;
     margin-top: 7px;
-    height: 8px;
     background: url(../images/bg_tiitle.jpg) repeat-x left top;
 }
 .news1
@@ -676,19 +675,17 @@ body
 .bg-mobil
 {
     float: left;
-    width: 690px;
-    height: 71px;
-    background-color: #49b5f4;
+    background-color: #016ca0;
     margin-top: 30px;
 }
-.bg-mobil h6
-{
-    float: left;
-    color: #10da41;
-    margin-top: 14px;
-    font-size: 14px;
-    width: 185px;
-}
+    .bg-mobil h6 {
+        float: left;
+        color: #10da41;
+        margin-top: 14px;
+        font-size: 14px;
+        width: 200px;
+        margin: 20px;
+    }
 .bg-mobil h6 span
 {
     color: #fff;
@@ -748,7 +745,7 @@ body
     font-weight: bold;
     text-indent: 6px;
     height: 27px;
-    background: url(../../images/title_right.jpg) no-repeat left bottom;
+    background: url(../images/title_right.jpg) no-repeat left bottom;
 }
 .video img
 {
@@ -765,7 +762,7 @@ body
     width: 100%;
     height: 137px;
     margin-top: 20px;
-    background: url(../images/Tuvan.png) no-repeat left top;
+    background: url(../../images/Tuvan.png) no-repeat left top;
 }
 .video .bg_httt a img
 {
@@ -814,7 +811,6 @@ body
 {
     float: left;
     width: 150px;
-    margin: 10px 20px 0 0;
 }
 
 .body-footer p a

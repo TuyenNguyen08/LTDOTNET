@@ -10,6 +10,18 @@
         <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2018.3.1017" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Update="wwwroot\fonts\Material-Design-Iconic-Font.ttf">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\fonts\Material-Design-Iconic-Font.woff">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\fonts\Material-Design-Iconic-Font.woff2">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
         <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
     </PropertyGroup>

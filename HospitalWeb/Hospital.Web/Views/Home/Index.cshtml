@@ -2,8 +2,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section css {
-    <link rel="stylesheet" href="~/css/stylev1.css" />
+    
     <link href="~/css/material-design-iconic-font.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+
+
 
 }
 
@@ -13,7 +16,7 @@
         <div class="welcome_slider owl-carousel">
             <div class="single_welcome_slider">
                 <div class="row align-items-center">
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-12 col-md-6">
                         <div class="welcome_content">
                             <h1>Growing up my dolls were doctors and on secret missions.</h1>
                             <p>Alongside Rouhani Referring to the marginalisation of life reformists after the disputed presidential vote then.</p>
@@ -25,7 +28,7 @@
             </div>
             <div class="single_welcome_slider">
                 <div class="row align-items-center">
-                    <div class="col-lg-6 col-md-8">
+                    <div class="col-lg-12 col-md-8">
                         <div class="welcome_content">
                             <h1>Growing up my dolls were doctors and on secret missions.</h1>
                             <p>Alongside Rouhani Referring to the marginalisation of life reformists after the disputed presidential vote then.</p>
@@ -101,34 +104,34 @@
         </div>
     </div>
     <div class="container">
-        <div class="row" style="background-color: #016ca0">
+        <div class="row text-center" style="background-color: #016ca0;" >
             <div class="col-md-3">
                 <img src="~/images/icon-slider.jpg" alt="" />
             </div>
 
-            <div class="col-md-3">
-                <h4 style="color: white">
+            <div class="col-md-3 cc">
+                <h3 >
                     Cấp cứu 24/24
-                </h4>
-                <h4 style="color: white">
+                </h3>
+                <h4 >
                     (08) 3 45 687 25
                 </h4>
             </div>
 
-            <div class="col-md-3">
-                <h4 style="color: white">
+            <div class="col-md-3 cc">
+                <h3 >
                     Đường dây nóng
-                </h4>
-                <h4 style="color: white">
+                </h3>
+                <h4 >
                     (08) 3 45 687 25
                 </h4>
             </div>
 
-            <div class="col-md-3">
-                <h4 style="color: white">
+            <div class="col-md-3 cc">
+                <h3 >
                     Đăng ký hẹn khám bệnh
-                </h4>
-                <h4 style="color: white">
+                </h3>
+                <h4 >
                     (08) 3 45 687 25
                 </h4>
             </div>
@@ -244,7 +247,7 @@
                         </div>
                     </div>
                     <div class="bg-mobil">
-                        <h6 style="color: #f6ff00; margin-left: 120px;">
+                        <h6 style="color: #f6ff00;">
                             Cấp cứu 24/24 <br />
                             <span>
                                 (08 3 25 258 20)
@@ -332,9 +335,8 @@
 @section scripts {
     <script src="~/js/owl.carousel.min.js"></script>
     <script>
+
         jQuery(document).on('ready', function () {
-
-
             //slider plugin
             if ($.fn.owlCarousel) {
                 //==welcome_area==\\
@@ -343,7 +345,7 @@
                     items: 1,
                     loop: true,
                     smartSpeed: 500,
-                    autoplay: true,
+                    autoplay: false,
                     mouseDrag: false,
                     touchDrag: false,
                     dots: true,
@@ -374,6 +376,7 @@
 
 
         });
+
     </script>
 
 }

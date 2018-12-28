@@ -445,7 +445,8 @@ ul.main_menu>li:hover>ul {
  ====/========        =======/====/*/
 
 .single_welcome_slider {
-    height: 750px;
+    margin-top:50px;
+    height: auto;
     min-height: 450px;
     display: -webkit-flex;
     display: -moz-flex;
@@ -520,9 +521,7 @@ ul.main_menu>li:hover>ul {
 }
 
 .w_man {
-    position: absolute;
     right: 0;
-    bottom: -183px;
 }
 
 .welcome_areaa {
@@ -1168,10 +1167,9 @@ footer:after {
 }
 
 .footer_widget .widget_menu li {
-    margin-bottom: 10px;
+   
     position: relative;
     z-index: 1;
-    padding-left: 25px;
 }
 
 .footer_widget .widget_menu a,
@@ -1767,7 +1765,6 @@ a.single_recent_post {
 .widget_menu a {
     color: #565656;
     transition: .3s linear;
-    margin-bottom: 10px;
     color: #565656;
 }
 
@@ -2549,7 +2546,6 @@ td.fc-day.fc-widget-content {
 td.fc-event-container {
     color: #fff;
 }
-
 .fc-event,
 .fc-event-dot {
     background: #44A6F0;
@@ -5109,6 +5105,10 @@ a.read_btn.v5:hover {
 }
 footer.v5 {
     background: #FCFCFC;
+}
+
+#menu_footer{
+    padding-top:5%;
 }
 
 footer.v5 .footer_area.home_2 a:hover,
