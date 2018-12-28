@@ -14,9 +14,13 @@
     <script src="~/lib/kendo-2018.3/kendo.all.min.js"></script>
     <script src="~/lib/kendo-2018.3/kendo.aspnetmvc.min.js"></script>
 
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+
+
+
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -25,50 +29,176 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link href="~/css/slicknav.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+
     @RenderSection("css", required: false)
+
+
+
+
 </head>
 <body>
-    <div class="k-header">
-        <div class="container">
-            <div class="row">
-                <h1><a asp-controller="Home" asp-action="Index">Your .NET Core Application</a></h1>
+
+
+    <div class="preloader">
+        <img src="~/images/img/preloader.gif" alt="">
+    </div>
+    <header>
+        <div class="header_top_area">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-12">
+                        <div class="htl">
+                            <p>Welcome to our medical care!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-12 text-right">
+                        <div class="htr">
+                            <a href="#" class="htr_single_contact"><i class="zmdi zmdi-sign-in"></i>Đăng ký</a>
+                            <a href="#" class="htr_single_contact"><i class="zmdi zmdi-sign-in"></i>Đăng nhập</a>
+                            <a href="#" class="htr_single_contact"><i class=""></i>Sơ đồ trang</a>
+                            <a class="vn" href="">
+                                <img src="~/images/vn.jpg" alt="" />
+                            </a> <a class="el" href="">
+                                <img src="~/images/vn-03.jpg" alt="" />
+                            </a>
+                            <a href="#" class="htr_single_contact"><i class=""></i>Thư góp ý</a>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container menu-content">
-        <div id="responsive-panel">
-            @(Html.Kendo().Menu()
-                                .Name("Menu")
-                                .Items(items =>
-                                {
-                                    items.Add()
-                                        .Text("Home")
-                                        .Action("Index", "Home");
-                                    items.Add()
-                                        .Text("About")
-                                        .Action("About", "Home");
-                                    items.Add()
-                                        .Text("Contact")
-                                        .Action("Contact", "Home");
-                                    items.Add().Text("Disabled item").Enabled(false);
-                                })
-            )
+        <div class="header_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 col-6">
+                        <a href="#" class="site_logo">
+                            <img src="~/images/logo.jpg" alt="" />
+                        </a>
+
+                    </div>
+                    <div class="col-lg-10 text-center col-6">
+                        <h1>Bệnh viện quân dân Y miền đông</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 text-center col-6">
+                        <nav class="menu_bar">
+                            <ul class="main_menu">
+                                <li><a href="index.html">Trang chủ</a></li>
+                                <li>
+                                    <a href="#">Giới thiệu</a>
+                                    <ul>
+                                        <li><a href="#">Ban Giám đốc</a></li>
+                                        <li><a href="#">Lịch sử hình thành</a></li>
+                                        <li><a href="#">Chức năng nhiệm vụ</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Kĩ thuật</a></li>
+                                <li>
+                                    <a href="#">Dịch vụ</a>
+                                    <ul>
+                                        <li><a href="#">Sức khỏa định kỳ</a></li>
+                                        <li><a href="#">Phẩu thuật kỹ thuật cao</a></li>
+                                        <li><a href="#">Dịch vụ kỹ thuật cao RHM</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="">Tin tức</a></li>
+                                <li><a href="">Đề tài nghiên cứu khoa học</a></li>
+                                <li><a href="">Liên hệ</a></li>
+
+                            </ul>
+                            <form action="#" class="search_form">
+                                <input type="search" placeholder="Search here">
+                                <button type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                        </nav>
+                    </div>
+                </div>
+            </div>
         </div>
-        <button id="configure" class="k-rpanel-toggle k-button k-primary btn-toggle"><span class="k-icon k-i-hbars"></span></button>
-    </div>
-    <div class="container body-content">
-        @Html.Kendo().DateTimePicker().Name("testdp1")
+    </header>
 
-        <kendo-datetimepicker name='testdp2' />
-
-        @RenderBody()
-        <footer class="footer">
-            <span class="text-muted">Copyright © @DateTime.Now.Year Progress Software Corporation and/or its subsidiaries or affiliates.</span>
-            <span class="text-muted">All rights reserved.</span>
-        </footer>
-    </div>
+    <!--Content here-->
+    @RenderBody()
+    <!-- Footer Area Start-->
+    <footer>
+        <div class="footer">
+            <div class="body-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-2 col-12">
+                            <div class="footer_widget">
+                                <ul class="widget_menu">
+                                    <li><a href="#"><i></i> Diễn đàn</a></li>
+                                    <li><a href="#"><i></i> Trang chủ</a></li>
+                                    <li><a href="#"><i></i> Giới thiệu chung</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-2 col-12">
+                            <div class="footer_widget">
+                                <ul class="widget_menu">
+                                    <li><a href="#"><i></i>Sitemap</a></li>
+                                    <li><a href="#"><i></i> Quy định chung</a></li>
+                                    <li><a href="#"><i></i>Dịch vụ y tế</a></li>
+                                    <li><a href="#"><i></i> Thẻ thành viên</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-2 col-12">
+                            <div class="footer_widget">
+                                <ul class="widget_menu">
+                                    <li><a href="#"><i></i> Xét nghiệm</a></li>
+                                    <li><a href="#"><i></i> Điều trị nội trú</a></li>
+                                    <li><a href="#"><i></i> Đăng ký khám bệnh</a></li>
+                                    <li><a href="#"><i></i> Đặt hẹn trực tuyến</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-2 col-12">
+                            <div class="footer_widget">
+                                <ul class="widget_menu">
+                                    <li><a href="#"><i></i> Hướng dẫn khám bệnh</a></li>
+                                    <li><a href="#"><i></i> Tư vấn sức khỏe</a></li>
+                                    <li><a href="#"><i></i> Dịch vụ chuyên khoa</a></li>
+                                    <li><a href="#"><i></i> Chương trình trọn gói</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-12">
+                            <div class="footer_widget">
+                                <p class="diachi">
+                                    <b>BỆNH VIỆN QUÂN DÂN MIỀN ĐÔNG</b><br />
+                                    Địa chỉ: 50 Lê Văn Việt, P.Hiệp Phú, Q.9, TP.HCM<br />
+                                    Điện thoại: 08. 38 960 054 - Fax: 08. 37 307 125<br />
+                                    Email: quandanmiendong@gmail.com
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright_area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <span>Copyright © 2013 Quan Dan Mien Dong Hospital. Alright reserved. </span><a href="">
+                                <img src="~/images/face-icon.png" alt="" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     @RenderSection("scripts", required: false)
+
+     
     <script>
         $(document).ready(function () {
             $("#responsive-panel").kendoResponsivePanel({
@@ -76,10 +206,13 @@
                 autoClose: false,
                 orientation: "top"
             });
+            $('.preloader').fadeOut(3000);
         });
+
         function onclick(e) {
             $("#responsive-panel").getKendoResponsivePanel().toggle();
         }
     </script>
+
 </body>
 </html>

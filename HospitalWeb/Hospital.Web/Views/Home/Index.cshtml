@@ -1,80 +1,379 @@
-@{
-	ViewData["Title"] = "Home Page";
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css {
+    <link rel="stylesheet" href="~/css/stylev1.css" />
+    <link href="~/css/material-design-iconic-font.min.css" rel="stylesheet" />
+
 }
 
-<div class="row">
-	<div class="col-xs-4 col-md-3 placeholder">
-		<img class="img-responsive" alt="200x200" src="~/Images/200.png">
-	</div>
-	<div class="col-xs-12 col-md-9">
-		<div class="row">
-			<div class="col-xs-12 col-md-12">
-				<h2>Lorem ipsum...</h2>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12 col-md-4">
-				<p>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-					Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-					galley of type and scrambled it to make a type specimen book.
-				</p>
 
-				<p>
-					<kendo-button name="PrimaryButton" tag="span" class="textButton k-primary">Primary Button</kendo-button>
-				</p>
-			</div>
+<div class="welcome_areaa" style="background-image: url(images/img/welcome_shap.png);">
+    <div class="container">
+        <div class="welcome_slider owl-carousel">
+            <div class="single_welcome_slider">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="welcome_content">
+                            <h1>Growing up my dolls were doctors and on secret missions.</h1>
+                            <p>Alongside Rouhani Referring to the marginalisation of life reformists after the disputed presidential vote then.</p>
+                            <a href="#" class="custom_btn">Know more  <i class="zmdi zmdi-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w_man"><img src="~/images/img/welcome1.png" alt=""></div>
+            </div>
+            <div class="single_welcome_slider">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-8">
+                        <div class="welcome_content">
+                            <h1>Growing up my dolls were doctors and on secret missions.</h1>
+                            <p>Alongside Rouhani Referring to the marginalisation of life reformists after the disputed presidential vote then.</p>
+                            <a href="#" class="custom_btn">Know more  <i class="zmdi zmdi-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w_man"><img src="~/images/img/welcome2.png" alt=""></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Welcome Area End-->
+<!-- Cbox Area Start-->
+<div class="cbox_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="single_cbox">
+                    <div class="cbox_title">
+                        <div class="cbox_icon">  <img src="~/images/icon-1.png" alt="" /></div>
+                        <h4>Đăng ký khám bênh qua mạng</h4>
+                    </div>
+                    <p>
+                        Dịch vụ "Đăng ký khám theo hẹn" bắt đầu đi vào hoạt động từ ngày 09 tháng 4 năm
+                        2009.Ngoài ra, phụ huynh có con cần khám dịch vụ tại phòng khám vẫn có thể đặt lịch
+                        trước bằng cách ...
+                    </p>
 
-			<div class="col-xs-12 col-md-4">
-				<p>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-					Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-					galley of type and scrambled it to make a type specimen book.
-				</p>
-				<p>
-                    <kendo-button name="TextButton" tag="span" class="textButton">Button</kendo-button>
-				</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="single_cbox">
+                    <div class="cbox_title">
+                        <div class="cbox_icon"><img src="~/images/icon-2.png" alt=""></div>
+                        <h4>Xem hồ sơ bệnh án trên mạng</h4>
+                    </div>
+                    <p>
+                        Dịch vụ "Đăng ký khám theo hẹn" bắt đầu đi vào hoạt động từ ngày 09 tháng 4 năm
+                        2009.Ngoài ra, phụ huynh có con cần khám dịch vụ tại phòng khám vẫn có thể đặt lịch
+                        trước bằng cách ...
+                    </p>
 
-			</div>
-			<div class="col-xs-12 col-md-4">
-				<p>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-					Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-					galley of type and scrambled it to make a type specimen book.
-				</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="single_cbox">
+                    <div class="cbox_title">
+                        <div class="cbox_icon"><img src="~/images/icon-3.png" alt=""></div>
+                        <h4>Xem lịch khám theo bác sĩ</h4>
+                    </div>
+                    <p>
+                        Dịch vụ "Đăng ký khám theo hẹn" bắt đầu đi vào hoạt động từ ngày 09 tháng 4 năm
+                        2009.Ngoài ra, phụ huynh có con cần khám dịch vụ tại phòng khám vẫn có thể đặt lịch
+                        trước bằng cách ...
+                    </p>
 
-				<p>
-                    <kendo-button name="Button" tag="span" class="textButton">Button</kendo-button>
-				</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="single_cbox">
+                    <div class="cbox_title">
+                        <div class="cbox_icon"><img src="~/images/icon-3.png" alt=""></div>
+                        <h4>diễn đàn hỏi đáp y khoa</h4>
+                    </div>
+                    <p>
+                        Dịch vụ "Đăng ký khám theo hẹn" bắt đầu đi vào hoạt động từ ngày 09 tháng 4 năm
+                        2009.Ngoài ra, phụ huynh có con cần khám dịch vụ tại phòng khám vẫn có thể đặt lịch
+                        trước bằng cách ...
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" style="background-color: #016ca0">
+            <div class="col-md-3">
+                <img src="~/images/icon-slider.jpg" alt="" />
+            </div>
 
-			</div>
-		</div>
-	</div>
+            <div class="col-md-3">
+                <h4 style="color: white">
+                    Cấp cứu 24/24
+                </h4>
+                <h4 style="color: white">
+                    (08) 3 45 687 25
+                </h4>
+            </div>
 
+            <div class="col-md-3">
+                <h4 style="color: white">
+                    Đường dây nóng
+                </h4>
+                <h4 style="color: white">
+                    (08) 3 45 687 25
+                </h4>
+            </div>
+
+            <div class="col-md-3">
+                <h4 style="color: white">
+                    Đăng ký hẹn khám bệnh
+                </h4>
+                <h4 style="color: white">
+                    (08) 3 45 687 25
+                </h4>
+            </div>
+        </div>
+
+    </div>
 </div>
 
-<div class="row">
-	<div class="col-xs-18 col-md-12">
-		@(Html.Kendo().Grid<Hospital.Web.Models.OrderViewModel>()
-				.Name("grid")
-				.Columns(columns =>
-				{
-					columns.Bound(p => p.OrderID).Filterable(false);
-					columns.Bound(p => p.Freight);
-					columns.Bound(p => p.OrderDate).Format("{0:MM/dd/yyyy}");
-					columns.Bound(p => p.ShipName);
-					columns.Bound(p => p.ShipCity);
-				})
-				.Pageable()
-				.Sortable()
-				.Scrollable()
-				.Filterable()
-				.HtmlAttributes(new { style = "height:550px;" })
-				.DataSource(dataSource => dataSource
-					.Ajax()
-					.PageSize(20)
-					.Read(read => read.Action("Orders_Read", "Grid"))
-				)
-		)
-	</div>
+<!-- Cbox Area end-->
+<!-- About Area Start-->
+<div class="about_area background_grey">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="about">
+                    <h2>làm đẹp với hai chuyên gia thẩm mỹ hàng đầu đến từ pháp</h2>
+                    <div class="about_txt">
+                        <p>
+                            Dịch vụ "Đăng ký khám theo hẹn" bắt đầu đi vào hoạt động từ ngày 09 tháng 4 năm
+                            2009.Ngoài ra, phụ huynh có con cần khám dịch vụ tại phòng khám vẫn có thể đặt lịch
+                            trước bằng cách Dịch vụ "Đăng ký khám theo hẹn" bắt đầu đi vào hoạt động từ ngày
+                            09 tháng 4 năm 2009.Ngoài ra, phụ huynh có con cần khám dịch vụ tại phòng khám vẫn
+                            có thể đặt lịch trước bằng cách Dịch vụ "Đăng ký khám theo hẹn" bắt đầu đi vào hoạt
+                            động từ ngày 09 tháng 4 năm 2009.Ngoài ra, phụ huynh có con cần khám dịch vụ tại
+                            phòng khám vẫn có thể đặt lịch trước bằng cách Dịch vụ "Đăng ký khám theo hẹn"từ
+                            ngày 09 tháng 4 năm 2009. <a href="">Xem tiếp</a>
+                        </p>
+                    </div>
+                    <div class="about_news">
+                        <ul>
+                            <li>
+                                <img src="~/images/icon-about.jpg" alt="" />
+                                <a href="">Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc </a>
+                            </li>
+                            <li>
+                                <img src="~/images/icon-about.jpg" alt="" />
+                                <a href="">Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc </a>
+                            </li>
+                            <li>
+                                <img src="~/images/icon-about.jpg" alt="" />
+                                <a href="">Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc </a>
+                            </li>
+                            <li>
+                                <img src="~/images/icon-about.jpg" alt="" />
+                                <a href="">Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc </a>
+                            </li>
+                            <li>
+                                <img src="~/images/icon-about.jpg" alt="" />
+                                <a href="">Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc </a>
+                            </li>
+                            <li>
+                                <img src="~/images/icon-about.jpg" alt="" />
+                                <a href="">Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc </a>
+                            </li>
+                            <li>
+                                <img src="~/images/icon-about.jpg" alt="" />
+                                <a href="">Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc </a>
+                            </li>
+                            <li>
+                                <img src="~/images/icon-about.jpg" alt="" />
+                                <a href="">Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc </a>
+                            </li>
+                            <li>
+                                <img src="images/icon-about.jpg" alt="" />
+                                <a href="">Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="box_news">
+                        <div class="title_news">
+                            <div class="color-title">
+                            </div>
+                            <h2>
+                                Tin tức mới nhất
+                            </h2>
+                            <div class="repeat-title">
+                            </div>
+                        </div>
+                        <div class="news1">
+                            <a href="">
+                                <img src="~/images/img_news.jpg" alt="" />
+                            </a>
+                            <h6>
+                                <a href="">Văn phòng đại diện, hợp tác thương mại</a>
+                            </h6>
+                            <p>
+                                Công ty chúng tôi đã đầu tư xây dựng các dự án trọng điểm như tòa nhà văn phòng,
+                                hay trung tâm đào tạo nghề
+                            </p>
+                        </div>
+                        <div class="news2">
+                            <ul>
+                                <li>
+                                    <img src="~/images/news2.jpg" alt="" />
+                                    <p>
+                                        <a href="">Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc </a><span>10 Lượt xem</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <img src="~/images/news3.jpg" alt="" />
+                                    <p>
+                                        <a href="">Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc </a><span>54 Lượt xem</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <img src="~/images/news2.jpg" alt="" />
+                                    <p>
+                                        <a href="">Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc </a><span>34 Lượt xem</span>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bg-mobil">
+                        <h6 style="color: #f6ff00; margin-left: 120px;">
+                            Cấp cứu 24/24 <br />
+                            <span>
+                                (08 3 25 258 20)
+                            </span>
+                        </h6>
+                        <h6 style="color: #f6ff00">
+                            Cấp cứu 24/24 <br />
+                            <span>
+                                (08 3 25 258 20)
+                            </span>
+                        </h6>
+                        <h6 style="color: #f6ff00">
+                            Cấp cứu 24/24 <br />
+                            <span>
+                                (08 3 25 258 20)
+                            </span>
+                        </h6>
+                    </div>
+                    <div class="bottom_cl">
+                        <div class="ha_1">
+                            <a href="">
+                                <img src="~/images/sk_tong-quat.jpg" alt="" />
+                            </a>
+                            <p>
+                                <a href="">Khám sức khỏe tổng quát</a>
+                            </p>
+                        </div>
+                        <div class="ha_1">
+                            <a href="">
+                                <img src="~/images/thongtin-tuyendung.jpg" alt="" />
+                            </a>
+                            <p>
+                                <a href="">Thông tin tuyển dụng</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="video">
+                    <div class="title_video">
+                        Video
+                    </div>
+                    <iframe width="272" height="237" src="http://www.youtube.com/embed/6_ePYRcNFoY" frameborder="0"
+                            allowfullscreen></iframe>
+                </div>
+                <div class="video">
+                    <div class="title_video">
+                        <p>
+                            Hỗ trợ trực tuyến
+                        </p>
+                    </div>
+                    <div class="bg_httt">
+                        <a href="">
+                            <img style="width: 72px; height: 22px; margin: 112px 0 0 10px" src="~/images/skype.jpg"
+                                 alt="" />
+                        </a> <a href="">
+                            <img src="~/images/yahoo.jpg" alt="" />
+                        </a>
+                    </div>
+                </div>
+                <div class="video">
+                    <div class="title_video">
+                        <p class="sk">Sự kiện</p>
+                    </div>
+                    <div class="bg_httt2">
+                        <div class="bg_1">
+                            <div class="bottom_img">
+                                <a href="">Chương trình thẻ hội viên</a>
+                            </div>
+                        </div>
+                        <a href="">
+                            <img src="~/images/sk2.jpg" alt="" />
+                        </a> <a href="">
+                            <img src="~/images/sk3.jpg" alt="" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+@section scripts {
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script>
+        jQuery(document).on('ready', function () {
+
+
+            //slider plugin
+            if ($.fn.owlCarousel) {
+                //==welcome_area==\\
+                var wSlider = $('.welcome_slider');
+                wSlider.owlCarousel({
+                    items: 1,
+                    loop: true,
+                    smartSpeed: 500,
+                    autoplay: true,
+                    mouseDrag: false,
+                    touchDrag: false,
+                    dots: true,
+                    nav: true,
+                    navText: ['<i class="zmdi zmdi-chevron-left"></i>', '<i class="zmdi zmdi-chevron-right"></i>']
+                });
+
+                //==welcome_area animation==\\
+                wSlider.on('translate.owl.carousel', function () {
+                    $('.welcome_content h1').removeClass('fadeInLeft animated').hide();
+                    $('.welcome_content p').removeClass('fadeInLeft animated').hide();
+                    $('.welcome_content a').removeClass('fadeInLeft animated').hide();
+                    $('.welcome_area.v3 img').removeClass('fadeInRight animated').hide();
+                    $('.w_man').removeClass('fadeInRight animated').hide();
+                    $('.welcome_slider form').removeClass('fadeInRight animated').hide();
+                });
+                wSlider.on('translated.owl.carousel', function () {
+                    $('.owl-item.active .welcome_content h1').addClass('fadeInLeft animated').show();
+                    $('.owl-item.active .welcome_content p').addClass('fadeInLeft animated').show();
+                    $('.owl-item.active .welcome_content a').addClass('fadeInLeft animated').show();
+                    $('.welcome_area.v3 .owl-item.active img').addClass('fadeInRight animated').show();
+                    $('.owl-item.active .w_man').addClass('fadeInRight animated').show();
+                    $('.welcome_slider .owl-item.active form').addClass('fadeInRight animated').show();
+                });
+
+            };
+
+
+
+        });
+    </script>
+
+}
