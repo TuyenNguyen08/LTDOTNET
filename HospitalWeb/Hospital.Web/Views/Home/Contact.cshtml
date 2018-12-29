@@ -1,17 +1,202 @@
-﻿@{
-    ViewData["Title"] = "Contact";
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@ViewData["Title"].</h2>
-<h3>@ViewData["Message"]</h3>
+@section css {
+    <link href="~/css/material-design-iconic-font.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+    <link href="~/css/Contact.css" rel="stylesheet" />
+    <link href="~/css/util.css" rel="stylesheet" />
+}
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+
+
+<div class="welcome_areaa" style="background-image: url(../images/img/welcome_shap.png);">
+    <div class="container">
+        <div class="welcome_slider owl-carousel">
+            <div class="single_welcome_slider">
+                <div class="row align-items-center">
+                    <div class="col-lg-12 col-md-6">
+                        <div class="welcome_content">
+                            <h1 id="TextSilder">Growing up my dolls were doctors and on secret missions.</h1>
+                            <p>Alongside Rouhani Referring to the marginalisation of life reformists after the disputed presidential vote then.</p>
+                            <a href="#" class="custom_btn">Know more  <i class="zmdi zmdi-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w_man"><img src="~/images/img/welcome1.png" alt=""></div>
+            </div>
+            <div class="single_welcome_slider">
+                <div class="row align-items-center">
+                    <div class="col-lg-12 col-md-8">
+                        <div class="welcome_content">
+                            <h1 id="TextSilder">Growing up my dolls were doctors and on secret missions.</h1>
+                            <p>Alongside Rouhani Referring to the marginalisation of life reformists after the disputed presidential vote then.</p>
+                            <a href="#" class="custom_btn">Know more  <i class="zmdi zmdi-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w_man"><img src="~/images/img/welcome2.png" alt=""></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-contact100">
+    <div class="wrap-contact100">
+        <form class="contact100-form validate-form">
+            <span class="contact100-form-title">
+                Send Us A Message
+            </span>
+
+            <label class="label-input100" for="first-name">Tell us your name *</label>
+            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name">
+                <input id="first-name" class="input100" type="text" name="first-name" placeholder="First name">
+                <span class="focus-input100"></span>
+            </div>
+            <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name">
+                <input class="input100" type="text" name="last-name" placeholder="Last name">
+                <span class="focus-input100"></span>
+            </div>
+
+            <label class="label-input100" for="email">Enter your email *</label>
+            <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                <input id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com">
+                <span class="focus-input100"></span>
+            </div>
+
+            <label class="label-input100" for="phone">Enter phone number</label>
+            <div class="wrap-input100">
+                <input id="phone" class="input100" type="text" name="phone" placeholder="Eg. +1 800 000000">
+                <span class="focus-input100"></span>
+            </div>
+
+            <label class="label-input100" for="phone">Tình trạng hôn nhân</label>
+            <div class="demo-section k-content">
+                <kendo-dropdowntree name="dropdowntree" datatextfield="FullName">
+                    <hierarchical-datasource>
+                        <schema type="json">
+                            <hierarchical-model id="EmployeeId" has-children="HasEmployees">
+                            </hierarchical-model>
+                        </schema>
+                    </hierarchical-datasource>
+                </kendo-dropdowntree>
+            </div>
+
+            <label class="label-input100" for="message">Message *</label>
+            <div class="wrap-input100 validate-input" data-validate="Message is required">
+                <textarea id="message" class="input100" name="message" placeholder="Write us a message"></textarea>
+                <span class="focus-input100"></span>
+            </div>
+
+            <div class="container-contact100-form-btn">
+                <button class="contact100-form-btn">
+                    Send Message
+                </button>
+            </div>
+        </form>
+
+        <div class="contact100-more flex-col-c-m" style="background-image: url('../images/bg-01.jpg');">
+
+            <div class="flex-w size1 p-b-47">
+                <div class="txt1 p-r-25">
+                    <i class="far fa-map-marker-alt"></i>
+                </div>
+
+                <div class="flex-col size2">
+                    <span class="txt1 p-b-20">
+                        Address
+                    </span>
+
+                    <span class="txt2">
+                        Mada Center 8th floor, 379 Hudson St, New York, NY 10018 US
+                    </span>
+                </div>
+            </div>
+
+            <div class="dis-flex size1 p-b-47">
+                <div class="txt1 p-r-25">
+                    <i class="fal fa-phone"></i>
+                </div>
+
+                <div class="flex-col size2">
+                    <span class="txt1 p-b-20">
+                        Lets Talk
+                    </span>
+
+                    <span class="txt3">
+                        +1 800 1236879
+                    </span>
+                </div>
+            </div>
+
+            <div class="dis-flex size1 p-b-47">
+                <div class="txt1 p-r-25">
+                    <i class="fal fa-envelope"></i>
+                </div>
+
+                <div class="flex-col size2">
+                    <span class="txt1 p-b-20">
+                        General Support
+                    </span>
+
+                    <span class="txt3">
+                        contact@example.com
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="dropDownSelect1"></div>
+
+@section scripts {
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script>
+
+        jQuery(document).on('ready', function () {
+            //slider plugin
+            if ($.fn.owlCarousel) {
+                //==welcome_area==\\
+                var wSlider = $('.welcome_slider');
+                wSlider.owlCarousel({
+                    items: 1,
+                    loop: true,
+                    smartSpeed: 500,
+                    autoplay: false,
+                    mouseDrag: false,
+                    touchDrag: false,
+                    dots: true,
+                    nav: true,
+                    navText: ['<i class="zmdi zmdi-chevron-left"></i>', '<i class="zmdi zmdi-chevron-right"></i>']
+                });
+
+                //==welcome_area animation==\\
+                wSlider.on('translate.owl.carousel', function () {
+                    $('.welcome_content h1').removeClass('fadeInLeft animated').hide();
+                    $('.welcome_content p').removeClass('fadeInLeft animated').hide();
+                    $('.welcome_content a').removeClass('fadeInLeft animated').hide();
+                    $('.welcome_area.v3 img').removeClass('fadeInRight animated').hide();
+                    $('.w_man').removeClass('fadeInRight animated').hide();
+                    $('.welcome_slider form').removeClass('fadeInRight animated').hide();
+                });
+                wSlider.on('translated.owl.carousel', function () {
+                    $('.owl-item.active .welcome_content h1').addClass('fadeInLeft animated').show();
+                    $('.owl-item.active .welcome_content p').addClass('fadeInLeft animated').show();
+                    $('.owl-item.active .welcome_content a').addClass('fadeInLeft animated').show();
+                    $('.welcome_area.v3 .owl-item.active img').addClass('fadeInRight animated').show();
+                    $('.owl-item.active .w_man').addClass('fadeInRight animated').show();
+                    $('.welcome_slider .owl-item.active form').addClass('fadeInRight animated').show();
+                });
+
+            };
+
+
+
+        });
+
+    </script>
+}

@@ -200,8 +200,8 @@ h2,
 h3,
 h4,
 h5,
-h6{
-    color: #565656
+h6 {
+    color: #565656;
 }
 ul {
     padding: 0;
@@ -272,8 +272,10 @@ ul.htr_language {
     display: inline-block;
     padding-left: 25px;
 }
-
-.htr_language>li {
+#TextSilder{
+    color:white;
+}
+.htr_language > li {
     position: relative;
 }
 
@@ -356,7 +358,7 @@ ul.main_menu>li ul {
 }
 
 ul.main_menu>li>a {
-    color: #565656;
+    color: white;
     font-size: 16px;
     font-weight: 600;
     padding: 10px 15px;
@@ -433,6 +435,8 @@ ul.main_menu>li:hover>ul {
 
 .header_area {
     padding: 15px 0;
+    background-color: #016ca0;
+    
 }
 
 
