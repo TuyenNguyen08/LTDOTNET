@@ -27,6 +27,54 @@ namespace Hospital.Web.Controllers
             return View();
         }
 
+        public IActionResult TinTuc()
+        {
+            ViewData["Message"] = "Your contact page.";
+
+            return View();
+        }
+        public IActionResult Blog_detail()
+        {
+            ViewData["Message"] = "Your contact page.";
+
+            return View();
+        }
+        public IActionResult Blog()
+        {
+            ViewData["Message"] = "Your contact page.";
+
+            return View();
+        }
+        public IActionResult Doctor()
+        {
+            ViewData["Message"] = "Your contact page.";
+
+            return View();
+        }
+        public IActionResult Doctor_detail()
+        {
+            ViewData["Message"] = "Your contact page.";
+
+            return View();
+        }
+        public IActionResult Hoidap()
+        {
+            ViewData["Message"] = "Your contact page.";
+
+            return View();
+        }
+        public IActionResult Hoidap_detail()
+        {
+            ViewData["Message"] = "Your contact page.";
+
+            return View();
+        }
+        public IActionResult DichVu()
+        {
+            ViewData["Message"] = "Your contact page.";
+
+            return View();
+        }
         public IActionResult Error()
         {
             return View();

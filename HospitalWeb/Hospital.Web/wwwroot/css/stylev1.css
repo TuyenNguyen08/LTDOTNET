@@ -474,6 +474,11 @@ body
     width: 100%;
     margin-top: 20px;
 }
+.box_news, .title_newsTinTuc {
+    float: left;
+    width: 100%;
+}
+
 .color-title
 {
     float: left;
@@ -869,10 +874,8 @@ body
     float: left;
     width: 100%;
     margin-top: 10px;
-    position: relative;
     height: 111px;
     background: url(../images/sk1.jpg) no-repeat;
-    border: 1px solid #d2e6f1;
 }
 .bottom_img
 {
@@ -1412,6 +1415,14 @@ a.nivo-prevNav
     padding-bottom: 10px;
     margin-top: 15px;
 }
+.hoi_dap {
+    border-bottom: 1px dashed #d3d3d3;
+    font-size:12px;
+
+}
+.hoi_dap span{
+    color:#C00;
+}
 .hoidap_1 h2 a
 {
     width: 100%;
@@ -1561,6 +1572,11 @@ a.nivo-prevNav
     float: left;
     margin: 0 0 0 10px;
     width: 456px;
+}
+.TinTuc_right {
+    float: left;
+    margin: 0 0 0 10px;
+    width: 600px;
 }
 .dichvu_right span
 {

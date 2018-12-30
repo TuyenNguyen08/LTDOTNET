@@ -600,7 +600,7 @@ ul.main_menu>li:hover>ul {
  ====/========        =======/====/*/
 
 .cbox_area {
-    padding: 100px 0;
+    padding: 50px 0;
 }
 
 .cbox_icon {
@@ -888,7 +888,7 @@ a.read_btn,
 
 .counter_area {
     padding: 120px 0;
-    background-image: url(assets/img/counter_bg.jpg);
+    background-image: url(../images/img/counter_bg.jpg);
     background-size: contain;
     background-position: top center;
     background-color: #ccc;
@@ -936,7 +936,7 @@ a.read_btn,
     content: "";
     width: 623px;
     height: 583px;
-    background-image: url(assets/img/doctor_shap.png);
+    background-image: url(../images/img/doctor_shap.png);
     background-size: 100%;
     background-repeat: no-repeat;
     bottom: 0;
@@ -1296,7 +1296,6 @@ span.video_content i {
     content: "";
     width: 121px;
     height: 131px;
-    background-image: url(assets/img/about_shape.png);
     right: -57px;
     bottom: -43px;
     z-index: -1;
