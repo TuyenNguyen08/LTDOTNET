@@ -1,0 +1,145 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css {
+<link href="~/css/nice-select.css" rel="stylesheet" />
+   
+}
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>Checkout</h1>
+                <div class="breadcroumb_link">
+                    <a href="index.html">Home </a>/ Checkout
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcroumb Area End-->
+<!--Checkout page Start-->
+<div class="checkout_page_area">
+    <div class="container">
+        <div class="row checkout_top_area">
+            <div class="col-12">
+                <div class="single_checkout_top">
+                    <span>Returning customer?</span> <a href="#" class="float-right">Click here to login</a>
+                </div>
+                <div class="single_checkout_top">
+                    <span>Have a coupon? </span> <a href="#" class="float-right">Click here to enter your code</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-7 col-lg-8">
+                <div class="checkout_form_wraper">
+                    <h3>Billing details</h3>
+                    <form action="#" class="checkout_form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" placeholder="First name">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" placeholder="Last name">
+                            </div>
+                            <div class="col-md-12">
+                                <input type="text" placeholder="Company Name">
+                            </div>
+                            <div class="col-md-12">
+                                <select>
+                                    <option value="Country">Country</option>
+                                    <option value="Bangladesh">Bangladesh</option>
+                                    <option value="United State">United State</option>
+                                    <option value="United Kingdom">United Kingdom</option>
+                                    <option value="france">france</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="text" placeholder="Address">
+                            </div>
+                            <div class="col-md-12">
+                                <input type="text">
+                            </div>
+                            <div class="col-md-12">
+                                <input type="text" placeholder="Town / City">
+                            </div>
+                            <div class="col-md-12">
+                                <select>
+                                    <option value="Country">District</option>
+                                    <option value="Dhaka">Dhaka</option>
+                                    <option value="Rajsahi">Rajsahi</option>
+                                    <option value="Sylhet">Sylhet</option>
+                                    <option value="Khulna">Khulna</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="text" placeholder="Postcode / ZIP">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" placeholder="Phone">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" placeholder="Email">
+                            </div>
+                            <div class="col-md-12">
+                                <label>
+                                    <input type="checkbox">Create an account?
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-5 col-lg-4">
+                <div class="additional_inf">
+                    <h3>Additional information</h3>
+                    <span>Order notes</span>
+                    <span>notes about your order e.g. special notes for delivery</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="total_order_bar">
+                    <h3>Your order</h3>
+                    <ul class="total_order">
+                        <li><span class="item_name">Ingredients of skin care products</span><span class="float-right">$120.00</span></li>
+                        <li><span class="item_name">Ingredients of skin care products</span><span class="float-right">$120.00</span></li>
+                        <li><strong class="total_title">SUBTOTAL</strong><strong class="float-right">$240.00</strong></li>
+                        <li><strong class="total_title">TOTAL</strong><strong class="float-right">$240.00</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form action="#" class="payment_method_area">
+                    <fieldset id="payment_group">
+                        <div class="payment_1">
+                            <label for="payment1">
+                                <input id="payment1" class="payment1" type="radio" name="payment_group"> Check Payment
+                                <span class="payment1_content">Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</span>
+                            </label>
+                        </div>
+                        <div class="paypal">
+                            <label for="paypal">
+                                <input id="paypal" type="radio" name="payment_group">PayPal
+                            </label>
+                            <a href="#"><img src="~/images/img/paypal.png" alt=""> What is PayPal?</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="col-md-12">
+                <a href="#" class="custom_btn">Place order</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+
+}

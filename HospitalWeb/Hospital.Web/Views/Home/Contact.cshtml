@@ -3,201 +3,89 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section css {
-    <link href="~/css/material-design-iconic-font.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
 
-    <link href="~/css/Contact.css" rel="stylesheet" />
-    <link href="~/css/util.css" rel="stylesheet" />
+
 }
 
 
-
-<div class="welcome_areaa" style="background-image: url(../images/img/welcome_shap.png);">
+<div class="breadvroumb_area">
     <div class="container">
-        <div class="welcome_slider owl-carousel">
-            <div class="single_welcome_slider">
-                <div class="row align-items-center">
-                    <div class="col-lg-12 col-md-6">
-                        <div class="welcome_content">
-                            <h1>Growing up my dolls were doctors and on secret missions.</h1>
-                            <p>Alongside Rouhani Referring to the marginalisation of life reformists after the disputed presidential vote then.</p>
-                            <a href="#" class="custom_btn">Know more  <i class="zmdi zmdi-plus"></i></a>
-                        </div>
-                    </div>
+        <div class="row text-center">
+            <div class="col">
+                <h1>Service</h1>
+                <div class="breadcroumb_link">
+                    <a href="index.html">Home </a>/ Contact
                 </div>
-                <div class="w_man"><img src="~/images/img/welcome1.png" alt=""></div>
-            </div>
-            <div class="single_welcome_slider">
-                <div class="row align-items-center">
-                    <div class="col-lg-12 col-md-8">
-                        <div class="welcome_content">
-                            <h1>Growing up my dolls were doctors and on secret missions.</h1>
-                            <p>Alongside Rouhani Referring to the marginalisation of life reformists after the disputed presidential vote then.</p>
-                            <a href="#" class="custom_btn">Know more  <i class="zmdi zmdi-plus"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="w_man"><img src="~/images/img/welcome2.png" alt=""></div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container-contact100">
-    <div class="wrap-contact100">
-        <form class="contact100-form validate-form">
-            <span class="contact100-form-title">
-                Liên hệ
-            </span>
-
-            <label class="label-input100" for="first-name">Tell us your name *</label>
-            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name">
-                <input id="first-name" class="input100" type="text" name="first-name" placeholder="First name">
-                <span class="focus-input100"></span>
-            </div>
-            <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name">
-                <input class="input100" type="text" name="last-name" placeholder="Last name">
-                <span class="focus-input100"></span>
-            </div>
-
-            <label class="label-input100" for="email">Enter your email *</label>
-            <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                <input id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com">
-                <span class="focus-input100"></span>
-            </div>
-
-            <label class="label-input100" for="phone">Enter phone number</label>
-            <div class="wrap-input100">
-                <input id="phone" class="input100" type="text" name="phone" placeholder="Eg. +1 800 000000">
-                <span class="focus-input100"></span>
-            </div>
-
-            <label class="label-input100" for="phone">Tình trạng hôn nhân</label>
-            <div class="wrap-input100">
-                <kendo-dropdowntree name="dropdowntree" datatextfield="FullName">
-                    <hierarchical-datasource>
-                        <schema type="json">
-                            <hierarchical-model id="EmployeeId" has-children="HasEmployees">
-                            </hierarchical-model>
-                        </schema>
-                    </hierarchical-datasource>
-                </kendo-dropdowntree>
+<div class="contact_page_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-5 offset-md-1 order-md-8">
+                <div class="contact_inf_area">
+                    <div class="single_contact_inf">
+                        <div class="contact_icon"><img src="~/images/img/contact_icon1.png" alt=""></div>
+                        <div class="ccontact_inf_content">
+                            <h5>Emergency contact</h5>
+                            <span>free call 24/ 7</span>
+                            <a href="tel:8754666746">(875) 466-6746</a>
+                        </div>
+                    </div>
+                    <div class="single_contact_inf">
+                        <div class="contact_icon"><img src="~/images/img/contact_icon2.png" alt=""></div>
+                        <div class="ccontact_inf_content">
+                            <h5>Home visit</h5>
+                            <a href="tel:8754666746">(875) 466-6746</a>
+                        </div>
+                    </div>
+                    <div class="single_contact_inf">
+                        <div class="contact_icon"><img src="~/images/img/contact_icon3.png" alt=""></div>
+                        <div class="ccontact_inf_content">
+                            <h5>Phone contact</h5>
+                            <a href="tel:8754666746">(875) 466-6746</a>
+                        </div>
+                    </div>
+                    <div class="single_contact_inf">
+                        <div class="contact_icon"><img src="~/images/img/contact_icon4.png" alt=""></div>
+                        <div class="ccontact_inf_content">
+                            <h5>Email us</h5>
+                            <a href="mailto:yframi@yahoo.com">yframi@yahoo.com</a>
+                        </div>
+                    </div>
                 </div>
-
-                <label class="label-input100" for="message">Message *</label>
-                <div class="wrap-input100 validate-input" data-validate="Message is required">
-                    <textarea id="message" class="input100" name="message" placeholder="Write us a message"></textarea>
-                    <span class="focus-input100"></span>
-                </div>
-
-                <div class="container-contact100-form-btn">
-                    <button class="contact100-form-btn">
-                        Send Message
-                    </button>
-                </div>
-        </form>
-        <form class="contact100-form validate-form">
-            <span class="contact100-form-title">
-                Thông tin cá nhân
-            </span>
-
-            <label class="label-input100" for="first-name">Tell us your name *</label>
-            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name">
-                <input id="first-name" class="input100" type="text" name="first-name" placeholder="First name">
-                <span class="focus-input100"></span>
             </div>
-            <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name">
-                <input class="input100" type="text" name="last-name" placeholder="Last name">
-                <span class="focus-input100"></span>
+            <div class="col-lg-8 col-md-6">
+                <form action="#" class="contact_form2">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <input type="text" placeholder="Name">
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="email" placeholder="Email">
+                        </div>
+                        <div class="col-lg-12">
+                            <input type="text" placeholder="Subject">
+                        </div>
+                        <div class="col-lg-12">
+                            <textarea placeholder="Message"></textarea>
+                        </div>
+                        <div class="col-lg-12">
+                            <button type="submit" class="custom_btn">Submit now</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-
-            <label class="label-input100" for="email">Enter your email *</label>
-            <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                <input id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com">
-                <span class="focus-input100"></span>
-            </div>
-
-            <label class="label-input100" for="phone">Enter phone number</label>
-            <div class="wrap-input100">
-                <input id="phone" class="input100" type="text" name="phone" placeholder="Eg. +1 800 000000">
-                <span class="focus-input100"></span>
-            </div>
-
-            <label class="label-input100" for="phone">Tình trạng hôn nhân</label>
-                <kendo-dropdowntree name="dropdowntree1" datatextfield="FullName">
-                    <hierarchical-datasource>
-                        <schema type="json">
-                            <hierarchical-model id="EmployeeId" has-children="HasEmployees">
-                            </hierarchical-model>
-                        </schema>
-                    </hierarchical-datasource>
-                </kendo-dropdowntree>
-
-            <label class="label-input100" for="message">Message *</label>
-            <div class="wrap-input100 validate-input" data-validate="Message is required">
-                <textarea id="message" class="input100" name="message" placeholder="Write us a message"></textarea>
-                <span class="focus-input100"></span>
-            </div>
-
-            <div class="container-contact100-form-btn">
-                <button class="contact100-form-btn">
-                    Send Message
-                </button>
-            </div>
-        </form>
-
-
-
-
+        </div>
     </div>
 </div>
 
 
 
 @section scripts {
-    <script src="~/js/owl.carousel.min.js"></script>
-    <script>
-
-        jQuery(document).on('ready', function () {
-            //slider plugin
-            if ($.fn.owlCarousel) {
-                //==welcome_area==\\
-                var wSlider = $('.welcome_slider');
-                wSlider.owlCarousel({
-                    items: 1,
-                    loop: true,
-                    smartSpeed: 500,
-                    autoplay: false,
-                    mouseDrag: false,
-                    touchDrag: false,
-                    dots: true,
-                    nav: true,
-                    navText: ['<i class="zmdi zmdi-chevron-left"></i>', '<i class="zmdi zmdi-chevron-right"></i>']
-                });
-
-                //==welcome_area animation==\\
-                wSlider.on('translate.owl.carousel', function () {
-                    $('.welcome_content h1').removeClass('fadeInLeft animated').hide();
-                    $('.welcome_content p').removeClass('fadeInLeft animated').hide();
-                    $('.welcome_content a').removeClass('fadeInLeft animated').hide();
-                    $('.welcome_area.v3 img').removeClass('fadeInRight animated').hide();
-                    $('.w_man').removeClass('fadeInRight animated').hide();
-                    $('.welcome_slider form').removeClass('fadeInRight animated').hide();
-                });
-                wSlider.on('translated.owl.carousel', function () {
-                    $('.owl-item.active .welcome_content h1').addClass('fadeInLeft animated').show();
-                    $('.owl-item.active .welcome_content p').addClass('fadeInLeft animated').show();
-                    $('.owl-item.active .welcome_content a').addClass('fadeInLeft animated').show();
-                    $('.welcome_area.v3 .owl-item.active img').addClass('fadeInRight animated').show();
-                    $('.owl-item.active .w_man').addClass('fadeInRight animated').show();
-                    $('.welcome_slider .owl-item.active form').addClass('fadeInRight animated').show();
-                });
-
-            };
 
 
 
-        });
-
-    </script>
 }

@@ -12,7 +12,12 @@ namespace Hospital.Web.Controllers
         {
             return View();
         }
+        public IActionResult Index2()
+        {
+            ViewData["Message"] = "Your contact page.";
 
+            return View();
+        }
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -27,12 +32,6 @@ namespace Hospital.Web.Controllers
             return View();
         }
 
-        public IActionResult TinTuc()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
         public IActionResult Blog_detail()
         {
             ViewData["Message"] = "Your contact page.";
@@ -57,24 +56,25 @@ namespace Hospital.Web.Controllers
 
             return View();
         }
-        public IActionResult Hoidap()
+        public IActionResult CheckOut()
         {
             ViewData["Message"] = "Your contact page.";
 
             return View();
         }
-        public IActionResult Hoidap_detail()
+        public IActionResult Service()
         {
             ViewData["Message"] = "Your contact page.";
 
             return View();
         }
-        public IActionResult DichVu()
+        public IActionResult Service_detail()
         {
             ViewData["Message"] = "Your contact page.";
 
             return View();
         }
+
         public IActionResult Error()
         {
             return View();
