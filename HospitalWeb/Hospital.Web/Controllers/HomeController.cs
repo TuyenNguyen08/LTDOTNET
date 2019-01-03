@@ -12,12 +12,7 @@ namespace Hospital.Web.Controllers
         {
             return View();
         }
-        public IActionResult Index2()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
+     
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
