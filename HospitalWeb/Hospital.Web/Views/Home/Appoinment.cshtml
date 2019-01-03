@@ -1,0 +1,143 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css {
+
+
+}
+
+
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>Đặt lịch khám</h1>
+                <div class="breadcroumb_link">
+                    <a href="index.html">Home </a>/ Appoinment
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contact_page_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-5 offset-md-1 order-md-8">
+                <div class="contact_inf_area">
+                    <div class="single_contact_inf">
+                        <div class="contact_icon"><img src="~/images/img/contact_icon1.png" alt=""></div>
+                        <div class="ccontact_inf_content">
+                            <h5>Emergency contact</h5>
+                            <span>free call 24/ 7</span>
+                            <a href="tel:8754666746">(875) 466-6746</a>
+                        </div>
+                    </div>
+                    <div class="single_contact_inf">
+                        <div class="contact_icon"><img src="~/images/img/contact_icon2.png" alt=""></div>
+                        <div class="ccontact_inf_content">
+                            <h5>Home visit</h5>
+                            <a href="tel:8754666746">(875) 466-6746</a>
+                        </div>
+                    </div>
+                    <div class="single_contact_inf">
+                        <div class="contact_icon"><img src="~/images/img/contact_icon3.png" alt=""></div>
+                        <div class="ccontact_inf_content">
+                            <h5>Phone contact</h5>
+                            <a href="tel:8754666746">(875) 466-6746</a>
+                        </div>
+                    </div>
+                    <div class="single_contact_inf">
+                        <div class="contact_icon"><img src="~/images/img/contact_icon4.png" alt=""></div>
+                        <div class="ccontact_inf_content">
+                            <h5>Email us</h5>
+                            <a href="mailto:yframi@yahoo.com">yframi@yahoo.com</a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-6">
+                <form action="#" class="contact_form2">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h3>Tên</h3>
+                            <input type="text" placeholder="Name">
+                        </div>
+                        <div class="col-lg-6">
+                            <h3>Email</h3>
+                            <input type="email" placeholder="Email">
+                        </div>
+                        <div class="col-lg-12">
+                            <h3>Subject</h3>
+                            <input type="text" placeholder="Subject">
+                        </div>
+
+                        <div class="col-lg-12">
+                            <h3>Dropdownlist</h3>
+                            @(Html.Kendo().DropDownList()
+.Name("color")
+.DataTextField("Text")
+.DataValueField("Value")
+.Events(e => e.Change("change"))
+.BindTo(new List<SelectListItem>() {
+                                                                                                                  new SelectListItem() {
+                                                                                                                      Text = "Black",
+                                                                                                                      Value = "1"
+                                                                                                                  },
+                                                                                                                  new SelectListItem() {
+                                                                                                                      Text = "Orange",
+                                                                                                                      Value = "2"
+                                                                                                                  },
+                                                                                                                  new SelectListItem() {
+                                                                                                                      Text = "Grey",
+                                                                                                                      Value = "3"
+                                                                                                                  }
+})
+.Value("1")
+.HtmlAttributes(new { style = "width: 100%" })
+                            )
+
+                        </div>
+                        <div class="col-lg-12">
+                            <h3>DatePicler</h3>
+                            @(Html.Kendo().DateTimePicker()
+.Name("datetimepicker")
+.Value(DateTime.Now)
+.HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+.DateInput()
+                            )
+                        </div>
+                        <div class="col-lg-12">
+                            <h3>Ghi chú</h3>
+                            <textarea placeholder="Message"></textarea>
+                        </div>
+                        <div class="col-lg-12" style="margin-left:70%; margin-top:50px">
+                            <button type="submit" class="custom_btn">Submit now</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+  <script>
+    function change() {
+        var value = $("#color").val();
+        $("#cap")
+                .toggleClass("black-cap", value == 1)
+                .toggleClass("orange-cap", value == 2)
+                .toggleClass("grey-cap", value == 3);
+    };
+
+  
+</script>
+
+
+}

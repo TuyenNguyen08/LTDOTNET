@@ -74,7 +74,24 @@ namespace Hospital.Web.Controllers
 
             return View();
         }
+        public IActionResult Appoinment()
+        {
+            ViewData["Message"] = "Your contact page.";
 
+            return View();
+        }
+        public IActionResult Departments()
+        {
+            ViewData["Message"] = "Your contact page.";
+
+            return View();
+        }
+        public IActionResult Departments_detail()
+        {
+            ViewData["Message"] = "Your contact page.";
+
+            return View();
+        }
         public IActionResult Error()
         {
             return View();

@@ -1017,7 +1017,7 @@ a.read_btn,
 .contact_form textarea {
     width: 100%;
     margin-bottom: 30px;
-    background: #F5F5F5;
+    background: #fafafa;
     border: 1px solid transparent;
     text-indent: 15px;
     transition: .3s linear;
@@ -1029,13 +1029,14 @@ a.read_btn,
     }
 
 .contact_form input {
-    height: 58px;
+    height: 40px;
 }
 
 .contact_form textarea {
     height: 164px;
     padding-top: 10px;
     resize: none;
+    margin-top:10px;
 }
 
 .nice-select:hover {
@@ -1135,7 +1136,7 @@ footer {
     }
 
 .footer_area {
-    padding: 90px 0 80px;
+    padding: 20px 0 20px;
     color: #fff;
 }
 
@@ -1154,7 +1155,6 @@ footer {
 
     .footer_contact_inf li {
         position: relative;
-        margin-bottom: 15px;
         padding-left: 25px;
     }
 

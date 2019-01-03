@@ -79,9 +79,11 @@
                             <input type="text" placeholder="Your name">
                         </div>
                         <div class="col-lg-6 col-md-12">
-                            <div class="calender">
-                                <input type="text" placeholder="Date of Birth">
-                            </div>
+                            @(Html.Kendo().DatePicker()
+.Name("dateofBirth")
+.Value("10/10/2011")
+.HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+                            )
                         </div>
                     </div>
                     <div class="row">
@@ -89,24 +91,42 @@
                             <input type="email" placeholder="Email">
                         </div>
                         <div class="col-lg-6 col-md-12">
-                            <input type="text" placeholder="Phone">
+                            <input type="number" placeholder="Phone">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
-                            <select>
-                                <option value="Select your service">Select your service</option>
-                                <option value="Select your service">Select your service</option>
-                                <option value="Select your service">Select your service</option>
-                                <option value="Select your service">Select your service</option>
-                            </select>
+                            @(Html.Kendo().DropDownList()
+.Name("color")
+.DataTextField("Text")
+.DataValueField("Value")
+.Events(e => e.Change("change"))
+.BindTo(new List<SelectListItem>() {
+                        new SelectListItem() {
+                        Text = "Black",
+                        Value = "1"
+                        },
+                        new SelectListItem() {
+                        Text = "Orange",
+                        Value = "2"
+                        },
+                        new SelectListItem() {
+                        Text = "Grey",
+                        Value = "3"
+                        }
+})
+.Value("1")
+.HtmlAttributes(new { style = "width: 100%" })
+                            )
+
                         </div>
                         <div class="col-lg-6 col-md-12">
-                            <div class="calender">
-                                <input type="text" placeholder="Reservation date">
-                               
-                            </div>
-                        
+                           
+                                @(Html.Kendo().DatePicker()
+.Name("datepicker")
+.Value("10/10/2011")
+.HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+                                )
                         </div>
                     </div>
 
@@ -179,4 +199,15 @@
     </div>
 </div>
 @section scripts {
+    <script>
+    function change() {
+        var value = $("#color").val();
+        $("#cap")
+                .toggleClass("black-cap", value == 1)
+                .toggleClass("orange-cap", value == 2)
+                .toggleClass("grey-cap", value == 3);
+    };
+
+
+    </script>
 }
