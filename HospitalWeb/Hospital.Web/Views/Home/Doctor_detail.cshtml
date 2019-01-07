@@ -156,50 +156,5 @@
 </div>
 
 @section scripts {
-    <script src="~/js/about.js"></script>
-    <script src="~/js/owl.carousel.min.js"></script>
-    <script>
-
-        jQuery(document).on('ready', function () {
-            //slider plugin
-            if ($.fn.owlCarousel) {
-                //==welcome_area==\\
-                var wSlider = $('.welcome_slider');
-                wSlider.owlCarousel({
-                    items: 1,
-                    loop: true,
-                    smartSpeed: 500,
-                    autoplay: false,
-                    mouseDrag: false,
-                    touchDrag: false,
-                    dots: true,
-                    nav: true,
-                    navText: ['<i class="zmdi zmdi-chevron-left"></i>', '<i class="zmdi zmdi-chevron-right"></i>']
-                });
-
-                //==welcome_area animation==\\
-                wSlider.on('translate.owl.carousel', function () {
-                    $('.welcome_content h1').removeClass('fadeInLeft animated').hide();
-                    $('.welcome_content p').removeClass('fadeInLeft animated').hide();
-                    $('.welcome_content a').removeClass('fadeInLeft animated').hide();
-                    $('.welcome_area.v3 img').removeClass('fadeInRight animated').hide();
-                    $('.w_man').removeClass('fadeInRight animated').hide();
-                    $('.welcome_slider form').removeClass('fadeInRight animated').hide();
-                });
-                wSlider.on('translated.owl.carousel', function () {
-                    $('.owl-item.active .welcome_content h1').addClass('fadeInLeft animated').show();
-                    $('.owl-item.active .welcome_content p').addClass('fadeInLeft animated').show();
-                    $('.owl-item.active .welcome_content a').addClass('fadeInLeft animated').show();
-                    $('.welcome_area.v3 .owl-item.active img').addClass('fadeInRight animated').show();
-                    $('.owl-item.active .w_man').addClass('fadeInRight animated').show();
-                    $('.welcome_slider .owl-item.active form').addClass('fadeInRight animated').show();
-                });
-
-            };
-
-
-
-        });
-
-    </script>
+   
 }
