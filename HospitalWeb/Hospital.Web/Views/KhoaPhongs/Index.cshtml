@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Hospital.Web.EfModels.KhoaPhong>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TieuDeKhoa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenKhoaPhong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GioiThieu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoiDung)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayCapNhat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserModify)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HinhAnhDaiDien)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HenKhamBenh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LuotXem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FkLoaiKhoaPhongNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FkNgonNguNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TieuDeKhoa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenKhoaPhong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioiThieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoiDung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayCapNhat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserModify)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HinhAnhDaiDien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HenKhamBenh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LuotXem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkLoaiKhoaPhongNavigation.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkNgonNguNavigation.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

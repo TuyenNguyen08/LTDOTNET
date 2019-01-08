@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hospital.Web.EfModels;
+using Hospital.Web.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -35,6 +38,11 @@ namespace Hospital.Web
 
             // Add Kendo UI services to the services container
             services.AddKendo();
+
+            services.AddScoped<InitParam>();
+
+            var connection = Configuration.GetConnectionString("NBenhVien7CContext");
+            services.AddDbContext<NBenhVien7CContext>(options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,93 @@
+﻿@model Hospital.Web.EfModels.KhoaPhong
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>KhoaPhong</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TieuDeKhoa)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TieuDeKhoa)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TenKhoaPhong)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TenKhoaPhong)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GioiThieu)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GioiThieu)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NoiDung)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayCapNhat)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NgayCapNhat)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserModify)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserModify)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HinhAnhDaiDien)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HinhAnhDaiDien)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HenKhamBenh)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HenKhamBenh)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stt)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LuotXem)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LuotXem)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FkLoaiKhoaPhongNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FkLoaiKhoaPhongNavigation.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FkNgonNguNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FkNgonNguNavigation.Id)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
