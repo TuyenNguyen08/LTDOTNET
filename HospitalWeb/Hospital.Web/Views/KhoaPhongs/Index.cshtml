@@ -1,101 +1,61 @@
-﻿@model IEnumerable<Hospital.Web.EfModels.KhoaPhong>
+﻿@model List<Hospital.Web.EfModels.KhoaPhong>
+@using Hospital.Web.Controllers
 
 @{
-    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TieuDeKhoa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TenKhoaPhong)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GioiThieu)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NoiDung)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NgayCapNhat)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserModify)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HinhAnhDaiDien)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HenKhamBenh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Stt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LuotXem)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FkLoaiKhoaPhongNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FkNgonNguNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TieuDeKhoa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenKhoaPhong)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GioiThieu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoiDung)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayCapNhat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserModify)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HinhAnhDaiDien)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HenKhamBenh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LuotXem)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FkLoaiKhoaPhongNavigation.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FkNgonNguNavigation.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+@section css {
 }
-    </tbody>
-</table>
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>Departments</h1>
+                <div class="breadcroumb_link">
+                    <a href="index.html">Home </a>/ Departments
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="depertment_area depertment_page_area">
+    <div class="container">
+        <div class="title_bar">
+            <div class="row">
+                <div class="col-md-6 ">
+                    <div class="depertment_title">
+                        <h4>Các khoa của bệnh viện</h4>
+                    </div>
+                </div>
+                <div class="col-md-6  text-right">
+                    <form action="#" class="dept_search_bar">
+                        <input type="search" placeholder="Khoa bạn muốn tìm">
+                        <button type="submit"><i class="zmdi zmdi-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="custom_row text-center justify-content-center">
+            @foreach (var khoaPhong in Model)
+            {
+                <div class="custom_col">
+                    <div class="single_dept">
+                        <a asp-action="@nameof(KhoaPhongsController.Details)" 
+                           asp-controller="@nameof(KhoaPhongsController).Replace("Controller","")" 
+                           asp-route-id="@khoaPhong.Id"
+                           target="_blank">@khoaPhong.TenKhoaPhong</a>
+
+                        <div class="dept_img">
+                            <img src="~/images/img/dept_icon1.png" alt="">
+                           @* <img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_KHOA_PHONG + khoaPhong.HinhAnhDaiDien)" />*@
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+@section scripts {
+}

@@ -10,26 +10,41 @@ using Hospital.Web.Models;
 
 namespace Hospital.Web.Controllers
 {
-    public class KhoaPhongsController : ControllerBase
+    public class HomesController : ControllerBase
     {
 
-        public KhoaPhongsController(InitParam initParam) : base(initParam)
+        public HomesController(InitParam initParam) : base(initParam)
         {
 
         }
 
-        // GET: KhoaPhongs
+        // GET: HomeIndex
         public async Task<IActionResult> Index()
         {
-            var listKhoaPhong = await InitParam.Db.KhoaPhong.AsNoTracking()
-                .Select(t => new KhoaPhong
-                {
-                    Id = t.Id,
-                    TenKhoaPhong = t.TenKhoaPhong,
-                    HinhAnhDaiDien=t.HinhAnhDaiDien,
-                }).ToListAsync();
+            HomeModel model = new HomeModel();
 
-            return View(listKhoaPhong);
+            var listGioiThieu = await InitParam.Db.GioiThieuChiTiet.AsNoTracking()
+                .Select(t => new GioiThieuChiTiet
+                {
+                   Id = t.Id,
+                   Ten=t.Ten,
+                   GioiThieu=t.GioiThieu,
+                   NoiDung=t.NoiDung,
+                }).ToListAsync();
+            model.lsGioiThieuChiTiet = new List<GioiThieuChiTiet>(listGioiThieu);
+
+            var listKhoaPhong = await InitParam.Db.KhoaPhong.AsNoTracking().Select(t => new KhoaPhong
+            {
+                Id=t.Id,
+                TieuDeKhoa=t.TieuDeKhoa,
+            }).ToListAsync();
+
+           
+            model.lsKhoaPhong = new List<KhoaPhong>(listKhoaPhong);
+
+            return View(model);
+
+
         }
 
         // GET: KhoaPhongs/Details/5
@@ -47,10 +62,10 @@ namespace Hospital.Web.Controllers
                 .Select(t => new KhoaPhong
                 {
                     Id = t.Id,
-                    TieuDeKhoa=t.TieuDeKhoa,
+                    TieuDeKhoa = t.TieuDeKhoa,
                     TenKhoaPhong = t.TenKhoaPhong,
-                    GioiThieu=t.GioiThieu,
-                    NoiDung=t.NoiDung,
+                    GioiThieu = t.GioiThieu,
+                    NoiDung = t.NoiDung,
                     FkLoaiKhoaPhongNavigation = t.FkLoaiKhoaPhongNavigation
                 }).FirstOrDefaultAsync();
             ;
@@ -62,10 +77,6 @@ namespace Hospital.Web.Controllers
 
             return View(khoaPhong);
         }
-
-
-
-
 
 
 

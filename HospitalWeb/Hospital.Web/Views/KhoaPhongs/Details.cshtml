@@ -1,90 +1,97 @@
 ﻿@model Hospital.Web.EfModels.KhoaPhong
+@using Hospital.Web.Controllers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css {
+}
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>@Model.TenKhoaPhong</h1>
+                <div class="breadcroumb_link">
+                    <a href="index.html">Trang chủ </a>/ Khoa phòng / @Model.TenKhoaPhong
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dept_details_page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 order-md-6 ">
+                <img src="~/images/img/dept_page.jpg" alt="">
+                @* <img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_KHOA_PHONG + khoaPhong.HinhAnhDaiDien)" />*@
 
-<div>
-    <h4>KhoaPhong</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TieuDeKhoa)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TieuDeKhoa)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TenKhoaPhong)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TenKhoaPhong)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.GioiThieu)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.GioiThieu)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NoiDung)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NoiDung)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayCapNhat)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NgayCapNhat)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.UserModify)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UserModify)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.HinhAnhDaiDien)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.HinhAnhDaiDien)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.HenKhamBenh)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.HenKhamBenh)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Stt)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Stt)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LuotXem)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LuotXem)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FkLoaiKhoaPhongNavigation)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FkLoaiKhoaPhongNavigation.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FkNgonNguNavigation)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FkNgonNguNavigation.Id)
-        </dd>
-    </dl>
+
+            </div>
+            <div class="col-md-6">
+                <p>
+                    @Model.GioiThieu
+                </p>
+                <br>
+                <p>@Html.Raw(Model.NoiDung)</p>
+                <br>
+                <a href="#" class="custom_btn">Appoinmaent  <i class="zmdi zmdi-plus"></i></a>
+            </div>
+        </div>
+        <div class="dept_fee_area">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="treatment_fee_wraper">
+                        <h4>Phương pháp điều trị:</h4>
+                        <ul class="treatment_fee">
+                            <li><span>Captopril Renogram</span><strong>$300</strong></li>
+                            <li><span>Paratyroid scan</span><strong>$450</strong></li>
+                            <li><span>Heart Patient</span><strong>$95</strong></li>
+                            <li><span>Liposuction</span><strong>$185</strong></li>
+                            <li><span>Tummy Tuck</span><strong>$145</strong></li>
+                            <li><span>Cardiac ablation</span><strong>$360</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 ml-auto">
+                    <div class="treatment_fee_wraper pl">
+                        <h4>Investigation:</h4>
+                        <ul class="treatment_fee">
+                            <li><span>Captopril Renogram</span><strong>$300</strong></li>
+                            <li><span>Paratyroid scan</span><strong>$450</strong></li>
+                            <li><span>Heart Patient</span><strong>$95</strong></li>
+                            <li><span>Liposuction</span><strong>$185</strong></li>
+                            <li><span>Tummy Tuck</span><strong>$145</strong></li>
+                            <li><span>Cardiac ablation</span><strong>$360</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="working_box" style="background-image: url(../images/img/about_bg.jpg);">
+                        <h4>Thời gian làm việc</h4>
+                        <ul>
+                            <Li>Thứ 2-Thứ 6 08:00am - 10:00pm </Li>
+                            <Li>Thứ 7 - 10:00am - 07:00pm </Li>
+                            <Li>Chủ nhật - Emergency Only </Li>
+                            <Li>Thứ 2 - 8:00 AM – 10:00 pm</Li>
+                            <Li>Thứ 3 - 8:00 AM – 7:00 pm</Li>
+                            <Li>Cấp cứu 24/7 </Li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
+    <a asp-action="@nameof(KhoaPhongsController.Index)"
+       asp-controller="@nameof(KhoaPhongsController).Replace("Controller","")">Ve lai danh sach</a>
+
 </div>
+@section scripts {
+}
+

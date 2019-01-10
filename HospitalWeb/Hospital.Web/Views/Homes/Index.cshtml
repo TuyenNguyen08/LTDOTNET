@@ -1,4 +1,8 @@
-﻿@{
+﻿@model Hospital.Web.Models.HomeModel
+
+
+@using Hospital.Web.Controllers
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section css {
@@ -14,30 +18,23 @@
 <div class="welcome_areaa" style="background-image: url(../images/img/welcome_shap.png);">
     <div class="container">
         <div class="welcome_slider owl-carousel">
+            @foreach (var gioiThieuChiTiet in Model.lsGioiThieuChiTiet)
+            {
             <div class="single_welcome_slider">
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-6">
                         <div class="welcome_content">
-                            <h1>Hy vọng cho bệnh nhân khiếm thính</h1>
-                            <p>QDYMD đã thực hiện thành công ca cấy điện cực ốc tai ĐẦU TIÊN trong hệ thống bệnh viện tư nhân tại vùng ĐỒNG BẰNG SÔNG CỬU LONG cho bệnh nhi 9 tuổi bị điếc sâu hai tai bẩm sinh.</p>
+                            <h1>@gioiThieuChiTiet.Ten</h1>
+                            <p>@Html.Raw(gioiThieuChiTiet.GioiThieu)</p>
                             <a href="#" class="custom_btn">Know more  <i class="zmdi zmdi-plus"></i></a>
                         </div>
                     </div>
                 </div>
                 <div class="w_man"><img src="~/images/img/welcome1.png" alt=""></div>
+                @* <img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_GIOI_THIEU_CHI_TIET + khoaPhong.HinhAnh)" />*@
+
             </div>
-            <div class="single_welcome_slider">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 col-md-8">
-                        <div class="welcome_content">
-                            <h1>Triển khai hotline tư vấn tiêm chủng</h1>
-                            <p>Nhằm giải đáp các thắc mắc về tiêm chủng cho các bậc phụ huynh, BVQDYMD đã triển khai số điện thoại hotline tiêm chủng: 0865.xxx.xxx - Hoạt động từ 7 giờ - 21 giờ vào tất cả các ngày trong tuần, kể cả chủ nhật.</p>
-                            <a href="#" class="custom_btn">Xem thêm  <i class="zmdi zmdi-plus"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="w_man"><img src="~/images/img/welcome2.png" alt=""></div>
-            </div>
+            }
         </div>
     </div>
 </div>
@@ -174,86 +171,23 @@
             </div>
         </div>
         <div class="custom_row text-center justify-content-center">
-            <div class="custom_col">
-                <div class="single_dept">
-                    <a href="#">Phẫu thuật thẩm mỹ</a>
-                    <div class="dept_img">
-                        <img src="~/images/img/dept_icon1.png" alt="">
+            @foreach (var khoaPhong in Model.lsKhoaPhong)
+            {
+                <div class="custom_col">
+                    <div class="single_dept">
+                        <a asp-action="@nameof(KhoaPhongsController.Details)"
+                           asp-controller="@nameof(KhoaPhongsController).Replace("Controller","")"
+                           asp-route-id="@khoaPhong.Id"
+                           target="_blank">@khoaPhong.TieuDeKhoa</a>
+
+                        <div class="dept_img">
+                            <img src="~/images/img/dept_icon1.png" alt="">
+                            @* <img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_KHOA_PHONG + khoaPhong.HinhAnhDaiDien)" />*@
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="custom_col">
-                <div class="single_dept">
-                    <a href="#">Khoa mũi</a>
-                    <div class="dept_img">
-                        <img src="~/images/img/dept_icon2.png" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="custom_col">
-                <div class="single_dept">
-                    <a href="#">Thần kinh</a>
-                    <div class="dept_img">
-                        <img src="~/images/img/dept_icon3.png" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="custom_col">
-                <div class="single_dept">
-                    <a href="#">Tiêu hóa</a>
-                    <div class="dept_img">
-                        <img src="~/images/img/dept_icon4.png" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="custom_col">
-                <div class="single_dept">
-                    <a href="#">Tai mũi họng</a>
-                    <div class="dept_img">
-                        <img src="~/images/img/dept_icon5.png" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="custom_col">
-                <div class="single_dept">
-                    <a href="#">Phổi</a>
-                    <div class="dept_img">
-                        <img src="~/images/img/dept_icon6.png" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="custom_col">
-                <div class="single_dept">
-                    <a href="#">Tiết niệu</a>
-                    <div class="dept_img">
-                        <img src="~/images/img/dept_icon7.png" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="custom_col">
-                <div class="single_dept">
-                    <a href="#">Chăm sóc răng miệng</a>
-                    <div class="dept_img">
-                        <img src="~/images/img/dept_icon8.png" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="custom_col">
-                <div class="single_dept">
-                    <a href="#">Chỉnh hình</a>
-                    <div class="dept_img">
-                        <img src="~/images/img/dept_icon9.png" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="custom_col">
-                <div class="single_dept">
-                    <a href="#">Chăm sóc mắt</a>
-                    <div class="dept_img">
-                        <img src="~/images/img/dept_icon10.png" alt="">
-                    </div>
-                </div>
-            </div>
+            }
+
         </div>
         <div class="row">
             <div class="col text-center">
@@ -388,7 +322,7 @@
                             <input type="number" placeholder="Số điện thoại">
                         </div>
                     </div>
-                  
+
                     <div class="row">
                         <div class="col"><textarea placeholder="Ghi chú"></textarea></div>
                     </div>
@@ -403,7 +337,7 @@
                 <div class="section_title">
                     <h1>Tin tức mới nhất</h1>
                     <p>
-                       Cập nhật thông tin mới nhất của bệnh viện
+                        Cập nhật thông tin mới nhất của bệnh viện
                     </p>
                 </div>
                 <div class="latest_news">

@@ -18,6 +18,7 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
         <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2018.3.1017" />
+        <PackageReference Include="X.PagedList.Mvc.Core" Version="7.6.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -30,6 +31,11 @@
       <Content Update="wwwroot\fonts\Material-Design-Iconic-Font.woff2">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\DuLieuDB\HoatDong\" />
+      <Folder Include="wwwroot\DuLieuDB\KhoaPhong\" />
     </ItemGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
