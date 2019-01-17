@@ -1,4 +1,6 @@
-﻿
+﻿@model List<Hospital.Web.EfModels.DichVuChiTiet>
+@using Hospital.Web.Controllers
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -10,7 +12,8 @@
             <div class="col">
                 <h1>Dịch vụ</h1>
                 <div class="breadcroumb_link">
-                    <a href="index.html">Trang chủ </a>/ Dịch vụ
+                    <a asp-action="@nameof(HomesController.Index)"
+                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>/ Dịch vụ
                 </div>
             </div>
         </div>
@@ -21,56 +24,34 @@
 <div class="service_area">
     <div class="container">
         <div class="row justify-content-center align-items-center">
+
             <div class="col-lg-6 col-md-8 text-center">
                 <div class="section_title">
                     <h1>Dịch vụ của chúng tôi</h1>
                     <p>Các dịch vụ chăm sóc sức khỏa người bệnh</p>
                 </div>
             </div>
+
         </div>
+
+
         <div class="row">
-            <div class="col-md-4">
-                <a href="#" class="single_service">
-                    <div class="service_icon"><img src="~/images/img/service1.png" alt=""></div>
-                    <h4>Đơn vị cấp cứu</h4>
-                    <p>Tất cả các ngày trong tuần (kể cả chủ nhật và ngày lễ)</p>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="#" class="single_service">
-                    <div class="service_icon"><img src="~/images/img/service2.png" alt=""></div>
-                    <h4>Chăm sóc sức khỏe</h4>
-                    <p>Tất cả các ngày trong tuần (kể cả chủ nhật và ngày lễ)</p>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="#" class="single_service">
-                    <div class="service_icon"><img src="~/images/img/service3.png" alt=""></div>
-                    <h4>Trình độ bác sĩ</h4>
-                    <p>Tất cả các ngày trong tuần (kể cả chủ nhật và ngày lễ)</p>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="#" class="single_service">
-                    <div class="service_icon"><img src="~/images/img/service4.png" alt=""></div>
-                    <h4>Xe cứu thương</h4>
-                    <p>Tất cả các ngày trong tuần (kể cả chủ nhật và ngày lễ)</p>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="#" class="single_service">
-                    <div class="service_icon"><img src="~/images/img/service5.png" alt=""></div>
-                    <h4>Chăm sóc sức khỏe</h4>
-                    <p>Tất cả các ngày trong tuần (kể cả chủ nhật và ngày lễ)</p>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="#" class="single_service">
-                    <div class="service_icon"><img src="~/images/img/service6.png" alt=""></div>
-                    <h4>Thử nghiệm DNA</h4>
-                    <p>Tất cả các ngày trong tuần (kể cả chủ nhật và ngày lễ)</p>
-                </a>
-            </div>
+            @foreach (var dichVuChiTiet in Model)
+            {
+                <div class="col-md-4">
+                    <a asp-action="@nameof(DichVusController.Details)"
+                               asp-controller="@nameof(DichVusController).Replace("Controller", "")"
+                               asp-route-id="@dichVuChiTiet.Id"
+                               target="_blank" class="single_service">
+                        <div class="service_icon"><img src="~/images/img/service1.png" alt=""></div>
+                        <h4>
+                           @dichVuChiTiet.TenDichVu
+                        </h4>
+                        <p>Tất cả các ngày trong tuần (kể cả chủ nhật và ngày lễ)</p>
+                    </a>
+                </div>
+            }
+
         </div>
     </div>
 </div>

@@ -1,0 +1,67 @@
+﻿@model List<Hospital.Web.EfModels.DanhMucBacSi>
+@using Hospital.Web.Controllers
+
+@{
+    ViewData["Title"] = "Index";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css {
+
+
+
+}
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>Bác sĩ</h1>
+                <div class="breadcroumb_link">
+                    <a asp-action="@nameof(HomesController.Index)"
+                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>/ Bác sĩ
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="doctor_page">
+    <div class="container">
+        <div class="row">
+            @foreach (var danhMucBacSi in Model)
+            {
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="single_doctor">
+                        <a asp-action="@nameof(DanhMucBacSisController.Details)"
+                           asp-controller="@nameof(DanhMucBacSisController).Replace("Controller", "")"
+                           asp-route-id="@danhMucBacSi.Id" class="doctor_img">
+                            <img src="~/images/img/doctor1.jpg" alt="">
+                            @*<img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_BAC_SI + tinTuc.HinhAnhMinhHoa)" />*@
+                        </a>
+                        <h5 >
+                            <a asp-action="@nameof(DanhMucBacSisController.Details)"
+                               asp-controller="@nameof(DanhMucBacSisController).Replace("Controller", "")"
+                               asp-route-id="@danhMucBacSi.Id"  target="_blank">
+                                @danhMucBacSi.TenBacSi
+                            </a>
+                        </h5>
+                        <span>Bác sĩ</span>
+                        <div class="social_cion">
+                            <a href="#"><i class="zmdi zmdi-twitter"></i></a>
+                            <a href="#"><i class="zmdi zmdi-facebook"></i></a>
+                            <a href="#"><i class="zmdi zmdi-instagram"></i></a>
+                            <a href="#"><i class="zmdi zmdi-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts {
+
+
+}

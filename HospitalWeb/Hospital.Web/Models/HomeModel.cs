@@ -10,6 +10,6 @@ namespace Hospital.Web.Models
     {
         public List<KhoaPhong> lsKhoaPhong { get; set; }
 
-        public List<GioiThieuChiTiet> lsGioiThieuChiTiet { get; set; }
+        public List<SlideShow> lsSLide { get; set; }
     }
 }

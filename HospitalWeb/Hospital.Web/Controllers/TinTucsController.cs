@@ -35,7 +35,7 @@ namespace Hospital.Web.Controllers
 
             
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
-            var onePageOfTinTuc = listTinTuc.ToPagedList(pageNumber, 2); // will only contain 25 products max because of the pageSize
+            var onePageOfTinTuc = listTinTuc.ToPagedList(pageNumber, 6); // will only contain 25 products max because of the pageSize
 
             return View(onePageOfTinTuc);
         }
@@ -53,8 +53,16 @@ namespace Hospital.Web.Controllers
                 .Include(t => t.FkNgonNguNavigation)
                 .Include(t => t.FkUserNguoiSuaNavigation)
                 .Include(t => t.FkUserNguoiTaoNavigation)
+                .Where(t => t.Id == id)
                 .Select(t => new TinTuc
                 {
+                    TieuDe=t.TieuDe,
+                    GioiThieu=t.GioiThieu,
+                    HinhAnhMinhHoa=t.HinhAnhMinhHoa,
+                    NgayTao=t.NgayTao,
+                    NoiDung=t.NoiDung,
+                    LuotXem=t.LuotXem,
+                    Author=t.Author,
                 }).FirstOrDefaultAsync();
             if (tinTuc == null)
             {

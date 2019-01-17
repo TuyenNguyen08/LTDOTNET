@@ -1,0 +1,149 @@
+﻿@model Hospital.Web.EfModels.DichVuChiTiet
+@using Hospital.Web.Controllers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css {
+}
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>@Model.TenDichVu</h1>
+                <div class="breadcroumb_link">
+                    <a asp-action="@nameof(HomesController.Index)"
+                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>/ Chi tiết dịch vụ
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcroumb Area End-->
+<!-- ServiceDetailss Area Start-->
+<div class="service_details_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="~/images/img/service_details1.jpg" alt="">
+                @*<img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_DICH_VU + DichVuChiTiet.HinhAnh`)" />*@
+            </div>
+            <div class="col-md-6">
+                <div class="section_title">
+
+                    <h1>Liên hệ ngay! </h1>
+                    <p> @Model.GioiThieu</p>
+                </div>
+                <form action="#" class="contact_form">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <input type="text" placeholder="Tên của bạn">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            @(Html.Kendo().DatePicker()
+.Name("dateofBirth")
+.Value("10/10/2011")
+.HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+                            )
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <input type="email" placeholder="Email">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <input type="number" placeholder="Số điện thoại">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            @(Html.Kendo().DropDownList()
+.Name("color")
+.DataTextField("Text")
+.DataValueField("Value")
+.Events(e => e.Change("change"))
+.BindTo(new List<SelectListItem>() {
+                                                                    new SelectListItem() {
+                                                                    Text = "Black",
+                                                                    Value = "1"
+                                                                    },
+                                                                    new SelectListItem() {
+                                                                    Text = "Orange",
+                                                                    Value = "2"
+                                                                    },
+                                                                    new SelectListItem() {
+                                                                    Text = "Grey",
+                                                                    Value = "3"
+                                                                    }
+})
+.Value("1")
+.HtmlAttributes(new { style = "width: 100%" })
+                            )
+
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+
+                            @(Html.Kendo().DatePicker()
+.Name("datepicker")
+.Value("10/10/2011")
+.HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+                            )
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <textarea placeholder="Nhập nội dung"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="custom_btn">Gửi <i class="zmdi zmdi-plus"></i></button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="service_details_wraper">
+                    <h4>@Model.TenDichVu</h4>
+                    <div class="service_quote">
+                        <i class="zmdi zmdi-quote"></i>
+                        <h4>
+                            @Model.GioiThieu
+                        </h4>
+                        <h3>Số điện thoại liên lạc: 0988 929 059</h3>
+                    </div>
+
+
+                    <br>
+                    <ul class="service_list_items">
+                        <li>
+                            <i class="zmdi zmdi-play-circle"></i> would ever be possible to fish out gene fragments
+                        </li>
+                        <li>
+                            <i class="zmdi zmdi-play-circle"></i> limited by the availability of fossil bones.
+                        </li>
+
+                    </ul>
+                    <br>
+                    <p>@Model.NoiDung</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script>
+        function change() {
+            var value = $("#color").val();
+            $("#cap")
+                .toggleClass("black-cap", value == 1)
+                .toggleClass("orange-cap", value == 2)
+                .toggleClass("grey-cap", value == 3);
+        };
+
+
+    </script>
+}

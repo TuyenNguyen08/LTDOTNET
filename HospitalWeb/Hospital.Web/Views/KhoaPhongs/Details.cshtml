@@ -16,7 +16,8 @@
             <div class="col">
                 <h1>@Model.TenKhoaPhong</h1>
                 <div class="breadcroumb_link">
-                    <a href="index.html">Trang chủ </a>/ Khoa phòng / @Model.TenKhoaPhong
+                    <a asp-action="@nameof(HomesController.Index)"
+                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>/ Khoa phòng
                 </div>
             </div>
         </div>
@@ -25,40 +26,26 @@
 <div class="dept_details_page">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 order-md-6 ">
+            <div class="col-md-4 order-md-6 ">
                 <img src="~/images/img/dept_page.jpg" alt="">
                 @* <img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_KHOA_PHONG + khoaPhong.HinhAnhDaiDien)" />*@
-
-
             </div>
-            <div class="col-md-6">
+            <div class="col-md-8">
+                <h1>@Model.TieuDeKhoa</h1>
                 <p>
                     @Model.GioiThieu
                 </p>
                 <br>
+
                 <p>@Html.Raw(Model.NoiDung)</p>
                 <br>
-                <a href="#" class="custom_btn">Appoinmaent  <i class="zmdi zmdi-plus"></i></a>
             </div>
         </div>
         <div class="dept_fee_area">
             <div class="row justify-content-center">
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-8">
                     <div class="treatment_fee_wraper">
-                        <h4>Phương pháp điều trị:</h4>
-                        <ul class="treatment_fee">
-                            <li><span>Captopril Renogram</span><strong>$300</strong></li>
-                            <li><span>Paratyroid scan</span><strong>$450</strong></li>
-                            <li><span>Heart Patient</span><strong>$95</strong></li>
-                            <li><span>Liposuction</span><strong>$185</strong></li>
-                            <li><span>Tummy Tuck</span><strong>$145</strong></li>
-                            <li><span>Cardiac ablation</span><strong>$360</strong></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 ml-auto">
-                    <div class="treatment_fee_wraper pl">
-                        <h4>Investigation:</h4>
+                        <h4>Bảng giá dịch vụ</h4>
                         <ul class="treatment_fee">
                             <li><span>Captopril Renogram</span><strong>$300</strong></li>
                             <li><span>Paratyroid scan</span><strong>$450</strong></li>
@@ -86,12 +73,7 @@
         </div>
     </div>
 </div>
-<div>
-    <a asp-action="Index">Back to List</a>
-    <a asp-action="@nameof(KhoaPhongsController.Index)"
-       asp-controller="@nameof(KhoaPhongsController).Replace("Controller","")">Ve lai danh sach</a>
 
-</div>
 @section scripts {
 }
 

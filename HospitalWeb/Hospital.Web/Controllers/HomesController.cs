@@ -23,15 +23,15 @@ namespace Hospital.Web.Controllers
         {
             HomeModel model = new HomeModel();
 
-            var listGioiThieu = await InitParam.Db.GioiThieuChiTiet.AsNoTracking()
-                .Select(t => new GioiThieuChiTiet
+            var lsSLide = await InitParam.Db.SlideShow.AsNoTracking()
+                .Select(t => new SlideShow
                 {
                    Id = t.Id,
-                   Ten=t.Ten,
-                   GioiThieu=t.GioiThieu,
-                   NoiDung=t.NoiDung,
+                  TieuDe=t.TieuDe,
+                  HinhAnh=t.HinhAnh,
+                 
                 }).ToListAsync();
-            model.lsGioiThieuChiTiet = new List<GioiThieuChiTiet>(listGioiThieu);
+            model.lsSLide = new List<SlideShow>(lsSLide);
 
             var listKhoaPhong = await InitParam.Db.KhoaPhong.AsNoTracking().Select(t => new KhoaPhong
             {
@@ -58,7 +58,7 @@ namespace Hospital.Web.Controllers
             var khoaPhong = await InitParam.Db.KhoaPhong.AsNoTracking()
                 .Include(k => k.FkLoaiKhoaPhongNavigation)
                 .Include(k => k.FkNgonNguNavigation)
-                .Where(m => m.Id == id)
+                .Where (m => m.Id == id)
                 .Select(t => new KhoaPhong
                 {
                     Id = t.Id,
@@ -68,6 +68,7 @@ namespace Hospital.Web.Controllers
                     NoiDung = t.NoiDung,
                     FkLoaiKhoaPhongNavigation = t.FkLoaiKhoaPhongNavigation
                 }).FirstOrDefaultAsync();
+            
             ;
 
             if (khoaPhong == null)
@@ -77,7 +78,6 @@ namespace Hospital.Web.Controllers
 
             return View(khoaPhong);
         }
-
 
 
 

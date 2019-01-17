@@ -1,11 +1,14 @@
-﻿@using X.PagedList.Mvc.Core; //import this so we get our HTML Helper
-@using X.PagedList; //import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
 
 @model X.PagedList.IPagedList<Hospital.Web.EfModels.TinTuc>
+@using Hospital.Web.Controllers
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Index";
-< link href = "~/css/PagedList.css" rel = "stylesheet" />
+}
+@section css {
+    <link href="~/css/PagedList.css" rel="stylesheet" />
 }
 <div class="breadvroumb_area">
     <div class="container">
@@ -13,7 +16,8 @@
             <div class="col">
                 <h1>Tin tức mới nhất</h1>
                 <div class="breadcroumb_link">
-                    <a href="index.html">Home </a>/Tin tức mới nhất
+                    <a asp-action="@nameof(HomesController.Index)"
+                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>/Tin tức mới nhất
                 </div>
             </div>
         </div>
@@ -24,7 +28,7 @@
 <div class="blog_area">
     <div class="container">
         <div class="row">
-            <div class="col-md-8 order-md-12">
+            <div class="col-md-12 order-md-12">
                 <div class="row">
 
                     @foreach (var tinTuc in Model)
@@ -37,16 +41,28 @@
                                 </div>
                                 <div class="blog_content">
                                     <div class="blog_meta">
-                                        <a href="#" class="date">
-                                            <span>@Html.Raw(tinTuc.NgayTao)</span>
-                                        </a>
+                                        <a class="date" asp-action="@nameof(TinTucsController.Details)"
+                                           asp-controller="@nameof(TinTucsController).Replace("Controller","")"
+                                           asp-route-id="@tinTuc.Id"
+                                           target="_blank">@tinTuc.NgayTao</a>
                                         <a href="#" class="comment_box">
                                             <i class="zmdi zmdi-comments"></i> 3
                                         </a>
                                     </div>
-                                    <h4>@Html.Raw(tinTuc.TieuDe)</h4>
-                                    <p>@Html.Raw(tinTuc.GioiThieu)</p>
-                                    <a class="read_btn" href="#">Xem thêm  <i class="zmdi zmdi-plus"></i></a>
+                                    <h4>
+                                        <a asp-action="@nameof(TinTucsController.Details)"
+                                           asp-controller="@nameof(TinTucsController).Replace("Controller","")"
+                                           asp-route-id="@tinTuc.Id"
+                                           target="_blank">@tinTuc.TieuDe</a>
+                                    </h4>
+                                   <p asp-action="@nameof(TinTucsController.Details)"
+                                       asp-controller="@nameof(TinTucsController).Replace("Controller","")"
+                                       asp-route-id="@tinTuc.Id"
+                                       target="_blank">@tinTuc.GioiThieu</p>
+                                    <a class="read_btn" asp-action="@nameof(TinTucsController.Details)"
+                                           asp-controller="@nameof(TinTucsController).Replace("Controller","")"
+                                           asp-route-id="@tinTuc.Id"
+                                           target="_blank">Xem thêm  <i class="zmdi zmdi-plus"></i></a>
                                 </div>
                             </div>
 
@@ -57,85 +73,6 @@
                     @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 
 
-                    <div class="row">
-                        <div class="col">
-                            <div class="paginations_bar">
-                                <ul class="paginations_menu">
-                                    <li class="nav prev"><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">6</a></li>
-                                    <li class="nav next"><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="widget_raper">
-                    <form action="#" class="widget_search_bar">
-                        <input type="search" placeholder="Search here">
-                        <button type="submit"><i class="zmdi zmdi-search"></i></button>
-                    </form>
-                    <div class="recent_post">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#Popular" role="tab" data-toggle="tab">Popular</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#Recent" role="tab" data-toggle="tab">Recent</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#Comments" role="tab" data-toggle="tab">Comments</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            @foreach (var tinTuc in Model)
-                            {
-                                <div role="tabpanel" class="tab-pane fade in active show" id="Popular">
-                                    <a href="#" class="single_recent_post">
-                                        <span class="rp_img" style="background-image: url(../images/img/blog1.jpg);">
-                                            @*<img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_TIN_TUC + tinTuc.HinhAnhMinhHoa)" />*@
-
-                                        </span>
-                                        <h4>@Html.Raw(tinTuc.TieuDe)</h4>
-                                        <span>@Html.Raw(tinTuc.NgayTao)</span>
-                                    </a>
-
-                                </div>
-                            }
-
-                        </div>
-                    </div>
-                    <div class="widget_menu_bar">
-                        <h4>Categories</h4>
-                        <ul class="widget_menu">
-                            <li><a href="#"><i class="zmdi zmdi-long-arrow-right"></i> Dental care</a></li>
-                            <li><a href="#"><i class="zmdi zmdi-long-arrow-right"></i> Health care</a></li>
-                            <li><a href="#"><i class="zmdi zmdi-long-arrow-right"></i> Laboratory</a></li>
-                            <li><a href="#"><i class="zmdi zmdi-long-arrow-right"></i> Cardiology</a></li>
-                            <li><a href="#"><i class="zmdi zmdi-long-arrow-right"></i> Parenting</a></li>
-                            <li><a href="#"><i class="zmdi zmdi-long-arrow-right"></i> Research</a></li>
-                        </ul>
-                    </div>
-                    <div class="widget_tag">
-                        <h4>Tags</h4>
-                        <ul class="tag_list">
-                            <li><a href="#">Clean environment </a></li>
-                            <li><a href="#">kids health </a></li>
-                            <li><a href="#">blood pressure </a></li>
-                            <li><a href="#">body </a></li>
-                            <li><a href="#">learning</a></li>
-                            <li><a href="#">tips </a></li>
-                            <li><a href="#">willpower</a></li>
-                            <li><a href="#">Rehabilitation</a></li>
-                            <li><a href="#">Treatment</a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
