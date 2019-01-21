@@ -1,8 +1,9 @@
-﻿@model Hospital.Web.EfModels.TinTuc
+﻿@model Hospital.Web.EfModels.Event
 @using Hospital.Web.Controllers
 @{
     ViewData["Title"] = "Details";
 }
+
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,7 +23,7 @@
                 <h1>@Model.TieuDe</h1>
                 <div class="breadcroumb_link">
                     <a asp-action="@nameof(HomesController.Index)"
-                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>/ Tin tức mới nhất
+                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>/ Sự kiện mới nhất
                 </div>
             </div>
         </div>
@@ -45,7 +46,7 @@
                             <p>@Model.GioiThieu</p>
                         </div>
                         <p>
-                            @Html.Raw(Model.NoiDung) <br>
+                            @Html.Raw(@Model.GioiThieu) <br>
                             <br>
 
                             <br>
@@ -132,16 +133,12 @@
                                 <div class="row">
                                     <div class="col"><textarea placeholder="Nhập nội dung"></textarea></div>
                                 </div>
-                                <div class="col-lg-12" style="margin-left:60%">
-                                    <button type="submit" class="custom_btn">Gửi</button>
-                                    <button type="submit" class="custom_btn">Hủy</button>
-                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-        
+
         </div>
     </div>
 </div>

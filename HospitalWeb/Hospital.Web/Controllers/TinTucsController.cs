@@ -29,11 +29,11 @@ namespace Hospital.Web.Controllers
                                GioiThieu = t.GioiThieu,
                                HinhAnhMinhHoa = t.HinhAnhMinhHoa,
                                NoiDung = t.NoiDung,
-                               NgayTao=t.NgayTao,
-                              
+                               NgayTao = t.NgayTao,
+
                            });
 
-            
+
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
             var onePageOfTinTuc = listTinTuc.ToPagedList(pageNumber, 6); // will only contain 25 products max because of the pageSize
 
@@ -56,13 +56,13 @@ namespace Hospital.Web.Controllers
                 .Where(t => t.Id == id)
                 .Select(t => new TinTuc
                 {
-                    TieuDe=t.TieuDe,
-                    GioiThieu=t.GioiThieu,
-                    HinhAnhMinhHoa=t.HinhAnhMinhHoa,
-                    NgayTao=t.NgayTao,
-                    NoiDung=t.NoiDung,
-                    LuotXem=t.LuotXem,
-                    Author=t.Author,
+                    TieuDe = t.TieuDe,
+                    GioiThieu = t.GioiThieu,
+                    HinhAnhMinhHoa = t.HinhAnhMinhHoa,
+                    NgayTao = t.NgayTao,
+                    NoiDung = t.NoiDung,
+                    LuotXem = t.LuotXem,
+                    Author = t.Author,
                 }).FirstOrDefaultAsync();
             if (tinTuc == null)
             {
@@ -70,133 +70,6 @@ namespace Hospital.Web.Controllers
             }
 
             return View(tinTuc);
-        }
-
-        // GET: TinTucs/Create
-        public IActionResult Create()
-        {
-            ViewData["FkLoaiTin"] = new SelectList(InitParam.Db.LoaiTin, "Id", "Id");
-            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id");
-            ViewData["FkUserNguoiSua"] = new SelectList(InitParam.Db.User, "UserName", "UserName");
-            ViewData["FkUserNguoiTao"] = new SelectList(InitParam.Db.User, "UserName", "UserName");
-            return View();
-        }
-
-        // POST: TinTucs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TieuDe,GioiThieu,HinhAnhMinhHoa,FkNgonNgu,FkLoaiTin,NgayTao,FkUserNguoiTao,NoiDung,Stt,LuotXem,Author,FkUserNguoiSua,NgaySua")] TinTuc tinTuc)
-        {
-            if (ModelState.IsValid)
-            {
-                InitParam.Db.Add(tinTuc);
-                await InitParam.Db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["FkLoaiTin"] = new SelectList(InitParam.Db.LoaiTin, "Id", "Id", tinTuc.FkLoaiTin);
-            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id", tinTuc.FkNgonNgu);
-            ViewData["FkUserNguoiSua"] = new SelectList(InitParam.Db.User, "UserName", "UserName", tinTuc.FkUserNguoiSua);
-            ViewData["FkUserNguoiTao"] = new SelectList(InitParam.Db.User, "UserName", "UserName", tinTuc.FkUserNguoiTao);
-            return View(tinTuc);
-        }
-
-        // GET: TinTucs/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var tinTuc = await InitParam.Db.TinTuc.FindAsync(id);
-            if (tinTuc == null)
-            {
-                return NotFound();
-            }
-            ViewData["FkLoaiTin"] = new SelectList(InitParam.Db.LoaiTin, "Id", "Id", tinTuc.FkLoaiTin);
-            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id", tinTuc.FkNgonNgu);
-            ViewData["FkUserNguoiSua"] = new SelectList(InitParam.Db.User, "UserName", "UserName", tinTuc.FkUserNguoiSua);
-            ViewData["FkUserNguoiTao"] = new SelectList(InitParam.Db.User, "UserName", "UserName", tinTuc.FkUserNguoiTao);
-            return View(tinTuc);
-        }
-
-        // POST: TinTucs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TieuDe,GioiThieu,HinhAnhMinhHoa,FkNgonNgu,FkLoaiTin,NgayTao,FkUserNguoiTao,NoiDung,Stt,LuotXem,Author,FkUserNguoiSua,NgaySua")] TinTuc tinTuc)
-        {
-            if (id != tinTuc.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    InitParam.Db.Update(tinTuc);
-                    await InitParam.Db.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TinTucExists(tinTuc.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["FkLoaiTin"] = new SelectList(InitParam.Db.LoaiTin, "Id", "Id", tinTuc.FkLoaiTin);
-            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id", tinTuc.FkNgonNgu);
-            ViewData["FkUserNguoiSua"] = new SelectList(InitParam.Db.User, "UserName", "UserName", tinTuc.FkUserNguoiSua);
-            ViewData["FkUserNguoiTao"] = new SelectList(InitParam.Db.User, "UserName", "UserName", tinTuc.FkUserNguoiTao);
-            return View(tinTuc);
-        }
-
-        // GET: TinTucs/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var tinTuc = await InitParam.Db.TinTuc
-                .Include(t => t.FkLoaiTinNavigation)
-                .Include(t => t.FkNgonNguNavigation)
-                .Include(t => t.FkUserNguoiSuaNavigation)
-                .Include(t => t.FkUserNguoiTaoNavigation)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (tinTuc == null)
-            {
-                return NotFound();
-            }
-
-            return View(tinTuc);
-        }
-
-        // POST: TinTucs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var tinTuc = await InitParam.Db.TinTuc.FindAsync(id);
-            InitParam.Db.TinTuc.Remove(tinTuc);
-            await InitParam.Db.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool TinTucExists(int id)
-        {
-            return InitParam.Db.TinTuc.Any(e => e.Id == id);
         }
     }
 }

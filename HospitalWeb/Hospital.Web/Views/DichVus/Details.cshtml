@@ -111,7 +111,7 @@
                     <div class="service_quote">
                         <i class="zmdi zmdi-quote"></i>
                         <h4>
-                            @Model.GioiThieu
+                            @Html.Raw(@Model.GioiThieu)
                         </h4>
                         <h3>Số điện thoại liên lạc: 0988 929 059</h3>
                     </div>
@@ -128,7 +128,7 @@
 
                     </ul>
                     <br>
-                    <p>@Model.NoiDung</p>
+                    <p>@Html.Raw(@Model.NoiDung)</p>
                 </div>
             </div>
         </div>

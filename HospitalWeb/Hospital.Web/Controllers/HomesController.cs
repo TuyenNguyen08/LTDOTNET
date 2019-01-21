@@ -26,21 +26,41 @@ namespace Hospital.Web.Controllers
             var lsSLide = await InitParam.Db.SlideShow.AsNoTracking()
                 .Select(t => new SlideShow
                 {
-                   Id = t.Id,
-                  TieuDe=t.TieuDe,
-                  HinhAnh=t.HinhAnh,
-                 
+                    Id = t.Id,
+                    TieuDe = t.TieuDe,
+                    HinhAnh = t.HinhAnh,
+
                 }).ToListAsync();
             model.lsSLide = new List<SlideShow>(lsSLide);
 
             var listKhoaPhong = await InitParam.Db.KhoaPhong.AsNoTracking().Select(t => new KhoaPhong
             {
-                Id=t.Id,
-                TieuDeKhoa=t.TieuDeKhoa,
+                Id = t.Id,
+                TieuDeKhoa = t.TieuDeKhoa,
             }).ToListAsync();
 
-           
+
             model.lsKhoaPhong = new List<KhoaPhong>(listKhoaPhong);
+
+            var listGioiThieu = await InitParam.Db.GioiThieuChiTiet.AsNoTracking().Select(t => new GioiThieuChiTiet
+            {
+                Id = t.Id,
+                Ten = t.Ten,
+            }).ToListAsync();
+
+
+            model.lsGioiThieu = new List<GioiThieuChiTiet>(listGioiThieu);
+
+            var listTinTuc = await InitParam.Db.TinTuc.AsNoTracking().Take(3).Select(t => new TinTuc
+            {
+                Id = t.Id,
+                TieuDe = t.TieuDe,
+                NgayTao = t.NgayTao,
+            }).ToListAsync();
+
+
+            model.lsTinTuc = new List<TinTuc>(listTinTuc);
+
 
             return View(model);
 
@@ -58,7 +78,7 @@ namespace Hospital.Web.Controllers
             var khoaPhong = await InitParam.Db.KhoaPhong.AsNoTracking()
                 .Include(k => k.FkLoaiKhoaPhongNavigation)
                 .Include(k => k.FkNgonNguNavigation)
-                .Where (m => m.Id == id)
+                .Where(m => m.Id == id)
                 .Select(t => new KhoaPhong
                 {
                     Id = t.Id,
@@ -68,7 +88,7 @@ namespace Hospital.Web.Controllers
                     NoiDung = t.NoiDung,
                     FkLoaiKhoaPhongNavigation = t.FkLoaiKhoaPhongNavigation
                 }).FirstOrDefaultAsync();
-            
+
             ;
 
             if (khoaPhong == null)
@@ -83,120 +103,35 @@ namespace Hospital.Web.Controllers
 
 
         // GET: KhoaPhongs/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Contact()
         {
-            ViewData["FkLoaiKhoaPhong"] = new SelectList(InitParam.Db.LoaiKhoaPhong, "Id", "Id");
-            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id");
-            return View();
+            var nBenhVien7CContext = InitParam.Db.HenKhamBenh;
+            return View(await nBenhVien7CContext.ToListAsync());
         }
-
-        // POST: KhoaPhongs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TieuDeKhoa,TenKhoaPhong,GioiThieu,NoiDung,NgayCapNhat,UserModify,FkLoaiKhoaPhong,FkNgonNgu,HinhAnhDaiDien,HenKhamBenh,Stt,LuotXem")] KhoaPhong khoaPhong)
-        {
-            if (ModelState.IsValid)
-            {
-                InitParam.Db.Add(khoaPhong);
-                await InitParam.Db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["FkLoaiKhoaPhong"] = new SelectList(InitParam.Db.LoaiKhoaPhong, "Id", "Id", khoaPhong.FkLoaiKhoaPhong);
-            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id", khoaPhong.FkNgonNgu);
-            return View(khoaPhong);
-        }
-
-        // GET: KhoaPhongs/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> About(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var khoaPhong = await InitParam.Db.KhoaPhong.FindAsync(id);
-            if (khoaPhong == null)
-            {
-                return NotFound();
-            }
-            ViewData["FkLoaiKhoaPhong"] = new SelectList(InitParam.Db.LoaiKhoaPhong, "Id", "Id", khoaPhong.FkLoaiKhoaPhong);
-            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id", khoaPhong.FkNgonNgu);
-            return View(khoaPhong);
-        }
-
-        // POST: KhoaPhongs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TieuDeKhoa,TenKhoaPhong,GioiThieu,NoiDung,NgayCapNhat,UserModify,FkLoaiKhoaPhong,FkNgonNgu,HinhAnhDaiDien,HenKhamBenh,Stt,LuotXem")] KhoaPhong khoaPhong)
-        {
-            if (id != khoaPhong.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+            var tinTuc = await InitParam.Db.GioiThieuChiTiet.AsNoTracking()
+                .Include(t => t.FkNgonNguNavigation)
+                .Include(t => t.FkGioiThieuNavigation)
+                .Where(t => t.Id == id)
+                .Select(t => new GioiThieuChiTiet
                 {
-                    InitParam.Db.Update(khoaPhong);
-                    await InitParam.Db.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!KhoaPhongExists(khoaPhong.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["FkLoaiKhoaPhong"] = new SelectList(InitParam.Db.LoaiKhoaPhong, "Id", "Id", khoaPhong.FkLoaiKhoaPhong);
-            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id", khoaPhong.FkNgonNgu);
-            return View(khoaPhong);
-        }
-
-        // GET: KhoaPhongs/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
+                    Ten = t.Ten,
+                    GioiThieu = t.GioiThieu,
+                    NoiDung = t.NoiDung,
+                    HinhAnh = t.HinhAnh,
+                }).FirstOrDefaultAsync();
+            if (tinTuc == null)
             {
                 return NotFound();
             }
 
-            var khoaPhong = await InitParam.Db.KhoaPhong
-                .Include(k => k.FkLoaiKhoaPhongNavigation)
-                .Include(k => k.FkNgonNguNavigation)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (khoaPhong == null)
-            {
-                return NotFound();
-            }
-
-            return View(khoaPhong);
-        }
-
-        // POST: KhoaPhongs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var khoaPhong = await InitParam.Db.KhoaPhong.FindAsync(id);
-            InitParam.Db.KhoaPhong.Remove(khoaPhong);
-            await InitParam.Db.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool KhoaPhongExists(int id)
-        {
-            return InitParam.Db.KhoaPhong.Any(e => e.Id == id);
+            return View(tinTuc);
         }
     }
 }

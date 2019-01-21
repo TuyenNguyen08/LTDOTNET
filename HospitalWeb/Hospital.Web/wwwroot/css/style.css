@@ -853,6 +853,7 @@ a.read_btn,
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
     transition: .3s linear;
     margin-bottom: 13px;
+    min-height:300px;
 }
 
     .single_dept:hover {
@@ -1561,7 +1562,7 @@ nav.auto-hide-filter {
     display: inline-block;
     padding: 10px;
     text-align: center;
-    width: 70px;
+    width: 80px;
     padding: 6px 0;
     margin-bottom: 5px;
 }

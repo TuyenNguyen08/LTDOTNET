@@ -55,22 +55,23 @@
                                            asp-route-id="@tinTuc.Id"
                                            target="_blank">@tinTuc.TieuDe</a>
                                     </h4>
-                                   <p asp-action="@nameof(TinTucsController.Details)"
+                                    <p asp-action="@nameof(TinTucsController.Details)"
                                        asp-controller="@nameof(TinTucsController).Replace("Controller","")"
                                        asp-route-id="@tinTuc.Id"
                                        target="_blank">@tinTuc.GioiThieu</p>
                                     <a class="read_btn" asp-action="@nameof(TinTucsController.Details)"
-                                           asp-controller="@nameof(TinTucsController).Replace("Controller","")"
-                                           asp-route-id="@tinTuc.Id"
-                                           target="_blank">Xem thêm  <i class="zmdi zmdi-plus"></i></a>
+                                       asp-controller="@nameof(TinTucsController).Replace("Controller","")"
+                                       asp-route-id="@tinTuc.Id"
+                                       target="_blank">Xem thêm<i class="zmdi zmdi-plus"></i></a>
                                 </div>
                             </div>
 
                         </div>
                     }
 
-                    <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                    <div class="col-md-6">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                    </div>
 
 
                 </div>

@@ -1,0 +1,47 @@
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+
+@model X.PagedList.IPagedList<Hospital.Web.EfModels.HoiDapYkhoa>
+@using Hospital.Web.Controllers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css {
+    <link href="~/css/PagedList.css" rel="stylesheet" />
+}
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>Hỏi đáp y khoa</h1>
+                <div class="breadcroumb_link">
+                    <a asp-action="@nameof(HomesController.Index)"
+                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>/ Hỏi đáp y khoa
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="faq_page_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ">
+                @foreach (var hoidap in Model)
+                {
+                    <div class="single_faq" id="faq1">
+
+                        <h4 style="color:#0094ea"> @Html.Raw(hoidap.TieuDe)</h4>
+                        <span style="color: #C00">Câu hỏi:</span> @Html.Raw(hoidap.NoiDungCauHoi)
+                        <br />
+                        <span style="color: #C00">Trả lời:</span>@Html.Raw(hoidap.NoiDungTraLoi)
+
+                    </div>
+                }
+            </div>
+            <div class="col-md-6">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            </div>
+
+        </div>
+    </div>
+</div>

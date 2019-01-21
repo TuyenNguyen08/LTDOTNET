@@ -1,4 +1,7 @@
-﻿@{
+﻿@model Hospital.Web.EfModels.GioiThieuChiTiet
+@using Hospital.Web.Controllers
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,24 +12,24 @@
     <link rel="stylesheet" href="~/css/owl.carousel.min.css">
 
 }
-    <div class="breadvroumb_area">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col">
-                    <h1>Giới thiệu</h1>
-                    <div class="breadcroumb_link">
-                        <a href="index.html">Trang chủ </a>/ Giới thiệu
-                    </div>
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>@Model.Ten</h1>
+                <div class="breadcroumb_link">
+                    <a href="index.html">Trang chủ </a>/ Giới thiệu
                 </div>
             </div>
         </div>
     </div>
+</div>
 <div class=" about_page">
     <div class="container">
         <div class="row">
             <div class="col-lg-5 order-lg-7">
                 <div class="about_video_content">
-                    <a href="https://www.youtube.com/watch?v=3-iCDOYkfms" class="video_popup">
+                    <a href="#" class="video_popup">
                         <img src="~/images/img/about2.jpg" alt="">
                         <span class="video_content"><i class="zmdi zmdi-play-circle-outline"></i> Môi trường làm việc của chúng tôi</span>
                     </a>
@@ -34,8 +37,8 @@
             </div>
             <div class="col-lg-7">
                 <div class="about_content">
-                    <h1>Chào mừng bạn đến với Quân Dân Y Miền Đông</h1>
-                    <p>Hứa hẹn sẽ mở ra những con đường nghiên cứu mới về tiền sử của con người và đã được các nhà di truyền học và khảo cổ học hứng thú với điều đó giống như khám phá ra rằng bạn có thể.</p>
+                    <h1>@Model.Ten</h1>
+                    <p>@Html.Raw(Model.GioiThieu)</p>
                     <ul>
                         <li>
                             <i class="zmdi zmdi-play-circle"></i> Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc
@@ -50,9 +53,13 @@
                             <i class="zmdi zmdi-play-circle"></i> Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc
                         </li>
                     </ul>
-                    <p>Hứa hẹn sẽ mở ra những con đường nghiên cứu mới về tiền sử của con người và đã được các nhà di truyền học và khảo cổ học hứng thú với điều đó giống như khám phá ra rằng bạn có thể.</p>
+                   
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <p class="col-lg-12">@Html.Raw(Model.NoiDung)</p>
+            <br />
         </div>
         <div class="row">
             <div class="col-md-4">
@@ -61,7 +68,7 @@
                     <p>
                         Bệnh viện Quân Dân Y Miền Đông tự hào là một trong những bệnh viện sở hữu đội ngũ y bác sĩ được đào tạo bài bản, giàu kinh nghiệm và chuyên môn.
 
-                        </p>
+                    </p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -83,166 +90,7 @@
         </div>
     </div>
 </div>
-<!-- AboutMedifair Area End-->
-<!-- Counter Area Start-->
-<div class="counter_area">
-    <div class="container">
-        <div class="row text-center justify-content-center">
-            <div class="col-md-3 col-6">
-                <div class="single_counter">
-                    <h1><span class="count">108</span></h1>
-                    <span>Nhân viên</span>
-                </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="single_counter">
-                    <h1><span class="count">20</span>+</h1>
-                    <span>Kinh nghiệm</span>
-                </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="single_counter">
-                    <h1><span class="count">1450</span></h1>
-                    <span>Nụ cười</span>
-                </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="single_counter">
-                    <h1><span class="count">646</span></h1>
-                    <span>Hiến máu</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Counter Area End-->
-<!-- Service Area Start-->
-<div class="service_area">
-    <div class="container">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-lg-6 col-md-8 text-center">
-                <div class="section_title">
-                    <h1>Dịch vụ của chúng tôi</h1>
-                    <p>Các dịch vụ chăm sóc sức khỏa người bệnh</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <a href="#" class="single_service">
-                    <div class="service_icon"><img src="~/images/img/service1.png" alt=""></div>
-                    <h4>Đơn vị cấp cứu</h4>
-                    <p>Tất cả các ngày trong tuần (kể cả chủ nhật và ngày lễ)</p>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="#" class="single_service">
-                    <div class="service_icon"><img src="~/images/img/service2.png" alt=""></div>
-                    <h4>Chăm sóc sức khỏe</h4>
-                    <p>Tất cả các ngày trong tuần (kể cả chủ nhật và ngày lễ)</p>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="#" class="single_service">
-                    <div class="service_icon"><img src="~/images/img/service3.png" alt=""></div>
-                    <h4>Trình độ bác sĩ</h4>
-                    <p>Tất cả các ngày trong tuần (kể cả chủ nhật và ngày lễ)</p>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="#" class="single_service">
-                    <div class="service_icon"><img src="~/images/img/service4.png" alt=""></div>
-                    <h4>Xe cứu thương</h4>
-                    <p>Tất cả các ngày trong tuần (kể cả chủ nhật và ngày lễ)</p>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="#" class="single_service">
-                    <div class="service_icon"><img src="~/images/img/service5.png" alt=""></div>
-                    <h4>Chăm sóc sức khỏe</h4>
-                    <p>Tất cả các ngày trong tuần (kể cả chủ nhật và ngày lễ)</p>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="#" class="single_service">
-                    <div class="service_icon"><img src="~/images/img/service6.png" alt=""></div>
-                    <h4>Thử nghiệm DNA</h4>
-                    <p>Tất cả các ngày trong tuần (kể cả chủ nhật và ngày lễ)</p>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Service Area End-->
-<!-- Doctors Area Start-->
-<div class="doctor_area pt_none">
-    <div class="container">
-        <div class="row justify-content-center ">
-            <div class="col-lg-6 col-md-8 text-center">
-                <div class="section_title">
-                    <h1>Bác sĩ Quân Dân Y Miền Đông</h1>
-                    <p>Đội ngũ 100 bác sỹ (07 BsCKII, 41 BsCKI, 05 ThsY, 47 bác sĩ), 222 điều dưỡng (31 ĐDĐH, 24 ĐDCĐ, 167 ĐDTH) và 238 cán bộ, nhân viên</p>
-                </div>
-            </div>
-        </div>
-        <div class="row justify">
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="doctor_content">
-                    <h4>Giới thiệu về bác sĩ của chúng tôi</h4>
-                    <p>Đội ngũ 100 bác sỹ (07 BsCKII, 41 BsCKI, 05 ThsY, 47 bác sĩ), 222 điều dưỡng (31 ĐDĐH, 24 ĐDCĐ, 167 ĐDTH) và 238 cán bộ, nhân viên</p>
-                    <a class="read_btn" href="#">Xem thêm  <i class="zmdi zmdi-plus"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="single_doctor">
-                    <a href="#" class="doctor_img">
-                        <img src="~/images/img/doctor1.jpg" alt="">
-                    </a>
-                    <h5>Steven Elliott</h5>
-                    <span>Cardiology</span>
-                    <div class="social_cion">
-                        <a href="#"><i class="zmdi zmdi-twitter"></i></a>
-                        <a href="#"><i class="zmdi zmdi-facebook"></i></a>
-                        <a href="#"><i class="zmdi zmdi-instagram"></i></a>
-                        <a href="#"><i class="zmdi zmdi-linkedin"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="single_doctor">
-                    <div class="doctor_img">
-                        <img src="~/images/img/doctor2.jpg" alt="">
-                    </div>
-                    <h5>Risi siva</h5>
-                    <span>Cardiology</span>
-                    <div class="social_cion">
-                        <a href="#"><i class="zmdi zmdi-twitter"></i></a>
-                        <a href="#"><i class="zmdi zmdi-facebook"></i></a>
-                        <a href="#"><i class="zmdi zmdi-instagram"></i></a>
-                        <a href="#"><i class="zmdi zmdi-linkedin"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="single_doctor">
-                    <div class="doctor_img">
-                        <img src="~/images/img/doctor3.jpg" alt="">
-                    </div>
-                    <h5>Sara remos</h5>
-                    <span>Cardiology</span>
-                    <div class="social_cion">
-                        <a href="#"><i class="zmdi zmdi-twitter"></i></a>
-                        <a href="#"><i class="zmdi zmdi-facebook"></i></a>
-                        <a href="#"><i class="zmdi zmdi-instagram"></i></a>
-                        <a href="#"><i class="zmdi zmdi-linkedin"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 @section scripts {
-    
+
 }

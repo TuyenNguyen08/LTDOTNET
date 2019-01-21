@@ -11,5 +11,8 @@ namespace Hospital.Web.Models
         public List<KhoaPhong> lsKhoaPhong { get; set; }
 
         public List<SlideShow> lsSLide { get; set; }
+        public List<GioiThieuChiTiet> lsGioiThieu { get; set; }
+        public List<TinTuc> lsTinTuc { get; set; }
+
     }
 }

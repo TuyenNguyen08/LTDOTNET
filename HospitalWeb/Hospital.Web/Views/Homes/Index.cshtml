@@ -42,12 +42,13 @@
 <!-- Cbox Area Start-->
 <div class="cbox_area">
     <div class="container">
-        <div class="row">
+        <div class="row" style="background-color: #f6fbff;">
             <div class="col-md-3">
                 <div class="single_cbox">
                     <div class="cbox_title">
                         <div class="cbox_icon">  <img src="~/images/icon-1.png" alt="" /></div>
-                        <h4>Đăng ký khám bênh qua mạng</h4>
+                        <a asp-action="@nameof(HenKhamBenhsController.Index)"
+                           asp-controller="@nameof(HenKhamBenhsController).Replace("Controller","")"><h4>Đăng ký khám bênh qua mạng</h4></a>
                     </div>
                     <p>
                         Dịch vụ "Đăng ký khám theo hẹn" bắt đầu đi vào hoạt động từ ngày 09 tháng 4 năm
@@ -64,7 +65,7 @@
                 <div class="single_cbox">
                     <div class="cbox_title">
                         <div class="cbox_icon"><img src="~/images/icon-2.png" alt=""></div>
-                        <h4>Xem hồ sơ bệnh án trên mạng</h4>
+                        <a><h4>Xem hồ sơ bệnh án trên mạng</h4></a>
                     </div>
                     <p>
                         Dịch vụ "Đăng ký khám theo hẹn" bắt đầu đi vào hoạt động từ ngày 09 tháng 4 năm
@@ -79,7 +80,7 @@
                 <div class="single_cbox">
                     <div class="cbox_title">
                         <div class="cbox_icon"><img src="~/images/icon-3.png" alt=""></div>
-                        <h4>Xem lịch khám theo bác sĩ</h4>
+                        <a><h4>Xem lịch khám theo bác sĩ</h4></a>
                     </div>
                     <p>
                         Dịch vụ "Đăng ký khám theo hẹn" bắt đầu đi vào hoạt động từ ngày 09 tháng 4 năm
@@ -93,7 +94,8 @@
                 <div class="single_cbox">
                     <div class="cbox_title">
                         <div class="cbox_icon"><img src="~/images/icon-3.png" alt=""></div>
-                        <h4>Diễn đàn hỏi đáp y khoa</h4>
+                        <a asp-action="@nameof(HoiDapYkhoasController.Index)"
+                           asp-controller="@nameof(HoiDapYkhoasController).Replace("Controller","")"><h4>Diễn đàn hỏi đáp y khoa</h4></a>
                     </div>
                     <p>
                         Dịch vụ "Đăng ký khám theo hẹn" bắt đầu đi vào hoạt động từ ngày 09 tháng 4 năm
@@ -137,12 +139,8 @@
             </div>
             <div class="col-lg-7">
                 <div class="about_righ_content">
-                    <div class="about_slide owl-carousel">
-                        <div class="single_about_slide" style="background-image: url(../images/img/about1.jpg);"></div>
-                        <div class="single_about_slide" style="background-image: url(../images/img/about1.jpg);"></div>
-                        <div class="single_about_slide" style="background-image: url(../images/img/about1.jpg);"></div>
-                    </div>
                     <div class="working_box" style="background-image: url(../images/img/about_bg.jpg);">
+                        @* <img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_GIOI_THIEU_CHI_TIET + khoaPhong.HinhAnh)" />*@
                         <h4>Thời gian làm việc</h4>
                         <ul>
                             <Li>Thứ 2-Thứ 6 08:00am - 10:00pm </Li>
@@ -158,145 +156,6 @@
         </div>
     </div>
 </div>
-<!-- About Area End-->
-<!-- depertment Area Start-->
-<div class="depertment_area">
-    <div class="container">
-        <div class="row justify-content-center ">
-            <div class="col-lg-6 col-md-8 text-center">
-                <div class="section_title">
-                    <h1>Chuyên khoa</h1>
-                    <p>Hoạt động 24/24 vào tất cả các ngày trong tuần, kể cả thứ 7 và Chủ nhật cũng như các ngày lễ</p>
-                </div>
-            </div>
-        </div>
-        <div class="custom_row text-center justify-content-center">
-            @foreach (var khoaPhong in Model.lsKhoaPhong)
-            {
-                <div class="custom_col">
-                    <div class="single_dept">
-                        <a asp-action="@nameof(KhoaPhongsController.Details)"
-                           asp-controller="@nameof(KhoaPhongsController).Replace("Controller","")"
-                           asp-route-id="@khoaPhong.Id"
-                           target="_blank">@khoaPhong.TieuDeKhoa</a>
-
-                        <div class="dept_img">
-                            <img src="~/images/img/dept_icon1.png" alt="">
-                            @* <img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_KHOA_PHONG + khoaPhong.HinhAnhDaiDien)" />*@
-                        </div>
-                    </div>
-                </div>
-            }
-
-        </div>
-        <div class="row">
-            <div class="col text-center">
-                <a href="#" class=" dept_load_more custom_btn">Xem tất cả</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- depertment Area end-->
-<!-- Counter Area Start-->
-<div class="counter_area">
-    <div class="container">
-        <div class="row text-center justify-content-center">
-            <div class="col-md-3 col-6">
-                <div class="single_counter">
-                    <h1><span class="count">108</span></h1>
-                    <span>Nhân viên</span>
-                </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="single_counter">
-                    <h1><span class="count">20</span>+</h1>
-                    <span>Kinh nghiệm</span>
-                </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="single_counter">
-                    <h1><span class="count">1450</span></h1>
-                    <span>Happy smiler</span>
-                </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="single_counter">
-                    <h1><span class="count">646</span></h1>
-                    <span>Hiến máu</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Counter Area End-->
-<!-- Doctors Area Start-->
-<div class="doctor_area">
-    <div class="container">
-        <div class="row justify-content-center ">
-            <div class="col-lg-6 col-md-8 text-center">
-                <div class="section_title">
-                    <h1>Bác sĩ Quân Dân Y Miền Đông</h1>
-                    <p>Đội ngũ 100 bác sỹ (07 BsCKII, 41 BsCKI, 05 ThsY, 47 bác sĩ), 222 điều dưỡng (31 ĐDĐH, 24 ĐDCĐ, 167 ĐDTH) và 238 cán bộ, nhân viên</p>
-                </div>
-            </div>
-        </div>
-        <div class="row justify">
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="doctor_content">
-                    <h4>Giới thiệu về bác sĩ của chúng tôi</h4>
-                    <p>Đội ngũ 100 bác sỹ (07 BsCKII, 41 BsCKI, 05 ThsY, 47 bác sĩ), 222 điều dưỡng (31 ĐDĐH, 24 ĐDCĐ, 167 ĐDTH) và 238 cán bộ, nhân viên</p>
-                    <a class="read_btn" href="#">Xem thêm  <i class="zmdi zmdi-plus"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="single_doctor">
-                    <a href="#" class="doctor_img">
-                        <img src="~/images/img/doctor1.jpg" alt="">
-                    </a>
-                    <h5>Nguyễn Văn</h5>
-                    <span>Bác sĩ</span>
-                    <div class="social_cion">
-                        <a href="#"><i class="zmdi zmdi-twitter"></i></a>
-                        <a href="#"><i class="zmdi zmdi-facebook"></i></a>
-                        <a href="#"><i class="zmdi zmdi-instagram"></i></a>
-                        <a href="#"><i class="zmdi zmdi-linkedin"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="single_doctor">
-                    <div class="doctor_img">
-                        <img src="~/images/img/doctor2.jpg" alt="">
-                    </div>
-                    <h5>Nguyễn Văn</h5>
-                    <span>Bác sĩ</span>
-                    <div class="social_cion">
-                        <a href="#"><i class="zmdi zmdi-twitter"></i></a>
-                        <a href="#"><i class="zmdi zmdi-facebook"></i></a>
-                        <a href="#"><i class="zmdi zmdi-instagram"></i></a>
-                        <a href="#"><i class="zmdi zmdi-linkedin"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="single_doctor">
-                    <div class="doctor_img">
-                        <img src="~/images/img/doctor3.jpg" alt="">
-                    </div>
-                    <h5>Nguyễn Văn</h5>
-                    <span>Bác sĩ</span>
-                    <div class="social_cion">
-                        <a href="#"><i class="zmdi zmdi-twitter"></i></a>
-                        <a href="#"><i class="zmdi zmdi-facebook"></i></a>
-                        <a href="#"><i class="zmdi zmdi-instagram"></i></a>
-                        <a href="#"><i class="zmdi zmdi-linkedin"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Doctors Area End-->
 <!-- News Area Start-->
 <div class="news_area">
     <div class="container">
@@ -328,7 +187,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <button type="submit" class="custom_btn">Xem thêm  <i class="zmdi zmdi-plus"></i></button>
+                            <button type="submit" class="custom_btn">Gửi <i class="zmdi zmdi-plus"></i></button>
                         </div>
                     </div>
                 </form>
@@ -341,31 +200,23 @@
                     </p>
                 </div>
                 <div class="latest_news">
-                    <a href="#" class="single_latest_news">
+                    @foreach (var tinTuc in Model.lsTinTuc)
+                    {
+                    <a asp-action="@nameof(TinTucsController.Details)"
+                               asp-controller="@nameof(TinTucsController).Replace("Controller","")"
+                               asp-route-id="@tinTuc.Id"
+                               target="_blank" class="single_latest_news">
                         <span class="l_img" style="background-image: url(../images/img/news1.jpg);"></span>
-                        <h5>Thông tin của bạn là bảo mật</h5>
-                        <span>21/02/2017</span>
+                        <h5>
+                           @tinTuc.TieuDe
+                        </h5>
+                        <span>@tinTuc.NgayTao</span>
                         <p>
-                            Cam kết giữ bí mật thông tin bệnh nhân...
+                            @tinTuc.GioiThieu
                         </p>
                     </a>
-                    <a href="#" class="single_latest_news">
-                        <span class="l_img" style="background-image: url(../images/img/news2.jpg);"></span>
-                        <h5>Thông tin của bạn là bảo mật</h5>
-                        <span>21/02/2017</span>
-                        <p>
-                            Cam kết giữ bí mật thông tin bệnh nhân...
-                        </p>
-                    </a>
-                    <a href="#" class="single_latest_news">
-                        <span class="l_img" style="background-image: url(../images/img/news3.jpg);"></span>
-                        <h5>Thông tin của bạn là bảo mật</h5>
-                        <span>21/02/2017</span>
-                        <p>
-                            Cam kết giữ bí mật thông tin bệnh nhân...
-                        </p>
-                    </a>
-                </div>
+                        }
+</div>
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 ﻿@using X.PagedList.Mvc.Core;
 @using X.PagedList;
 
-@model X.PagedList.IPagedList<Hospital.Web.EfModels.HoatDong>
+@model X.PagedList.IPagedList<Hospital.Web.EfModels.Event>
 @using Hospital.Web.Controllers
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,10 +14,10 @@
     <div class="container">
         <div class="row text-center">
             <div class="col">
-                <h1>Hoạt động</h1>
+                <h1>Sự kiện mới nhất</h1>
                 <div class="breadcroumb_link">
                     <a asp-action="@nameof(HomesController.Index)"
-                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>/ Hoạt động
+                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>/Sự kiện mới nhất
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
             <div class="col-md-12 order-md-12">
                 <div class="row">
 
-                    @foreach (var hoatdong in Model)
+                    @foreach (var sukien in Model)
                     {
                         <div class="col-md-6">
                             <div class="single_blog">
@@ -41,38 +41,36 @@
                                 </div>
                                 <div class="blog_content">
                                     <div class="blog_meta">
-                                        <a class="date" asp-action="@nameof(HoatDongsController.Details)"
-                                           asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
-                                           asp-route-id="@hoatdong.Id"
-                                           target="_blank">@hoatdong.NgayTao</a>
+                                        <a class="date" asp-action="@nameof(EventsController.Details)"
+                                           asp-controller="@nameof(EventsController).Replace("Controller","")"
+                                           asp-route-id="@sukien.Id"
+                                           target="_blank">@sukien.NgayTao</a>
                                         <a href="#" class="comment_box">
                                             <i class="zmdi zmdi-comments"></i> 3
                                         </a>
                                     </div>
                                     <h4>
-                                        <a asp-action="@nameof(HoatDongsController.Details)"
-                                           asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
-                                           asp-route-id="@hoatdong.Id"
-                                           target="_blank">@hoatdong.TieuDe</a>
+                                        <a asp-action="@nameof(EventsController.Details)"
+                                           asp-controller="@nameof(EventsController).Replace("Controller","")"
+                                           asp-route-id="@sukien.Id"
+                                           target="_blank">@sukien.TieuDe</a>
                                     </h4>
-                                    <p asp-action="@nameof(HoatDongsController.Details)"
-                                       asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
-                                       asp-route-id="@hoatdong.Id"
-                                       target="_blank">@hoatdong.GioiThieu</p>
-                                    <a class="read_btn" asp-action="@nameof(HoatDongsController.Details)"
-                                       asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
-                                       asp-route-id="@hoatdong.Id"
+                                    <p asp-action="@nameof(EventsController.Details)"
+                                       asp-controller="@nameof(EventsController).Replace("Controller","")"
+                                       asp-route-id="@sukien.Id"
+                                       target="_blank">@sukien.GioiThieu</p>
+                                    <a class="read_btn" asp-action="@nameof(EventsController.Details)"
+                                       asp-controller="@nameof(EventsController).Replace("Controller","")"
+                                       asp-route-id="@sukien.Id"
                                        target="_blank">Xem thêm<i class="zmdi zmdi-plus"></i></a>
                                 </div>
                             </div>
 
                         </div>
                     }
-
-                    <div class="col-md-6">
-                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-                    </div>
-
+                        <div class="col-md-6">
+                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                        </div>
 
                 </div>
             </div>
