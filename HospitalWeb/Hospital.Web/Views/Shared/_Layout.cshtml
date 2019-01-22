@@ -1,4 +1,7 @@
 ﻿@using Hospital.Web.Controllers
+@using Hospital.Web.Models
+@inject InitParam initParam
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,41 +90,12 @@
                     </div>
                     <div class="col-lg-10 text-center col-6">
                         <nav class="menu_bar">
-                            <ul class="main_menu">
-                                <li>
-                                    <a asp-action="@nameof(HomesController.Index)"
-                                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>
-                                </li>
-                                <li>
-                                    <a href="#">Giới thiệu</a>
-                                    <ul>
-                                        <li><a href="#">Ban Giám đốc</a></li>
-                                        <li><a href="#">Lịch sử hình thành</a></li>
-                                        <li><a href="#">Chức năng nhiệm vụ</a></li>
-                                    </ul>
-                                </li>
-
-                                <li>
-                                    <a asp-action="@nameof(DichVusController.Index)"
-                                       asp-controller="@nameof(DichVusController).Replace("Controller","")">Dịch vụ</a>
-                                    <ul>
-                                        <li><a href="#">Sức khỏa định kỳ</a></li>
-                                        <li><a href="#">Phẩu thuật kỹ thuật cao</a></li>
-                                        <li><a href="#">Dịch vụ kỹ thuật cao RHM</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Bệnh nhân</a></li>
-                                <li>
-                                    <a asp-action="@nameof(TinTucsController.Index)"
-                                       asp-controller="@nameof(TinTucsController).Replace("Controller","")">Tin tức</a>
-                                </li>
-                               
-                                <li>
-                                    <a asp-action="@nameof(HenKhamBenhsController.Index)"
-                                       asp-controller="@nameof(HenKhamBenhsController).Replace("Controller","")">Liên hệ</a>
-                                </li>
-
-                            </ul>
+                            <a href="@Url.Action("Contact", "Homes")">Home</a>
+                            @{
+                                var listMenu = await MenuHelper.GetListMenuAsync(initParam);
+                            }
+                            <partial name="_MenuPartial" model="listMenu" />
+                          
                             <form action="#" class="search_form">
                                 <input type="search" placeholder="Tìm kiếm">
                                 <button type="submit"><i class="zmdi zmdi-search"></i></button>

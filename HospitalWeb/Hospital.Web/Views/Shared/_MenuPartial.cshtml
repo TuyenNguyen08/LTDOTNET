@@ -1,0 +1,21 @@
+﻿@model List<Hospital.Web.Models.MenuViewModel>
+
+<ul class="main_menu">
+
+    @foreach (var menuCha in Model)
+    {
+        <li>
+            <a href="@menuCha.Menu.Link">@menuCha.Menu.Name</a>
+            @if (menuCha.ListMenu.Count > 0)
+            {
+                <ul>
+                    @foreach (var menuCon in menuCha.ListMenu)
+                    {
+                        <li><a href="@menuCon.Menu.Link">@menuCon.Menu.Name</a></li>
+                    }
+                </ul>
+            }
+        </li>
+    }
+
+</ul>
