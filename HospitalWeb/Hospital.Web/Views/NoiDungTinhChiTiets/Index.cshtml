@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Hospital.Web.EfModels.NoiDungTinhChiTiet>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TieuDe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GioiThieu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoiDung)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HinhAnh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayChinhSua)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LuotXem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FkNgonNguNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FkNoiDungTinhNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FkUserChinhsuaNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TieuDe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioiThieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoiDung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HinhAnh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayChinhSua)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LuotXem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkNgonNguNavigation.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkNoiDungTinhNavigation.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkUserChinhsuaNavigation.UserName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
