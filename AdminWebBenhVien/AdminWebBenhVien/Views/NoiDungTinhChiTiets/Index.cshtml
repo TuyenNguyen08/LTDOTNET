@@ -1,0 +1,74 @@
+﻿@model IEnumerable<AdminWebBenhVien.EfModels.NoiDungTinhChiTiet>
+@using AdminWebBenhVien.Controllers
+@using AdminWebBenhVien.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Danh sách dịch vụ bệnh nhân<span style="color:orange"></span></h1>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-12">
+                <kendo-grid name="gridNoiDungTinhChiTiet" height="550">
+                    <datasource type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="20">
+                        <transport>
+                            <read url="@Url.Action(nameof(NoiDungTinhChiTietsController.NoiDungTinhChiTiet_Read))" type="get" />
+                        </transport>
+                        <schema>
+                            <model id="@nameof(NoiDungTinhChiTietViewModel.Id)">
+                                <fields>
+                                    <field name="@nameof(NoiDungTinhChiTietViewModel.Id)" />
+                                    <field name="@nameof(NoiDungTinhChiTietViewModel.TieuDe)" />
+                                    <field name="@nameof(NoiDungTinhChiTietViewModel.GioiThieu)" />
+                                    <field name="@nameof(NoiDungTinhChiTietViewModel.LuotXem)" />
+                                </fields>
+                            </model>
+                        </schema>
+                    </datasource>
+                    <groupable enabled="true" />
+                    <sortable enabled="true" />
+                    <filterable enabled="true" />
+                    <scrollable enabled="true" />
+                    <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
+                    </pageable>
+                    <filterable enabled="true" />
+                    <columns>
+                        <column field="@nameof(NoiDungTinhChiTietViewModel.Id)" title="STT" width="80" />
+                        <column field="@nameof(NoiDungTinhChiTietViewModel.TieuDe)" title="Tên" width="200" />
+                        <column field="@nameof(NoiDungTinhChiTietViewModel.GioiThieu)" title="Giới thiệu" width="200" />
+                        <column field="@nameof(NoiDungTinhChiTietViewModel.LuotXem)" title="Lượt xem" width="150" />
+                        <column title="Thao tác" width="150">
+                            <commands>
+                                <column-command text="Sửa" name="btnCapNhat" class-name="k-primary" click="btnCapNhat_Click"></column-command>
+                            </commands>
+                        </column>
+                    </columns>
+                </kendo-grid>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        var urlCapNhat = "@Url.Action(nameof(NoiDungTinhChiTietsController.Edit), new { id = Constants.PARAM_NOI_DUNG_TINH_CHI_TIET_ID })";
+
+        function btnCapNhat_Click(e) {
+
+            e.preventDefault();
+
+            var kendoGrid = $("#gridNoiDungTinhChiTiet").data("kendoGrid");
+            var tr = $(e.currentTarget).closest("tr");
+            var data = kendoGrid.dataItem(tr);
+
+            var url = urlCapNhat.replace("@Constants.PARAM_NOI_DUNG_TINH_CHI_TIET_ID", data.id);
+            window.open(url, "_blank");
+        };
+    </script>
+}

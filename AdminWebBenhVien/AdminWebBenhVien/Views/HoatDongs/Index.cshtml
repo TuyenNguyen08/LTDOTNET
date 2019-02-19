@@ -1,0 +1,90 @@
+﻿@model IEnumerable<AdminWebBenhVien.EfModels.HoatDong>
+
+@using AdminWebBenhVien.Controllers
+@using AdminWebBenhVien.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Danh sách hoạt động<span style="color:orange"></span></h1>
+            </div>
+        </div>
+        <br />
+        <p>
+            <a asp-action="Create"><button class="k-primary">Thêm</button></a>
+        </p>
+        <div class="row">
+            <div class="col-lg-12">
+                <kendo-grid name="gridHoatDong" height="550">
+                    <datasource type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="20">
+                        <transport>
+                            <read url="@Url.Action(nameof(HoatDongsController.HoatDong_Read))" type="get" />
+                        </transport>
+                        <schema>
+                            <model id="@nameof(HoatDongViewModel.Id)">
+                                <fields>
+                                    <field name="@nameof(HoatDongViewModel.Stt)" />
+                                    <field name="@nameof(HoatDongViewModel.TieuDe)" />
+                                    <field name="@nameof(HoatDongViewModel.LuotXem)" />
+                                    <field name="@nameof(HoatDongViewModel.Author)" />
+                                </fields>
+                            </model>
+                        </schema>
+                    </datasource>
+                    <groupable enabled="true" />
+                    <sortable enabled="true" />
+                    <filterable enabled="true" />
+                    <scrollable enabled="true" />
+                    <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
+                    </pageable>
+                    <filterable enabled="true" />
+                    <columns>
+                        <column field="@nameof(HoatDongViewModel.Stt)" title="STT" width="80" />
+                        <column field="@nameof(HoatDongViewModel.TieuDe)" title="Tiêu đề" width="200" />
+                        <column field="@nameof(HoatDongViewModel.LuotXem)" title="Lượt xem" width="100" />
+                        <column field="@nameof(HoatDongViewModel.Author)" title="Tác giả" width="200" />
+                        <column title="Thao tác" width="150">
+                            <commands>
+                                <column-command text="Sửa" name="btnCapNhat" class-name="k-primary" click="btnCapNhat_Click"></column-command>
+                                <column-command text="Xóa" name="btnXoa" class-name="k-primary" click="btnXoa_Click"></column-command>
+                            </commands>
+                        </column>
+                    </columns>
+                </kendo-grid>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        var urlCapNhat = "@Url.Action(nameof(HoatDongsController.Edit), new { id = Constants.PARAM_HOAT_DONG_ID })";
+        var urlXoa = "@Url.Action(nameof(HoatDongsController.Delete), new { id = Constants.PARAM_XOA_HOAT_DONG_ID })";
+
+        function btnCapNhat_Click(e) {
+
+            e.preventDefault();
+
+            var kendoGrid = $("#gridHoatDong").data("kendoGrid");
+            var tr = $(e.currentTarget).closest("tr");
+            var data = kendoGrid.dataItem(tr);
+
+            var url = urlCapNhat.replace("@Constants.PARAM_HOAT_DONG_ID", data.id);
+            window.open(url, "_blank");
+        };
+         function btnXoa_Click(e) {
+            e.preventDefault();
+
+            var kendoGrid = $("#gridHoatDong").data("kendoGrid");
+            var tr = $(e.currentTarget).closest("tr");
+            var data = kendoGrid.dataItem(tr);
+
+             var url = urlXoa.replace("@Constants.PARAM_XOA_HOAT_DONG_ID", data.id);
+            window.open(url, "_blank");
+        };
+    </script>
+}

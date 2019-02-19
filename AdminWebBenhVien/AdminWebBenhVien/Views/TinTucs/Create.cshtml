@@ -1,0 +1,96 @@
+﻿@model AdminWebBenhVien.EfModels.TinTuc
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    <link href="~/css/Create.css" rel="stylesheet" />
+}
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Thêm tin tức mới<span style="color:orange"></span></h1>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-12">
+
+                <form asp-action="Create">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#paneGioiThieu" aria-expanded="false">Thông tin chung</a>
+                            </h4>
+                        </div>
+                        <div id="paneGioiThieu" class="collapse in" aria-expanded="false">
+                            <div class="panel-body">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="Stt" class="control-label"></label>
+                                    <input asp-for="Stt" class="form-control" />
+                                    <span asp-validation-for="Stt" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="TieuDe" class="control-label">Tiêu đề</label>
+                                    <input asp-for="TieuDe" class="form-control" />
+                                    <span asp-validation-for="TieuDe" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="GioiThieu" class="control-label">Giới thiệu</label>
+                                    <input asp-for="GioiThieu" class="form-control" />
+                                    <span asp-validation-for="GioiThieu" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="HinhAnhMinhHoa" class="control-label">Hình ảnh</label>
+                                    <input asp-for="HinhAnhMinhHoa" class="form-control" type="file" />
+                                    <span asp-validation-for="HinhAnhMinhHoa" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="FkNgonNgu" class="control-label"></label>
+                                    <select asp-for="FkNgonNgu" class="form-control" asp-items="ViewBag.FkNgonNgu"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="FkLoaiTin" class="control-label"></label>
+                                    <select asp-for="FkLoaiTin" class="form-control" asp-items="ViewBag.FkLoaiTin"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="NgayTao" class="control-label">Ngày tạo</label>
+                                    <input asp-for="NgayTao" class="form-control" />
+                                    <span asp-validation-for="NgayTao" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="FkUserNguoiTao" class="control-label"></label>
+                                    <select asp-for="FkUserNguoiTao" class="form-control" asp-items="ViewBag.FkUserNguoiTao"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Author" class="control-label">Tác giả</label>
+                                    <input asp-for="Author" class="form-control" />
+                                    <span asp-validation-for="Author" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="FkUserNguoiSua" class="control-label"></label>
+                                    <select asp-for="FkUserNguoiSua" class="form-control" asp-items="ViewBag.FkUserNguoiSua"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="NoiDung" class="control-label">Nội dung</label>
+                                    @Html.TextAreaFor(h => h.NoiDung, 10, 1, new { @class = "k-textbox" })
+                                    <span asp-validation-for="NoiDung" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Create" class="btn btn-success" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+
+    </div>
+</div>

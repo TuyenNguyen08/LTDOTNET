@@ -1,0 +1,92 @@
+﻿@model IEnumerable<AdminWebBenhVien.EfModels.HenKhamBenh>
+
+@using AdminWebBenhVien.Controllers
+@using AdminWebBenhVien.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Danh sách lịch khám online<span style="color:orange"></span></h1>
+            </div>
+        </div>
+        <br />
+        <p>
+            <a asp-action="Create"><button class="k-primary">Thêm</button></a>
+        </p>
+        <div class="row">
+            <div class="col-lg-12">
+                <kendo-grid name="gridHenKhamBenh" height="550">
+                    <datasource type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="20">
+                        <transport>
+                            <read url="@Url.Action(nameof(HenKhamBenhsController.HenKhamBenh_Read))" type="get" />
+                        </transport>
+                        <schema>
+                            <model id="@nameof(HenKhamBenhViewModel.Id)">
+                                <fields>
+                                    <field name="@nameof(HenKhamBenhViewModel.Id)" />
+                                    <field name="@nameof(HenKhamBenhViewModel.HoVaTen)" />
+                                    <field name="@nameof(HenKhamBenhViewModel.NgayHen)" />
+                                    <field name="@nameof(HenKhamBenhViewModel.BacSi)" />
+                                    <field name="@nameof(HenKhamBenhViewModel.DiaChi)" />
+                                </fields>
+                            </model>
+                        </schema>
+                    </datasource>
+                    <groupable enabled="true" />
+                    <sortable enabled="true" />
+                    <filterable enabled="true" />
+                    <scrollable enabled="true" />
+                    <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
+                    </pageable>
+                    <filterable enabled="true" />
+                    <columns>
+                        <column field="@nameof(HenKhamBenhViewModel.Id)" title="ID" width="80" />
+                        <column field="@nameof(HenKhamBenhViewModel.HoVaTen)" title="Họ và tên" width="200" />
+                        <column field="@nameof(HenKhamBenhViewModel.NgayHen)" title="Ngày hẹn" width="200" />
+                        <column field="@nameof(HenKhamBenhViewModel.BacSi)" title="Bác sĩ" width="150" />
+                        <column field="@nameof(HenKhamBenhViewModel.DiaChi)" title="Địa chỉ" width="150" />
+                        <column title="Thao tác" width="200">
+                            <commands>
+                                <column-command text="Sửa" name="btnCapNhat" class-name="k-primary" click="btnCapNhat_Click"></column-command>
+                                <column-command text="Xóa" name="btnXoa" class-name="k-primary" click="btnXoa_Click"></column-command>
+                            </commands>
+                        </column>
+                    </columns>
+                </kendo-grid>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        var urlCapNhat = "@Url.Action(nameof(HenKhamBenhsController.Edit), new { id = Constants.PARAM_HEN_KHAM_BENH_ID })";
+        var urlXoa = "@Url.Action(nameof(HenKhamBenhsController.Delete), new { id = Constants.PARAM_XOA_HEN_KHAM_BENH_ID })";
+
+        function btnCapNhat_Click(e) {
+
+            e.preventDefault();
+
+            var kendoGrid = $("#gridHenKhamBenh").data("kendoGrid");
+            var tr = $(e.currentTarget).closest("tr");
+            var data = kendoGrid.dataItem(tr);
+
+            var url = urlCapNhat.replace("@Constants.PARAM_HEN_KHAM_BENH_ID", data.id);
+            window.open(url, "_blank");
+        };
+         function btnXoa_Click(e) {
+            e.preventDefault();
+
+             var kendoGrid = $("#gridHenKhamBenh").data("kendoGrid");
+            var tr = $(e.currentTarget).closest("tr");
+            var data = kendoGrid.dataItem(tr);
+
+             var url = urlXoa.replace("@Constants.PARAM_XOA_HEN_KHAM_BENH_ID", data.id);
+            window.open(url, "_blank");
+        };
+    </script>
+}

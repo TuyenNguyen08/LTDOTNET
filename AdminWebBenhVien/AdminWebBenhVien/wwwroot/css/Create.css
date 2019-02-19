@@ -1,0 +1,39 @@
+﻿.form-group {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+.form-input {
+    text-align: left;
+}
+
+#paneGioiThieu .k-textbox {
+    width: 100%;
+}
+
+
+.panel-default > .panel-heading {
+    background-color: #5cb85c;
+}
+
+.k-widget.k-datetimepicker.k-header {
+    width: 100%;
+}
+
+.k-widget.k-dropdown.k-header {
+    width: 100%;
+}
+
+.panel-default {
+    border-color: #5cb85c;
+}
+
+.panel-title {
+    color: #fff;
+    font-weight: bold;
+}
+@media only screen and (min-width: 992px) {
+    #paneGioiThieu .form-label {
+        text-align: right;
+    }
+
+}

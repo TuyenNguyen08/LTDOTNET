@@ -1,0 +1,71 @@
+﻿@model AdminWebBenhVien.EfModels.SlideShow
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Bạn có chắc muốn xóa?<span style="color:orange"></span></h1>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-12">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TieuDe)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TieuDe)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.HinhAnh)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.HinhAnh)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Stt)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Stt)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsNewtab)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.IsNewtab)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LinkEvent)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.LinkEvent)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsLink)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.IsLink)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FkNgonNguNavigation)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FkNgonNguNavigation.Id)
+                    </dd>
+                </dl>
+
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+                    <a asp-action="Index">Back to List</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

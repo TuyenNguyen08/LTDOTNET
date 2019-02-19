@@ -1,0 +1,138 @@
+﻿@model AdminWebBenhVien.EfModels.KhoaPhong
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@section css{
+    <link href="~/css/Create.css" rel="stylesheet" />
+}
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Cập nhật khoa phòng<span style="color:orange"></span></h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <form asp-action="Edit">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#paneGioiThieu" aria-expanded="false">Thông tin chung</a>
+                            </h4>
+                        </div>
+                        <div id="paneGioiThieu" class="collapse in" aria-expanded="false">
+                            <div class="panel-body">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="hidden" asp-for="Id" />
+                                <div class="form-group">
+                                    <label asp-for="Stt" class="control-label">STT</label>
+                                    <input asp-for="Stt" class="form-control" />
+                                    <span asp-validation-for="Stt" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="TieuDeKhoa" class="control-label">Tiêu đề khoa</label>
+                                    <input asp-for="TieuDeKhoa" class="form-control" />
+                                    <span asp-validation-for="TieuDeKhoa" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="TenKhoaPhong" class="control-label">Tên khoa phòng</label>
+                                    <input asp-for="TenKhoaPhong" class="form-control" />
+                                    <span asp-validation-for="TenKhoaPhong" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="GioiThieu" class="control-label">Giới thiệu</label>
+                                    <input asp-for="GioiThieu" class="form-control" />
+                                    <span asp-validation-for="GioiThieu" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="NgayCapNhat" class="control-label">Ngày cập nhật</label>
+                                    <input asp-for="NgayCapNhat" class="form-control" />
+                                    <span asp-validation-for="NgayCapNhat" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="UserModify" class="control-label">UserModify</label>
+                                    <input asp-for="UserModify" class="form-control" />
+                                    <span asp-validation-for="UserModify" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="FkLoaiKhoaPhong" class="control-label">FkLoaiKhoaPhong</label>
+                                    <select asp-for="FkLoaiKhoaPhong" class="form-control" asp-items="ViewBag.FkLoaiKhoaPhong"></select>
+                                    <span asp-validation-for="FkLoaiKhoaPhong" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="FkNgonNgu" class="control-label">FkNgonNgu</label>
+                                    <select asp-for="FkNgonNgu" class="form-control" asp-items="ViewBag.FkNgonNgu"></select>
+                                    <span asp-validation-for="FkNgonNgu" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="HinhAnhDaiDien" class="control-label">Hình ảnh</label>
+                                    <input asp-for="HinhAnhDaiDien" class="form-control" type="file" />
+                                    <span asp-validation-for="HinhAnhDaiDien" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="HenKhamBenh" class="control-label">Hẹn khám bệnh</label>
+                                    <select asp-for="HenKhamBenh" class="form-control" asp-items="ViewBag.HenKhamBenh">
+                                        <option>True</option>
+                                        <option>False</option>
+                                    </select>
+                                    <span asp-validation-for="HenKhamBenh" class="text-danger"></span>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="LuotXem" class="control-label">Lượt xem</label>
+                                    <input asp-for="LuotXem" class="form-control" />
+                                    <span asp-validation-for="LuotXem" class="text-danger"></span>
+                                </div>
+                                <kendo-editor name="NoiDung" aria-label="editor" style="height:440px" encoded="false">
+                                    <tools>
+                                        <tool name="insertImage" />
+                                        <tool name="insertFile" />
+                                        <tool name="bold" />
+                                        <tool name="italic" />
+                                        <tool name="underline" />
+                                        <tool name="fontName">
+                                            <tool-items>
+                                                <tool-item text="Default site font" value="Arial,Verdana,sans-serif" />
+                                                <tool-item text="Monospaced font" value="monospace" />
+                                            </tool-items>
+                                        </tool>
+                                    </tools>
+                                    <image-browser file-types="*.png,*.gif,*.jpg,*.jpeg">
+                                        <image-browser-transport upload-url="@Url.Action("Upload", "ImageBrowser")">
+                                            <create url="@Url.Action("Create", "ImageBrowser")" />
+                                            <read url="@Url.Action("Read", "ImageBrowser")" />
+                                            <destroy url="@Url.Action("Destroy", "ImageBrowser")" />
+                                        </image-browser-transport>
+                                    </image-browser>
+                                    <file-browser>
+                                        <file-browser-transport upload-url="@Url.Action("Upload", "FileBrowser")">
+                                            <create url="@Url.Action("Create", "FileBrowser")" />
+                                            <read url="@Url.Action("Read", "FileBrowser")" />
+                                            <destroy url="@Url.Action("Destroy", "FileBrowser")" />
+                                        </file-browser-transport>
+                                    </file-browser>
+                                    <content>
+                                        @Html.Raw(Model.NoiDung)
+                                    </content>
+                                </kendo-editor>
+                                <div class="form-group">
+                                    <input type="submit" value="Save" class="btn btn-success" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</div>
+
