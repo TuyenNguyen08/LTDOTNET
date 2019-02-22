@@ -68,8 +68,10 @@ namespace AdminWebBenhVien.Controllers
         }
 
         // GET: Events/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var listNgonNgu = await GetListNgonNguAsync();
+            ViewBag.ListNgonNgu = listNgonNgu;
             ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id");
             ViewData["FkUserTao"] = new SelectList(_context.User, "UserName", "UserName");
             return View();
@@ -84,6 +86,8 @@ namespace AdminWebBenhVien.Controllers
         {
             if (ModelState.IsValid)
             {
+                var listNgonNgu = await GetListNgonNguAsync();
+                ViewBag.ListNgonNgu = listNgonNgu;
                 _context.Add(tevent);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -100,8 +104,12 @@ namespace AdminWebBenhVien.Controllers
             {
                 return NotFound();
             }
-
+            var listNgonNgu = await GetListNgonNguAsync();
+            ViewBag.ListNgonNgu = listNgonNgu;
             var tevent = await _context.Event.FindAsync(id);
+
+          
+
             if (tevent == null)
             {
                 return NotFound();
@@ -122,7 +130,8 @@ namespace AdminWebBenhVien.Controllers
             {
                 return NotFound();
             }
-
+            var listNgonNgu = await GetListNgonNguAsync();
+            ViewBag.ListNgonNgu = listNgonNgu;
             if (ModelState.IsValid)
             {
                 try
@@ -141,13 +150,23 @@ namespace AdminWebBenhVien.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+               // return RedirectToAction(nameof(Index));
             }
             ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", tevent.FkNgonNgu);
             ViewData["FkUserTao"] = new SelectList(_context.User, "UserName", "UserName", tevent.FkUserTao);
             return View(tevent);
         }
+        private Task<List<DropdownlistViewModel>> GetListNgonNguAsync()
+        {
+            var list = _context.NgonNgu.AsNoTracking()
+                .Select(h => new DropdownlistViewModel
+                {
+                    Id = h.Id,
+                    Ten = h.TenNgonNgu
+                }).ToListAsync();
 
+            return list;
+        }
         // GET: Events/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

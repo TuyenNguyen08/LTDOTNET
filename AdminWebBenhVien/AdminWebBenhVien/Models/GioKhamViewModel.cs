@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace AdminWebBenhVien.Models
 {
-    public class DropdownlistViewModel
+    public class GioKhamViewModel
     {
 
         public int Id { get; set; }
-        public string Ten { get; set; }
+        public string Gio { get; set; }
 
-        public int? NamSinh { get; set; }
     }
 }

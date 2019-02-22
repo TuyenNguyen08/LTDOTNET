@@ -45,8 +45,8 @@ namespace AdminWebBenhVien.Controllers
                     NoiDung = t.NoiDung,
                     Stt = t.Stt,
                     LuotXem = t.LuotXem,
-                    Author=t.Author,
-                    NgaySua=t.NgaySua
+                    Author = t.Author,
+                    NgaySua = t.NgaySua
 
 
                 });
@@ -77,24 +77,39 @@ namespace AdminWebBenhVien.Controllers
         }
 
         // GET: TinTucs/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+          
+            #region Get list master
+            var listNgonNgu = await GetListNgonNguAsync();
+            ViewBag.ListNgonNgu = listNgonNgu;
+            #endregion
+            var listLoaiTin = await GetListLoaiTinAsync();
+            ViewBag.ListLoaiTin = listLoaiTin;
+           
+
             ViewData["FkLoaiTin"] = new SelectList(_context.LoaiTin, "Id", "Id");
             ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id");
             ViewData["FkUserNguoiSua"] = new SelectList(_context.User, "UserName", "UserName");
             ViewData["FkUserNguoiTao"] = new SelectList(_context.User, "UserName", "UserName");
+
             return View();
         }
 
         // POST: TinTucs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TieuDe,GioiThieu,HinhAnhMinhHoa,FkNgonNgu,FkLoaiTin,NgayTao,FkUserNguoiTao,NoiDung,Stt,LuotXem,Author,FkUserNguoiSua,NgaySua")] TinTuc tinTuc)
         {
+           
             if (ModelState.IsValid)
             {
+                #region Get list master
+                var listNgonNgu = await GetListNgonNguAsync();
+                ViewBag.ListNgonNgu = listNgonNgu;
+                #endregion
+                var listLoaiTin = await GetListLoaiTinAsync();
+                ViewBag.ListLoaiTin = listLoaiTin;
                 _context.Add(tinTuc);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -113,7 +128,12 @@ namespace AdminWebBenhVien.Controllers
             {
                 return NotFound();
             }
-
+            #region Get list master
+            var listNgonNgu = await GetListNgonNguAsync();
+            ViewBag.ListNgonNgu = listNgonNgu;
+            #endregion
+            var listLoaiTin = await GetListLoaiTinAsync();
+            ViewBag.ListLoaiTin = listLoaiTin;
             var tinTuc = await _context.TinTuc.FindAsync(id);
             if (tinTuc == null)
             {
@@ -137,7 +157,12 @@ namespace AdminWebBenhVien.Controllers
             {
                 return NotFound();
             }
-
+            #region Get list master
+            var listNgonNgu = await GetListNgonNguAsync();
+            ViewBag.ListNgonNgu = listNgonNgu;
+            #endregion
+            var listLoaiTin = await GetListLoaiTinAsync();
+            ViewBag.ListLoaiTin = listLoaiTin;
             if (ModelState.IsValid)
             {
                 try
@@ -156,7 +181,7 @@ namespace AdminWebBenhVien.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
             ViewData["FkLoaiTin"] = new SelectList(_context.LoaiTin, "Id", "Id", tinTuc.FkLoaiTin);
             ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", tinTuc.FkNgonNgu);
@@ -164,7 +189,28 @@ namespace AdminWebBenhVien.Controllers
             ViewData["FkUserNguoiTao"] = new SelectList(_context.User, "UserName", "UserName", tinTuc.FkUserNguoiTao);
             return View(tinTuc);
         }
+        private Task<List<DropdownlistViewModel>> GetListNgonNguAsync()
+        {
+            var list = _context.NgonNgu.AsNoTracking()
+                .Select(h => new DropdownlistViewModel
+                {
+                    Id = h.Id,
+                    Ten = h.TenNgonNgu
+                }).ToListAsync();
 
+            return list;
+        }
+        private Task<List<DropdownlistViewModel>> GetListLoaiTinAsync()
+        {
+            var list = _context.LoaiTin.AsNoTracking()
+                .Select(h => new DropdownlistViewModel
+                {
+                    Id = h.Id,
+                    Ten = h.TenLoai
+                }).ToListAsync();
+
+            return list;
+        }
         // GET: TinTucs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

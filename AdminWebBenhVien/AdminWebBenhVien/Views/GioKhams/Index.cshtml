@@ -1,4 +1,5 @@
-﻿@model IEnumerable<AdminWebBenhVien.EfModels.KhoaPhong>
+﻿@model IEnumerable<AdminWebBenhVien.EfModels.GioKham>
+
 @using AdminWebBenhVien.Controllers
 @using AdminWebBenhVien.Models
 
@@ -10,24 +11,26 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Danh sách khoa phòng<span style="color:orange"></span></h1>
+                <h1 class="page-header">Giờ khám<span style="color:orange"></span></h1>
             </div>
         </div>
         <br />
+        <p>
+            <a asp-action="Create"><button class="k-primary">Thêm</button></a>
+        </p>
         <div class="row">
             <div class="col-lg-12">
-                <kendo-grid name="gridKhoaPhong" height="550">
+                <kendo-grid name="gridGioKham" height="550">
                     <datasource type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="20">
                         <transport>
-                            <read url="@Url.Action(nameof(KhoaPhongsController.KhoaPhong_Read))" type="get" />
+                            <read url="@Url.Action(nameof(GioKhamsController.GioKham_Read))" type="get" />
                         </transport>
                         <schema>
-                            <model id="@nameof(KhoaPhongViewModel.Id)">
+                            <model id="@nameof(GioKhamViewModel.Id)">
                                 <fields>
-                                    <field name="@nameof(KhoaPhongViewModel.Id)" />
-                                    <field name="@nameof(KhoaPhongViewModel.TieuDeKhoa)" />
-                                    <field name="@nameof(KhoaPhongViewModel.TenKhoaPhong)" />
-                                    <field name="@nameof(KhoaPhongViewModel.LuotXem)" />
+                                    <field name="@nameof(GioKhamViewModel.Id)" />
+                                    <field name="@nameof(GioKhamViewModel.Gio)" />
+
                                 </fields>
                             </model>
                         </schema>
@@ -40,13 +43,13 @@
                     </pageable>
                     <filterable enabled="true" />
                     <columns>
-                        <column field="@nameof(KhoaPhongViewModel.Id)" title="ID" width="80" />
-                        <column field="@nameof(KhoaPhongViewModel.TieuDeKhoa)" title="Tiêu đề khoa" width="200" />
-                        <column field="@nameof(KhoaPhongViewModel.TenKhoaPhong)" title="Tên khoa" width="200" />
-                        <column field="@nameof(GioiThieuChiTietViewModel.LuotXem)" title="Lượt xem" width="150" />
-                        <column title="Thao tác" width="150">
+                        <column field="@nameof(GioKhamViewModel.Id)" title="ID" width="80" />
+                        <column field="@nameof(GioKhamViewModel.Gio)" title="Giờ khám" width="200" />
+
+                        <column title="Thao tác" width="220">
                             <commands>
                                 <column-command text="Sửa" name="btnCapNhat" class-name="k-primary" click="btnCapNhat_Click"></column-command>
+                                <column-command text="Xóa" name="btnXoa" class-name="k-primary" click="btnXoa_Click"></column-command>
                             </commands>
                         </column>
                     </columns>
@@ -57,17 +60,28 @@
 </div>
 @section scripts{
     <script type="text/javascript">
-        var urlCapNhat = "@Url.Action(nameof(KhoaPhongsController.Edit), new { id = Constants.PARAM_KHOA_PHONG_ID })";
+        var urlCapNhat = "@Url.Action(nameof(GioKhamsController.Edit), new { id = Constants.PARAM_GIO_KHAM_ID })";
+        var urlXoa = "@Url.Action(nameof(GioKhamsController.Delete), new { id = Constants.PARAM_XOA_GIO_KHAM_ID })";
 
         function btnCapNhat_Click(e) {
 
             e.preventDefault();
 
-            var kendoGrid = $("#gridKhoaPhong").data("kendoGrid");
+            var kendoGrid = $("#gridGioKham").data("kendoGrid");
             var tr = $(e.currentTarget).closest("tr");
             var data = kendoGrid.dataItem(tr);
 
-            var url = urlCapNhat.replace("@Constants.PARAM_KHOA_PHONG_ID", data.id);
+            var url = urlCapNhat.replace("@Constants.PARAM_GIO_KHAM_ID", data.id);
+            window.open(url, "_blank");
+        };
+         function btnXoa_Click(e) {
+            e.preventDefault();
+
+             var kendoGrid = $("#gridGioKham").data("kendoGrid");
+            var tr = $(e.currentTarget).closest("tr");
+            var data = kendoGrid.dataItem(tr);
+
+             var url = urlXoa.replace("@Constants.PARAM_XOA_GIO_KHAM_ID", data.id);
             window.open(url, "_blank");
         };
     </script>

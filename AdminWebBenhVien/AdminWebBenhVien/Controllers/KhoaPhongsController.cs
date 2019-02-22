@@ -101,7 +101,11 @@ namespace AdminWebBenhVien.Controllers
             {
                 return NotFound();
             }
+            var listNgonNgu = await GetListNgonNguAsync();
+            ViewBag.ListNgonNgu = listNgonNgu;
 
+            var listLoaiKhoaPhong = await GetListLoaiKhoaPhongAsync();
+            ViewBag.ListLoaiKhoaPhong = listLoaiKhoaPhong;
             var khoaPhong = await _context.KhoaPhong.FindAsync(id);
             if (khoaPhong == null)
             {
@@ -121,7 +125,11 @@ namespace AdminWebBenhVien.Controllers
             {
                 return NotFound();
             }
+            var listNgonNgu = await GetListNgonNguAsync();
+            ViewBag.ListNgonNgu = listNgonNgu;
 
+            var listLoaiKhoaPhong = await GetListLoaiKhoaPhongAsync();
+            ViewBag.ListLoaiKhoaPhong = listLoaiKhoaPhong;
             if (ModelState.IsValid)
             {
                 try
@@ -146,7 +154,29 @@ namespace AdminWebBenhVien.Controllers
             ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", khoaPhong.FkNgonNgu);
             return View(khoaPhong);
         }
+        private Task<List<DropdownlistViewModel>> GetListNgonNguAsync()
+        {
+            var list = _context.NgonNgu.AsNoTracking()
+                .Select(h => new DropdownlistViewModel
+                {
+                    Id = h.Id,
+                    Ten = h.TenNgonNgu
+                }).ToListAsync();
 
+            return list;
+        }
+
+        private Task<List<DropdownlistViewModel>> GetListLoaiKhoaPhongAsync()
+        {
+            var list = _context.LoaiKhoaPhong.AsNoTracking()
+                .Select(h => new DropdownlistViewModel
+                {
+                    Id = h.Id,
+                    Ten = h.TenLoai
+                }).ToListAsync();
+
+            return list;
+        }
         // GET: KhoaPhongs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

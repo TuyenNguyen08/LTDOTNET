@@ -1,4 +1,5 @@
 ﻿@model AdminWebBenhVien.EfModels.Event
+@using AdminWebBenhVien.Models
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -53,8 +54,13 @@
                                     <span asp-validation-for="Link" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="FkNgonNgu" class="control-label"></label>
-                                    <select asp-for="FkNgonNgu" class="form-control" asp-items="ViewBag.FkNgonNgu"></select>
+                                    <label asp-for="FkNgonNgu" class="control-label">Ngôn ngữ</label>
+                                    <kendo-dropdownlist for="FkNgonNgu"
+                                                        bind-to="@((List<DropdownlistViewModel>)ViewBag.ListNgonNgu)"
+                                                        option-label="-- Chọn ngôn ngữ --"
+                                                        datatextfield="@nameof(DropdownlistViewModel.Ten)"
+                                                        datavaluefield="@nameof(DropdownlistViewModel.Id)" />
+                                    <span asp-validation-for="FkNgonNgu" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="NgayTao" class="control-label">Ngày tạo</label>
@@ -62,7 +68,7 @@
                                     <span asp-validation-for="NgayTao" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="FkUserTao" class="control-label"></label>
+                                    <label asp-for="FkUserTao" class="control-label">Người tạo</label>
                                     <select asp-for="FkUserTao" class="form-control" asp-items="ViewBag.FkUserTao"></select>
                                 </div>
 
@@ -74,7 +80,7 @@
                                     </select>                                    
                                     <span asp-validation-for="NewTab" class="text-danger"></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="save">
                                     <input type="submit" value="Create" class="btn btn-success" />
                                 </div>
                             </div>

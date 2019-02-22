@@ -35,5 +35,7 @@
     #paneGioiThieu .form-label {
         text-align: right;
     }
-
+}
+#save{
+    margin-left:90%;
 }

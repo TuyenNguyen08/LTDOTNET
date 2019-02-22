@@ -132,7 +132,9 @@ namespace AdminWebBenhVien.Controllers
             {
                 try
                 {
-                    _context.Update(gioiThieuChiTiet);
+                  //  _context.Update(gioiThieuChiTiet);
+                    _context.Update(gioiThieuChiTiet).Property(x => x.Id).IsModified = false;
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -146,7 +148,7 @@ namespace AdminWebBenhVien.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+               // return RedirectToAction(nameof(Index));
             }
             ViewData["FkGioiThieu"] = new SelectList(_context.GioiThieu, "Id", "Id", gioiThieuChiTiet.FkGioiThieu);
             ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", gioiThieuChiTiet.FkNgonNgu);

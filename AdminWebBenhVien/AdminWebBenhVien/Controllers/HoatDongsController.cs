@@ -74,8 +74,14 @@ namespace AdminWebBenhVien.Controllers
         }
 
         // GET: HoatDongs/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            #region Get list master
+            var listNgonNgu = await GetListNgonNguAsync();
+            ViewBag.ListNgonNgu = listNgonNgu;
+            #endregion
+            var listLoaiHoatDong = await GetListLoaiHoatDongAsync();
+            ViewBag.ListLoaiHoatDong = listLoaiHoatDong;
             ViewData["FkLoaiHoatDong"] = new SelectList(_context.LoaiHoatDong, "Id", "Id");
             ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id");
             ViewData["FkNguoiSua"] = new SelectList(_context.User, "UserName", "UserName");
@@ -92,6 +98,12 @@ namespace AdminWebBenhVien.Controllers
         {
             if (ModelState.IsValid)
             {
+                #region Get list master
+                var listNgonNgu = await GetListNgonNguAsync();
+                ViewBag.ListNgonNgu = listNgonNgu;
+                #endregion
+                var listLoaiHoatDong = await GetListLoaiHoatDongAsync();
+                ViewBag.ListLoaiHoatDong = listLoaiHoatDong;
                 _context.Add(hoatDong);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -110,7 +122,12 @@ namespace AdminWebBenhVien.Controllers
             {
                 return NotFound();
             }
-
+            #region Get list master
+            var listNgonNgu = await GetListNgonNguAsync();
+            ViewBag.ListNgonNgu = listNgonNgu;
+            #endregion
+            var listLoaiHoatDong = await GetListLoaiHoatDongAsync();
+            ViewBag.ListLoaiHoatDong = listLoaiHoatDong;
             var hoatDong = await _context.HoatDong.FindAsync(id);
             if (hoatDong == null)
             {
@@ -131,7 +148,12 @@ namespace AdminWebBenhVien.Controllers
             {
                 return NotFound();
             }
-
+            #region Get list master
+            var listNgonNgu = await GetListNgonNguAsync();
+            ViewBag.ListNgonNgu = listNgonNgu;
+            #endregion
+            var listLoaiHoatDong = await GetListLoaiHoatDongAsync();
+            ViewBag.ListLoaiHoatDong = listLoaiHoatDong;
             if (ModelState.IsValid)
             {
                 try
@@ -150,7 +172,7 @@ namespace AdminWebBenhVien.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+              //  return RedirectToAction(nameof(Index));
             }
             ViewData["FkLoaiHoatDong"] = new SelectList(_context.LoaiHoatDong, "Id", "Id", hoatDong.FkLoaiHoatDong);
             ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", hoatDong.FkNgonNgu);
@@ -158,55 +180,7 @@ namespace AdminWebBenhVien.Controllers
             ViewData["FkNguoiTao"] = new SelectList(_context.User, "UserName", "UserName", hoatDong.FkNguoiTao);
             return View(hoatDong);
         }
-        [HttpGet]
-        public async Task<IActionResult> ListDSNgonNgu(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return BadRequest();
-            }
-
-            #region Get list master
-            var listNgonNgu = await GetListNgonNguAsync();
-            ViewBag.ListNgonNgu = listNgonNgu;
-            #endregion  
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> ListDSNgonNgu(HoatDongViewModel model)
-        {
-            #region Get list master
-            var listNgonNgu = await GetListNgonNguAsync();
-            ViewBag.ListNgonNgu = listNgonNgu;
-            #endregion
-
-            return View(model);
-        }
-        [HttpGet]
-        public async Task<IActionResult> ListFkLoaiHoatDong(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return BadRequest();
-            }
-
-            #region Get list master
-            var listLoaiHoatDong = await GetListLoaiHoatDongAsync();
-            ViewBag.ListLoaiHoatDong = listLoaiHoatDong;
-            #endregion
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> ListFkLoaiHoatDong(HoatDongViewModel model)
-        {
-            #region Get list master
-            var listLoaiHoatDong = await GetListLoaiHoatDongAsync();
-            ViewBag.ListLoaiHoatDong = listLoaiHoatDong;
-            #endregion
-            return View(model);
-        }
+       
         private Task<List<DropdownlistViewModel>> GetListNgonNguAsync()
         {
             var list = _context.NgonNgu.AsNoTracking()

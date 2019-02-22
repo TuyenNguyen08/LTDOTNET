@@ -64,11 +64,41 @@
 
                                     <kendo-editor name="NoiDung" aria-label="editor" style="height:440px" encoded="false">
                                         <tools>
-                                            <tool name="insertImage" />
-                                            <tool name="insertFile" />
                                             <tool name="bold" />
                                             <tool name="italic" />
                                             <tool name="underline" />
+                                            <tool name="strikethrough" />
+                                            <tool name="justifyLeft" />
+                                            <tool name="justifyCenter" />
+                                            <tool name="justifyRight" />
+                                            <tool name="justifyFull" />
+                                            <tool name="insertUnorderedList" />
+                                            <tool name="insertOrderedList" />
+                                            <tool name="indent" />
+                                            <tool name="outdent" />
+                                            <tool name="createLink" />
+                                            <tool name="unlink" />
+                                            <tool name="insertImage" />
+                                            <tool name="insertFile" />
+                                            <tool name="subscript" />
+                                            <tool name="superscript" />
+                                            <tool name="tableWizard" />
+                                            <tool name="createTable" />
+                                            <tool name="addRowAbove" />
+                                            <tool name="addRowBelow" />
+                                            <tool name="addColumnLeft" />
+                                            <tool name="addColumnRight" />
+                                            <tool name="deleteRow" />
+                                            <tool name="deleteColumn" />
+                                            <tool name="viewHtml" />
+                                            <tool name="formatting" />
+                                            <tool name="cleanFormatting" />
+                                            <tool name="fontName" />
+                                            <tool name="fontSize" />
+                                            <tool name="foreColor" />
+                                            <tool name="foreColor" />
+                                            <tool name="backColor" />
+                                            <tool name="print" />
                                             <tool name="fontName">
                                                 <tool-items>
                                                     <tool-item text="Default site font" value="Arial,Verdana,sans-serif" />
@@ -77,14 +107,14 @@
                                             </tool>
                                         </tools>
                                         <image-browser file-types="*.png,*.gif,*.jpg,*.jpeg">
-                                            <image-browser-transport upload-url="@Url.Action("Upload", "ImageBrowser")">
+                                            <image-browser-transport upload-url="@Url.Action("Upload", "ImageBrowser")" image-url="~/shared/UserFiles/Images/{0}">
                                                 <create url="@Url.Action("Create", "ImageBrowser")" />
                                                 <read url="@Url.Action("Read", "ImageBrowser")" />
                                                 <destroy url="@Url.Action("Destroy", "ImageBrowser")" />
                                             </image-browser-transport>
                                         </image-browser>
                                         <file-browser>
-                                            <file-browser-transport upload-url="@Url.Action("Upload", "FileBrowser")">
+                                            <file-browser-transport upload-url="@Url.Action("Upload", "FileBrowser")" file-url="~/shared/UserFiles/Images/{0}">
                                                 <create url="@Url.Action("Create", "FileBrowser")" />
                                                 <read url="@Url.Action("Read", "FileBrowser")" />
                                                 <destroy url="@Url.Action("Destroy", "FileBrowser")" />
@@ -94,12 +124,14 @@
                                             @Html.Raw(Model.NoiDung)
                                         </content>
                                     </kendo-editor>
+                                    <span asp-validation-for="NoiDung" class="text-danger"></span>
+                                </div>
 
-                                    <div class="form-group">
-                                        <input type="submit" value="Save" class="btn btn-success" />
-                                    </div>
+                                <div class="form-group" id="save">
+                                    <input type="submit" value="Save" class="btn btn-success" />
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </form>
             </div>

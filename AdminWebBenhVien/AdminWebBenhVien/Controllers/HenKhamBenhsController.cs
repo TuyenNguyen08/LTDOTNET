@@ -120,9 +120,33 @@ namespace AdminWebBenhVien.Controllers
             {
                 return NotFound();
             }
-
             var henKhamBenh = await _context.HenKhamBenh
-                .Where(t => t.Id == id).FirstOrDefaultAsync();
+               .Where(t => t.Id == id).FirstOrDefaultAsync();
+
+            var listChuyenKhoa = await GetListChuyenKhoaAsync();
+            ViewBag.ListChuyenKhoa = listChuyenKhoa;
+
+            var listBacSi = await GetListBacSiAsync();
+            ViewBag.ListBacSi = listBacSi;
+
+            var listGioHen = await GetListGioHenAsync();
+            ViewBag.ListGioHen = listGioHen;
+
+            var listNamSinh = await GetListNamSinhAsync();
+            ViewBag.ListNamSinh = listNamSinh;
+
+            var listTinhTrangHonNhan = await GetListTinhTrangHonNhanAsync();
+            ViewBag.ListTinhTrangHonNhan = listTinhTrangHonNhan;
+
+            var listTrangThai = await GetListTrangThaiAsync();
+            ViewBag.ListTrangThai = listTrangThai;
+
+            var listQuocTich = await GetListQuocTichAsync();
+            ViewBag.ListQuocTich = listQuocTich;
+
+
+
+
             if (henKhamBenh == null)
             {
                 return NotFound();
@@ -148,6 +172,26 @@ namespace AdminWebBenhVien.Controllers
             {
                 return NotFound();
             }
+            var listChuyenKhoa = await GetListChuyenKhoaAsync();
+            ViewBag.ListChuyenKhoa = listChuyenKhoa;
+
+            var listBacSi = await GetListBacSiAsync();
+            ViewBag.ListBacSi = listBacSi;
+
+            var listGioHen = await GetListGioHenAsync();
+            ViewBag.ListGioHen = listGioHen;
+
+            var listNamSinh = await GetListNamSinhAsync();
+            ViewBag.ListNamSinh = listNamSinh;
+
+            var listTinhTrangHonNhan = await GetListTinhTrangHonNhanAsync();
+            ViewBag.ListTinhTrangHonNhan = listTinhTrangHonNhan;
+
+            var listTrangThai = await GetListTrangThaiAsync();
+            ViewBag.ListTrangThai = listTrangThai;
+
+            var listQuocTich = await GetListQuocTichAsync();
+            ViewBag.ListQuocTich = listQuocTich;
 
             if (ModelState.IsValid)
             {
@@ -167,7 +211,7 @@ namespace AdminWebBenhVien.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+              //  return RedirectToAction(nameof(Index));
             }
             ViewData["FkBacSi"] = new SelectList(_context.DanhMucBacSi, "Id", "Id", henKhamBenh.FkBacSi);
             ViewData["FkChuyenKhoa"] = new SelectList(_context.PhongKham, "Id", "Id", henKhamBenh.FkChuyenKhoa);
@@ -178,7 +222,89 @@ namespace AdminWebBenhVien.Controllers
             ViewData["FkTrangThai"] = new SelectList(_context.TrangThai, "Id", "Id", henKhamBenh.FkTrangThai);
             return View(henKhamBenh);
         }
+        private Task<List<DropdownlistViewModel>> GetListChuyenKhoaAsync()
+        {
+            var list = _context.PhongKham.AsNoTracking()
+                .Select(h => new DropdownlistViewModel
+                {
+                    Id = h.Id,
+                    Ten = h.TenPhongKham
+                }).ToListAsync();
 
+            return list;
+        }
+
+        private Task<List<DropdownlistViewModel>> GetListBacSiAsync()
+        {
+            var list = _context.DanhMucBacSi.AsNoTracking()
+                .Select(h => new DropdownlistViewModel
+                {
+                    Id = h.Id,
+                    Ten = h.TenBacSi
+                }).ToListAsync();
+
+            return list;
+        }
+
+        private Task<List<DropdownlistViewModel>> GetListGioHenAsync()
+        {
+            var list = _context.GioKham.AsNoTracking()
+                .Select(h => new DropdownlistViewModel
+                {
+                    Id = h.Id,
+                    Ten = h.Gio
+                }).ToListAsync();
+
+            return list;
+        }
+
+        private Task<List<DropdownlistViewModel>> GetListNamSinhAsync()
+        {
+            var list = _context.NamSinh.AsNoTracking()
+                .Select(h => new DropdownlistViewModel
+                {
+                    Id = h.Id,
+                    NamSinh = h.Nam
+                }).ToListAsync();
+
+            return list;
+        }
+
+        private Task<List<DropdownlistViewModel>> GetListTinhTrangHonNhanAsync()
+        {
+            var list = _context.TinhTrangHonNhan.AsNoTracking()
+                .Select(h => new DropdownlistViewModel
+                {
+                    Id = h.Id,
+                    Ten = h.TinhTrang
+                }).ToListAsync();
+
+            return list;
+        }
+
+        private Task<List<DropdownlistViewModel>> GetListTrangThaiAsync()
+        {
+            var list = _context.TrangThai.AsNoTracking()
+                .Select(h => new DropdownlistViewModel
+                {
+                    Id = h.Id,
+                    Ten = h.TenLoaiTrangThai
+                }).ToListAsync();
+
+            return list;
+        }
+
+        private Task<List<DropdownlistViewModel>> GetListQuocTichAsync()
+        {
+            var list = _context.QuocTich.AsNoTracking()
+                .Select(h => new DropdownlistViewModel
+                {
+                    Id = h.Id,
+                    Ten = h.TenQuocGia
+                }).ToListAsync();
+
+            return list;
+        }
         // GET: HenKhamBenhs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

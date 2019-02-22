@@ -1,4 +1,5 @@
 ﻿@model AdminWebBenhVien.EfModels.TinTuc
+@using AdminWebBenhVien.Models
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -48,12 +49,21 @@
                                     <span asp-validation-for="HinhAnhMinhHoa" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="FkNgonNgu" class="control-label"></label>
-                                    <select asp-for="FkNgonNgu" class="form-control" asp-items="ViewBag.FkNgonNgu"></select>
+                                    <label asp-for="FkNgonNgu" class="control-label">Ngôn ngữ</label>
+                                    <kendo-dropdownlist for="FkNgonNgu"
+                                                        option-label="-- Chọn ngôn ngữ --"
+                                                        bind-to="@((List<DropdownlistViewModel>)ViewBag.ListNgonNgu)"
+                                                        datatextfield="@nameof(DropdownlistViewModel.Ten)"
+                                                        datavaluefield="@nameof(DropdownlistViewModel.Id)" />
+                                    <span asp-validation-for="FkNgonNgu" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="FkLoaiTin" class="control-label"></label>
-                                    <select asp-for="FkLoaiTin" class="form-control" asp-items="ViewBag.FkLoaiTin"></select>
+                                    <label asp-for="FkLoaiTin" class="control-label">Loại tin</label>
+                                    <kendo-dropdownlist for="FkLoaiTin"
+                                                        bind-to="@((List<DropdownlistViewModel>)ViewBag.ListLoaiTin)"
+                                                        datatextfield="@nameof(DropdownlistViewModel.Ten)"
+                                                        datavaluefield="@nameof(DropdownlistViewModel.Id)" />
+                                    <span asp-validation-for="FkLoaiTin" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="NgayTao" class="control-label">Ngày tạo</label>
@@ -61,7 +71,7 @@
                                     <span asp-validation-for="NgayTao" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="FkUserNguoiTao" class="control-label"></label>
+                                    <label asp-for="FkUserNguoiTao" class="control-label">Người tạo</label>
                                     <select asp-for="FkUserNguoiTao" class="form-control" asp-items="ViewBag.FkUserNguoiTao"></select>
                                 </div>
                                 <div class="form-group">
@@ -70,15 +80,72 @@
                                     <span asp-validation-for="Author" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="FkUserNguoiSua" class="control-label"></label>
-                                    <select asp-for="FkUserNguoiSua" class="form-control" asp-items="ViewBag.FkUserNguoiSua"></select>
-                                </div>
-                                <div class="form-group">
                                     <label asp-for="NoiDung" class="control-label">Nội dung</label>
-                                    @Html.TextAreaFor(h => h.NoiDung, 10, 1, new { @class = "k-textbox" })
+
+                                    <kendo-editor name="NoiDung" aria-label="editor" style="height:440px" encoded="false">
+                                        <tools>
+                                            <tool name="bold" />
+                                            <tool name="italic" />
+                                            <tool name="underline" />
+                                            <tool name="strikethrough" />
+                                            <tool name="justifyLeft" />
+                                            <tool name="justifyCenter" />
+                                            <tool name="justifyRight" />
+                                            <tool name="justifyFull" />
+                                            <tool name="insertUnorderedList" />
+                                            <tool name="insertOrderedList" />
+                                            <tool name="indent" />
+                                            <tool name="outdent" />
+                                            <tool name="createLink" />
+                                            <tool name="unlink" />
+                                            <tool name="insertImage" />
+                                            <tool name="insertFile" />
+                                            <tool name="subscript" />
+                                            <tool name="superscript" />
+                                            <tool name="tableWizard" />
+                                            <tool name="createTable" />
+                                            <tool name="addRowAbove" />
+                                            <tool name="addRowBelow" />
+                                            <tool name="addColumnLeft" />
+                                            <tool name="addColumnRight" />
+                                            <tool name="deleteRow" />
+                                            <tool name="deleteColumn" />
+                                            <tool name="viewHtml" />
+                                            <tool name="formatting" />
+                                            <tool name="cleanFormatting" />
+                                            <tool name="fontName" />
+                                            <tool name="fontSize" />
+                                            <tool name="foreColor" />
+                                            <tool name="foreColor" />
+                                            <tool name="backColor" />
+                                            <tool name="print" />
+                                            <tool name="fontName">
+                                                <tool-items>
+                                                    <tool-item text="Default site font" value="Arial,Verdana,sans-serif" />
+                                                    <tool-item text="Monospaced font" value="monospace" />
+                                                </tool-items>
+                                            </tool>
+                                        </tools>
+                                        <image-browser file-types="*.png,*.gif,*.jpg,*.jpeg">
+                                            <image-browser-transport upload-url="@Url.Action("Upload", "ImageBrowser")" image-url="~/shared/UserFiles/Images/{0}">
+                                                <create url="@Url.Action("Create", "ImageBrowser")" />
+                                                <read url="@Url.Action("Read", "ImageBrowser")" />
+                                                <destroy url="@Url.Action("Destroy", "ImageBrowser")" />
+                                            </image-browser-transport>
+                                        </image-browser>
+                                        <file-browser>
+                                            <file-browser-transport upload-url="@Url.Action("Upload", "FileBrowser")" file-url="~/shared/UserFiles/Images/{0}">
+                                                <create url="@Url.Action("Create", "FileBrowser")" />
+                                                <read url="@Url.Action("Read", "FileBrowser")" />
+                                                <destroy url="@Url.Action("Destroy", "FileBrowser")" />
+                                            </file-browser-transport>
+                                        </file-browser>
+                                        <content>
+                                        </content>
+                                    </kendo-editor>
                                     <span asp-validation-for="NoiDung" class="text-danger"></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="save">
                                     <input type="submit" value="Create" class="btn btn-success" />
                                 </div>
                             </div>

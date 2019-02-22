@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using AdminWebBenhVien.Controllers
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -90,35 +91,145 @@
         <!-- /.navbar-top-links -->
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
+                <img src="@Url.Content("~/images/testlogo.png")" height="40" style="margin-left:40px" />
                 <ul class="nav" id="side-menu">
-                    <img src="@Url.Content("~/images/testlogo.png")" height="40" style="margin-left:40px" />
+                    <li>
+                        <a asp-action="@nameof(HomeController.Index)"
+                           asp-controller="@nameof(HomeController).Replace("Controller","")"><i class="fa fa-home fa-fw"></i>Trang chủ</a>
+                    </li>
+                    <li>
+                        <a>Bài viết<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                            <li>
+                                <a asp-action="@nameof(GioiThieuChiTietsController.Index)"
+                                   asp-controller="@nameof(GioiThieuChiTietsController).Replace("Controller","")"><i class="fa fa-briefcase fa-fw"></i>Giới thiệu tổng quan</a>
+                            </li>
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Giới thiệu khoa ban</a>
+                            </li>
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-flag   fa-fw"></i>Dịch vụ</a>
+                            </li>
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-user fa-fw"></i>Bệnh nhân</a>
+                            </li>
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-plus-square fa-fw"></i>Tin Tức</a>
+                            </li>
+
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-plus-circle fa-fw"></i>Hoạt động</a>
+                            </li>
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-plus-circle fa-fw"></i>Tuyển dụng</a>
+                            </li>
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-sign-in fa-fw"></i>Sự kiện-Quảng cáo</a>
+                            </li>
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-plus-circle fa-fw"></i>Lịch khám</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li>
                         <a asp-action=""
                            asp-controller=""
-                           asp-route-dotThauId=""><i class="fa fa-home fa-fw"></i>Trang chủ</a>
+                           asp-route-dotThauId=""><i class=""></i>Khách hàng<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Hỏi đáp sức khỏe</a>
+                            </li>
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Đặt hẹn lịch khám</a>
+                            </li>
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-flag   fa-fw"></i>Phản hồi khách hàng</a>
+                            </li>
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-user fa-fw"></i>Liên hệ khách hàng</a>
+                            </li>
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-plus-square fa-fw"></i>Hồ sơ bệnh án online</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a asp-action=""
+                           asp-controller=""
+                           asp-route-dotThauId=""><i class=""></i>Thư viện<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Slideshow trang chủ</a>
+                            </li>
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Video</a>
+                            </li>
+
+                        </ul>
                     </li>
                     <li>
                         <a asp-action=""
                            asp-controller=""
-                           asp-route-dotThauId=""><i class="fa fa-briefcase fa-fw"></i>Giới thiệu</a>
-                    </li>
+                           asp-route-dotThauId=""><i class=""></i>Quản trị<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Quản lý người dung</a>
+                            </li>
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Phân quyền sử dụng</a>
+                            </li>
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-flag   fa-fw"></i>Tùy chỉnh giao diện</a>
+                            </li>
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-user fa-fw"></i>Hình ảnh tiêu biểu trang</a>
+                            </li>
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-plus-square fa-fw"></i>Thông báo-Văn bản</a>
+                            </li>
+                        </ul>
+
                     <li>
-                        <a href="#"><i class="fa fa-flag   fa-fw"></i>Dịch vụ</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-user fa-fw"></i> Bệnh nhân</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-plus-square fa-fw"></i> Tin Tức</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-sign-in fa-fw"></i> Sự kiện</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-plus-circle fa-fw"></i> Hoạt động</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-plus-circle fa-fw"></i> Liên hệ</a>
+                        <a asp-action=""
+                           asp-controller=""
+                           asp-route-dotThauId=""><i class=""></i>Hệ thống<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Lỗi hệ thống</a>
+                            </li>
+                            <li>
+                                <a asp-action=""
+                                   asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Backup & Restore database</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -139,7 +250,8 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src=@Url.Content("~/lib/metisMenu/metisMenu.min.js")></script>
 
-    <script src="~/dist/js/sb-admin-2.js"></script>
+    <script src=@Url.Content("~/dist/js/sb-admin-2.js")></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
 
 </body>
 

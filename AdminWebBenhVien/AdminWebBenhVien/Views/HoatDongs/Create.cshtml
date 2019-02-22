@@ -1,4 +1,5 @@
 ﻿@model AdminWebBenhVien.EfModels.HoatDong
+@using AdminWebBenhVien.Models
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -48,12 +49,21 @@
                                     <span asp-validation-for="HinhAnhMinhHoa" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="FkNgonNgu" class="control-label"></label>
-                                    <select asp-for="FkNgonNgu" class="form-control" asp-items="ViewBag.FkNgonNgu"></select>
+                                    <label asp-for="FkNgonNgu" class="control-label">Ngôn ngữ</label>
+                                    <kendo-dropdownlist for="FkNgonNgu"
+                                                        option-label="-- Chọn ngôn ngữ --"
+                                                        bind-to="@((List<DropdownlistViewModel>)ViewBag.ListNgonNgu)"
+                                                        datatextfield="@nameof(DropdownlistViewModel.Ten)"
+                                                        datavaluefield="@nameof(DropdownlistViewModel.Id)" />
+                                    <span asp-validation-for="FkNgonNgu" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="FkLoaiHoatDong" class="control-label"></label>
-                                    <select asp-for="FkLoaiHoatDong" class="form-control" asp-items="ViewBag.FkLoaiHoatDong"></select>
+                                    <label asp-for="FkLoaiHoatDong" class="control-label">Loại hoạt động</label>
+                                    <kendo-dropdownlist for="FkLoaiHoatDong"
+                                                        bind-to="@((List<DropdownlistViewModel>)ViewBag.ListLoaiHoatDong)"
+                                                        datatextfield="@nameof(DropdownlistViewModel.Ten)"
+                                                        datavaluefield="@nameof(DropdownlistViewModel.Id)" />
+                                    <span asp-validation-for="FkLoaiHoatDong" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="NoiDung" class="control-label">Nội dung</label>
@@ -75,7 +85,7 @@
                                     <input asp-for="Author" class="form-control" />
                                     <span asp-validation-for="Author" class="text-danger"></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="save">
                                     <input type="submit" value="Create" class="btn btn-success" />
                                 </div>
                             </div>

@@ -103,7 +103,11 @@ namespace AdminWebBenhVien.Controllers
             {
                 return NotFound();
             }
+            var listNgonNgu = await GetListNgonNguAsync();
+            ViewBag.ListNgonNgu = listNgonNgu;
 
+            var listNoiDungTinh = await GetListNoiDungTinhAsync();
+            ViewBag.ListNoiDungTinh = listNoiDungTinh;
             var noiDungTinhChiTiet = await _context.NoiDungTinhChiTiet.Where(t=>t.Id==id).FirstOrDefaultAsync();
             if (noiDungTinhChiTiet == null)
             {
@@ -126,7 +130,11 @@ namespace AdminWebBenhVien.Controllers
             {
                 return NotFound();
             }
+            var listNgonNgu = await GetListNgonNguAsync();
+            ViewBag.ListNgonNgu = listNgonNgu;
 
+            var listNoiDungTinh = await GetListNoiDungTinhAsync();
+            ViewBag.ListNoiDungTinh = listNoiDungTinh;
             if (ModelState.IsValid)
             {
                 try
@@ -145,14 +153,36 @@ namespace AdminWebBenhVien.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+             //   return RedirectToAction(nameof(Index));
             }
             ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", noiDungTinhChiTiet.FkNgonNgu);
             ViewData["FkNoiDungTinh"] = new SelectList(_context.NoiDungTinh, "Id", "Id", noiDungTinhChiTiet.FkNoiDungTinh);
             ViewData["FkUserChinhsua"] = new SelectList(_context.User, "UserName", "UserName", noiDungTinhChiTiet.FkUserChinhsua);
             return View(noiDungTinhChiTiet);
         }
+        private Task<List<DropdownlistViewModel>> GetListNgonNguAsync()
+        {
+            var list = _context.NgonNgu.AsNoTracking()
+                .Select(h => new DropdownlistViewModel
+                {
+                    Id = h.Id,
+                    Ten = h.TenNgonNgu
+                }).ToListAsync();
 
+            return list;
+        }
+
+        private Task<List<DropdownlistViewModel>> GetListNoiDungTinhAsync()
+        {
+            var list = _context.NoiDungTinh.AsNoTracking()
+                .Select(h => new DropdownlistViewModel
+                {
+                    Id = h.Id,
+                    Ten = h.TenNoiDung
+                }).ToListAsync();
+
+            return list;
+        }
         // GET: NoiDungTinhChiTiets/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
