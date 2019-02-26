@@ -5,13 +5,13 @@
     @foreach (var menuCha in Model)
     {
         <li>
-            <a href="@menuCha.Menu.Link">@menuCha.Menu.Name</a>
+            <a href="@Url.Action(menuCha.Menu.ActionName, menuCha.Menu.ControllerName, new { id = menuCha.Menu.ParamId })">@menuCha.Menu.Name</a>
             @if (menuCha.ListMenu.Count > 0)
             {
                 <ul>
                     @foreach (var menuCon in menuCha.ListMenu)
                     {
-                        <li><a href="@menuCon.Menu.Link">@menuCon.Menu.Name</a></li>
+                        <li><a href="@Url.Action(menuCon.Menu.ActionName, menuCon.Menu.ControllerName, new { id = menuCon.Menu.ParamId })">@menuCon.Menu.Name</a></li>
                     }
                 </ul>
             }
