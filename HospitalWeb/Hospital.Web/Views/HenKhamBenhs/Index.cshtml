@@ -1,16 +1,19 @@
-﻿@model IEnumerable<Hospital.Web.EfModels.HenKhamBenh>
-@using Hospital.Web.Controllers
+﻿@using Hospital.Web.Controllers
+@using Hospital.Web.EfModels
+@model HenKhamBenh
+
+
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section css {
-<style>
-    .k-radio:checked + .k-radio-label:after {
-        top: 2px;
-        left: 2px;
-    }
-</style>
+    <style>
+        .k-radio:checked + .k-radio-label:after {
+            top: 2px;
+            left: 2px;
+        }
+    </style>
 }
 
 
@@ -66,8 +69,8 @@
 
                 </div>
             </div>
-            <div class="col-lg-8 col-md-6" >
-                <form action="#" class="contact_form2" >
+            <div class="col-lg-8 col-md-6">
+                <form action="#" class="contact_form2">
                     <div class="row">
                         <div class="col-lg-6">
                             <h3>Tên</h3>
@@ -91,54 +94,60 @@
                             @(Html.Kendo().RadioButton().Name("nu").HtmlAttributes(new { @name = "gioitinh" }).Label("Nữ"))
                         </div>
                         <div class="col-lg-6">
-                            <h3>Ngày sinh</h3>
-                            @(Html.Kendo().DatePicker()
-                                    .Name("namsinh")
-                                    .Value(DateTime.Now)
-                                    .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
-                                    .DateInput()
+                            <h3>Năm sinh</h3>
+                            @(Html.Kendo().DropDownList().Name(nameof(HenKhamBenh.FkNamSinh))
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .Events(e => e.Change("change"))
+                                                .BindTo((List<SelectListItem>)ViewBag.listNamSinh)
+                                                .Value($"{Model.FkNamSinh}")
+
                             )
                         </div>
                         <div class="col-lg-12">
                             <h3>Bác sĩ</h3>
-                            <input type="text" placeholder="Nội dung">
+                            <input type="text">
                         </div>
 
                         <div class="col-lg-12">
                             <h3>Chuyên khoa</h3>
                             @(Html.Kendo().DropDownList()
-                                    .Name("color")
-                                    .DataTextField("Text")
-                                    .DataValueField("Value")
-                                    .Events(e => e.Change("change"))
-                                    .BindTo(new List<SelectListItem>() {
-                                                new SelectListItem() {
-                                                Text = "Black",
-                                                Value = "1"
-                                                },
-                                                new SelectListItem() {
-                                                Text = "Orange",
-                                                Value = "2"
-                                                },
-                                                new SelectListItem() {
-                                                Text = "Grey",
-                                                Value = "3"
-                                                }
-                                    })
-                                    .Value("1")
-                                    .HtmlAttributes(new { style = "width: 100%" })
+                                       .Name(nameof(HenKhamBenh.FkChuyenKhoa))
+                                        .DataTextField("Text")
+                                        .DataValueField("Value")
+                                        .Events(e => e.Change("change"))
+                                        .BindTo((List<SelectListItem>)ViewBag.listPhongKham)
+                                        .OptionLabel("Vui lòng chọn phòng khám")
+                                        .Value($"{Model.FkChuyenKhoa}")
+                                        .HtmlAttributes(new { style = "width: 100%" })
                             )
 
                         </div>
-                        <div class="col-lg-12">
+
+                        <div class="col-lg-6">
                             <h3>Ngày khám</h3>
-                            @(Html.Kendo().DateTimePicker()
-                                    .Name("datetimepicker")
-                                    .Value(DateTime.Now)
-                                    .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
-                                    .DateInput()
+                            @(Html.Kendo().DatePicker()
+                                        .Name("ngaykham")
+                                        .Value(DateTime.Now)
+                                        .HtmlAttributes(new { style = "width: 100%", title = "ngaykham" })
+                                        .DateInput()
                             )
                         </div>
+
+
+                        <div class="col-lg-6">
+                            <h3>Giờ khám</h3>
+                            @(Html.Kendo().DropDownList().Name(nameof(HenKhamBenh.FkGioHen))
+                                        .DataTextField("Text")
+                                        .DataValueField("Value")
+                                        .Events(e => e.Change("change"))
+                                        .BindTo((List<SelectListItem>)ViewBag.listGioKham)
+                                        .OptionLabel("Vui lòng chọn giờ khám")
+                                        .Value($"{Model.FkGioHen}")
+
+                            )
+                        </div>
+
                         <div class="col-lg-12">
                             <h3>Ghi chú</h3>
                             <textarea placeholder="Nội dung ghi chú"></textarea>

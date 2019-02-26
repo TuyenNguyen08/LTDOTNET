@@ -10,6 +10,7 @@ using Hospital.Web.Models;
 
 namespace Hospital.Web.Controllers
 {
+
     public class HenKhamBenhsController : ControllerBase
     {
         public HenKhamBenhsController(InitParam initParam) : base(initParam)
@@ -20,9 +21,50 @@ namespace Hospital.Web.Controllers
         // GET: HenKhamBenhs
         public async Task<IActionResult> Index()
         {
-            var nBenhVien7CContext = InitParam.Db.HenKhamBenh.Include(h => h.FkBacSiNavigation).Include(h => h.FkChuyenKhoaNavigation).Include(h => h.FkGioHenNavigation).Include(h => h.FkNamSinhNavigation).Include(h => h.FkQuocTichNavigation).Include(h => h.FkTinhTrangHonNhanNavigation).Include(h => h.FkTrangThaiNavigation);
-            return View(await nBenhVien7CContext.ToListAsync());
+            var listPhongKham = await GetPhongKhamAsync();
+            var listGioKham = await GetGioKhamAsync();
+            var listNamSinh = await GetNamSinhAsync();
+            ViewBag.listPhongKham = listPhongKham;
+            ViewBag.listGioKham = listGioKham;
+            ViewBag.listNamSinh = listNamSinh;
+            return View(new HenKhamBenh());
         }
+        
+        
+        private async Task<List<SelectListItem>> GetPhongKhamAsync()
+        {
+
+            var phongKham = await InitParam.Db.PhongKham
+                .Where(h => h.HenKham == true && h.FkNgonNgu == NgonNgu)
+                .Select(h => new { Id = h.Id, Name = h.TenPhongKham }).ToListAsync();
+
+            var listItem = phongKham.Select(h => new SelectListItem(h.Name, h.Id.ToString())).ToList();
+
+            return listItem;  
+        }
+
+        private async Task<List<SelectListItem>> GetGioKhamAsync()
+        {
+
+            var gioKham = await InitParam.Db.GioKham
+                .Select(h => new { Id = h.Id, Name = h.Gio }).ToListAsync();
+
+            
+
+            var listClock = gioKham.Select(h => new SelectListItem(h.Name, h.Id.ToString())).ToList();
+
+            return listClock;
+        }
+
+        private async Task<List<SelectListItem>> GetNamSinhAsync()
+        {
+            var namSinh = await InitParam.Db.NamSinh.Select(k => new { Id = k.Id, Name = k.Nam }).ToListAsync();
+
+            var listYear = namSinh.Select(h => new SelectListItem(h.Name.ToString(), h.Id.ToString())).ToList();
+
+            return listYear;
+        }
+
 
         // GET: HenKhamBenhs/Details/5
         public async Task<IActionResult> Details(int? id)

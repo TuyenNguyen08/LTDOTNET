@@ -17,5 +17,7 @@ namespace Hospital.Web.Controllers
         }
 
         protected InitParam InitParam { get; set; }
+
+        protected int? NgonNgu = 1;
     }
 }
