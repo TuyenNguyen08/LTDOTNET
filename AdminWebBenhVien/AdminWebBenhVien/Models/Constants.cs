@@ -23,10 +23,14 @@ namespace AdminWebBenhVien.Models
         public const string PARAM_XOA_HEN_KHAM_BENH_ID = "__PARAM_XOA_HEN_KHAM_BENH_ID__";
         public const string PARAM_GIO_KHAM_ID = "__PARAM_GIO_KHAM_ID__";
         public const string PARAM_XOA_GIO_KHAM_ID = "__PARAM_XOA_GIO_KHAM_ID__";
-
-
-
-
+        public const string PARAM_HOI_DAP_Y_KHOA_ID = "__PARAM_HOI_DAP_Y_KHOA_ID__";
+        public const string PARAM_XOA_HOI_DAP_Y_KHOA_ID = "__PARAM_XOA_HOI_DAP_Y_KHOA_ID__";
+        public const string PARAM_PHAN_HOI_ID = "__PARAM_PHAN_HOI_ID__";
+        public const string PARAM_XOA_PHAN_HOI_ID = "__PARAM_XOA_PHAN_HOI_ID__";
+        public const string PARAM_LIEN_HE_KHACH_HANG_ID = "__PARAM_LIEN_HE_KHACH_HANG_ID__";
+        public const string PARAM_XOA_LIEN_HE_KHACH_HANG_ID = "__PARAM_XOA_LIEN_HE_KHACH_HANG_ID__";
+        public const string PARAM_VIDEO_ID = "__PARAM_VIDEO_ID__";
+        public const string PARAM_XOA_VIDEO_ID = "__PARAM_XOA_VIDEO_ID__";
 
     }
 }

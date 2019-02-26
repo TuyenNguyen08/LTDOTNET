@@ -1,0 +1,136 @@
+﻿@model AdminWebBenhVien.EfModels.PhanHoi
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Bạn có chắc muốn xóa?<span style="color:orange"></span></h1>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-12">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NgayKham)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NgayKham)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MaSoBenhNhan)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.MaSoBenhNhan)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.HoVaTen)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.HoVaTen)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NgaySinh)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NgaySinh)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.GioiTinh)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.GioiTinh)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DienThoai)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DienThoai)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NoiDung)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NoiDung)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NgayGui)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NgayGui)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DaXem)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DaXem)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FkLoaiPhanHoi)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FkLoaiPhanHoi)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NoiDungTraLoi)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NoiDungTraLoi)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NgayTraLoi)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NgayTraLoi)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DiaChi)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DiaChi)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsShow)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.IsShow)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TieuDe)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TieuDe)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FkNgonNguNavigation)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FkNgonNguNavigation.Id)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FkUserTraLoiNavigation)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FkUserTraLoiNavigation.UserName)
+                    </dd>
+                </dl>
+
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+                    <a asp-action="Index">Back to List</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

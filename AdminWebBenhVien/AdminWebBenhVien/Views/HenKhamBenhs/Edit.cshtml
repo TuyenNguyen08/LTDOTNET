@@ -68,7 +68,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="NgayHen" class="control-label">Ngày hẹn</label>
-                                    <input asp-for="NgayHen" class="form-control" />
+                                    <kendo-datepicker name='datepicker'
+                                                      for="NgayHen"
+                                                      style='width: 100%;' />
                                     <span asp-validation-for="NgayHen" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">

@@ -6,45 +6,51 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AdminWebBenhVien.EfModels;
-using Kendo.Mvc.UI;
 using AdminWebBenhVien.Models;
+using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 
 namespace AdminWebBenhVien.Controllers
 {
-    public class SlideShowsController : Controller
+    public class VideosController : Controller
     {
         private readonly NBenhVien7CContext _context;
 
-        public SlideShowsController(NBenhVien7CContext context)
+        public VideosController(NBenhVien7CContext context)
         {
             _context = context;
         }
 
-        // GET: SlideShows
+        // GET: Videos
         public async Task<IActionResult> Index()
         {
-            var nBenhVien7CContext = _context.SlideShow.Include(s => s.FkNgonNguNavigation);
+            var nBenhVien7CContext = _context.Video.Include(v => v.FkNgonNguNavigation);
             return View(await nBenhVien7CContext.ToListAsync());
         }
         [HttpGet]
-        public async Task<IActionResult> SlideShows_Read([DataSourceRequest]DataSourceRequest request)
+        public async Task<IActionResult> Video_Read([DataSourceRequest]DataSourceRequest request)
         {
-            var listSlideShows = _context.SlideShow.AsNoTracking()
-                .Select(t => new SlideShowViewModel
+            var listEvent = _context.Video.AsNoTracking()
+                .Select(t => new VideoViewModel
                 {
-                    Id = t.Id,
-                    TieuDe = t.TieuDe,
-                    HinhAnh=t.HinhAnh,
-                    FkNgonNgu = t.FkNgonNgu,
-                    Stt=t.Stt,
-                    IsNewtab=t.IsNewtab,
-                    IsLink=t.IsLink
+                   Id=t.Id,
+                   TieuDe=t.TieuDe,
+                   GioiThieu=t.GioiThieu,
+                   DuongDanFile=t.DuongDanFile,
+                   IsYoutube=t.IsYoutube,
+                   NoiBat=t.NoiBat,
+                   LuotXem=t.LuotXem,
+                   FkNgonNgu=t.FkNgonNgu,
+                   NgayTao=t.NgayTao,
+                   UserNguoiSua=t.UserNguoiSua,
+                   NgaySua=t.NgaySua,
+                   Stt=t.Stt,
+                   HinhAnh=t.HinhAnh
                 });
-            var result = await listSlideShows.ToDataSourceResultAsync(request);
+            var result = await listEvent.ToDataSourceResultAsync(request);
             return Json(result);
         }
-        // GET: SlideShows/Details/5
+        // GET: Videos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -52,73 +58,71 @@ namespace AdminWebBenhVien.Controllers
                 return NotFound();
             }
 
-            var slideShow = await _context.SlideShow
-                .Include(s => s.FkNgonNguNavigation)
+            var video = await _context.Video
+                .Include(v => v.FkNgonNguNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (slideShow == null)
+            if (video == null)
             {
                 return NotFound();
             }
 
-            return View(slideShow);
+            return View(video);
         }
 
-        // GET: SlideShows/Create
+        // GET: Videos/Create
         public async Task<IActionResult> Create()
         {
-            #region Get list master
             var listNgonNgu = await GetListNgonNguAsync();
             ViewBag.ListNgonNgu = listNgonNgu;
-            #endregion
             ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id");
             return View();
         }
 
-        // POST: SlideShows/Create
+        // POST: Videos/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TieuDe,HinhAnh,FkNgonNgu,Stt,IsNewtab,LinkEvent,IsLink")] SlideShow slideShow)
+        public async Task<IActionResult> Create([Bind("Id,TieuDe,GioiThieu,DuongDanFile,IsYoutube,NoiBat,LuotXem,FkNgonNgu,NgayTao,NguoiTao,UserNguoiSua,NgaySua,Stt,HinhAnh")] Video video)
         {
             if (ModelState.IsValid)
             {
-                #region Get list master
                 var listNgonNgu = await GetListNgonNguAsync();
                 ViewBag.ListNgonNgu = listNgonNgu;
-                #endregion
-                _context.Add(slideShow);
+                _context.Add(video);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", slideShow.FkNgonNgu);
-            return View(slideShow);
+            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", video.FkNgonNgu);
+            return View(video);
         }
 
-        // GET: SlideShows/Edit/5
+        // GET: Videos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            #region Get list master
             var listNgonNgu = await GetListNgonNguAsync();
             ViewBag.ListNgonNgu = listNgonNgu;
-            #endregion
-            var slideShow = await _context.SlideShow.FindAsync(id);
-            if (slideShow == null)
+            var video = await _context.Video.FindAsync(id);
+            if (video == null)
             {
                 return NotFound();
             }
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", slideShow.FkNgonNgu);
-            return View(slideShow);
+            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", video.FkNgonNgu);
+            return View(video);
         }
 
-        // POST: SlideShows/Edit/5
+        // POST: Videos/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TieuDe,HinhAnh,FkNgonNgu,Stt,IsNewtab,LinkEvent,IsLink")] SlideShow slideShow)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,TieuDe,GioiThieu,DuongDanFile,IsYoutube,NoiBat,LuotXem,FkNgonNgu,NgayTao,NguoiTao,UserNguoiSua,NgaySua,Stt,HinhAnh")] Video video)
         {
-            if (id != slideShow.Id)
+            if (id != video.Id)
             {
                 return NotFound();
             }
@@ -127,16 +131,14 @@ namespace AdminWebBenhVien.Controllers
             {
                 try
                 {
-                    #region Get list master
                     var listNgonNgu = await GetListNgonNguAsync();
                     ViewBag.ListNgonNgu = listNgonNgu;
-                    #endregion
-                    _context.Update(slideShow);
+                    _context.Update(video);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SlideShowExists(slideShow.Id))
+                    if (!VideoExists(video.Id))
                     {
                         return NotFound();
                     }
@@ -147,11 +149,11 @@ namespace AdminWebBenhVien.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", slideShow.FkNgonNgu);
-            return View(slideShow);
+            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", video.FkNgonNgu);
+            return View(video);
         }
 
-        // GET: SlideShows/Delete/5
+        // GET: Videos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -159,31 +161,31 @@ namespace AdminWebBenhVien.Controllers
                 return NotFound();
             }
 
-            var slideShow = await _context.SlideShow
-                .Include(s => s.FkNgonNguNavigation)
+            var video = await _context.Video
+                .Include(v => v.FkNgonNguNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (slideShow == null)
+            if (video == null)
             {
                 return NotFound();
             }
 
-            return View(slideShow);
+            return View(video);
         }
 
-        // POST: SlideShows/Delete/5
+        // POST: Videos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var slideShow = await _context.SlideShow.FindAsync(id);
-            _context.SlideShow.Remove(slideShow);
+            var video = await _context.Video.FindAsync(id);
+            _context.Video.Remove(video);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SlideShowExists(int id)
+        private bool VideoExists(int id)
         {
-            return _context.SlideShow.Any(e => e.Id == id);
+            return _context.Video.Any(e => e.Id == id);
         }
         private Task<List<DropdownlistViewModel>> GetListNgonNguAsync()
         {

@@ -1,6 +1,5 @@
 ﻿@model AdminWebBenhVien.EfModels.SlideShow
-
-
+@using AdminWebBenhVien.Models
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -44,14 +43,21 @@
                                     <span asp-validation-for="HinhAnh" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="FkNgonNgu" class="control-label"></label>
-                                    <select asp-for="FkNgonNgu" class="form-control" asp-items="ViewBag.FkNgonNgu"></select>
+                                    <label asp-for="FkNgonNgu" class="control-label">Ngôn ngữ</label>
+                                    <kendo-dropdownlist for="FkNgonNgu"
+                                                        option-label="-- Chọn ngôn ngữ --"
+                                                        bind-to="@((List<DropdownlistViewModel>)ViewBag.ListNgonNgu)"
+                                                        datatextfield="@nameof(DropdownlistViewModel.Ten)"
+                                                        datavaluefield="@nameof(DropdownlistViewModel.Id)" />
                                     <span asp-validation-for="FkNgonNgu" class="text-danger"></span>
                                 </div>
 
                                 <div class="form-group">
                                     <label asp-for="IsNewtab" class="control-label"></label>
-                                    <input asp-for="IsNewtab" class="form-control" />
+                                    <select asp-for="IsNewtab" class="form-control" asp-items="ViewBag.IsNewtab">
+                                        <option value="False">False</option>
+                                        <option value="True">True</option>
+                                    </select>
                                     <span asp-validation-for="IsNewtab" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
@@ -61,10 +67,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="IsLink" class="control-label"></label>
-                                    <input asp-for="IsLink" class="form-control" />
+                                    <select asp-for="IsLink" class="form-control" asp-items="ViewBag.IsLink">
+                                        <option value="False">False</option>
+                                        <option value="True">True</option>
+                                    </select>
                                     <span asp-validation-for="IsLink" class="text-danger"></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="save">
                                     <input type="submit" value="Save" class="btn btn-success" />
                                 </div>
                             </div>
