@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Hospital.Web.EfModels;
 using Hospital.Web.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Hospital.Web.Controllers
 {
@@ -132,6 +133,28 @@ namespace Hospital.Web.Controllers
             }
 
             return View(tinTuc);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> NgonNgu(int ngonNguId)
+        {
+            if (_listNgonNgu.Any(h => h.Id == ngonNguId))
+            {
+                base.NgonNgu = ngonNguId;
+            }
+            else if (_listNgonNgu.Count > 0)
+            {
+                base.NgonNgu = _listNgonNgu[0].Id;
+            }
+            else
+            {
+                base.NgonNgu = -1;
+            }
+
+            ViewBag.NgonNgu = base.NgonNgu;
+            InitParam.HttpContextAccessor.HttpContext.Session.SetInt32("NgonNgu", base.NgonNgu);
+
+            return Json(true);
         }
     }
 }
