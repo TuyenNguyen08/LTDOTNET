@@ -685,6 +685,10 @@ namespace Hospital.Web.EfModels
 
                 entity.Property(e => e.Root).HasColumnName("root");
 
+                entity.Property(e => e.ControllerName).HasMaxLength(50);
+                entity.Property(e => e.ActionName).HasMaxLength(50);
+                entity.Property(e => e.ParamId).HasMaxLength(50);
+
                 entity.HasOne(d => d.FkNgonNguNavigation)
                     .WithMany(p => p.Menu)
                     .HasForeignKey(d => d.FkNgonNgu)

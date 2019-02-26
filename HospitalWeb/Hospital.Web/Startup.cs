@@ -35,6 +35,8 @@ namespace Hospital.Web
                 // Maintain property names during serialization. See:
                 // https://github.com/aspnet/Announcements/issues/194
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            services.AddHttpContextAccessor();
+            services.AddSession();
 
             // Add Kendo UI services to the services container
             services.AddKendo();
@@ -60,6 +62,8 @@ namespace Hospital.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
