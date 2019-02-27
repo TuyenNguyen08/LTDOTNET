@@ -1,10 +1,5 @@
-﻿@model IEnumerable<AdminWebBenhVien.EfModels.GioiThieuChiTiet>
-@using AdminWebBenhVien.Controllers
+﻿@using AdminWebBenhVien.Controllers
 @using AdminWebBenhVien.Models
-
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
 <div id="wrapper">
     <div id="page-wrapper">
@@ -16,18 +11,26 @@
         <br />
         <div class="row">
             <div class="col-lg-12">
-                <kendo-grid name="gridGioiThieuChiTiet" height="550">
+                <kendo-grid name="gridGioiThieuChiTiet" height="550" resizable="true">
                     <datasource type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="20">
                         <transport>
                             <read url="@Url.Action(nameof(GioiThieuChiTietsController.GioiThieuChiTiet_Read))" type="get" />
                         </transport>
                         <schema>
-                            <model id="@nameof(GioiThieuChiTietViewModel.Id)">
+                            <model id="@nameof(GioiThieuTongQuanIndexViewModel.Id)">
                                 <fields>
-                                    <field name="@nameof(GioiThieuChiTietViewModel.Id)" />
-                                    <field name="@nameof(GioiThieuChiTietViewModel.Ten)" />
-                                    <field name="@nameof(GioiThieuChiTietViewModel.GioiThieu)" />
-                                    <field name="@nameof(GioiThieuChiTietViewModel.LuotXem)" />
+                                    <field name="@nameof(GioiThieuTongQuanIndexViewModel.Id)" />
+                                    <field name="@nameof(GioiThieuTongQuanIndexViewModel.TenLoaiId)" />
+                                    <field name="@nameof(GioiThieuTongQuanIndexViewModel.TenLoai)" />
+                                    <field name="@nameof(GioiThieuTongQuanIndexViewModel.TieuDe)" />
+                                    <field name="@nameof(GioiThieuTongQuanIndexViewModel.GioiThieu)" />
+                                    <field name="@nameof(GioiThieuTongQuanIndexViewModel.Xem)" type="number" />
+                                    <field name="@nameof(GioiThieuTongQuanIndexViewModel.NgonNguId)" />
+                                    <field name="@nameof(GioiThieuTongQuanIndexViewModel.NgonNgu)" />
+                                    <field name="@nameof(GioiThieuTongQuanIndexViewModel.NgayTao)" type="date" />
+                                    <field name="@nameof(GioiThieuTongQuanIndexViewModel.NgaySua)" type="date" />
+                                    <field name="@nameof(GioiThieuTongQuanIndexViewModel.NguoiSuaId)" />
+                                    <field name="@nameof(GioiThieuTongQuanIndexViewModel.NguoiSua)" />
                                 </fields>
                             </model>
                         </schema>
@@ -36,17 +39,25 @@
                     <sortable enabled="true" />
                     <filterable enabled="true" />
                     <scrollable enabled="true" />
-                    <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
-                    </pageable>
-                    <filterable enabled="true" />
+                    <pageable button-count="5" refresh="true" page-sizes="new int[] { 10, 20, 30, 40, 50, 100 }" />
                     <columns>
-                        <column field="@nameof(GioiThieuChiTietViewModel.Id)" title="ID" width="80" />
-                        <column field="@nameof(GioiThieuChiTietViewModel.Ten)" title="Tên" width="150" />
-                        <column field="@nameof(GioiThieuChiTietViewModel.GioiThieu)" title="Giới thiệu" width="250" />
-                        <column field="@nameof(GioiThieuChiTietViewModel.LuotXem)" title="Lượt xem" width="150" />
-                        <column title="Thao tác" width="150">
+                        <column title="Thao tác" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'>
                             <commands>
-                                <column-command text="Sửa" name="btnCapNhat" class-name="k-primary" click="btnCapNhat_Click"></column-command>
+                                <column-command text="Sửa" name="btnCapNhat1" class-name="k-primary" click="btnCapNhat_Click"></column-command>
+                            </commands>
+                        </column>
+                        <column field="@nameof(GioiThieuTongQuanIndexViewModel.Id)" title="ID" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'/>
+                        <column field="@nameof(GioiThieuTongQuanIndexViewModel.TenLoai)" title="Tên loại" width="300" />
+                        <column field="@nameof(GioiThieuTongQuanIndexViewModel.TieuDe)" title="Tiêu đề" width="300" />
+                        <column field="@nameof(GioiThieuTongQuanIndexViewModel.GioiThieu)" title="Giới thiệu" width="300" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-ellipsis" }' />
+                        <column field="@nameof(GioiThieuTongQuanIndexViewModel.Xem)" title="Lượt xem" width="100" format="{0:N0}" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-right" }' />
+                        <column field="@nameof(GioiThieuTongQuanIndexViewModel.NgonNgu)" title="Ngôn ngữ" width="100" />
+                        <column field="@nameof(GioiThieuTongQuanIndexViewModel.NgayTao)" title="Ngày tạo" width="150" format="{0:dd/MM/yy HH:mm:ss}" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'/>
+                        <column field="@nameof(GioiThieuTongQuanIndexViewModel.NgaySua)" title="Ngày sửa" width="150" format="{0:dd/MM/yy HH:mm:ss}" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'/>
+                        <column field="@nameof(GioiThieuTongQuanIndexViewModel.NguoiSua)" title="Người sửa" width="200" />
+                        <column title="Thao tác" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'>
+                            <commands>
+                                <column-command text="Sửa" name="btnCapNhat2" class-name="k-primary" click="btnCapNhat_Click" ></column-command>
                             </commands>
                         </column>
                     </columns>
@@ -66,7 +77,7 @@
             var kendoGrid = $("#gridGioiThieuChiTiet").data("kendoGrid");
             var tr = $(e.currentTarget).closest("tr");
             var data = kendoGrid.dataItem(tr);
-
+            console.log(data);
             var url = urlCapNhat.replace("@Constants.PARAM_GIOI_THIEU_CHI_TIET_ID", data.id);
             window.open(url, "_blank");
         };
