@@ -57,10 +57,45 @@ namespace Hospital.Web.Controllers
                 Id = t.Id,
                 TieuDe = t.TieuDe,
                 NgayTao = t.NgayTao,
+                GioiThieu=t.GioiThieu.Substring(0, 200) + "...",
             }).ToListAsync();
 
 
             model.lsTinTuc = new List<TinTuc>(listTinTuc);
+
+            var listHoatDong = await InitParam.Db.HoatDong.AsNoTracking().Take(3).Select(t => new HoatDong
+            {
+                Id = t.Id,
+                TieuDe = t.TieuDe,
+                NgayTao = t.NgayTao,
+                GioiThieu = t.GioiThieu.Substring(0,200)+"...",
+            }).ToListAsync();
+
+
+            model.lsHoatDong = new List<HoatDong>(listHoatDong);
+
+            var listVideo = await InitParam.Db.Video.AsNoTracking().Select(t => new Video
+            {
+                Id = t.Id,
+                TieuDe=t.TieuDe,
+                GioiThieu=t.GioiThieu,
+                HinhAnh=t.HinhAnh,
+                DuongDanFile=t.DuongDanFile,
+
+            }).ToListAsync();
+
+
+            model.lsVideo = new List<Video>(listVideo);
+
+            //var listLichNgay = await InitParam.Db.LichNgay.AsNoTracking().Select(t => new LichNgay
+            //{
+            //    Id = t.Id,
+            //    TenThu=t.TenThu,
+
+            //}).ToListAsync();
+
+
+            //model.lsLichNgay = new List<LichNgay>(listLichNgay);
 
 
             return View(model);
