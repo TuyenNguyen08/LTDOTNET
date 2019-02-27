@@ -18,27 +18,31 @@ namespace Hospital.Web.Controllers
 
         }
 
-        // GET: HoatDongs
-        public async Task<IActionResult> Index(int? page)
+        // Activities.aspx? type = 1
+        public async Task<IActionResult> Index(int? id, int? page)
         {
-            var listHoatDong = InitParam.Db.HoatDong.AsNoTracking()
-                .Include(h => h.FkLoaiHoatDongNavigation)
-                .Include(h => h.FkNgonNguNavigation)
-                .Include(h => h.FkNguoiSuaNavigation)
-                .Include(h => h.FkNguoiTaoNavigation)
-                .Select( t=> new HoatDong
+
+            var query = InitParam.Db.HoatDong.AsNoTracking()
+                .Where(h => h.FkNgonNgu == NgonNgu);
+            if (id.HasValue && id.Value > 0)
+            {
+                query = query.Where(h => h.FkLoaiHoatDong == id);
+            }
+
+            query = query.OrderByDescending(h => h.NgayTao);
+
+            var listResult = query.Select( t=> new HoatDong
                 {
-                    Id=t.Id,
-                    TieuDe=t.TieuDe,
-                    NgayTao=t.NgayTao,
-                    GioiThieu=t.GioiThieu,
-                    HinhAnhMinhHoa=t.HinhAnhMinhHoa,
-                    NoiDung=t.NoiDung,
+                    Id = t.Id,
+                    TieuDe = t.TieuDe,
+                    GioiThieu = t.GioiThieu,
+                    HinhAnhMinhHoa = t.HinhAnhMinhHoa,
+                    NgayTao = t.NgayTao,
                 });
 
 
-            var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
-            var onePageOfTinTuc = listHoatDong.ToPagedList(pageNumber, 6); // will only contain 25 products max because of the pageSize
+            var pageNumber = page ?? 1;
+            var onePageOfTinTuc = await listResult.ToPagedListAsync(pageNumber, PageSize);
 
             return View(onePageOfTinTuc);
         }

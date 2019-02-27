@@ -18,24 +18,32 @@ namespace Hospital.Web.Controllers
 
         }
 
-        // GET: TinTucs
-        public async Task<IActionResult> Index(int? page)
+        // Thread.aspx?type=1
+        public async Task<IActionResult> Index(int? id, int? page)
         {
-            var listTinTuc = InitParam.Db.TinTuc.AsNoTracking()
-                           .Select(t => new TinTuc
-                           {
-                               Id = t.Id,
-                               TieuDe = t.TieuDe,
-                               GioiThieu = t.GioiThieu,
-                               HinhAnhMinhHoa = t.HinhAnhMinhHoa,
-                               NoiDung = t.NoiDung,
-                               NgayTao = t.NgayTao,
 
-                           });
+            var query = InitParam.Db.TinTuc.AsNoTracking()
+                .Where(h => h.FkNgonNgu == NgonNgu);
+            if (id.HasValue && id.Value > 0)
+            {
+                query = query.Where(h => h.FkLoaiTin == id);
+            }
+
+            query = query.OrderByDescending(h => h.NgayTao);
 
 
-            var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
-            var onePageOfTinTuc = listTinTuc.ToPagedList(pageNumber, 6); // will only contain 25 products max because of the pageSize
+            var listResult = query.Select(t => new TinTuc
+            {
+                Id = t.Id,
+                TieuDe = t.TieuDe,
+                GioiThieu = t.GioiThieu,
+                HinhAnhMinhHoa = t.HinhAnhMinhHoa,
+                NgayTao = t.NgayTao,
+            });
+
+
+            var pageNumber = page ?? 1;
+            var onePageOfTinTuc = await listResult.ToPagedListAsync(pageNumber, PageSize);
 
             return View(onePageOfTinTuc);
         }
