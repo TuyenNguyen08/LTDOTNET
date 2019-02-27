@@ -22,30 +22,39 @@ namespace AdminWebBenhVien.Controllers
         }
 
         // GET: NoiDungTinhChiTiets
-        public async Task<IActionResult> Index()
+        [Route("benh-nhan")]
+        public  IActionResult Index()
         {
-            var nBenhVien7CContext = _context.NoiDungTinhChiTiet.Include(n => n.FkNgonNguNavigation).Include(n => n.FkNoiDungTinhNavigation).Include(n => n.FkUserChinhsuaNavigation);
-            return View(await nBenhVien7CContext.ToListAsync());
+            return View();
         }
         [HttpGet]
         public async Task<IActionResult> NoiDungTinhChiTiet_Read([DataSourceRequest]DataSourceRequest request)
         {
-            var listNoiDungTinhChiTiet = _context.NoiDungTinhChiTiet.AsNoTracking()
-                .Select(t => new NoiDungTinhChiTietViewModel
+            var resultDb = await _context.NoiDungTinhChiTiet
+                 .Include(h => h.FkNoiDungTinhNavigation)
+                .Include(h => h.FkNgonNguNavigation)
+                .Include(h => h.FkUserChinhsuaNavigation)
+                .Select(h => new BenhNhanIndexViewModel
                 {
-                    Id = t.Id,
-                    FkNgonNgu = t.FkNgonNgu,
-                    FkNoiDungTinh=t.FkNoiDungTinh,
-                    TieuDe=t.TieuDe,
-                    GioiThieu = t.GioiThieu.Substring(0, 40) + "...",
-                    NoiDung = t.NoiDung,
-                    HinhAnh = t.HinhAnh,
-                    NgayChinhSua = t.NgayChinhSua,
-                    FkUserChinhsua=t.FkUserChinhsua,
-                    LuotXem = t.LuotXem
-                });
-            var result = await listNoiDungTinhChiTiet.ToDataSourceResultAsync(request);
-            return Json(result);
+                    Id = h.Id,
+
+                    TenLoaiId = h.FkNoiDungTinh,
+                    TenLoai = h.FkNoiDungTinhNavigation.TenNoiDung,
+
+                    TieuDe = h.TieuDe,
+                    GioiThieu = h.GioiThieu,
+                    Xem = h.LuotXem,
+
+                    NgonNguId = h.FkNgonNgu,
+                    NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
+
+                    NgaySua = h.NgayChinhSua,
+                    NguoiSuaId = h.FkUserChinhsua,
+                    NguoiSua = h.FkUserChinhsuaNavigation.HoVaTen
+
+                }).ToListAsync();
+            var resultJson = await resultDb.ToDataSourceResultAsync(request);
+            return Json(resultJson);
         }
         // GET: NoiDungTinhChiTiets/Details/5
         public async Task<IActionResult> Details(int? id)

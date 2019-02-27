@@ -98,16 +98,16 @@
                                    asp-controller="@nameof(GioiThieuChiTietsController).Replace("Controller","")"><i class="fa fa-briefcase fa-fw"></i>Giới thiệu tổng quan</a>
                             </li>
                             <li>
-                                <a asp-action=""
-                                   asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Giới thiệu khoa ban</a>
+                                <a asp-action="@nameof(KhoaPhongsController.Index)"
+                                   asp-controller="@nameof(KhoaPhongsController).Replace("Controller","")"><i class="fa fa-briefcase fa-fw"></i>Giới thiệu khoa ban</a>
                             </li>
                             <li>
-                                <a asp-action=""
-                                   asp-controller=""><i class="fa fa-flag   fa-fw"></i>Dịch vụ</a>
+                                <a asp-action="@nameof(DichVuChiTietsController.Index)"
+                                   asp-controller="@nameof(DichVuChiTietsController).Replace("Controller","")"><i class="fa fa-flag   fa-fw"></i>Dịch vụ</a>
                             </li>
                             <li>
-                                <a asp-action=""
-                                   asp-controller=""><i class="fa fa-user fa-fw"></i>Bệnh nhân</a>
+                                <a asp-action="@nameof(NoiDungTinhChiTietsController.Index)"
+                                   asp-controller="@nameof(NoiDungTinhChiTietsController).Replace("Controller","")"><i class="fa fa-user fa-fw"></i>Bệnh nhân</a>
                             </li>
                             <li>
                                 <a asp-action=""
