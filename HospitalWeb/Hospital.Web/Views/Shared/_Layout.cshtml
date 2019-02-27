@@ -1,5 +1,6 @@
 ﻿@using Hospital.Web.Controllers
 @using Hospital.Web.Models
+@using Hospital.Web.EfModels
 @inject InitParam initParam
 
 <!DOCTYPE html>
@@ -68,13 +69,56 @@
                             <a href="#" class="htr_single_contact"><i class="zmdi zmdi-email"></i>quandanymiendong@gmail.com</a>
                             <ul class="htr_language">
                                 <li>
-                                    <a href="#">Translate<i class="zmdi zmdi-caret-down"></i></a>
+                                    @{
+                                        var listNgonNgu = (List<NgonNgu>)ViewBag.ListNgonNgu;
+                                        var selectNgonNguId = (int)ViewBag.NgonNgu;
+                                        var selectNgonNguItem = listNgonNgu.FirstOrDefault(h => h.Id == selectNgonNguId);
+                                    }
+                                    <a>@selectNgonNguItem.TenNgonNgu<i class="zmdi zmdi-caret-down"></i></a>
                                     <ul>
-                                        <li><a href="#">English</a></li>
-                                        <li><a href="#">Tiếng Việt</a></li>
+
+                                        @foreach (var ngonNgu in listNgonNgu)
+                                        {
+                                            <li><a href="#" class="bv-ngon-ngu @(ngonNgu.Id == selectNgonNguId ? "bv-select" : "" )" data-ngon-ngu-id="@ngonNgu.Id">@ngonNgu.TenNgonNgu</a></li>
+                                        }
                                     </ul>
                                 </li>
                             </ul>
+                            <style>
+                                .bv-ngon-ngu{
+                                    white-space:nowrap;
+                                    margin-right:5px;
+                                }
+                                .bv-ngon-ngu.bv-select {
+                                    color: red;
+                                }
+                            </style>
+                            <script>
+                                $(document).ready(function () {
+                                    $(".bv-ngon-ngu").click(function (e) {
+                                        e.preventDefault();
+
+                                        var $item = $(this);
+                                        var ngonNguId = $item.data("ngon-ngu-id");
+                                        var currentUrl = window.location.href;
+
+                                        $.ajax({
+                                            url: '@Url.Action("NgonNgu","Homes")',
+                                            type: 'POST',
+                                            data: {
+                                                ngonNguId: ngonNguId
+                                            },
+                                            error: function (arg1, arg2, arg3) {
+                                                //handleErrorAjaxCall(arg1, arg2, arg3);
+                                            },
+                                            success: function (data) {
+                                                location.reload();
+                                            },
+                                            //beforeSend: beforeSend_passAuthorize
+                                        });
+                                    })
+                                })
+                            </script>
                         </div>
                     </div>
                 </div>
@@ -94,7 +138,7 @@
                                 var listMenu = await MenuHelper.GetListMenuAsync(initParam);
                             }
                             <partial name="_MenuPartial" model="listMenu" />
-                          
+
                             <form action="#" class="search_form">
                                 <input type="search" placeholder="Tìm kiếm">
                                 <button type="submit"><i class="zmdi zmdi-search"></i></button>
