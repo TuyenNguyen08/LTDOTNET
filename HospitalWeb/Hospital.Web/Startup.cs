@@ -69,7 +69,7 @@ namespace Hospital.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Homes}/{action=Index}/{id?}");
             });
         }
     }
