@@ -74,19 +74,19 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h3>Tên</h3>
-                            <input type="text" placeholder="Tên của bạn">
+                            @Html.EditorFor(model => model.HoVaTen, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                         <div class="col-lg-6">
                             <h3>Địa chỉ</h3>
-                            <input type="text" placeholder="Địa chỉ của bạn">
+                            @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                         <div class="col-lg-6">
                             <h3>Số điện thoại</h3>
-                            <input type="number" placeholder="Số điện thoại của bạn">
+                            @Html.EditorFor(model => model.SoDienThoaiDiDong, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                         <div class="col-lg-6">
                             <h3>Email</h3>
-                            <input type="email" placeholder="Email">
+                            @Html.EditorFor(model => model.DiaChiEmail, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                         <div class="col-lg-6">
                             <h3>Giới tính</h3>
@@ -100,13 +100,21 @@
                                                 .DataValueField("Value")
                                                 .Events(e => e.Change("change"))
                                                 .BindTo((List<SelectListItem>)ViewBag.listNamSinh)
-                                                .Value($"{Model.FkNamSinh}")
+                                                .HtmlAttributes(new { style = "width: 100%" })
 
                             )
                         </div>
                         <div class="col-lg-12">
                             <h3>Bác sĩ</h3>
-                            <input type="text">
+                            @(Html.Kendo().DropDownList()
+                                               .Name(nameof(HenKhamBenh.FkBacSi))
+                                                .DataTextField("Text")
+                                                .DataValueField("Value")
+                                                .Events(e => e.Change("change"))
+                                                .BindTo((List<SelectListItem>)ViewBag.listBacSi)
+                                                .OptionLabel("Vui lòng chọn Bác sỹ")
+                                                .HtmlAttributes(new { style = "width: 100%" })
+                            )
                         </div>
 
                         <div class="col-lg-12">
@@ -118,7 +126,6 @@
                                         .Events(e => e.Change("change"))
                                         .BindTo((List<SelectListItem>)ViewBag.listPhongKham)
                                         .OptionLabel("Vui lòng chọn phòng khám")
-                                        .Value($"{Model.FkChuyenKhoa}")
                                         .HtmlAttributes(new { style = "width: 100%" })
                             )
 
@@ -143,7 +150,7 @@
                                         .Events(e => e.Change("change"))
                                         .BindTo((List<SelectListItem>)ViewBag.listGioKham)
                                         .OptionLabel("Vui lòng chọn giờ khám")
-                                        .Value($"{Model.FkGioHen}")
+                                        
 
                             )
                         </div>
@@ -152,8 +159,8 @@
                             <h3>Ghi chú</h3>
                             <textarea placeholder="Nội dung ghi chú"></textarea>
                         </div>
-                        <div class="col-lg-12" style="margin-left:50%">
-                            <button type="submit" class="custom_btn">Gửi</button>
+                        <div class="col-lg-12" style="margin-left:50%">                            
+                            <button type="submit" class="custom_btn" value="Create">Gửi</button>
                             <button type="submit" class="custom_btn">Hủy</button>
                         </div>
                     </div>

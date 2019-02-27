@@ -100,9 +100,6 @@ namespace Hospital.Web.Controllers
             return View(khoaPhong);
         }
 
-
-
-
         // GET: KhoaPhongs/Create
         public async Task<IActionResult> Contact()
         {
