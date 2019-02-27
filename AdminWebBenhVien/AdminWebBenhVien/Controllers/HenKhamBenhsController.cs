@@ -81,8 +81,29 @@ namespace AdminWebBenhVien.Controllers
         }
 
         // GET: HenKhamBenhs/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var listChuyenKhoa = await GetListChuyenKhoaAsync();
+            ViewBag.ListChuyenKhoa = listChuyenKhoa;
+
+            var listBacSi = await GetListBacSiAsync();
+            ViewBag.ListBacSi = listBacSi;
+
+            var listGioHen = await GetListGioHenAsync();
+            ViewBag.ListGioHen = listGioHen;
+
+            var listNamSinh = await GetListNamSinhAsync();
+            ViewBag.ListNamSinh = listNamSinh;
+
+            var listTinhTrangHonNhan = await GetListTinhTrangHonNhanAsync();
+            ViewBag.ListTinhTrangHonNhan = listTinhTrangHonNhan;
+
+            var listTrangThai = await GetListTrangThaiAsync();
+            ViewBag.ListTrangThai = listTrangThai;
+
+            var listQuocTich = await GetListQuocTichAsync();
+            ViewBag.ListQuocTich = listQuocTich;
+
             ViewData["FkBacSi"] = new SelectList(_context.DanhMucBacSi, "Id", "Id");
             ViewData["FkChuyenKhoa"] = new SelectList(_context.PhongKham, "Id", "Id");
             ViewData["FkGioHen"] = new SelectList(_context.GioKham, "Id", "Id");
@@ -99,6 +120,28 @@ namespace AdminWebBenhVien.Controllers
         {
             if (ModelState.IsValid)
             {
+             
+                var listChuyenKhoa = await GetListChuyenKhoaAsync();
+                ViewBag.ListChuyenKhoa = listChuyenKhoa;
+
+                var listBacSi = await GetListBacSiAsync();
+                ViewBag.ListBacSi = listBacSi;
+
+                var listGioHen = await GetListGioHenAsync();
+                ViewBag.ListGioHen = listGioHen;
+
+                var listNamSinh = await GetListNamSinhAsync();
+                ViewBag.ListNamSinh = listNamSinh;
+
+                var listTinhTrangHonNhan = await GetListTinhTrangHonNhanAsync();
+                ViewBag.ListTinhTrangHonNhan = listTinhTrangHonNhan;
+
+                var listTrangThai = await GetListTrangThaiAsync();
+                ViewBag.ListTrangThai = listTrangThai;
+
+                var listQuocTich = await GetListQuocTichAsync();
+                ViewBag.ListQuocTich = listQuocTich;
+
                 _context.Add(henKhamBenh);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

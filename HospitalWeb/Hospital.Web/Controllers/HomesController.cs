@@ -106,6 +106,8 @@ namespace Hospital.Web.Controllers
             var nBenhVien7CContext = InitParam.Db.HenKhamBenh;
             return View(await nBenhVien7CContext.ToListAsync());
         }
+
+        // Intro.aspx? ID = 1
         public async Task<IActionResult> About(int? id)
         {
             if (id == null)

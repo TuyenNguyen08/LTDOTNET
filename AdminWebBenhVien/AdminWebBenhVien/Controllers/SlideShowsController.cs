@@ -64,21 +64,27 @@ namespace AdminWebBenhVien.Controllers
         }
 
         // GET: SlideShows/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            #region Get list master
+            var listNgonNgu = await GetListNgonNguAsync();
+            ViewBag.ListNgonNgu = listNgonNgu;
+            #endregion
             ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id");
             return View();
         }
 
         // POST: SlideShows/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TieuDe,HinhAnh,FkNgonNgu,Stt,IsNewtab,LinkEvent,IsLink")] SlideShow slideShow)
         {
             if (ModelState.IsValid)
             {
+                #region Get list master
+                var listNgonNgu = await GetListNgonNguAsync();
+                ViewBag.ListNgonNgu = listNgonNgu;
+                #endregion
                 _context.Add(slideShow);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -94,7 +100,10 @@ namespace AdminWebBenhVien.Controllers
             {
                 return NotFound();
             }
-
+            #region Get list master
+            var listNgonNgu = await GetListNgonNguAsync();
+            ViewBag.ListNgonNgu = listNgonNgu;
+            #endregion
             var slideShow = await _context.SlideShow.FindAsync(id);
             if (slideShow == null)
             {
@@ -105,8 +114,6 @@ namespace AdminWebBenhVien.Controllers
         }
 
         // POST: SlideShows/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,TieuDe,HinhAnh,FkNgonNgu,Stt,IsNewtab,LinkEvent,IsLink")] SlideShow slideShow)
@@ -120,6 +127,10 @@ namespace AdminWebBenhVien.Controllers
             {
                 try
                 {
+                    #region Get list master
+                    var listNgonNgu = await GetListNgonNguAsync();
+                    ViewBag.ListNgonNgu = listNgonNgu;
+                    #endregion
                     _context.Update(slideShow);
                     await _context.SaveChangesAsync();
                 }
@@ -173,6 +184,17 @@ namespace AdminWebBenhVien.Controllers
         private bool SlideShowExists(int id)
         {
             return _context.SlideShow.Any(e => e.Id == id);
+        }
+        private Task<List<DropdownlistViewModel>> GetListNgonNguAsync()
+        {
+            var list = _context.NgonNgu.AsNoTracking()
+                .Select(h => new DropdownlistViewModel
+                {
+                    Id = h.Id,
+                    Ten = h.TenNgonNgu
+                }).ToListAsync();
+
+            return list;
         }
     }
 }

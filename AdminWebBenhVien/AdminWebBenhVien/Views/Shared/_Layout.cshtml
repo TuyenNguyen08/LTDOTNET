@@ -1,6 +1,7 @@
 ﻿@using AdminWebBenhVien.Controllers
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,36 +10,26 @@
     <meta name="author" content="">
     <title>Admin Quân Dân Y Miền Đông</title>
 
-    <link href="~/lib/kendo-2018.3/kendo.common-material.min.css" rel="stylesheet" />
-    <link href="~/lib/kendo-2018.3/kendo.mobile.all.min.css" rel="stylesheet" />
-    <link href="~/lib/kendo-2018.3/kendo.material.min.css" rel="stylesheet" />
+    <link href="~/lib/kendo-2019.1/kendo.common-material.min.css" rel="stylesheet" />
+    <link href="~/lib/kendo-2019.1/kendo.mobile.all.min.css" rel="stylesheet" />
+    <link href="~/lib/kendo-2019.1/kendo.material.min.css" rel="stylesheet" />
 
-    <script src="~/lib/kendo-2018.3/jquery.min.js"></script>
-    <script src="~/lib/kendo-2018.3/jszip.min.js"></script>
-    <script src="~/lib/kendo-2018.3/kendo.all.min.js"></script>
-    <script src="~/lib/kendo-2018.3/kendo.aspnetmvc.min.js"></script>
-
-    <environment names="Development">
+    <script src="~/lib/kendo-2019.1/jquery.min.js"></script>
+    <script src="~/lib/kendo-2019.1/jszip.min.js"></script>
+    <script src="~/lib/kendo-2019.1/kendo.all.min.js"></script>
+    <script src="~/lib/kendo-2019.1/kendo.aspnetmvc.min.js"></script>
 
 
-    </environment>
-    <environment names="Staging,Production">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
     <!-- Bootstrap Core CSS -->
     <!-- MetisMenu CSS -->
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/bootstrap.min.css" rel="stylesheet" />
     <link href="~/lib/metisMenu/metisMenu.min.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="~/dist/css/sb-admin-2.css" rel="stylesheet" />
     <!-- Morris Charts CSS -->
     <link href="~/lib/morrisjs/morris.css" rel="stylesheet" />
     <!-- Custom Fonts -->
-    <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
-
+    <link href="~/lib/fontawesome-pro-5.6.3-web/css/all.min.css" rel="stylesheet" />
 
     @RenderSection("css", required: false)
     <style>
@@ -47,22 +38,22 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;background-color:#3f51b5;">
-        <div class="navbar-header" ">
+        <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
             <a class="navbar-brand" href="#" id="textColorWhite"> Admin Quân Dân Y Miền Đông</a>
         </div>
-
         <!-- /.navbar-header -->
+
         <ul class="nav navbar-top-links navbar-right">
             <!-- /.dropdown -->
             <li class="dropdown">
@@ -89,6 +80,7 @@
             <li><a id="textColorWhite">Nguyễn Thị Cẩm Tuyên</a></li>
         </ul>
         <!-- /.navbar-top-links -->
+
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <img src="@Url.Content("~/images/testlogo.png")" height="40" style="margin-left:40px" />
@@ -100,7 +92,6 @@
                     <li>
                         <a>Bài viết<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-
                             <li>
                                 <a asp-action="@nameof(GioiThieuChiTietsController.Index)"
                                    asp-controller="@nameof(GioiThieuChiTietsController).Replace("Controller","")"><i class="fa fa-briefcase fa-fw"></i>Giới thiệu tổng quan</a>
@@ -121,7 +112,6 @@
                                 <a asp-action=""
                                    asp-controller=""><i class="fa fa-plus-square fa-fw"></i>Tin Tức</a>
                             </li>
-
                             <li>
                                 <a asp-action=""
                                    asp-controller=""><i class="fa fa-plus-circle fa-fw"></i>Hoạt động</a>
@@ -140,13 +130,11 @@
                             </li>
                         </ul>
                     </li>
-
                     <li>
                         <a asp-action=""
                            asp-controller=""
                            asp-route-dotThauId=""><i class=""></i>Khách hàng<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-
                             <li>
                                 <a asp-action=""
                                    asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Hỏi đáp sức khỏe</a>
@@ -169,13 +157,11 @@
                             </li>
                         </ul>
                     </li>
-
                     <li>
                         <a asp-action=""
                            asp-controller=""
                            asp-route-dotThauId=""><i class=""></i>Thư viện<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-
                             <li>
                                 <a asp-action=""
                                    asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Slideshow trang chủ</a>
@@ -184,7 +170,6 @@
                                 <a asp-action=""
                                    asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Video</a>
                             </li>
-
                         </ul>
                     </li>
                     <li>
@@ -192,10 +177,9 @@
                            asp-controller=""
                            asp-route-dotThauId=""><i class=""></i>Quản trị<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-
                             <li>
                                 <a asp-action=""
-                                   asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Quản lý người dung</a>
+                                   asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Quản lý người dùng</a>
                             </li>
                             <li>
                                 <a asp-action=""
@@ -214,13 +198,12 @@
                                    asp-controller=""><i class="fa fa-plus-square fa-fw"></i>Thông báo-Văn bản</a>
                             </li>
                         </ul>
-
+                    </li>
                     <li>
                         <a asp-action=""
                            asp-controller=""
                            asp-route-dotThauId=""><i class=""></i>Hệ thống<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-
                             <li>
                                 <a asp-action=""
                                    asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Lỗi hệ thống</a>
@@ -237,21 +220,24 @@
         </div>
         <!-- /.navbar-static-side -->
     </nav>
+
+
     @RenderBody()
-    <br>
+
+    <br />
+
     <footer class="footer-distributed" style="background-color:#3f51b5; text-align:center; font-size:15px;height:50px;">
         <p style="padding-top:15px" id="textColorWhite">Bệnh viện Quân Dân Y Miền Đông &copy; 2019</p>
     </footer>
+
     @RenderSection("scripts", required: false)
-    <!-- /#wrapper -->
-    <!-- jQuery -->
-    <!-- Bootstrap Core JavaScript -->
+
     <script src=@Url.Content("~/lib/bootstrap/dist/js/bootstrap.min.js")></script>
     <!-- Metis Menu Plugin JavaScript -->
     <script src=@Url.Content("~/lib/metisMenu/metisMenu.min.js")></script>
-
     <script src=@Url.Content("~/dist/js/sb-admin-2.js")></script>
-    <script src="../vendor/jquery/jquery.min.js"></script>
+
+
 
 </body>
 

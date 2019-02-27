@@ -51,5 +51,6 @@ namespace Hospital.Web.Controllers
 
         protected InitParam InitParam { get; set; }
         protected int NgonNgu { get; set; }
+        protected int PageSize { get; set; } = 6;
     }
 }
