@@ -1,0 +1,11 @@
+﻿.bv-column-ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.bv-column-align-right {
+    text-align:right;
+}
+.bv-column-align-center {
+    text-align: center;
+}
