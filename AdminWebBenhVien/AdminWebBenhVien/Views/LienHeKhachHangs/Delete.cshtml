@@ -1,0 +1,88 @@
+﻿@model AdminWebBenhVien.EfModels.LienHeKhachHang
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Bạn có chắc muốn xóa?<span style="color:orange"></span></h1>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-12">
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.HoVaTen)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.HoVaTen)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DienThoaiNha)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DienThoaiNha)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DienThoaiDiDong)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DienThoaiDiDong)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NoiDung)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NoiDung)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NgayGui)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NgayGui)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DaXem)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DaXem)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NgayXem)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NgayXem)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TieuDe)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TieuDe)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FkNguoiXemNavigation)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FkNguoiXemNavigation.UserName)
+                    </dd>
+                </dl>
+
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+                    <a asp-action="Index">Back to List</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
