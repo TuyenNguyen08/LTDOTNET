@@ -22,33 +22,39 @@ namespace AdminWebBenhVien.Controllers
         }
 
         // GET: KhoaPhongs
-        public async Task<IActionResult> Index([DataSourceRequest]DataSourceRequest request)
+        [Route("gioi-thieu-khoa-ban")]
+        public IActionResult Index()
         {
-            var nBenhVien7CContext = _context.KhoaPhong.Include(k => k.FkLoaiKhoaPhongNavigation).Include(k => k.FkNgonNguNavigation);
-            return View(await nBenhVien7CContext.ToListAsync());
+            return View();
         }
         [HttpGet]
         public async Task<IActionResult> KhoaPhong_Read([DataSourceRequest]DataSourceRequest request)
         {
-            var listKhoaPhong = _context.KhoaPhong.AsNoTracking()
-                .Select(t => new KhoaPhongViewModel
+            var resultDb = await _context.KhoaPhong
+                .Include(h => h.FkLoaiKhoaPhongNavigation)
+                .Include(h => h.FkNgonNguNavigation)
+                .OrderBy(h => h.FkLoaiKhoaPhongNavigation.TenLoai)
+                .ThenBy(h => h.TieuDeKhoa)
+                .ThenBy(h => h.FkNgonNguNavigation.TenNgonNgu)
+                .Select(h => new GioiThieuKhoaBanIndexViewModel
                 {
-                    Id = t.Id,
-                    TieuDeKhoa=t.TieuDeKhoa,
-                    TenKhoaPhong = t.TenKhoaPhong,
-                    GioiThieu = t.GioiThieu,
-                    NoiDung = t.NoiDung,
-                    NgayCapNhat=t.NgayCapNhat,
-                    UserModify=t.UserModify,
-                    FkLoaiKhoaPhong=t.FkLoaiKhoaPhong,
-                    FkNgonNgu = t.FkNgonNgu,
-                    HinhAnhDaiDien=t.HinhAnhDaiDien,
-                    HenKhamBenh=t.HenKhamBenh,
-                    Stt=t.Stt,
-                    LuotXem=t.LuotXem
-                });
-            var result = await listKhoaPhong.ToDataSourceResultAsync(request);
-            return Json(result);
+                    Id = h.Id,
+
+                    TenLoaiId = h.FkLoaiKhoaPhong,
+                    TenLoai = h.FkLoaiKhoaPhongNavigation.TenLoai,
+
+                    TieuDe = h.TieuDeKhoa,
+                    GioiThieu =  h.GioiThieu,
+                    Xem = h.LuotXem,
+
+                    NgonNguId = h.FkNgonNgu,
+                    NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
+
+                    NgaySua = h.NgayCapNhat,
+                    NguoiSua = h.UserModify,
+                }).ToListAsync();
+            var resultJson = await resultDb.ToDataSourceResultAsync(request);
+            return Json(resultJson);
         }
 
         // GET: KhoaPhongs/Details/5

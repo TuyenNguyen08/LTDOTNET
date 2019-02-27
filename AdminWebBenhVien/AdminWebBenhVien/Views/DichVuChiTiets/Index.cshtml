@@ -16,18 +16,26 @@
         <br />
         <div class="row">
             <div class="col-lg-12">
-                <kendo-grid name="gridDichVuChiTiet" height="550">
+                <kendo-grid name="gridDichVuChiTiet" height="550" resizable="true">
                     <datasource type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="20">
                         <transport>
                             <read url="@Url.Action(nameof(DichVuChiTietsController.DichVuChiTiet_Read))" type="get" />
                         </transport>
                         <schema>
-                            <model id="@nameof(DichVuChiTietViewModel.Id)">
+                            <model id="@nameof(DichVuIndexViewModel.Id)">
                                 <fields>
-                                    <field name="@nameof(DichVuChiTietViewModel.Id)" />
-                                    <field name="@nameof(DichVuChiTietViewModel.TenDichVu)" />
-                                    <field name="@nameof(DichVuChiTietViewModel.GioiThieu)" />
-                                    <field name="@nameof(DichVuChiTietViewModel.LuotXem)" />
+                                    <field name="@nameof(DichVuIndexViewModel.Id)" />
+                                    <field name="@nameof(DichVuIndexViewModel.TenLoaiId)" />
+                                    <field name="@nameof(DichVuIndexViewModel.TenLoai)" />
+                                    <field name="@nameof(DichVuIndexViewModel.TieuDe)" />
+                                    <field name="@nameof(DichVuIndexViewModel.GioiThieu)" />
+                                    <field name="@nameof(DichVuIndexViewModel.Xem)" type="number" />
+                                    <field name="@nameof(DichVuIndexViewModel.NgonNguId)" />
+                                    <field name="@nameof(DichVuIndexViewModel.NgonNgu)" />
+                                    <field name="@nameof(DichVuIndexViewModel.NgayTao)" type="date" />
+                                    <field name="@nameof(DichVuIndexViewModel.NgaySua)" type="date" />
+                                    <field name="@nameof(DichVuIndexViewModel.NguoiSuaId)" />
+                                    <field name="@nameof(DichVuIndexViewModel.NguoiSua)" />
                                 </fields>
                             </model>
                         </schema>
@@ -36,17 +44,27 @@
                     <sortable enabled="true" />
                     <filterable enabled="true" />
                     <scrollable enabled="true" />
-                    <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
+                    <pageable button-count="5" refresh="true" page-sizes="new int[] { 10, 20, 30, 40, 50, 100 }">
                     </pageable>
                     <filterable enabled="true" />
                     <columns>
-                        <column field="@nameof(DichVuChiTietViewModel.Id)" title="ID" width="80" />
-                        <column field="@nameof(DichVuChiTietViewModel.TenDichVu)" title="Tên dịch vụ" width="200" />
-                        <column field="@nameof(DichVuChiTietViewModel.GioiThieu)" title="Giới thiệu" width="200" />
-                        <column field="@nameof(DichVuChiTietViewModel.LuotXem)" title="Lượt xem" width="150" />
-                        <column title="Thao tác" width="150">
+                        <column title="Thao tác" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'>
                             <commands>
-                                <column-command text="Sửa" name="btnCapNhat" class-name="k-primary" click="btnCapNhat_Click"></column-command>
+                                <column-command text="Sửa" name="btnCapNhat1" class-name="k-primary" click="btnCapNhat_Click"></column-command>
+                            </commands>
+                        </column>
+                        <column field="@nameof(DichVuIndexViewModel.Id)" title="ID" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }' />
+                        <column field="@nameof(DichVuIndexViewModel.TenLoai)" title="Tên loại" width="300" />
+                        <column field="@nameof(DichVuIndexViewModel.TieuDe)" title="Tiêu đề" width="300" />
+                        <column field="@nameof(DichVuIndexViewModel.GioiThieu)" title="Giới thiệu" width="300" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-ellipsis" }' />
+                        <column field="@nameof(DichVuIndexViewModel.Xem)" title="Lượt xem" width="100" format="{0:N0}" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-right" }' />
+                        <column field="@nameof(DichVuIndexViewModel.NgonNgu)" title="Ngôn ngữ" width="100" />
+                        <column field="@nameof(DichVuIndexViewModel.NgayTao)" title="Ngày tạo" width="150" format="{0:dd/MM/yy HH:mm:ss}" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }' />
+                        <column field="@nameof(DichVuIndexViewModel.NgaySua)" title="Ngày sửa" width="150" format="{0:dd/MM/yy HH:mm:ss}" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }' />
+                        <column field="@nameof(DichVuIndexViewModel.NguoiSua)" title="Người sửa" width="200" />
+                        <column title="Thao tác" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'>
+                            <commands>
+                                <column-command text="Sửa" name="btnCapNhat2" class-name="k-primary" click="btnCapNhat_Click"></column-command>
                             </commands>
                         </column>
                     </columns>
