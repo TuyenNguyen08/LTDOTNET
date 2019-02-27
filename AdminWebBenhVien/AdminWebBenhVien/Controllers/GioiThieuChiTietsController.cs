@@ -21,33 +21,49 @@ namespace AdminWebBenhVien.Controllers
             _context = context;
         }
 
-        // GET: GioiThieuChiTiets
-        public async Task<IActionResult> Index()
+
+        [Route("gioi-thieu-tong-quan")]
+        public IActionResult Index()
         {
-            var nBenhVien7CContext = _context.GioiThieuChiTiet.Include(g => g.FkGioiThieuNavigation).Include(g => g.FkNgonNguNavigation).Include(g => g.FkUserModifyNavigation);
-            return View(await nBenhVien7CContext.ToListAsync());
+            return View();
         }
+
+
         [HttpGet]
         public async Task<IActionResult> GioiThieuChiTiet_Read([DataSourceRequest]DataSourceRequest request)
         {
-            var listGioiThieuChiTiet = _context.GioiThieuChiTiet.AsNoTracking()
-                .Select(t => new GioiThieuChiTietViewModel
+            var resultDb = await _context.GioiThieuChiTiet
+                .Include(h => h.FkGioiThieuNavigation)
+                .Include(h => h.FkNgonNguNavigation)
+                .Include(h => h.FkUserModifyNavigation)
+                .OrderBy(h => h.FkGioiThieuNavigation.TenGioiThieu)
+                .ThenBy(h => h.Ten)
+                .ThenBy(h => h.FkNgonNguNavigation.TenNgonNgu)
+                .Select(h => new GioiThieuTongQuanIndexViewModel
                 {
-                    Id = t.Id,
-                    FkNgonNgu=t.FkNgonNgu,
-                    FkGioiThieu=t.FkGioiThieu,
-                    Ten=t.Ten,
-                    GioiThieu=t.GioiThieu.Substring(0,40)+"...",
-                    NoiDung=t.NoiDung,
-                    HinhAnh=t.HinhAnh,
-                    FkUserModify=t.FkUserModify,
-                    NgayTao=t.NgayTao,
-                    NgayChinhSua=t.NgayChinhSua,
-                    LuotXem=t.LuotXem
-                });
-            var result = await listGioiThieuChiTiet.ToDataSourceResultAsync(request);
-            return Json(result);
+                    Id = h.Id,
+
+                    TenLoaiId = h.FkGioiThieu,
+                    TenLoai = h.FkGioiThieuNavigation.TenGioiThieu,
+
+                    TieuDe = h.Ten,
+                    GioiThieu = h.GioiThieu,
+                    Xem = h.LuotXem,
+
+                    NgonNguId = h.FkNgonNgu,
+                    NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
+
+                    NgayTao = h.NgayTao,
+                    NgaySua = h.NgayChinhSua,
+                    NguoiSuaId = h.FkUserModify,
+                    NguoiSua = h.FkUserModifyNavigation.HoVaTen
+                })
+                .ToListAsync();
+
+            var resultJson = await resultDb.ToDataSourceResultAsync(request);
+            return Json(resultJson);
         }
+
         // GET: GioiThieuChiTiets/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -105,7 +121,7 @@ namespace AdminWebBenhVien.Controllers
                 return NotFound();
             }
 
-            var gioiThieuChiTiet = await _context.GioiThieuChiTiet.Where(t=>t.Id==id).FirstOrDefaultAsync();
+            var gioiThieuChiTiet = await _context.GioiThieuChiTiet.Where(t => t.Id == id).FirstOrDefaultAsync();
             if (gioiThieuChiTiet == null)
             {
                 return NotFound();
@@ -132,7 +148,7 @@ namespace AdminWebBenhVien.Controllers
             {
                 try
                 {
-                  //  _context.Update(gioiThieuChiTiet);
+                    //  _context.Update(gioiThieuChiTiet);
                     _context.Update(gioiThieuChiTiet).Property(x => x.Id).IsModified = false;
 
                     await _context.SaveChangesAsync();
@@ -148,7 +164,7 @@ namespace AdminWebBenhVien.Controllers
                         throw;
                     }
                 }
-               // return RedirectToAction(nameof(Index));
+                // return RedirectToAction(nameof(Index));
             }
             ViewData["FkGioiThieu"] = new SelectList(_context.GioiThieu, "Id", "Id", gioiThieuChiTiet.FkGioiThieu);
             ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", gioiThieuChiTiet.FkNgonNgu);
