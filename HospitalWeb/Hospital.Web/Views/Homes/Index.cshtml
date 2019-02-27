@@ -29,6 +29,10 @@
         .col {
             margin-bottom: 50px;
         }
+        .video ul{
+            width:100%;
+            height:100%
+        }
     </style>
 }
 
@@ -41,15 +45,19 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
                             <div class="welcome_content">
-                                <h1>@slide.TieuDe</h1>
+                                <h1 style="width:500px">
+                                    @slide.TieuDe
+                                </h1>
                                 @* <p>@Html.Raw(slide.Noi)</p>*@
-                                <a href="#" class="custom_btn">Know more  <i class="zmdi zmdi-plus"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="w_man"><img src="~/images/img/welcome1.png" alt=""></div>
+                    <div class="col-lg-6 ">
+                        <div class="welcome_content">
+                            <div class="w_man"><img src="@Url.Content("~/images/image_slider/" + slide.HinhAnh)" alt=""></div>
+                        </div>
+                    </div>
                     @* <img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_GIOI_THIEU_CHI_TIET + khoaPhong.HinhAnh)" />*@
-
                 </div>
             }
         </div>
@@ -158,8 +166,8 @@
                                 <a asp-action="@nameof(HoatDongsController.Details)"
                                    asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
                                    asp-route-id="@hoatdong.Id"
-                                   target="_blank" class="single_latest_news">
-                                    <span class="l_img" style="background-image: url(../images/img/news1.jpg);"></span>
+                                   target="_blank" class="single_latest_news"><img src="@Url.Content("~/images/image_slider/" + hoatdong.HinhAnhMinhHoa)"/>
+                                    <span class="l_img" style="background-image: url(~/images/image_slide/);"></span>
                                     <h5>
                                         @hoatdong.TieuDe
                                     </h5>
@@ -202,7 +210,7 @@
 
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 video">
                 <div class="section_title">
                     <h1>Video</h1>
                 </div>
@@ -210,13 +218,11 @@
                 {
                     <ul>
                         <li>
-                            <i class="zmdi zmdi-play-circle"> @video.TieuDe</i>
-                            <img src="@Url.Content("~/images/image_video/" + video.HinhAnh)" alt="">
-
-                        </li>
-                        <li>
-                            <i class="zmdi zmdi-play-circle"> @video.GioiThieu</i>
-
+                            <a href="@video.DuongDanFile" target="_blank">
+                                <i class="zmdi zmdi-play-circle"> @video.TieuDe</i>
+                                <br/>
+                                <img src="@Url.Content("~/images/image_video/" + video.HinhAnh)" alt="">
+                            </a>
                         </li>
                     </ul>
                 }
