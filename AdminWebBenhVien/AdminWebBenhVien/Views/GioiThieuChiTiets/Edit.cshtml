@@ -98,30 +98,23 @@
                                             <tool name="fontName" />
                                             <tool name="fontSize" />
                                             <tool name="foreColor" />
-                                            <tool name="foreColor" />
                                             <tool name="backColor" />
                                             <tool name="print" />
-                                            <tool name="fontName">
-                                                <tool-items>
-                                                    <tool-item text="Default site font" value="Arial,Verdana,sans-serif" />
-                                                    <tool-item text="Monospaced font" value="monospace" />
-                                                </tool-items>
-                                            </tool>
                                         </tools>
                                         <image-browser file-types="*.png,*.gif,*.jpg,*.jpeg">
-                                            <image-browser-transport upload-url="@Url.Action("Upload", "ImageBrowser")" image-url="~/shared/UserFiles/Images/{0}">
+                                            <image-browser-transport upload-url="@Url.Action("Upload", "ImageBrowser")" image-url="/ImageBrowser/GetImage/{0}/image">
                                                 <create url="@Url.Action("Create", "ImageBrowser")" />
                                                 <read url="@Url.Action("Read", "ImageBrowser")" />
                                                 <destroy url="@Url.Action("Destroy", "ImageBrowser")" />
                                             </image-browser-transport>
                                         </image-browser>
-                                        <file-browser>
+                                        @*<file-browser>
                                             <file-browser-transport upload-url="@Url.Action("Upload", "FileBrowser")" file-url="~/shared/UserFiles/Images/{0}">
                                                 <create url="@Url.Action("Create", "FileBrowser")" />
                                                 <read url="@Url.Action("Read", "FileBrowser")" />
                                                 <destroy url="@Url.Action("Destroy", "FileBrowser")" />
                                             </file-browser-transport>
-                                        </file-browser>
+                                        </file-browser>*@
                                         <content>
                                             @Html.Raw(Model.NoiDung)
                                         </content>
