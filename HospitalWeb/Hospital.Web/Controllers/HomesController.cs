@@ -57,6 +57,7 @@ namespace Hospital.Web.Controllers
                 Id = t.Id,
                 TieuDe = t.TieuDe,
                 NgayTao = t.NgayTao,
+                HinhAnhMinhHoa=t.HinhAnhMinhHoa,
                 GioiThieu=t.GioiThieu.Substring(0, 100) + "...",
             }).ToListAsync();
 
@@ -68,6 +69,7 @@ namespace Hospital.Web.Controllers
                 Id = t.Id,
                 TieuDe = t.TieuDe,
                 NgayTao = t.NgayTao,
+                HinhAnhMinhHoa=t.HinhAnhMinhHoa,
                 GioiThieu = t.GioiThieu.Substring(0,100)+"...",
             }).ToListAsync();
 

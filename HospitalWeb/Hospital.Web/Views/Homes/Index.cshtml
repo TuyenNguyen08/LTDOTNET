@@ -42,7 +42,7 @@
         <div class="welcome_slider owl-carousel">
             @foreach (var slide in Model.lsSLide)
             {
-                <div class="single_welcome_slider" style="background-image:url(@Url.Content("~/images/image_slider/" + slide.HinhAnh));background-repeat: no-repeat;
+                <div class="single_welcome_slider" style="background-image:url(@Url.Action("GetImage" ,"ImageBrowser",new {id=slide.HinhAnh })));background-repeat: no-repeat;
     background-size: cover;">
                 </div>
             }
@@ -59,7 +59,7 @@
                 <div class="col-md-3">
                     <div class="single_cbox">
                         <div class="cbox_title">
-                            <div class="cbox_icon"><img src="@Url.Content("~/images/image_subNote/" + subNote.Image)" alt="" /></div>
+                            <div class="cbox_icon"><img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=subNote.Image })" /></div>
 
                             <a asp-action="@nameof(HenKhamBenhsController.Index)"
                                asp-controller="@nameof(HenKhamBenhsController).Replace("Controller", "")"><h4>@subNote.TieuDe</h4></a>
@@ -101,7 +101,9 @@
                                    asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
                                    asp-route-id="@hoatdong.Id"
                                    target="_blank" class="single_latest_news">
-                                    <span class="l_img"><img src="@Url.Content("~/images/image_hoatdong/" + hoatdong.HinhAnhMinhHoa)" /></span>
+                                    <span class="l_img">
+                                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=hoatdong.HinhAnhMinhHoa })" />
+                                    </span>
                                     <h5>
                                         @hoatdong.TieuDe
                                     </h5>
@@ -126,7 +128,10 @@
                                    asp-controller="@nameof(TinTucsController).Replace("Controller","")"
                                    asp-route-id="@tinTuc.Id"
                                    target="_blank" class="single_latest_news">
-                                    <span class="l_img"><img src="@Url.Content("~/images/image_tintuc/" + tinTuc.HinhAnhMinhHoa)" /></span>
+                                    <span class="l_img">
+                                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=tinTuc.HinhAnhMinhHoa })" />
+                                        @*@tinTuc.HinhAnhMinhHoa*@
+                                    </span>
                                     <h5>
                                         @tinTuc.TieuDe
                                     </h5>
@@ -152,7 +157,7 @@
                             <a href="@video.DuongDanFile" target="_blank">
                                 <i class="zmdi zmdi-play-circle"> @video.TieuDe</i>
                                 <br />
-                                <img src="@Url.Content("~/images/image_video/" + video.HinhAnh)" alt="">
+                                <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=video.HinhAnh })" />
                             </a>
                         </li>
                     </ul>
