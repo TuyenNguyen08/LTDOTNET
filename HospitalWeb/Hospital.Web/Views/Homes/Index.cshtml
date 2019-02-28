@@ -12,7 +12,29 @@
     <link href="~/css/slicknav.min.css" rel="stylesheet" />
     <link href="~/css/nice-select.css" rel="stylesheet" />
     <link href="~/css/responsive.css" rel="stylesheet" />
+    <style>
+        .cc {
+            text-align: center;
+            padding: 30px;
+        }
 
+            .cc h2 {
+                color: #ffbc09;
+            }
+
+            .cc h3 {
+                color: #01f8fd;
+            }
+
+        .col {
+            margin-bottom: 50px;
+        }
+
+        .video ul {
+            width: 100%;
+            height: 200px;
+        }
+    </style>
 }
 
 <div class="welcome_areaa" style="background-image: url(../images/img/welcome_shap.png);">
@@ -20,20 +42,9 @@
         <div class="welcome_slider owl-carousel">
             @foreach (var slide in Model.lsSLide)
             {
-            <div class="single_welcome_slider">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="welcome_content">
-                            <h1>@slide.TieuDe</h1>
-                           @* <p>@Html.Raw(slide.Noi)</p>*@
-                            <a href="#" class="custom_btn">Know more  <i class="zmdi zmdi-plus"></i></a>
-                        </div>
-                    </div>
+                <div class="single_welcome_slider" style="background-image:url(@Url.Action("GetImage" ,"ImageBrowser",new {id=slide.HinhAnh })));background-repeat: no-repeat;
+    background-size: cover;">
                 </div>
-                <div class="w_man"><img src="~/images/img/welcome1.png" alt=""></div>
-                @* <img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_GIOI_THIEU_CHI_TIET + khoaPhong.HinhAnh)" />*@
-
-            </div>
             }
         </div>
     </div>
@@ -42,185 +53,120 @@
 <!-- Cbox Area Start-->
 <div class="cbox_area">
     <div class="container">
-        <div class="row" style="background-color: #f6fbff;">
-            <div class="col-md-3">
-                <div class="single_cbox">
-                    <div class="cbox_title">
-                        <div class="cbox_icon">  <img src="~/images/icon-1.png" alt="" /></div>
-                        <a asp-action="@nameof(HenKhamBenhsController.Index)"
-                           asp-controller="@nameof(HenKhamBenhsController).Replace("Controller","")"><h4>Đăng ký khám bênh qua mạng</h4></a>
-                    </div>
-                    <p>
-                        Dịch vụ "Đăng ký khám theo hẹn" bắt đầu đi vào hoạt động từ ngày 09 tháng 4 năm
-                        2009.Ngoài ra, phụ huynh có con cần khám dịch vụ tại phòng khám vẫn có thể đặt lịch
-                        trước bằng cách ...
-                    </p>
-                    <div class="call_btn">
-                        <span>Call us:</span>
-                        <a href="tel:062109-9222">(062) 109-9222</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="single_cbox">
-                    <div class="cbox_title">
-                        <div class="cbox_icon"><img src="~/images/icon-2.png" alt=""></div>
-                        <a><h4>Xem hồ sơ bệnh án trên mạng</h4></a>
-                    </div>
-                    <p>
-                        Dịch vụ "Đăng ký khám theo hẹn" bắt đầu đi vào hoạt động từ ngày 09 tháng 4 năm
-                        2009.Ngoài ra, phụ huynh có con cần khám dịch vụ tại phòng khám vẫn có thể đặt lịch
-                        trước bằng cách ...
-                    </p>
-                    <a href="#">Appointment <i class="zmdi zmdi-plus"></i></a>
+        <div style="background-color: #f6fbff;">
+            @foreach (var subNote in Model.lsSubNote)
+            {
+                <div class="col-md-3">
+                    <div class="single_cbox">
+                        <div class="cbox_title">
+                            <div class="cbox_icon"><img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=subNote.Image })" /></div>
 
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="single_cbox">
-                    <div class="cbox_title">
-                        <div class="cbox_icon"><img src="~/images/icon-3.png" alt=""></div>
-                        <a><h4>Xem lịch khám theo bác sĩ</h4></a>
+                            <a asp-action="@nameof(HenKhamBenhsController.Index)"
+                               asp-controller="@nameof(HenKhamBenhsController).Replace("Controller", "")"><h4>@subNote.TieuDe</h4></a>
+                        </div>
+                        <p>
+                            @subNote.NoiDung
+                        </p>
+                        <a href="#">Xem thêm <i class="zmdi zmdi-plus"></i></a>
                     </div>
-                    <p>
-                        Dịch vụ "Đăng ký khám theo hẹn" bắt đầu đi vào hoạt động từ ngày 09 tháng 4 năm
-                        2009.Ngoài ra, phụ huynh có con cần khám dịch vụ tại phòng khám vẫn có thể đặt lịch
-                        trước bằng cách ...
-                    </p>
-                    <a href="#">Know more <i class="zmdi zmdi-plus"></i></a>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="single_cbox">
-                    <div class="cbox_title">
-                        <div class="cbox_icon"><img src="~/images/icon-3.png" alt=""></div>
-                        <a asp-action="@nameof(HoiDapYkhoasController.Index)"
-                           asp-controller="@nameof(HoiDapYkhoasController).Replace("Controller","")"><h4>Diễn đàn hỏi đáp y khoa</h4></a>
-                    </div>
-                    <p>
-                        Dịch vụ "Đăng ký khám theo hẹn" bắt đầu đi vào hoạt động từ ngày 09 tháng 4 năm
-                        2009.Ngoài ra, phụ huynh có con cần khám dịch vụ tại phòng khám vẫn có thể đặt lịch
-                        trước bằng cách ...
-                    </p>
-                    <a href="#">Xem thêm <i class="zmdi zmdi-plus"></i></a>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>
+<div class="container" style="background-color:#016ca0; margin:10px">
+    @foreach (var subPhone in Model.lsSubPhone)
+    {
+        <div class="col-lg-4 cc">
+            <h2>@subPhone.Name</h2>
+            <h3>@subPhone.SoDienThoai</h3>
+        </div>
+    }
+</div>
 <!-- Cbox Area end-->
 <!-- About Area Start-->
-<div class="about_area background_grey">
+<div class="about_area ">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-5">
+        <div>
+            <div class="col-lg-8">
                 <div class="about_content">
-                    <h1>
-                        Chào mừng bạn đến với Quân Dân Y Miền Đông
-                        <span class="regular">Chăm sóc & Tiện nghi</span>
-                    </h1>
-                    <p>Hứa hẹn sẽ mở ra những con đường nghiên cứu mới về tiền sử của con người và đã được các nhà di truyền học và khảo cổ học hứng thú với điều đó giống như khám phá ra rằng bạn có thể.</p>
-                    <ul>
-                        <li>
-                            <i class="zmdi zmdi-play-circle"></i> Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc
-                        </li>
-                        <li>
-                            <i class="zmdi zmdi-play-circle"></i> Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc
-                        </li>
-                        <li>
-                            <i class="zmdi zmdi-play-circle"></i> Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc
-                        </li>
-                        <li>
-                            <i class="zmdi zmdi-play-circle"></i> Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc
-                        </li>
-                    </ul>
-                    <a href="#" class="custom_btn">Xem thêm  <i class="zmdi zmdi-plus"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-7">
-                <div class="about_righ_content">
-                    <div class="working_box" style="background-image: url(../images/img/about_bg.jpg);">
-                        @* <img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_GIOI_THIEU_CHI_TIET + khoaPhong.HinhAnh)" />*@
-                        <h4>Thời gian làm việc</h4>
-                        <ul>
-                            <Li>Thứ 2-Thứ 6 08:00am - 10:00pm </Li>
-                            <Li>Thứ 7 - 10:00am - 07:00pm </Li>
-                            <Li>Chủ nhật - Emergency Only </Li>
-                            <Li>Thứ 2 - 8:00 AM – 10:00 pm</Li>
-                            <Li>Thứ 3 - 8:00 AM – 7:00 pm</Li>
-                            <Li>Cấp cứu 24/7 </Li>
-                        </ul>
+                    <div class="col background_grey">
+                        <div class="section_title">
+                            <h1>Hoạt động</h1>
+                        </div>
+                        <div class="latest_news">
+                            @foreach (var hoatdong in Model.lsHoatDong)
+                            {
+                                <a asp-action="@nameof(HoatDongsController.Details)"
+                                   asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
+                                   asp-route-id="@hoatdong.Id"
+                                   target="_blank" class="single_latest_news">
+                                    <span class="l_img">
+                                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=hoatdong.HinhAnhMinhHoa })" />
+                                    </span>
+                                    <h5>
+                                        @hoatdong.TieuDe
+                                    </h5>
+                                    <span>@hoatdong.NgayTao</span>
+                                    <p>
+                                        @hoatdong.GioiThieu
+                                    </p>
+                                </a>
+                            }
+                        </div>
                     </div>
                 </div>
+                <div class="about_content">
+                    <div class="col background_grey">
+                        <div class="section_title">
+                            <h1>Tin tức mới nhất</h1>
+                        </div>
+                        <div class="latest_news">
+                            @foreach (var tinTuc in Model.lsTinTuc)
+                            {
+                                <a asp-action="@nameof(TinTucsController.Details)"
+                                   asp-controller="@nameof(TinTucsController).Replace("Controller","")"
+                                   asp-route-id="@tinTuc.Id"
+                                   target="_blank" class="single_latest_news">
+                                    <span class="l_img">
+                                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=tinTuc.HinhAnhMinhHoa })" />
+                                        @*@tinTuc.HinhAnhMinhHoa*@
+                                    </span>
+                                    <h5>
+                                        @tinTuc.TieuDe
+                                    </h5>
+                                    <span>@tinTuc.NgayTao</span>
+                                    <p>
+                                        @tinTuc.GioiThieu
+                                    </p>
+                                </a>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-4 video">
+                <div class="section_title">
+                    <h1>Video</h1>
+                </div>
+                @foreach (var video in Model.lsVideo)
+                {
+                    <ul>
+                        <li>
+                            <a href="@video.DuongDanFile" target="_blank">
+                                <i class="zmdi zmdi-play-circle"> @video.TieuDe</i>
+                                <br />
+                                <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=video.HinhAnh })" />
+                            </a>
+                        </li>
+                    </ul>
+                }
             </div>
         </div>
     </div>
 </div>
 <!-- News Area Start-->
-<div class="news_area">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="section_title">
-                    <h1>Liên hệ ngay</h1>
-                    <p>
-                        Phục vụ 24/24 tất cả các ngày trong tuần kể cả ngày lễ
-                    </p>
-                </div>
-                <form action="#" class="contact_form">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12">
-                            <input type="text" placeholder="Tên bạn">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12">
-                            <input type="email" placeholder="Email">
-                        </div>
-                        <div class="col-lg-6 col-md-12">
-                            <input type="number" placeholder="Số điện thoại">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col"><textarea placeholder="Ghi chú"></textarea></div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <button type="submit" class="custom_btn">Gửi <i class="zmdi zmdi-plus"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col">
-                <div class="section_title">
-                    <h1>Tin tức mới nhất</h1>
-                    <p>
-                        Cập nhật thông tin mới nhất của bệnh viện
-                    </p>
-                </div>
-                <div class="latest_news">
-                    @foreach (var tinTuc in Model.lsTinTuc)
-                    {
-                    <a asp-action="@nameof(TinTucsController.Details)"
-                               asp-controller="@nameof(TinTucsController).Replace("Controller","")"
-                               asp-route-id="@tinTuc.Id"
-                               target="_blank" class="single_latest_news">
-                        <span class="l_img" style="background-image: url(../images/img/news1.jpg);"></span>
-                        <h5>
-                           @tinTuc.TieuDe
-                        </h5>
-                        <span>@tinTuc.NgayTao</span>
-                        <p>
-                            @tinTuc.GioiThieu
-                        </p>
-                    </a>
-                        }
-</div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 

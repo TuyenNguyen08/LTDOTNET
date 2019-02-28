@@ -22,31 +22,43 @@ namespace AdminWebBenhVien.Controllers
         }
 
         // GET: DichVuChiTiets
-        public async Task<IActionResult> Index()
+        [Route("dich-vu")]
+        public IActionResult Index()
         {
-            var nBenhVien7CContext = _context.DichVuChiTiet.Include(d => d.FkDichVuNavigation).Include(d => d.FkNgonNguNavigation).Include(d => d.FkUserModifyNavigation);
-            return View(await nBenhVien7CContext.ToListAsync());
+            return View();
         }
         [HttpGet]
         public async Task<IActionResult> DichVuChiTiet_Read([DataSourceRequest]DataSourceRequest request)
         {
-            var listDichVuChiTiet = _context.DichVuChiTiet.AsNoTracking()
-                .Select(t => new DichVuChiTietViewModel
+            var resultDb = await _context.DichVuChiTiet
+                .Include(h => h.FkDichVuNavigation)
+                .Include(h => h.FkNgonNguNavigation)
+                .Include(h => h.FkUserModifyNavigation)
+                .OrderBy(h => h.FkDichVuNavigation.MoTa)
+                .ThenBy(h => h.TenDichVu)
+                .ThenBy(h => h.FkNgonNguNavigation.TenNgonNgu)
+                .Select(h => new DichVuIndexViewModel
                 {
-                    Id = t.Id,
-                    FkNgonNgu = t.FkNgonNgu,
-                    FkDichVu=t.FkDichVu,
-                    TenDichVu=t.TenDichVu,
-                    GioiThieu = t.GioiThieu.Substring(0, 40) + "...",
-                    NoiDung = t.NoiDung,
-                    HinhAnh = t.HinhAnh,
-                    FkUserModify = t.FkUserModify,
-                    NgayTao = t.NgayTao,
-                    NgayChinhSua = t.NgayChinhSua,
-                    LuotXem = t.LuotXem
-                });
-            var result = await listDichVuChiTiet.ToDataSourceResultAsync(request);
-            return Json(result);
+                    Id = h.Id,
+
+                    TenLoaiId = h.FkDichVu,
+                    TenLoai = h.FkDichVuNavigation.MoTa,
+
+                    TieuDe = h.TenDichVu,
+                    GioiThieu = h.GioiThieu,
+                    Xem = h.LuotXem,
+
+                    NgonNguId = h.FkNgonNgu,
+                    NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
+
+                    NgayTao = h.NgayTao,
+                    NgaySua = h.NgayChinhSua,
+                    NguoiSuaId = h.FkUserModify,
+                    NguoiSua = h.FkUserModifyNavigation.HoVaTen
+                }).ToListAsync();
+
+            var resultJson = await resultDb.ToDataSourceResultAsync(request);
+            return Json(resultJson);
         }
        
         // GET: DichVuChiTiets/Edit/5

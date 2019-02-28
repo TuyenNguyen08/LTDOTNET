@@ -36,6 +36,13 @@
         text-align: right;
     }
 }
-#save{
+/*#save{
     margin-left:90%;
+}*/
+
+.control-label {
+    min-width: 100px;
+}
+.bv-label-content {
+    font-weight: normal;
 }

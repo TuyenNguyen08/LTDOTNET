@@ -448,7 +448,7 @@ ul.main_menu > li:hover > ul {
  ====/========        =======/====/*/
 
 .single_welcome_slider {
-    height: 750px;
+    /*height: 750px;*/
     min-height: 450px;
     display: -webkit-flex;
     display: -moz-flex;
@@ -600,7 +600,7 @@ ul.main_menu > li:hover > ul {
  ====/========        =======/====/*/
 
 .cbox_area {
-    padding: 100px 0;
+    padding: 50px 0;
 }
 
 .cbox_icon {
@@ -718,7 +718,6 @@ a.read_btn,
     }
 
 .about_righ_content {
-    padding-left: 56%;
     position: relative;
 }
 
@@ -800,7 +799,7 @@ a.read_btn,
         }
 
 .about_area {
-    padding: 100px 0 135px;
+    padding: 50px 0 50px;
     background-position: bottom right;
     background-repeat: no-repeat;
 }

@@ -57,11 +57,61 @@ namespace Hospital.Web.Controllers
                 Id = t.Id,
                 TieuDe = t.TieuDe,
                 NgayTao = t.NgayTao,
+                HinhAnhMinhHoa=t.HinhAnhMinhHoa,
+                GioiThieu=t.GioiThieu.Substring(0, 100) + "...",
             }).ToListAsync();
 
 
             model.lsTinTuc = new List<TinTuc>(listTinTuc);
 
+            var listHoatDong = await InitParam.Db.HoatDong.AsNoTracking().Take(3).Select(t => new HoatDong
+            {
+                Id = t.Id,
+                TieuDe = t.TieuDe,
+                NgayTao = t.NgayTao,
+                HinhAnhMinhHoa=t.HinhAnhMinhHoa,
+                GioiThieu = t.GioiThieu.Substring(0,100)+"...",
+            }).ToListAsync();
+
+
+            model.lsHoatDong = new List<HoatDong>(listHoatDong);
+
+            var listVideo = await InitParam.Db.Video.AsNoTracking().Take(6).Select(t => new Video
+            {
+                Id = t.Id,
+                TieuDe=t.TieuDe,
+                GioiThieu=t.GioiThieu,
+                HinhAnh=t.HinhAnh,
+                DuongDanFile=t.DuongDanFile,
+
+            }).ToListAsync();
+
+
+            model.lsVideo = new List<Video>(listVideo);
+
+            var listSubNote = await InitParam.Db.SubNote.AsNoTracking().Take(4).Select(t => new SubNote
+            {
+                Id = t.Id,
+                TieuDe=t.TieuDe,
+                NoiDung=t.NoiDung.Substring(0,200)+"...",
+                Image=t.Image,
+               
+            }).ToListAsync();
+
+
+            model.lsSubNote = new List<SubNote>(listSubNote);
+
+
+            var listSubPhone = await InitParam.Db.SubPhone.AsNoTracking().Take(3).Select(t => new SubPhone
+            {
+                Id = t.Id,
+                Name=t.Name,
+                SoDienThoai=t.SoDienThoai,
+
+            }).ToListAsync();
+
+
+            model.lsSubPhone = new List<SubPhone>(listSubPhone);
 
             return View(model);
 
