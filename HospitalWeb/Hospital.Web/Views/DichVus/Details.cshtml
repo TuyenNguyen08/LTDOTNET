@@ -38,7 +38,9 @@
                             <h4>
                                 @Html.Raw(@Model.GioiThieu)
                             </h4>
+
                         </div>
+                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=Model.HinhAnh })" />
                         <br>
                         <br>
                         <p>@Html.Raw(@Model.NoiDung)</p>
@@ -57,7 +59,7 @@
                             <a asp-action="@nameof(DichVusController.Details)"
                                asp-controller="@nameof(DichVusController).Replace("Controller","")"
                                asp-route-id="@dichVu.Id">
-                                *@dichVu.MoTa
+                                *@dichVu.TenDichVu
                             </a>
                         </li>
 
