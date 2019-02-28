@@ -1,6 +1,4 @@
-﻿@model IEnumerable<AdminWebBenhVien.EfModels.Video>
-
-@using AdminWebBenhVien.Controllers
+﻿@using AdminWebBenhVien.Controllers
 @using AdminWebBenhVien.Models
 
 @{
@@ -20,18 +18,25 @@
         </p>
         <div class="row">
             <div class="col-lg-12">
-                <kendo-grid name="gridVideo" height="550">
+                <kendo-grid name="gridVideo" height="550" resizable="true">
                     <datasource type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="20">
                         <transport>
                             <read url="@Url.Action(nameof(VideosController.Video_Read))" type="get" />
                         </transport>
                         <schema>
-                            <model id="@nameof(VideoViewModel.Id)">
+                            <model id="@nameof(VideoIndexViewModel.Id)">
                                 <fields>
-                                    <field name="@nameof(VideoViewModel.Id)" />
-                                    <field name="@nameof(VideoViewModel.TieuDe)" />
-                                    <field name="@nameof(VideoViewModel.LuotXem)" />
-                                    <field name="@nameof(VideoViewModel.DuongDanFile)" />
+                                    <field name="@nameof(VideoIndexViewModel.Id)" />
+                                    <field name="@nameof(VideoIndexViewModel.TieuDe)" />
+                                    <field name="@nameof(VideoIndexViewModel.GioiThieu)" />
+                                    <field name="@nameof(VideoIndexViewModel.Xem)" type="number" />
+                                    <field name="@nameof(VideoIndexViewModel.DuongDanFile)" />
+                                    <field name="@nameof(VideoIndexViewModel.NgonNguId)" />
+                                    <field name="@nameof(VideoIndexViewModel.NgonNgu)" />
+                                    <field name="@nameof(VideoIndexViewModel.NgayTao)" type="date" />
+                                    <field name="@nameof(VideoIndexViewModel.NguoiTao)" />
+                                    <field name="@nameof(VideoIndexViewModel.NgaySua)" type="date" />
+                                    <field name="@nameof(VideoIndexViewModel.NguoiSua)" />
                                 </fields>
                             </model>
                         </schema>
@@ -40,18 +45,28 @@
                     <sortable enabled="true" />
                     <filterable enabled="true" />
                     <scrollable enabled="true" />
-                    <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
+                    <pageable button-count="5" refresh="true" page-sizes="new int[] { 10, 20, 30, 40, 50, 100 }">
                     </pageable>
                     <filterable enabled="true" />
                     <columns>
-                        <column field="@nameof(VideoViewModel.Id)" title="ID" width="80" />
-                        <column field="@nameof(VideoViewModel.TieuDe)" title="Tiêu đề" width="200" />
-                        <column field="@nameof(VideoViewModel.LuotXem)" title="Lượt xem" width="100" />
-                        <column field="@nameof(VideoViewModel.DuongDanFile)" title="Đường dẫn" width="150" />
-                        <column title="Thao tác" width="150">
+                        <column title="Thao tác" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'>
                             <commands>
-                                <column-command text="Sửa" name="btnCapNhat" class-name="k-primary" click="btnCapNhat_Click"></column-command>
-                                <column-command text="Xóa" name="btnXoa" class-name="k-primary" click="btnXoa_Click"></column-command>
+                                <column-command text="Sửa" name="btnCapNhat1" class-name="k-primary" click="btnCapNhat_Click"></column-command>
+                            </commands>
+                        </column>
+                        <column field="@nameof(VideoIndexViewModel.Id)" title="ID" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }' />
+                        <column field="@nameof(VideoIndexViewModel.TieuDe)" title="Tiêu đề" width="300" />
+                        <column field="@nameof(VideoIndexViewModel.GioiThieu)" title="Giới thiệu" width="300" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-ellipsis" }' />
+                        <column field="@nameof(VideoIndexViewModel.Xem)" title="Lượt xem" width="100" format="{0:N0}" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-right" }' />
+                        <column field="@nameof(VideoIndexViewModel.DuongDanFile)" title="Đường link" width="200" />
+                        <column field="@nameof(VideoIndexViewModel.NgonNgu)" title="Ngôn ngữ" width="100" />
+                        <column field="@nameof(VideoIndexViewModel.NgayTao)" title="Ngày tạo" width="150" format="{0:dd/MM/yy HH:mm:ss}" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }' />
+                        <column field="@nameof(VideoIndexViewModel.NguoiTao)" title="Người tạo" width="200" />
+                        <column field="@nameof(VideoIndexViewModel.NgaySua)" title="Ngày sửa" width="150" format="{0:dd/MM/yy HH:mm:ss}" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }' />
+                        <column field="@nameof(VideoIndexViewModel.NguoiSua)" title="Người sửa" width="200" />
+                        <column title="Thao tác" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'>
+                            <commands>
+                                <column-command text="Sửa" name="btnCapNhat2" class-name="k-primary" click="btnCapNhat_Click"></column-command>
                             </commands>
                         </column>
                     </columns>

@@ -1,11 +1,5 @@
-﻿@model IEnumerable<AdminWebBenhVien.EfModels.HoatDong>
-
-@using AdminWebBenhVien.Controllers
+﻿@using AdminWebBenhVien.Controllers
 @using AdminWebBenhVien.Models
-
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
 <div id="wrapper">
     <div id="page-wrapper">
@@ -20,18 +14,29 @@
         </p>
         <div class="row">
             <div class="col-lg-12">
-                <kendo-grid name="gridHoatDong" height="550">
+                <kendo-grid name="gridHoatDong" height="550" resizable="true">
                     <datasource type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="20">
                         <transport>
                             <read url="@Url.Action(nameof(HoatDongsController.HoatDong_Read))" type="get" />
                         </transport>
                         <schema>
-                            <model id="@nameof(HoatDongViewModel.Id)">
+                            <model id="@nameof(HoatDongIndexViewModel.Id)">
                                 <fields>
-                                    <field name="@nameof(HoatDongViewModel.Id)" />
-                                    <field name="@nameof(HoatDongViewModel.TieuDe)" />
-                                    <field name="@nameof(HoatDongViewModel.LuotXem)" />
-                                    <field name="@nameof(HoatDongViewModel.Author)" />
+                                    <field name="@nameof(HoatDongIndexViewModel.Id)" />
+                                    <field name="@nameof(HoatDongIndexViewModel.TenLoaiId)" />
+                                    <field name="@nameof(HoatDongIndexViewModel.TenLoai)" />
+                                    <field name="@nameof(HoatDongIndexViewModel.TieuDe)" />
+                                    <field name="@nameof(HoatDongIndexViewModel.GioiThieu)" />
+                                    <field name="@nameof(HoatDongIndexViewModel.Xem)" type="number" />
+                                    <field name="@nameof(HoatDongIndexViewModel.TacGia)" />
+                                    <field name="@nameof(HoatDongIndexViewModel.NgonNguId)" />
+                                    <field name="@nameof(HoatDongIndexViewModel.NgonNgu)" />
+                                    <field name="@nameof(HoatDongIndexViewModel.NgayTao)" type="date" />
+                                    <field name="@nameof(HoatDongIndexViewModel.NgaySua)" type="date" />
+                                    <field name="@nameof(HoatDongIndexViewModel.NguoiSuaId)" />
+                                    <field name="@nameof(HoatDongIndexViewModel.NguoiSua)" />
+                                    <field name="@nameof(HoatDongIndexViewModel.NguoiTaoId)" />
+                                    <field name="@nameof(HoatDongIndexViewModel.NguoiTao)" />
                                 </fields>
                             </model>
                         </schema>
@@ -40,18 +45,29 @@
                     <sortable enabled="true" />
                     <filterable enabled="true" />
                     <scrollable enabled="true" />
-                    <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
+                    <pageable button-count="5" refresh="true" page-sizes="new int[] { 10, 20, 30, 40, 50, 100 }">
                     </pageable>
                     <filterable enabled="true" />
                     <columns>
-                        <column field="@nameof(HoatDongViewModel.Id)" title="ID" width="80" />
-                        <column field="@nameof(HoatDongViewModel.TieuDe)" title="Tiêu đề" width="200" />
-                        <column field="@nameof(HoatDongViewModel.LuotXem)" title="Lượt xem" width="100" />
-                        <column field="@nameof(HoatDongViewModel.Author)" title="Tác giả" width="200" />
-                        <column title="Thao tác" width="150">
+                        <column title="Thao tác" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'>
                             <commands>
-                                <column-command text="Sửa" name="btnCapNhat" class-name="k-primary" click="btnCapNhat_Click"></column-command>
-                                <column-command text="Xóa" name="btnXoa" class-name="k-primary" click="btnXoa_Click"></column-command>
+                                <column-command text="Sửa" name="btnCapNhat1" class-name="k-primary" click="btnCapNhat_Click"></column-command>
+                            </commands>
+                        </column>
+                        <column field="@nameof(HoatDongIndexViewModel.Id)" title="ID" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }' />
+                        <column field="@nameof(HoatDongIndexViewModel.TenLoai)" title="Tên loại" width="300" />
+                        <column field="@nameof(HoatDongIndexViewModel.TieuDe)" title="Tiêu đề" width="300" />
+                        <column field="@nameof(HoatDongIndexViewModel.GioiThieu)" title="Giới thiệu" width="300" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-ellipsis" }' />
+                        <column field="@nameof(HoatDongIndexViewModel.Xem)" title="Lượt xem" width="100" format="{0:N0}" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-right" }' />
+                        <column field="@nameof(HoatDongIndexViewModel.TacGia)" title="Tác giả" width="300" />
+                        <column field="@nameof(HoatDongIndexViewModel.NgonNgu)" title="Ngôn ngữ" width="100" />
+                        <column field="@nameof(HoatDongIndexViewModel.NgayTao)" title="Ngày tạo" width="150" format="{0:dd/MM/yy HH:mm:ss}" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }' />
+                        <column field="@nameof(HoatDongIndexViewModel.NguoiTao)" title="Người tạo" width="200" />
+                        <column field="@nameof(HoatDongIndexViewModel.NgaySua)" title="Ngày sửa" width="150" format="{0:dd/MM/yy HH:mm:ss}" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }' />
+                        <column field="@nameof(HoatDongIndexViewModel.NguoiSua)" title="Người sửa" width="200" />
+                        <column title="Thao tác" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'>
+                            <commands>
+                                <column-command text="Sửa" name="btnCapNhat2" class-name="k-primary" click="btnCapNhat_Click"></column-command>
                             </commands>
                         </column>
                     </columns>
