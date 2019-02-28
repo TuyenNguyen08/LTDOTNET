@@ -5,7 +5,7 @@
 @using Hospital.Web.Controllers
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Index";
+    ViewBag.Title = "Sự kiện";
 }
 @section css {
     <link href="~/css/PagedList.css" rel="stylesheet" />
@@ -67,9 +67,9 @@
 
                         </div>
                     }
-                        <div class="col-md-6">
-                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-                        </div>
+                    <div class="col-md-6">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                    </div>
 
                 </div>
             </div>
