@@ -28,8 +28,10 @@ namespace AdminWebBenhVien.Controllers
         {
         }
 
-        [Route("{temp}/images/UploadFiles/{id}")]
+        [Route("ImageBrowser/GetImage/{id}")]
         [Route("images/UploadFiles/{id}")]
+        [Route("{temp}/images/UploadFiles/{id}")]
+        [Route("{temp}/ImageBrowser/GetImage/{id}")]
         public IActionResult GetImage(string id, string temp)
         {
             var file = System.IO.Path.Combine(_destination, id);
