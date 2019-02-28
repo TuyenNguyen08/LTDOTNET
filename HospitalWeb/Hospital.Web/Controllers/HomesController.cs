@@ -57,7 +57,8 @@ namespace Hospital.Web.Controllers
                 Id = t.Id,
                 TieuDe = t.TieuDe,
                 NgayTao = t.NgayTao,
-                GioiThieu=t.GioiThieu.Substring(0, 200) + "...",
+                HinhAnhMinhHoa=t.HinhAnhMinhHoa,
+                GioiThieu=t.GioiThieu.Substring(0, 100) + "...",
             }).ToListAsync();
 
 
@@ -68,13 +69,14 @@ namespace Hospital.Web.Controllers
                 Id = t.Id,
                 TieuDe = t.TieuDe,
                 NgayTao = t.NgayTao,
-                GioiThieu = t.GioiThieu.Substring(0,200)+"...",
+                HinhAnhMinhHoa=t.HinhAnhMinhHoa,
+                GioiThieu = t.GioiThieu.Substring(0,100)+"...",
             }).ToListAsync();
 
 
             model.lsHoatDong = new List<HoatDong>(listHoatDong);
 
-            var listVideo = await InitParam.Db.Video.AsNoTracking().Select(t => new Video
+            var listVideo = await InitParam.Db.Video.AsNoTracking().Take(6).Select(t => new Video
             {
                 Id = t.Id,
                 TieuDe=t.TieuDe,
@@ -87,16 +89,29 @@ namespace Hospital.Web.Controllers
 
             model.lsVideo = new List<Video>(listVideo);
 
-            //var listLichNgay = await InitParam.Db.LichNgay.AsNoTracking().Select(t => new LichNgay
-            //{
-            //    Id = t.Id,
-            //    TenThu=t.TenThu,
+            var listSubNote = await InitParam.Db.SubNote.AsNoTracking().Take(4).Select(t => new SubNote
+            {
+                Id = t.Id,
+                TieuDe=t.TieuDe,
+                NoiDung=t.NoiDung.Substring(0,200)+"...",
+                Image=t.Image,
+               
+            }).ToListAsync();
 
-            //}).ToListAsync();
+
+            model.lsSubNote = new List<SubNote>(listSubNote);
 
 
-            //model.lsLichNgay = new List<LichNgay>(listLichNgay);
+            var listSubPhone = await InitParam.Db.SubPhone.AsNoTracking().Take(3).Select(t => new SubPhone
+            {
+                Id = t.Id,
+                Name=t.Name,
+                SoDienThoai=t.SoDienThoai,
 
+            }).ToListAsync();
+
+
+            model.lsSubPhone = new List<SubPhone>(listSubPhone);
 
             return View(model);
 

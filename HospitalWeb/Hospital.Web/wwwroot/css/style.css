@@ -448,7 +448,7 @@ ul.main_menu > li:hover > ul {
  ====/========        =======/====/*/
 
 .single_welcome_slider {
-    height: 750px;
+    /*height: 750px;*/
     min-height: 450px;
     display: -webkit-flex;
     display: -moz-flex;

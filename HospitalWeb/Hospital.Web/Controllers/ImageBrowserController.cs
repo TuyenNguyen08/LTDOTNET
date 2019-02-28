@@ -8,10 +8,11 @@ namespace Hospital.Web.Controllers
 {
     public class ImageBrowserController : Controller
     {
-        private string _destination = @"D:\FolderImageBenhVien";
+        private string _destination = @"C:\ProjectAT\ImageWebBenhVien\images\UploadFiles";
 
-        [Route("ImageBrowser/GetImage/{id}/image")]
-        public IActionResult GetImage(string id)
+        [Route("{temp}/images/UploadFiles/{id}")]
+        [Route("images/UploadFiles/{id}")]
+        public IActionResult GetImage(string id, string temp)
         {
             var file = System.IO.Path.Combine(_destination, id);
 
