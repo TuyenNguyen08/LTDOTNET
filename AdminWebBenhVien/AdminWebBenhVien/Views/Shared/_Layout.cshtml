@@ -110,20 +110,20 @@
                                    asp-controller="@nameof(NoiDungTinhChiTietsController).Replace("Controller","")"><i class="fa fa-user fa-fw"></i>Bệnh nhân</a>
                             </li>
                             <li>
-                                <a asp-action=""
-                                   asp-controller=""><i class="fa fa-plus-square fa-fw"></i>Tin Tức</a>
+                                <a asp-action="@nameof(TinTucsController.Index)"
+                                   asp-controller="@nameof(TinTucsController).Replace("Controller","")"><i class="fa fa-plus-square fa-fw"></i>Tin Tức</a>
                             </li>
                             <li>
-                                <a asp-action=""
-                                   asp-controller=""><i class="fa fa-plus-circle fa-fw"></i>Hoạt động</a>
+                                <a asp-action="@nameof(HoatDongsController.Index)"
+                                   asp-controller="@nameof(HoatDongsController).Replace("Controller","")"><i class="fa fa-plus-circle fa-fw"></i>Hoạt động</a>
                             </li>
                             <li>
                                 <a asp-action=""
                                    asp-controller=""><i class="fa fa-plus-circle fa-fw"></i>Tuyển dụng</a>
                             </li>
                             <li>
-                                <a asp-action=""
-                                   asp-controller=""><i class="fa fa-sign-in fa-fw"></i>Sự kiện-Quảng cáo</a>
+                                <a asp-action="@nameof(EventsController.Index)"
+                                   asp-controller="@nameof(EventsController).Replace("Controller","")"><i class="fa fa-sign-in fa-fw"></i>Sự kiện-Quảng cáo</a>
                             </li>
                             <li>
                                 <a asp-action=""
@@ -164,12 +164,12 @@
                            asp-route-dotThauId=""><i class=""></i>Thư viện<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a asp-action=""
-                                   asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Slideshow trang chủ</a>
+                                <a asp-action="@nameof(SlideShowsController.Index)"
+                                   asp-controller="@nameof(SlideShowsController).Replace("Controller","")"><i class="fa fa-briefcase fa-fw"></i>Slideshow trang chủ</a>
                             </li>
                             <li>
-                                <a asp-action=""
-                                   asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Video</a>
+                                <a asp-action="@nameof(VideosController.Index)"
+                                   asp-controller="@nameof(VideosController).Replace("Controller","")"><i class="fa fa-briefcase fa-fw"></i>Video</a>
                             </li>
                         </ul>
                     </li>

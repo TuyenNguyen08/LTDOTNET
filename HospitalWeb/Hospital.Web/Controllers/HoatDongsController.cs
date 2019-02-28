@@ -42,7 +42,7 @@ namespace Hospital.Web.Controllers
 
 
             var pageNumber = page ?? 1;
-            var onePageOfTinTuc = await listResult.ToPagedListAsync(pageNumber, PageSize);
+            var onePageOfTinTuc = await listResult.ToPagedListAsync(pageNumber, 6);
 
             return View(onePageOfTinTuc);
         }

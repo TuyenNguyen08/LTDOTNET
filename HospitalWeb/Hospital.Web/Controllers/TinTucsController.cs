@@ -61,7 +61,6 @@ namespace Hospital.Web.Controllers
                 .Include(t => t.FkNgonNguNavigation)
                 .Include(t => t.FkUserNguoiSuaNavigation)
                 .Include(t => t.FkUserNguoiTaoNavigation)
-                .Where(t => t.Id == id && t.FkNgonNgu == NgonNgu)
                 .Select(t => new TinTuc
                 {
                     TieuDe = t.TieuDe,

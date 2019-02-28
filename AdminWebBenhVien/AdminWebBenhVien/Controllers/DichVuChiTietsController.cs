@@ -60,24 +60,47 @@ namespace AdminWebBenhVien.Controllers
             var resultJson = await resultDb.ToDataSourceResultAsync(request);
             return Json(resultJson);
         }
-       
+
         // GET: DichVuChiTiets/Edit/5
+        [HttpGet]
+        [Route("dich-vu/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || !id.HasValue)
             {
                 return NotFound();
             }
 
-            var dichVuChiTiet = await _context.DichVuChiTiet.Where(t=>t.Id==id).FirstOrDefaultAsync();
-            if (dichVuChiTiet == null)
+            var model = await _context.DichVuChiTiet.AsNoTracking()
+                .Include(h => h.FkDichVuNavigation)
+                .Include(h => h.FkNgonNguNavigation)
+                .Include(h => h.FkUserModifyNavigation)
+                .Where(h => h.Id == id.Value)
+                .Select(h => new DichVuEditViewModel
+                {
+                    Id = h.Id,
+
+                    TenLoai = h.FkDichVuNavigation.MoTa,
+
+                    TieuDe = h.TenDichVu,
+                    GioiThieu = h.GioiThieu,
+                    NoiDung = h.NoiDung,
+                    Xem = h.LuotXem,
+                    
+                    NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
+
+                    NgayTao = h.NgayTao,
+                    NgaySua = h.NgayChinhSua,
+                    NguoiSua = h.FkUserModifyNavigation.HoVaTen
+                })
+                .FirstOrDefaultAsync();
+
+            if (model == null)
             {
                 return NotFound();
             }
-            ViewData["FkDichVu"] = new SelectList(_context.DichVu, "Id", "Id", dichVuChiTiet.FkDichVu);
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", dichVuChiTiet.FkNgonNgu);
-            ViewData["FkUserModify"] = new SelectList(_context.User, "UserName", "UserName", dichVuChiTiet.FkUserModify);
-            return View(dichVuChiTiet);
+
+            return View(model);
         }
 
         // POST: DichVuChiTiets/Edit/5
@@ -85,40 +108,36 @@ namespace AdminWebBenhVien.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FkNgonNgu,FkDichVu,TenDichVu,GioiThieu,NoiDung,HinhAnh,FkUserModify,NgayTao,NgayChinhSua,Id,LuotXem")] DichVuChiTiet dichVuChiTiet)
+        [Route("dich-vu/{id}")]
+        public async Task<IActionResult> Edit(BenhNhanEditViewModel model)
         {
-            if (id != dichVuChiTiet.FkNgonNgu)
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var dbItem = await _context.DichVuChiTiet.FirstOrDefaultAsync(h => h.Id == model.Id);
+            if (dbItem == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                  //  _context.Update(dichVuChiTiet);
-                    _context.Update(dichVuChiTiet).Property(x => x.Id).IsModified = false;
+            dbItem.TenDichVu = model.TieuDe;
+            dbItem.GioiThieu = model.GioiThieu;
+            dbItem.NoiDung = model.NoiDung;
 
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!DichVuChiTietExists(dichVuChiTiet.FkNgonNgu))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-           //     return RedirectToAction(nameof(Index));
-            }
-            ViewData["FkDichVu"] = new SelectList(_context.DichVu, "Id", "Id", dichVuChiTiet.FkDichVu);
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", dichVuChiTiet.FkNgonNgu);
-            ViewData["FkUserModify"] = new SelectList(_context.User, "UserName", "UserName", dichVuChiTiet.FkUserModify);
-            return View(dichVuChiTiet);
+            dbItem.NgayChinhSua = DateTime.Now;
+            dbItem.FkUserModify = "admin";
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Edit), new { id = model.Id });
         }
+
+
+
+
+
 
        
         private bool DichVuChiTietExists(int id)

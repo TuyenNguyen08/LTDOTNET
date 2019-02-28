@@ -51,6 +51,18 @@ namespace Hospital.Web.Controllers
             {
                 return NotFound();
             }
+            #region listNoiDungTinh
+
+            var listNoiDungTinh = await InitParam.Db.NoiDungTinh.AsNoTracking().Take(9).Select(t => new NoiDungTinh
+            {
+                Id = t.Id,
+                TenNoiDung=t.TenNoiDung
+
+            }).ToListAsync();
+
+            ViewBag.lsNoiDungTinh = listNoiDungTinh;
+
+            #endregion
 
             var lsDungTinhChiTiet = await InitParam.Db.NoiDungTinhChiTiet.AsNoTracking()
                .Where(t => t.FkNgonNgu == fkNgonNgu)

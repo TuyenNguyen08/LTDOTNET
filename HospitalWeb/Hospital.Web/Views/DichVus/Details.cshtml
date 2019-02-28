@@ -2,6 +2,7 @@
 @using Hospital.Web.EfModels
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Dịch vụ";
 }
 
 @using Hospital.Web.Controllers
@@ -29,10 +30,10 @@
 <div class="service_details_area">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <img src="~/images/img/service_details1.jpg" alt="">
-                @*<img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_DICH_VU + DichVuChiTiet.HinhAnh`)" />*@
+            <div class="col-md-12">
+                <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=Model.HinhAnh })" />
             </div>
+<<<<<<< HEAD
             <div class="col-md-6">
                 <div class="section_title">
 
@@ -95,20 +96,26 @@
                             )
                         </div>
                     </div>
+=======
+>>>>>>> 34ec5ba010bae9f23183219761924095126ad62e
 
-                    <div class="row">
-                        <div class="col">
-                            <textarea placeholder="Nhập nội dung"></textarea>
+            <div>
+                <div class="col-md-12">
+                    <div class="service_details_wraper">
+                        <h4>@Model.TenDichVu</h4>
+                        <div class="service_quote">
+                            <i class="zmdi zmdi-quote "></i>
+                            <h4>
+                                @Html.Raw(@Model.GioiThieu)
+                            </h4>
                         </div>
+                        <br>
+                        <br>
+                        <p>@Html.Raw(@Model.NoiDung)</p>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <button type="submit" class="custom_btn">Gửi <i class="zmdi zmdi-plus"></i></button>
-                        </div>
-                    </div>
-                </form>
-
+                </div>
             </div>
+<<<<<<< HEAD
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -134,28 +141,32 @@
                                    asp-controller="@nameof(DichVusController).Replace("Controller", "")"
                                    asp-route-id="@dichVu.Id"><i class="zmdi zmdi-play-circle"></i>@dichVu.TenDichVu</a>
                             </li>
+=======
+            
+            <div class="container" style="    padding: 5%;">
+                <h1 style="border-bottom: 1px solid #8D8D8D; width:100%; float: left;">
+                    Dịch vụ khác
+                </h1>
+                <ul>
+                    @foreach (var dichVu in (ViewBag.lsDichVu as List<DichVu>))
+                    {
+                        <li>
+                            <a asp-action="@nameof(DichVusController.Details)"
+                               asp-controller="@nameof(DichVusController).Replace("Controller","")"
+                               asp-route-id="@dichVu.Id"
+                               target="_blank">
+                                *@dichVu.MoTa
+                            </a>
+                        </li>
+>>>>>>> 34ec5ba010bae9f23183219761924095126ad62e
 
-                        }
-                    </ul>
-                    <br>
-                    <p>@Html.Raw(@Model.NoiDung)</p>
-                </div>
+                    }
+                </ul>
             </div>
         </div>
-
 
     </div>
 </div>
 @section scripts {
-    <script>
-        function change() {
-            var value = $("#color").val();
-            $("#cap")
-                .toggleClass("black-cap", value == 1)
-                .toggleClass("orange-cap", value == 2)
-                .toggleClass("grey-cap", value == 3);
-        };
 
-
-    </script>
 }

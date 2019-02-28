@@ -5,7 +5,9 @@
 @using Hospital.Web.Controllers
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Index";
+    ViewBag.Title = "Hoạt động";
+   
+
 }
 @section css {
     <link href="~/css/PagedList.css" rel="stylesheet" />
@@ -36,7 +38,7 @@
                         <div class="col-md-6">
                             <div class="single_blog">
                                 <div class="blog_img">
-                                    <img src="~/images/img/blog1.jpg" alt="">
+                                    <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=hoatdong.HinhAnhMinhHoa })" alt="">
                                     @*<img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_TIN_TUC + tinTuc.HinhAnhMinhHoa)" />*@
                                 </div>
                                 <div class="blog_content">
@@ -44,10 +46,7 @@
                                         <a class="date" asp-action="@nameof(HoatDongsController.Details)"
                                            asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
                                            asp-route-id="@hoatdong.Id"
-                                           target="_blank">@hoatdong.NgayTao</a>
-                                        <a href="#" class="comment_box">
-                                            <i class="zmdi zmdi-comments"></i> 3
-                                        </a>
+                                           target="_blank">@hoatdong.NgayTao?.ToString("dd/MM/yy hh:mm:ss")</a>
                                     </div>
                                     <h4>
                                         <a asp-action="@nameof(HoatDongsController.Details)"
@@ -69,7 +68,7 @@
                         </div>
                     }
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
                     </div>
 
