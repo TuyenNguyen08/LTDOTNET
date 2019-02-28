@@ -28,6 +28,7 @@
 <!-- Blog page Area Start-->
 <div class="blog_area">
     <div class="container">
+        <p> @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</p>
         <div class="row">
             @foreach (var item in Model)
             {
@@ -37,7 +38,7 @@
                        asp-controller="@nameof(VideosController).Replace("Controller","")"
                        asp-route-id="@item.Id"
                        target="_blank">
-                        <img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_VIDEO + item.HinhAnh)" />
+                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=item.HinhAnh})" />
                     </a>
 
                 </div>
@@ -50,8 +51,9 @@
                     <p>@item.GioiThieu</p>
                 </div>
             }
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
         </div>
+        <p> @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</p>
+
     </div>
 </div>
 <!-- Blog page Area End-->
