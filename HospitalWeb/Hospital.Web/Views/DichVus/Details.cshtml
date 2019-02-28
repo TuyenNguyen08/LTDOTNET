@@ -1,5 +1,6 @@
 ﻿@model Hospital.Web.EfModels.DichVuChiTiet
 @using Hospital.Web.Controllers
+@using Hospital.Web.EfModels
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -62,18 +63,18 @@
 .DataValueField("Value")
 .Events(e => e.Change("change"))
 .BindTo(new List<SelectListItem>() {
-                                                                    new SelectListItem() {
-                                                                    Text = "Black",
-                                                                    Value = "1"
-                                                                    },
-                                                                    new SelectListItem() {
-                                                                    Text = "Orange",
-                                                                    Value = "2"
-                                                                    },
-                                                                    new SelectListItem() {
-                                                                    Text = "Grey",
-                                                                    Value = "3"
-                                                                    }
+                                                                                                                                                                                            new SelectListItem() {
+                                                                                                                                                                                            Text = "Black",
+                                                                                                                                                                                            Value = "1"
+                                                                                                                                                                                            },
+                                                                                                                                                                                            new SelectListItem() {
+                                                                                                                                                                                            Text = "Orange",
+                                                                                                                                                                                            Value = "2"
+                                                                                                                                                                                            },
+                                                                                                                                                                                            new SelectListItem() {
+                                                                                                                                                                                            Text = "Grey",
+                                                                                                                                                                                            Value = "3"
+                                                                                                                                                                                            }
 })
 .Value("1")
 .HtmlAttributes(new { style = "width: 100%" })
@@ -118,20 +119,24 @@
 
 
                     <br>
+
                     <ul class="service_list_items">
+                        @foreach (var dichVu in (ViewBag.lsDichVu as List<DichVu>))
+                        {
                         <li>
-                            <i class="zmdi zmdi-play-circle"></i> would ever be possible to fish out gene fragments
-                        </li>
-                        <li>
-                            <i class="zmdi zmdi-play-circle"></i> limited by the availability of fossil bones.
+                            <i class="zmdi zmdi-play-circle"></i>  @dichVu.Id
+                            <i class="zmdi zmdi-play-circle"></i>  @dichVu.MoTa
                         </li>
 
+                        }
                     </ul>
                     <br>
                     <p>@Html.Raw(@Model.NoiDung)</p>
                 </div>
             </div>
         </div>
+
+
     </div>
 </div>
 @section scripts {

@@ -7,6 +7,10 @@ namespace AdminWebBenhVien.Models
 {
     public class Constants
     {
+        public const string PARAM_ID_1 = "__PARAM_ID_1__";
+        public const string IMAGE_BROWSER_IMAGE_URL = "/ImageBrowser/GetImage/{0}";
+
+
         public const string PARAM_GIOI_THIEU_CHI_TIET_ID = "__PARAM_GIOI_THIEU_CHI_TIET_ID__";
         public const string PARAM_KHOA_PHONG_ID = "__PARAM_KHOA_PHONG_ID__";
         public const string PARAM_TIN_TUC_ID = "__PARAM_TIN_TUC_ID__";
