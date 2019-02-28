@@ -37,16 +37,17 @@
                     <a asp-action="@nameof(VideosController.Details)"
                        asp-controller="@nameof(VideosController).Replace("Controller","")"
                        asp-route-id="@item.Id"
-                       target="_blank">
-                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=item.HinhAnh})" />
+                       target="_blank" class="single_latest_news">
+                        <span class="l_img">
+                            <img src="https://img.youtube.com/vi/@item.HinhAnh/mqdefault.jpg" />
+                        </span>
                     </a>
-
                 </div>
                 <div class="col-lg-8">
-                    <b style="font-size: 25px;" asp-action="@nameof(VideosController.Details)"
+                    <a style="font-size: 25px;" asp-action="@nameof(VideosController.Details)"
                        asp-controller="@nameof(VideosController).Replace("Controller","")"
                        asp-route-id="@item.Id"
-                       target="_blank">@item.TieuDe</b>
+                       target="_blank">@item.TieuDe</a>
 
                     <p>@item.GioiThieu</p>
                 </div>

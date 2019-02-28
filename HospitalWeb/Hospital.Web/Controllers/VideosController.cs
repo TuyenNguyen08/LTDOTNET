@@ -21,6 +21,7 @@ namespace Hospital.Web.Controllers
         public async Task<IActionResult> Index(int? page)
         {
             var listVideo = InitParam.Db.Video.AsNoTracking()
+                .Where(t => t.FkNgonNgu == NgonNgu)
                 .Select(t => new Video
                 {
                     Id = t.Id,
@@ -29,9 +30,9 @@ namespace Hospital.Web.Controllers
                     HinhAnh = t.HinhAnh,
                     DuongDanFile = t.DuongDanFile,
                   
-                });
+                }).OrderByDescending(t => t.Id);
             var pageNumber = page ?? 1;
-            var onePageOfVideo = listVideo.ToPagedList(pageNumber, 6);
+            var onePageOfVideo = listVideo.ToPagedList(pageNumber, 4);
 
             return View(onePageOfVideo);
         }
@@ -46,7 +47,7 @@ namespace Hospital.Web.Controllers
             }
 
             var sukien = await InitParam.Db.Video.AsNoTracking()
-               .Where(t => t.Id == id)
+               .Where(t => t.Id == id && t.FkNgonNgu == NgonNgu)
                .Select(t => new Video
                {
                    Id = t.Id,

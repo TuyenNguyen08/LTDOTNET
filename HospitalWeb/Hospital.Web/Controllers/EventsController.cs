@@ -24,6 +24,7 @@ namespace Hospital.Web.Controllers
         public async Task<IActionResult> Index(int? page)
         {
             var listEvent = InitParam.Db.Event.AsNoTracking()
+                .Where(t => t.FkNgonNgu == NgonNgu)
                 .Select(t =>new Event {
                     Id=t.Id,
                     TieuDe=t.TieuDe,
@@ -50,7 +51,7 @@ namespace Hospital.Web.Controllers
             }
 
             var sukien = await InitParam.Db.Event.AsNoTracking()
-               .Where(t => t.Id == id)
+               .Where(t => t.Id == id && t.FkNgonNgu == NgonNgu)
                .Select(t => new Event
                {
                    Id=t.Id,

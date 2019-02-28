@@ -44,9 +44,9 @@
                                         <a class="date" asp-action="@nameof(HoatDongsController.Details)"
                                            asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
                                            asp-route-id="@hoatdong.Id"
-                                           target="_blank">@hoatdong.NgayTao</a>
+                                           target="_blank">@hoatdong.NgayTao?.ToString("dd/MM/yyyy HH:mm:ss")</a>
                                         <a href="#" class="comment_box">
-                                            <i class="zmdi zmdi-comments"></i> 3
+                                            <i class="zmdi zmdi-comments"></i> 0
                                         </a>
                                     </div>
                                     <h4>

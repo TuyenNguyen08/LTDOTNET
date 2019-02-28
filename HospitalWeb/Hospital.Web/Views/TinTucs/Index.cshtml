@@ -36,17 +36,17 @@
                         <div class="col-md-6">
                             <div class="single_blog">
                                 <div class="blog_img">
-                                    <img src="~/images/img/blog1.jpg" alt="">
+                                    
                                     @*<img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_TIN_TUC + tinTuc.HinhAnhMinhHoa)" />*@
                                 </div>
                                 <div class="blog_content">
                                     <div class="blog_meta">
                                         <a class="date" asp-action="@nameof(TinTucsController.Details)"
                                            asp-controller="@nameof(TinTucsController).Replace("Controller","")"
-                                           asp-route-id="@tinTuc.Id">@tinTuc.NgayTao</a>
-                                        @*<a href="#" class="comment_box">
-                                    <i class="zmdi zmdi-comments"></i> 3
-                                </a>*@
+                                           asp-route-id="@tinTuc.Id">@tinTuc.NgayTao?.ToString("dd/MM/yyyy HH:mm:ss")</a>
+                                        <a href="#" class="comment_box">
+                                    <i class="zmdi zmdi-comments"></i> 0
+                                </a>
                                     </div>
                                     <h4>
                                         <a asp-action="@nameof(TinTucsController.Details)"
