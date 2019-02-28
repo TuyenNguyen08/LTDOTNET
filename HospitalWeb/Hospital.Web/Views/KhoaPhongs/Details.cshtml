@@ -1,4 +1,5 @@
-﻿@model Hospital.Web.EfModels.KhoaPhong
+﻿@using Hospital.Web.EfModels
+@model KhoaPhong
 @using Hospital.Web.Controllers
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -26,11 +27,26 @@
 <div class="dept_details_page">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 order-md-6 ">
-                <img src="~/images/img/dept_page.jpg" alt="">
-                @* <img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_KHOA_PHONG + khoaPhong.HinhAnhDaiDien)" />*@
+            <div class="col-lg-3">
+                <ul id="submenu">
+                    @{
+                        var listKhoaPhong = (List<KhoaPhong>)ViewBag.listkhoaPhongKhac;
+                    }
+                    @foreach (var item in listKhoaPhong)
+                    {
+                        <li>
+                            <a asp-action="@nameof(KhoaPhongsController.Details)"
+                               asp-controller="@nameof(KhoaPhongsController).Replace("Controller","")"
+                               asp-route-id="@item.Id"
+                               target="_blank">@item.TenKhoaPhong</a>
+                        </li>
+                    }
+
+                </ul>
+
             </div>
-            <div class="col-md-8">
+           
+            <div class="col-md-9">
                 <h1>@Model.TieuDeKhoa</h1>
                 <p>
                     @Model.GioiThieu
