@@ -35,11 +35,9 @@
             <div class="col-md-12">
                 <div class="blog_detaisl_area">
                     <div class="blog_full_content">
-                        <img src="~/images/img/blog_big1.jpg" alt="">
-                        @* <img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_TIN_TUC + khoaPhong.HinhAnhDaiDien)" />*@
-                        <h4>@Model.TieuDe</h4>
+                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=Model.HinhAnhMinhHoa })" />
                         <div class="blog_meta">
-                            <a href="#">@Model.NgayTao</a> <a href="#">Lượt xem: @Model.LuotXem</a>
+                            <a href="#">@Model.NgayTao?.ToString("dd/MM/yy hh:mm:ss")</a>
                         </div>
                         <div class="blog_quote">
                             <p>@Model.GioiThieu</p>
@@ -50,75 +48,6 @@
 
                             <br>                           
                     </div>
-                    @*<div class="comment_area">
-                        <h4>4 Bình luận</h4>
-                        <div class="comment_wraper">
-                            <div class="single_comment">
-                                <div class="comment_content">
-                                    <div class="user_photo" style="background-image: url(../images/img/user1.jpg);"></div>
-                                    <div class="user_details">
-                                        <strong class="u_name">Kiên Nguyễn</strong>
-                                        <div class="date"><i class="zmdi zmdi-calendar-note"></i> 28/02/2017</div>
-                                        <a href="#" class="replay_btn"><i class="zmdi zmdi-mail-reply"></i>Trả lời</a>
-                                    </div>
-                                    <p>LÀm thế nào để trể con nín khóc</p>
-                                </div>
-                            </div>
-                            <div class="single_comment">
-                                <div class="comment_content">
-                                    <div class="user_photo" style="background-image: url(../images/img/user2.jpg);"></div>
-                                    <div class="user_details">
-                                        <strong class="u_name">Kiên Nguyễn</strong>
-                                        <div class="date"><i class="zmdi zmdi-calendar-note"></i> 28/02/2017</div>
-                                        <a href="#" class="replay_btn"><i class="zmdi zmdi-mail-reply"></i>Trả lời</a>
-                                    </div>
-                                    <p>LÀm thế nào để trể con nín khóc</p>
-                                </div>
-                                <div class="single_comment">
-                                    <div class="comment_content">
-                                        <div class="user_photo" style="background-image: url(../images/img/user3.jpg);"></div>
-                                        <div class="user_details">
-                                            <strong class="u_name">Kiên Nguyễn</strong>
-                                            <div class="date"><i class="zmdi zmdi-calendar-note"></i> 28/02/2017</div>
-                                            <a href="#" class="replay_btn"><i class="zmdi zmdi-mail-reply"></i>Trả lời</a>
-                                        </div>
-                                        <p>LÀm thế nào để trể con nín khóc</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single_comment">
-                                <div class="comment_content">
-                                    <div class="user_photo" style="background-image: url(../images/img/user4.jpg);"></div>
-                                    <div class="user_details">
-                                        <strong class="u_name">Kiên Nguyễn</strong>
-                                        <div class="date"><i class="zmdi zmdi-calendar-note"></i> 28/02/2017</div>
-                                        <a href="#" class="replay_btn"><i class="zmdi zmdi-mail-reply"></i>Trả lời</a>
-                                    </div>
-                                    <p>LÀm thế nào để trể con nín khóc</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment_form">
-                            <h4>Để lại một bình luận</h4>
-                            <form action="#" class="contact_form">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-12">
-                                        <input type="text" placeholder="Tên bạn">
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <input type="email" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col"><textarea placeholder="Nhập nội dung"></textarea></div>
-                                </div>
-                                <div class="col-lg-12" style="margin-left:60%">
-                                    <button type="submit" class="custom_btn">Gửi</button>
-                                    <button type="submit" class="custom_btn">Hủy</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>*@
                 </div>
             </div>
         
