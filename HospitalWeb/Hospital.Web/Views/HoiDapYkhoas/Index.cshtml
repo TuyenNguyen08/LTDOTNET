@@ -29,14 +29,15 @@
             <div class="col-md-8 ">
                 @foreach (var hoidap in Model)
                 {
-                    <div class="single_faq" id="faq1">
+                <div class="single_faq" id="faq1">
 
-                        <h4 style="color:#0094ea"> @Html.Raw(hoidap.TieuDe)</h4>
-                        <span style="color: #C00">Câu hỏi:</span> @Html.Raw(hoidap.NoiDungCauHoi)
-                        <br />
-                        <span style="color: #C00">Trả lời:</span>@Html.Raw(hoidap.NoiDungTraLoi)
-
-                    </div>
+                    <a asp-action="@nameof(HoiDapYkhoasController.Details)"
+                       asp-controller="@nameof(HoiDapYkhoasController).Replace("Controller", "")"
+                       asp-route-id="@hoidap.Id"><h4 style="color:#0094ea"> @Html.Raw(hoidap.TieuDe)</h4></a>
+                    <br />
+                    
+                    <span style="color: #C00">Câu hỏi:</span> @Html.Raw(hoidap.NoiDungCauHoi)
+                </div>
                 }
             </div>
             <div class="col-md-6">
