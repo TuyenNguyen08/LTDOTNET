@@ -1,9 +1,14 @@
 ﻿@model Hospital.Web.EfModels.DichVuChiTiet
-@using Hospital.Web.Controllers
 @using Hospital.Web.EfModels
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@using Hospital.Web.Controllers
+@{
+    ViewBag.Title = "Dich Vụ";
+}
+
 @section css {
 }
 <div class="breadvroumb_area">
@@ -63,18 +68,18 @@
 .DataValueField("Value")
 .Events(e => e.Change("change"))
 .BindTo(new List<SelectListItem>() {
-                                                                                                                                                                                            new SelectListItem() {
-                                                                                                                                                                                            Text = "Black",
-                                                                                                                                                                                            Value = "1"
-                                                                                                                                                                                            },
-                                                                                                                                                                                            new SelectListItem() {
-                                                                                                                                                                                            Text = "Orange",
-                                                                                                                                                                                            Value = "2"
-                                                                                                                                                                                            },
-                                                                                                                                                                                            new SelectListItem() {
-                                                                                                                                                                                            Text = "Grey",
-                                                                                                                                                                                            Value = "3"
-                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                        new SelectListItem() {
+                                                                                                                                                                                                                                                        Text = "Black",
+                                                                                                                                                                                                                                                        Value = "1"
+                                                                                                                                                                                                                                                        },
+                                                                                                                                                                                                                                                        new SelectListItem() {
+                                                                                                                                                                                                                                                        Text = "Orange",
+                                                                                                                                                                                                                                                        Value = "2"
+                                                                                                                                                                                                                                                        },
+                                                                                                                                                                                                                                                        new SelectListItem() {
+                                                                                                                                                                                                                                                        Text = "Grey",
+                                                                                                                                                                                                                                                        Value = "3"
+                                                                                                                                                                                                                                                        }
 })
 .Value("1")
 .HtmlAttributes(new { style = "width: 100%" })
@@ -121,12 +126,14 @@
                     <br>
 
                     <ul class="service_list_items">
-                        @foreach (var dichVu in (ViewBag.lsDichVu as List<DichVu>))
+                        @foreach (var dichVu in (ViewBag.lsDichVuCT as List<DichVuChiTiet>))
                         {
-                        <li>
-                            <i class="zmdi zmdi-play-circle"></i>  @dichVu.Id
-                            <i class="zmdi zmdi-play-circle"></i>  @dichVu.MoTa
-                        </li>
+                            <li>
+
+                                <a asp-action="@nameof(DichVusController.Details)"
+                                   asp-controller="@nameof(DichVusController).Replace("Controller", "")"
+                                   asp-route-id="@dichVu.Id"><i class="zmdi zmdi-play-circle"></i>@dichVu.TenDichVu</a>
+                            </li>
 
                         }
                     </ul>
