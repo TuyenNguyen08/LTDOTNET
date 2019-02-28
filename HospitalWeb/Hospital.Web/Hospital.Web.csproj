@@ -70,6 +70,7 @@
     <ItemGroup>
       <Folder Include="wwwroot\DuLieuDB\HoatDong\" />
       <Folder Include="wwwroot\DuLieuDB\KhoaPhong\" />
+      <Folder Include="wwwroot\images\image_subNote\" />
     </ItemGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
