@@ -1,5 +1,5 @@
-﻿@model AdminWebBenhVien.EfModels.Event
-@using AdminWebBenhVien.Models
+﻿@using AdminWebBenhVien.Models
+@model SuKienEditViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -17,71 +17,55 @@
         <br />
         <div class="row">
             <div class="col-lg-12">
-                <form asp-action="Edit">
+                <form asp-action="Edit" method="post">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#paneGioiThieu" aria-expanded="false">Thông tin chung</a>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#paneGioiThieu" aria-expanded="false">Thông tin</a>
                             </h4>
                         </div>
                         <div id="paneGioiThieu" class="collapse in" aria-expanded="false">
+
+                            <br />
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-success" />
+                            </div>
+
                             <div class="panel-body">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <input type="hidden" asp-for="Id" />
-                                <input type="hidden" asp-for="Stt" />
-
 
                                 <div class="form-group">
                                     <label asp-for="TieuDe" class="control-label">Tiêu đề</label>
                                     <input asp-for="TieuDe" class="form-control" />
                                     <span asp-validation-for="TieuDe" class="text-danger"></span>
                                 </div>
+
                                 <div class="form-group">
                                     <label asp-for="GioiThieu" class="control-label">Giới thiệu</label>
-                                    <input asp-for="GioiThieu" class="form-control" />
+                                    @Html.TextAreaFor(h => h.GioiThieu, 5, 1, new { @class = "k-textbox" })
                                     <span asp-validation-for="GioiThieu" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="HinhAnh" class="control-label">Hình ảnh</label>
-                                    <input asp-for="HinhAnh" class="form-control" type="file" />
-                                    <span asp-validation-for="HinhAnh" class="text-danger"></span>
+                                    <label class="control-label">Hình ảnh</label>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="Link" class="control-label"></label>
-                                    <input asp-for="Link" class="form-control" />
-                                    <span asp-validation-for="Link" class="text-danger"></span>
+                                    <label class="control-label">Ngày tạo</label>
+                                    <label class="control-label bv-label-content">@Model.NgayTao?.ToString("dd/MM/yy HH:mm:ss")</label>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="FkNgonNgu" class="control-label">Ngôn ngữ</label>
-                                    <kendo-dropdownlist for="FkNgonNgu"
-                                                        bind-to="@((List<DropdownlistViewModel>)ViewBag.ListNgonNgu)"
-                                                        option-label="-- Chọn ngôn ngữ --"
-                                                        datatextfield="@nameof(DropdownlistViewModel.Ten)"
-                                                        datavaluefield="@nameof(DropdownlistViewModel.Id)" />
-                                    <span asp-validation-for="FkNgonNgu" class="text-danger"></span>
+                                    <label class="control-label">Người tạo</label>
+                                    <label class="control-label bv-label-content">@Model.NguoiTao</label>
                                 </div>
-
-                                <div class="form-group">
-                                    <label asp-for="NewTab" class="control-label"></label>
-                                    <select asp-for="NewTab" class="form-control" asp-items="ViewBag.NewTab">
-                                        <option>True</option>
-                                        <option>False</option>
-                                    </select>
-                                    <span asp-validation-for="NewTab" class="text-danger"></span>
-                                </div>
-                                <div class="form-group" id="save">
-                                    <input type="submit" value="Save" class="btn btn-success" />
-                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-success" />
+                                <a asp-action="Index" class="btn btn-default">Trở về danh sách</a>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-
-        <div>
-            <a asp-action="Index">Back to List</a>
-        </div>
-
     </div>
 </div>

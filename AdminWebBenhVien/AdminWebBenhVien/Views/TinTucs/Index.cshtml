@@ -1,5 +1,4 @@
-﻿@model IEnumerable<AdminWebBenhVien.EfModels.TinTuc>
-@using AdminWebBenhVien.Controllers
+﻿@using AdminWebBenhVien.Controllers
 @using AdminWebBenhVien.Models
 
 @{
@@ -20,18 +19,29 @@
         <div class="row">
             <div class="col-lg-12">
 
-                <kendo-grid name="gridTinTuc" height="550">
+                <kendo-grid name="gridTinTuc" height="550" resizable="true">
                     <datasource type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="20">
                         <transport>
                             <read url="@Url.Action(nameof(TinTucsController.TinTuc_Read))" type="get" />
                         </transport>
                         <schema>
-                            <model id="@nameof(TinTucViewModel.Id)">
+                            <model id="@nameof(TinTucIndexViewModel.Id)">
                                 <fields>
-                                    <field name="@nameof(TinTucViewModel.Id)" />
-                                    <field name="@nameof(TinTucViewModel.TieuDe)" />
-                                    <field name="@nameof(TinTucViewModel.LuotXem)" />
-                                    <field name="@nameof(TinTucViewModel.Author)" />
+                                    <field name="@nameof(TinTucIndexViewModel.Id)" />
+                                    <field name="@nameof(TinTucIndexViewModel.TenLoaiId)" />
+                                    <field name="@nameof(TinTucIndexViewModel.TenLoai)" />
+                                    <field name="@nameof(TinTucIndexViewModel.TieuDe)" />
+                                    <field name="@nameof(TinTucIndexViewModel.GioiThieu)" />
+                                    <field name="@nameof(TinTucIndexViewModel.Xem)" type="number" />
+                                    <field name="@nameof(TinTucIndexViewModel.TacGia)" />
+                                    <field name="@nameof(TinTucIndexViewModel.NgonNguId)" />
+                                    <field name="@nameof(TinTucIndexViewModel.NgonNgu)" />
+                                    <field name="@nameof(TinTucIndexViewModel.NgayTao)" type="date" />
+                                    <field name="@nameof(TinTucIndexViewModel.NgaySua)" type="date" />
+                                    <field name="@nameof(TinTucIndexViewModel.NguoiSuaId)" />
+                                    <field name="@nameof(TinTucIndexViewModel.NguoiSua)" />
+                                    <field name="@nameof(TinTucIndexViewModel.NguoiTaoId)" />
+                                    <field name="@nameof(TinTucIndexViewModel.NguoiTao)" />
                                 </fields>
                             </model>
                         </schema>
@@ -40,18 +50,29 @@
                     <sortable enabled="true" />
                     <filterable enabled="true" />
                     <scrollable enabled="true" />
-                    <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
+                    <pageable button-count="5" refresh="true" page-sizes="new int[] { 10, 20, 30, 40, 50, 100 }">
                     </pageable>
                     <filterable enabled="true" />
                     <columns>
-                        <column field="@nameof(TinTucViewModel.Id)" title="ID" width="80" />
-                        <column field="@nameof(TinTucViewModel.TieuDe)" title="Tiêu đề" width="200" />
-                        <column field="@nameof(TinTucViewModel.LuotXem)" title="Lượt xem" width="100" />
-                        <column field="@nameof(TinTucViewModel.Author)" title="Tác giả" width="150" />
-                        <column title="Thao tác" width="150">
+                        <column title="Thao tác" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'>
                             <commands>
-                                <column-command text="Sửa" name="btnCapNhat" class-name="k-primary" click="btnCapNhat_Click"></column-command>
-                                <column-command text="Xóa" name="btnXoa" class-name="k-primary" click="btnXoa_Click"></column-command>
+                                <column-command text="Sửa" name="btnCapNhat1" class-name="k-primary" click="btnCapNhat_Click"></column-command>
+                            </commands>
+                        </column>
+                        <column field="@nameof(TinTucIndexViewModel.Id)" title="ID" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }' />
+                        <column field="@nameof(TinTucIndexViewModel.TenLoai)" title="Tên loại" width="300" />
+                        <column field="@nameof(TinTucIndexViewModel.TieuDe)" title="Tiêu đề" width="300" />
+                        <column field="@nameof(TinTucIndexViewModel.GioiThieu)" title="Giới thiệu" width="300" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-ellipsis" }' />
+                        <column field="@nameof(TinTucIndexViewModel.Xem)" title="Lượt xem" width="100" format="{0:N0}" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-right" }' />
+                        <column field="@nameof(TinTucIndexViewModel.TacGia)" title="Tác giả" width="300" />
+                        <column field="@nameof(TinTucIndexViewModel.NgonNgu)" title="Ngôn ngữ" width="100" />
+                        <column field="@nameof(TinTucIndexViewModel.NgayTao)" title="Ngày tạo" width="150" format="{0:dd/MM/yy HH:mm:ss}" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }' />
+                        <column field="@nameof(TinTucIndexViewModel.NguoiTao)" title="Người tạo" width="200" />
+                        <column field="@nameof(TinTucIndexViewModel.NgaySua)" title="Ngày sửa" width="150" format="{0:dd/MM/yy HH:mm:ss}" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }' />
+                        <column field="@nameof(TinTucIndexViewModel.NguoiSua)" title="Người sửa" width="200" />
+                        <column title="Thao tác" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'>
+                            <commands>
+                                <column-command text="Sửa" name="btnCapNhat2" class-name="k-primary" click="btnCapNhat_Click"></column-command>
                             </commands>
                         </column>
                     </columns>

@@ -1,10 +1,5 @@
-﻿@model IEnumerable<AdminWebBenhVien.EfModels.SlideShow>
-@using AdminWebBenhVien.Controllers
+﻿@using AdminWebBenhVien.Controllers
 @using AdminWebBenhVien.Models
-
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
 <div id="wrapper">
     <div id="page-wrapper">
@@ -19,18 +14,19 @@
         </p>
         <div class="row">
             <div class="col-lg-12">
-                <kendo-grid name="gridSlideShows" height="550">
+                <kendo-grid name="gridSlideShows" height="550" resizable="true">
                     <datasource type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="20">
                         <transport>
                             <read url="@Url.Action(nameof(SlideShowsController.SlideShows_Read))" type="get" />
                         </transport>
                         <schema>
-                            <model id="@nameof(SlideShowViewModel.Id)">
+                            <model id="@nameof(SlideShowIndexViewModel.Id)">
                                 <fields>
-                                    <field name="@nameof(SlideShowViewModel.Stt)" />
-                                    <field name="@nameof(SlideShowViewModel.TieuDe)" />
-                                    <field name="@nameof(SlideShowViewModel.LinkEvent)" />
-                                    <field name="@nameof(SlideShowViewModel.IsLink)" />
+                                    <field name="@nameof(SlideShowIndexViewModel.Id)" />
+                                    <field name="@nameof(SlideShowIndexViewModel.TieuDe)" />
+                                    <field name="@nameof(SlideShowIndexViewModel.NgonNguId)" />
+                                    <field name="@nameof(SlideShowIndexViewModel.NgonNgu)" />
+                                    <field name="@nameof(SlideShowIndexViewModel.LinkSuKien)" />
                                 </fields>
                             </model>
                         </schema>
@@ -39,18 +35,22 @@
                     <sortable enabled="true" />
                     <filterable enabled="true" />
                     <scrollable enabled="true" />
-                    <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
+                    <pageable button-count="5" refresh="true" page-sizes="new int[] { 10, 20, 30, 40, 50, 100 }">
                     </pageable>
                     <filterable enabled="true" />
                     <columns>
-                        <column field="@nameof(SlideShowViewModel.Stt)" title="STT" width="80" />
-                        <column field="@nameof(SlideShowViewModel.TieuDe)" title="Tiêu đề" width="200" />
-                        <column field="@nameof(SlideShowViewModel.LinkEvent)" title="Link sự kiện" width="100" />
-                        <column field="@nameof(SlideShowViewModel.IsLink)" title="IsLink" width="150" />
-                        <column title="Thao tác" width="150">
+                        <column title="Thao tác" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'>
                             <commands>
-                                <column-command text="Sửa" name="btnCapNhat" class-name="k-primary" click="btnCapNhat_Click"></column-command>
-                                <column-command text="Xóa" name="btnXoa" class-name="k-primary" click="btnXoa_Click"></column-command>
+                                <column-command text="Sửa" name="btnCapNhat1" class-name="k-primary" click="btnCapNhat_Click"></column-command>
+                            </commands>
+                        </column>
+                        <column field="@nameof(SlideShowIndexViewModel.Id)" title="ID" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }' />
+                        <column field="@nameof(SlideShowIndexViewModel.TieuDe)" title="Tiêu đề" width="300" />
+                        <column field="@nameof(SlideShowIndexViewModel.NgonNgu)" title="Ngôn ngữ" width="100" />
+                        <column field="@nameof(SlideShowIndexViewModel.LinkSuKien)" title="Đường link" width="300" />
+                        <column title="Thao tác" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'>
+                            <commands>
+                                <column-command text="Sửa" name="btnCapNhat2" class-name="k-primary" click="btnCapNhat_Click"></column-command>
                             </commands>
                         </column>
                     </columns>

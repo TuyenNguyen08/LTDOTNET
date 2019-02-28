@@ -1,11 +1,8 @@
 ﻿@model Hospital.Web.EfModels.HoatDong
 @using Hospital.Web.Controllers
 @{
-    ViewData["Title"] = "Details";
-}
-
-@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Hoạt động";
 }
 
 @section css {
@@ -22,7 +19,7 @@
                 <h1>@Model.TieuDe</h1>
                 <div class="breadcroumb_link">
                     <a asp-action="@nameof(HomesController.Index)"
-                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>/ Tin tức mới nhất
+                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>/ Hoạt động mới nhất
                 </div>
             </div>
         </div>
@@ -35,11 +32,10 @@
             <div class="col-md-12">
                 <div class="blog_detaisl_area">
                     <div class="blog_full_content">
-                        <img src="~/images/img/blog_big1.jpg" alt="">
-                        @* <img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_TIN_TUC + HoatDong.HinhAnhMinhHoa)" />*@
+                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=Model.HinhAnhMinhHoa })" alt="">
                         <h4>@Model.TieuDe</h4>
                         <div class="blog_meta">
-                            <a href="#">@Model.NgayTao?.ToString("dd/MM/yyyy HH:mm:ss")</a> <a href="#">Lượt xem: @Model.LuotXem</a>
+                            <a href="#">@Model.NgayTao?.ToString("dd/MM/yy hh:mm:ss")</a>
                         </div>
                         <div class="blog_quote">
                             <p>@Model.GioiThieu</p>
@@ -49,9 +45,28 @@
                             <br>
 
                             <br>
-
+                            <div class="tag_and_social_bar">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="blog_tag">
+                                            <i class="zmdi zmdi-label"></i>
+                                            <a href="#">Loiich</a>
+                                            <a href="#">Moitruong</a>
+                                            <a href="#">Xuly</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="share_with">
+                                            <a href="#"><i class="zmdi zmdi-twitter"></i></a>
+                                            <a href="#"><i class="zmdi zmdi-facebook"></i></a>
+                                            <a href="#"><i class="zmdi zmdi-instagram"></i></a>
+                                            <a href="#"><i class="zmdi zmdi-linkedin"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
-                    @*<div class="comment_area">
+                    <div class="comment_area">
                         <h4>4 Bình luận</h4>
                         <div class="comment_wraper">
                             <div class="single_comment">
@@ -119,7 +134,7 @@
                                 </div>
                             </form>
                         </div>
-                    </div>*@
+                    </div>
                 </div>
             </div>
 

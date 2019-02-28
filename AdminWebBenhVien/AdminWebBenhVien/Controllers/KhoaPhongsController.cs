@@ -57,6 +57,100 @@ namespace AdminWebBenhVien.Controllers
             return Json(resultJson);
         }
 
+
+        [HttpGet]
+        [Route("gioi-thieu-khoa-ban/{id}")]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || !id.HasValue)
+            {
+                return NotFound();
+            }
+
+            var model = await _context.KhoaPhong.AsNoTracking()
+                .Include(h => h.FkLoaiKhoaPhongNavigation)
+                .Include(h => h.FkNgonNguNavigation)
+                .Where(h => h.Id == id.Value)
+                .Select(h => new GioiThieuKhoaBanEditViewModel
+                {
+                    Id = h.Id,
+
+                    TenLoai = h.FkLoaiKhoaPhongNavigation.TenLoai,
+
+                    TieuDe = h.TieuDeKhoa,
+                    GioiThieu = h.GioiThieu,
+                    NoiDung = h.NoiDung,
+                    Xem = h.LuotXem,
+                    
+                    NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
+
+                    NgaySua = h.NgayCapNhat,
+                    NguoiSua = h.UserModify,
+                })
+                .FirstOrDefaultAsync();
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+            return View(model);
+        }
+
+        // POST: KhoaPhongs/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("gioi-thieu-khoa-ban/{id}")]
+        public async Task<IActionResult> Edit(GioiThieuKhoaBanEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var dbItem = await _context.KhoaPhong.FirstOrDefaultAsync(h => h.Id == model.Id);
+
+            if(dbItem == null)
+            {
+                return NotFound();
+            }
+
+            dbItem.TieuDeKhoa = model.TieuDe;
+            dbItem.GioiThieu = model.GioiThieu;
+            dbItem.NoiDung = model.NoiDung;
+
+            dbItem.NgayCapNhat = DateTime.Now;
+            dbItem.UserModify = "admin";
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Edit), new { id = model.Id });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // GET: KhoaPhongs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -84,6 +178,7 @@ namespace AdminWebBenhVien.Controllers
             ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id");
             return View();
         }
+       
         // POST: KhoaPhongs/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -101,65 +196,6 @@ namespace AdminWebBenhVien.Controllers
         }
 
         // GET: KhoaPhongs/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var listNgonNgu = await GetListNgonNguAsync();
-            ViewBag.ListNgonNgu = listNgonNgu;
-
-            var listLoaiKhoaPhong = await GetListLoaiKhoaPhongAsync();
-            ViewBag.ListLoaiKhoaPhong = listLoaiKhoaPhong;
-            var khoaPhong = await _context.KhoaPhong.FindAsync(id);
-            if (khoaPhong == null)
-            {
-                return NotFound();
-            }
-            ViewData["FkLoaiKhoaPhong"] = new SelectList(_context.LoaiKhoaPhong, "Id", "Id", khoaPhong.FkLoaiKhoaPhong);
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", khoaPhong.FkNgonNgu);
-            return View(khoaPhong);
-        }
-
-        // POST: KhoaPhongs/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TieuDeKhoa,TenKhoaPhong,GioiThieu,NoiDung,NgayCapNhat,UserModify,FkLoaiKhoaPhong,FkNgonNgu,HinhAnhDaiDien,HenKhamBenh,Stt,LuotXem")] KhoaPhong khoaPhong)
-        {
-            if (id != khoaPhong.Id)
-            {
-                return NotFound();
-            }
-            var listNgonNgu = await GetListNgonNguAsync();
-            ViewBag.ListNgonNgu = listNgonNgu;
-
-            var listLoaiKhoaPhong = await GetListLoaiKhoaPhongAsync();
-            ViewBag.ListLoaiKhoaPhong = listLoaiKhoaPhong;
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(khoaPhong);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!KhoaPhongExists(khoaPhong.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["FkLoaiKhoaPhong"] = new SelectList(_context.LoaiKhoaPhong, "Id", "Id", khoaPhong.FkLoaiKhoaPhong);
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", khoaPhong.FkNgonNgu);
-            return View(khoaPhong);
-        }
         private Task<List<DropdownlistViewModel>> GetListNgonNguAsync()
         {
             var list = _context.NgonNgu.AsNoTracking()

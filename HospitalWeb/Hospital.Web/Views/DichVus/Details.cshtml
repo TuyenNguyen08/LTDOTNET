@@ -3,6 +3,7 @@
 @using Hospital.Web.EfModels
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Dịch vụ";
 }
 @section css {
 }
@@ -24,131 +25,51 @@
 <div class="service_details_area">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <img src="~/images/img/service_details1.jpg" alt="">
-                @*<img src="@Url.Content(Hospital.Web.Models.Constants.FOLDER_IMAGE_DICH_VU + DichVuChiTiet.HinhAnh`)" />*@
-            </div>
-            <div class="col-md-6">
-                <div class="section_title">
-
-                    <h1>Liên hệ ngay! </h1>
-                    <p> @Model.GioiThieu</p>
-                </div>
-                <form action="#" class="contact_form">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12">
-                            <input type="text" placeholder="Tên của bạn">
-                        </div>
-                        <div class="col-lg-6 col-md-12">
-                            @(Html.Kendo().DatePicker()
-.Name("dateofBirth")
-.Value("10/10/2011")
-.HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
-                            )
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12">
-                            <input type="email" placeholder="Email">
-                        </div>
-                        <div class="col-lg-6 col-md-12">
-                            <input type="number" placeholder="Số điện thoại">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12">
-                            @(Html.Kendo().DropDownList()
-.Name("color")
-.DataTextField("Text")
-.DataValueField("Value")
-.Events(e => e.Change("change"))
-.BindTo(new List<SelectListItem>() {
-                                                                                                                                                                                            new SelectListItem() {
-                                                                                                                                                                                            Text = "Black",
-                                                                                                                                                                                            Value = "1"
-                                                                                                                                                                                            },
-                                                                                                                                                                                            new SelectListItem() {
-                                                                                                                                                                                            Text = "Orange",
-                                                                                                                                                                                            Value = "2"
-                                                                                                                                                                                            },
-                                                                                                                                                                                            new SelectListItem() {
-                                                                                                                                                                                            Text = "Grey",
-                                                                                                                                                                                            Value = "3"
-                                                                                                                                                                                            }
-})
-.Value("1")
-.HtmlAttributes(new { style = "width: 100%" })
-                            )
-
-                        </div>
-                        <div class="col-lg-6 col-md-12">
-
-                            @(Html.Kendo().DatePicker()
-.Name("datepicker")
-.Value("10/10/2011")
-.HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
-                            )
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <textarea placeholder="Nhập nội dung"></textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <button type="submit" class="custom_btn">Gửi <i class="zmdi zmdi-plus"></i></button>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-        <div class="row">
             <div class="col-md-12">
-                <div class="service_details_wraper">
-                    <h4>@Model.TenDichVu</h4>
-                    <div class="service_quote">
-                        <i class="zmdi zmdi-quote"></i>
-                        <h4>
-                            @Html.Raw(@Model.GioiThieu)
-                        </h4>
-                        <h3>Số điện thoại liên lạc: 0988 929 059</h3>
+                <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=Model.HinhAnh })" />
+            </div>
+
+            <div>
+                <div class="col-md-12">
+                    <div class="service_details_wraper">
+                        <h4>@Model.TenDichVu</h4>
+                        <div class="service_quote">
+                            <i class="zmdi zmdi-quote "></i>
+                            <h4>
+                                @Html.Raw(@Model.GioiThieu)
+                            </h4>
+
+                        </div>
+                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=Model.HinhAnh })" />
+                        <br>
+                        <br>
+                        <p>@Html.Raw(@Model.NoiDung)</p>
                     </div>
+                </div>
+            </div>
 
-
-                    <br>
-
-                    <ul class="service_list_items">
-                        @foreach (var dichVu in (ViewBag.lsDichVu as List<DichVu>))
-                        {
+            <div class="container" style="    padding: 5%;">
+                <h1 style="border-bottom: 1px solid #8D8D8D; width:100%; float: left;">
+                    Dịch vụ khác
+                </h1>
+                <ul>
+                    @foreach (var dichVu in (ViewBag.lsDichVuCT as List<DichVuChiTiet>))
+                    {
                         <li>
-                            <i class="zmdi zmdi-play-circle"></i>  @dichVu.Id
-                            <i class="zmdi zmdi-play-circle"></i>  @dichVu.MoTa
+                            <a asp-action="@nameof(DichVusController.Details)"
+                               asp-controller="@nameof(DichVusController).Replace("Controller","")"
+                               asp-route-id="@dichVu.Id">
+                                *@dichVu.TenDichVu
+                            </a>
                         </li>
 
-                        }
-                    </ul>
-                    <br>
-                    <p>@Html.Raw(@Model.NoiDung)</p>
-                </div>
+                    }
+                </ul>
             </div>
         </div>
-
 
     </div>
 </div>
 @section scripts {
-    <script>
-        function change() {
-            var value = $("#color").val();
-            $("#cap")
-                .toggleClass("black-cap", value == 1)
-                .toggleClass("orange-cap", value == 2)
-                .toggleClass("grey-cap", value == 3);
-        };
 
-
-    </script>
 }
