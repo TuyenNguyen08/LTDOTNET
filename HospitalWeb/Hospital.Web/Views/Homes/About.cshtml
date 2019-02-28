@@ -30,8 +30,8 @@
             <div class="col-lg-5 order-lg-7">
                 <div class="about_video_content">
                     <a href="#" class="video_popup">
-                        <img src="~/images/img/about2.jpg" alt="">
-                        <span class="video_content"><i class="zmdi zmdi-play-circle-outline"></i> Môi trường làm việc của chúng tôi</span>
+                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=Model.HinhAnh })" alt="">
+                        @Model.HinhAnh
                     </a>
                 </div>
             </div>
@@ -39,20 +39,6 @@
                 <div class="about_content">
                     <h1>@Model.Ten</h1>
                     <p>@Html.Raw(Model.GioiThieu)</p>
-                    <ul>
-                        <li>
-                            <i class="zmdi zmdi-play-circle"></i> Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc
-                        </li>
-                        <li>
-                            <i class="zmdi zmdi-play-circle"></i> Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc
-                        </li>
-                        <li>
-                            <i class="zmdi zmdi-play-circle"></i> Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc
-                        </li>
-                        <li>
-                            <i class="zmdi zmdi-play-circle"></i> Hội thảo các tiến bộ trong việc điều trị nếp Võng mạc
-                        </li>
-                    </ul>
                    
                 </div>
             </div>

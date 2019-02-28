@@ -40,11 +40,11 @@
 <div class="welcome_areaa" style="background-image: url(../images/img/welcome_shap.png);">
     <div class="container">
         <div class="welcome_slider owl-carousel">
-            @foreach (var slide in Model.lsSLide)
+            @foreach (var slide in Model.lsSLide) 
             {
-                <div class="single_welcome_slider" style="background-image:url(@Url.Action("GetImage" ,"ImageBrowser",new {id=slide.HinhAnh })));background-repeat: no-repeat;
-    background-size: cover;">
-                </div>
+            <div class="single_welcome_slider">
+                <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=slide.HinhAnh })" />
+            </div>
             }
         </div>
     </div>
@@ -167,9 +167,6 @@
     </div>
 </div>
 <!-- News Area Start-->
-
-
-
 @section scripts {
     <script src="~/js/jquery-2.1.4.min.js"></script>
     <script src="~/js/popper.min.js"></script>
