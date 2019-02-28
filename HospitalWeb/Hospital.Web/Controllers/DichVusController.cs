@@ -37,6 +37,7 @@ namespace Hospital.Web.Controllers
                 return NotFound();
             }
 
+            #region lsDichVuChiTiet
             var lstdichVuChiTiet = await InitParam.Db.DichVuChiTiet.AsNoTracking()
                 .Include(t => t.FkDichVu)
                 .Include(t => t.FkDichVuNavigation)
@@ -60,6 +61,20 @@ namespace Hospital.Web.Controllers
             {
                 return NotFound();
             }
+            #endregion
+
+            #region lsDichVu
+
+            var listDichVu = await InitParam.Db.DichVu.AsNoTracking().Take(9).Select(t => new DichVu
+            {
+                Id = t.Id,
+                MoTa = t.MoTa
+                
+            }).ToListAsync();
+
+            ViewBag.lsDichVu = listDichVu;
+
+            #endregion
 
             return View(lstdichVuChiTiet);
         }
