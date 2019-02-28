@@ -3,7 +3,7 @@
 
 @using Hospital.Web.Controllers
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Trang chủ";
 }
 @section css {
     <link href="~/css/animate.min.css" rel="stylesheet" />
@@ -42,9 +42,9 @@
         <div class="welcome_slider owl-carousel">
             @foreach (var slide in Model.lsSLide) 
             {
-            <div class="single_welcome_slider">
-                <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=slide.HinhAnh })" />
-            </div>
+                <div class="single_welcome_slider">
+                    <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=slide.HinhAnh })" />
+                </div>
             }
         </div>
     </div>
@@ -107,7 +107,7 @@
                                     <h5>
                                         @hoatdong.TieuDe
                                     </h5>
-                                    <span>@hoatdong.NgayTao</span>
+                                    <span>@hoatdong.NgayTao?.ToString("dd/MM/yyyy HH:mm:ss")</span>
                                     <p>
                                         @hoatdong.GioiThieu
                                     </p>
@@ -135,7 +135,7 @@
                                     <h5>
                                         @tinTuc.TieuDe
                                     </h5>
-                                    <span>@tinTuc.NgayTao</span>
+                                    <span>@tinTuc.NgayTao?.ToString("dd/MM/yyyy HH:mm:ss")</span>
                                     <p>
                                         @tinTuc.GioiThieu
                                     </p>
@@ -150,18 +150,14 @@
                 <div class="section_title">
                     <h1>Video</h1>
                 </div>
-                @foreach (var video in Model.lsVideo)
-                {
-                    <ul>
+                <ul>
+                    @foreach (var video in Model.lsVideo)
+                    {
                         <li>
-                            <a href="@video.DuongDanFile" target="_blank">
-                                <i class="zmdi zmdi-play-circle"> @video.TieuDe</i>
-                                <br />
-                                <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=video.HinhAnh })" />
-                            </a>
+                            <iframe src="https://www.youtube.com/embed/@video.DuongDanFile" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </li>
+                    }
                     </ul>
-                }
             </div>
         </div>
     </div>

@@ -23,99 +23,121 @@ namespace Hospital.Web.Controllers
         public async Task<IActionResult> Index()
         {
             HomeModel model = new HomeModel();
+            var fkNgonNgu = base.NgonNgu;
 
             var lsSLide = await InitParam.Db.SlideShow.AsNoTracking()
+                .Where(h => h.FkNgonNgu == fkNgonNgu)
                 .Select(t => new SlideShow
                 {
                     Id = t.Id,
                     TieuDe = t.TieuDe,
                     HinhAnh = t.HinhAnh,
 
-                }).ToListAsync();
+                })
+                .ToListAsync();
             model.lsSLide = new List<SlideShow>(lsSLide);
 
-            var listKhoaPhong = await InitParam.Db.KhoaPhong.AsNoTracking().Select(t => new KhoaPhong
-            {
-                Id = t.Id,
-                TieuDeKhoa = t.TieuDeKhoa,
-            }).ToListAsync();
 
-
+            var listKhoaPhong = await InitParam.Db.KhoaPhong.AsNoTracking()
+                .Where(h => h.FkNgonNgu == fkNgonNgu)
+                .Select(t => new KhoaPhong
+                {
+                    Id = t.Id,
+                    TieuDeKhoa = t.TieuDeKhoa,
+                })
+                .ToListAsync();
             model.lsKhoaPhong = new List<KhoaPhong>(listKhoaPhong);
 
-            var listGioiThieu = await InitParam.Db.GioiThieuChiTiet.AsNoTracking().Select(t => new GioiThieuChiTiet
-            {
-                Id = t.Id,
-                Ten = t.Ten,
-            }).ToListAsync();
 
-
+            var listGioiThieu = await InitParam.Db.GioiThieuChiTiet.AsNoTracking()
+                .Where(h => h.FkNgonNgu == fkNgonNgu)
+                .Select(t => new GioiThieuChiTiet
+                {
+                    Id = t.Id,
+                    Ten = t.Ten,
+                })
+                .ToListAsync();
             model.lsGioiThieu = new List<GioiThieuChiTiet>(listGioiThieu);
 
-            var listTinTuc = await InitParam.Db.TinTuc.AsNoTracking().Take(3).Select(t => new TinTuc
-            {
-                Id = t.Id,
-                TieuDe = t.TieuDe,
-                NgayTao = t.NgayTao,
-                HinhAnhMinhHoa=t.HinhAnhMinhHoa,
-                GioiThieu=t.GioiThieu.Substring(0, 100) + "...",
-            }).ToListAsync();
 
-
+            var listTinTuc = await InitParam.Db.TinTuc.AsNoTracking()
+                .Where(h => h.FkNgonNgu == fkNgonNgu)
+                .OrderByDescending(h => h.NgaySua)
+                .ThenByDescending(h => h.NgayTao)
+                .Take(3)
+                .Select(t => new TinTuc
+                {
+                    Id = t.Id,
+                    TieuDe = t.TieuDe,
+                    NgayTao = t.NgayTao,
+                    HinhAnhMinhHoa = t.HinhAnhMinhHoa,
+                    GioiThieu = t.GioiThieu.Substring(0, 100) + "...",
+                }).ToListAsync();
             model.lsTinTuc = new List<TinTuc>(listTinTuc);
 
-            var listHoatDong = await InitParam.Db.HoatDong.AsNoTracking().Take(3).Select(t => new HoatDong
-            {
-                Id = t.Id,
-                TieuDe = t.TieuDe,
-                NgayTao = t.NgayTao,
-                HinhAnhMinhHoa=t.HinhAnhMinhHoa,
-                GioiThieu = t.GioiThieu.Substring(0,100)+"...",
-            }).ToListAsync();
 
-
+            var listHoatDong = await InitParam.Db.HoatDong.AsNoTracking()
+                .Where(h => h.FkNgonNgu == fkNgonNgu)
+                .OrderByDescending(h => h.NgaySua)
+                .ThenByDescending(h => h.NgayTao)
+                .Take(3)
+                .Select(t => new HoatDong
+                {
+                    Id = t.Id,
+                    TieuDe = t.TieuDe,
+                    NgayTao = t.NgayTao,
+                    HinhAnhMinhHoa = t.HinhAnhMinhHoa,
+                    GioiThieu = t.GioiThieu.Substring(0, 100) + "...",
+                })
+                .ToListAsync();
             model.lsHoatDong = new List<HoatDong>(listHoatDong);
 
-            var listVideo = await InitParam.Db.Video.AsNoTracking().Take(6).Select(t => new Video
-            {
-                Id = t.Id,
-                TieuDe=t.TieuDe,
-                GioiThieu=t.GioiThieu,
-                HinhAnh=t.HinhAnh,
-                DuongDanFile=t.DuongDanFile,
 
-            }).ToListAsync();
-
-
+            var listVideo = await InitParam.Db.Video.AsNoTracking()
+                .Where(h => h.FkNgonNgu == fkNgonNgu)
+                .OrderByDescending(h => h.NgaySua)
+                .ThenByDescending(h => h.NgayTao)
+                .Take(6)
+                .Select(t => new Video
+                {
+                    Id = t.Id,
+                    TieuDe = t.TieuDe,
+                    GioiThieu = t.GioiThieu,
+                    HinhAnh = t.HinhAnh,
+                    DuongDanFile = t.DuongDanFile,
+                })
+                .ToListAsync();
             model.lsVideo = new List<Video>(listVideo);
 
-            var listSubNote = await InitParam.Db.SubNote.AsNoTracking().Take(4).Select(t => new SubNote
-            {
-                Id = t.Id,
-                TieuDe=t.TieuDe,
-                NoiDung=t.NoiDung.Substring(0,200)+"...",
-                Image=t.Image,
-               
-            }).ToListAsync();
 
-
+            var listSubNote = await InitParam.Db.SubNote.AsNoTracking()
+                .Where(h => h.FkNgonNgu == fkNgonNgu)
+                .Take(4)
+                .Select(t => new SubNote
+                {
+                    Id = t.Id,
+                    TieuDe = t.TieuDe,
+                    NoiDung = t.NoiDung.Substring(0, 200) + "...",
+                    Image = t.Image,
+                })
+                .ToListAsync();
             model.lsSubNote = new List<SubNote>(listSubNote);
 
 
-            var listSubPhone = await InitParam.Db.SubPhone.AsNoTracking().Take(3).Select(t => new SubPhone
-            {
-                Id = t.Id,
-                Name=t.Name,
-                SoDienThoai=t.SoDienThoai,
+            var listSubPhone = await InitParam.Db.SubPhone.AsNoTracking()
+                .Where(h => h.FkNgonNgu == fkNgonNgu)
+                .Take(3)
+                .Select(t => new SubPhone
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    SoDienThoai = t.SoDienThoai,
 
-            }).ToListAsync();
-
-
+                })
+                .ToListAsync();
             model.lsSubPhone = new List<SubPhone>(listSubPhone);
 
             return View(model);
-
-
         }
 
         // GET: KhoaPhongs/Details/5
@@ -149,9 +171,6 @@ namespace Hospital.Web.Controllers
 
             return View(khoaPhong);
         }
-
-
-
 
         // GET: KhoaPhongs/Create
         public async Task<IActionResult> Contact()

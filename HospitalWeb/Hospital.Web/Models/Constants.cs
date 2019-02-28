@@ -14,6 +14,6 @@ namespace Hospital.Web.Models
         public const string FOLDER_IMAGE_BAC_SI = "~/DuLieuDB/BacSi/";
         public const string FOLDER_IMAGE_DICH_VU = "~/DuLieuDB/DichVuChiTiet/";
 
-
+        public const string FOLDER_IMAGE_VIDEO = "~/DuLieuDB/Video/";
     }
 }
