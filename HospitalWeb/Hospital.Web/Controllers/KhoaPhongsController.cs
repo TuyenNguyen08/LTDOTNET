@@ -43,7 +43,7 @@ namespace Hospital.Web.Controllers
             var khoaPhong = await InitParam.Db.KhoaPhong.AsNoTracking()
                 .Include(k => k.FkLoaiKhoaPhongNavigation)
                 .Include(k => k.FkNgonNguNavigation)
-                .Where(m => m.Id == id)
+                .Where(m => m.Id == id && m.FkNgonNgu == NgonNgu )
                 .Select(t => new KhoaPhong
                 {
                     Id = t.Id,
@@ -51,6 +51,7 @@ namespace Hospital.Web.Controllers
                     TenKhoaPhong = t.TenKhoaPhong,
                     GioiThieu=t.GioiThieu,
                     NoiDung=t.NoiDung,
+                    FkLoaiKhoaPhong = t.FkLoaiKhoaPhong,
                     FkLoaiKhoaPhongNavigation = t.FkLoaiKhoaPhongNavigation
                 }).FirstOrDefaultAsync();
             ;
@@ -59,6 +60,19 @@ namespace Hospital.Web.Controllers
             {
                 return NotFound();
             }
+
+            //load danh sach cac khoa phong cung loai
+            var listkhoaPhongKhac = await InitParam.Db.KhoaPhong.AsNoTracking()
+               .Where(m => m.FkLoaiKhoaPhong == khoaPhong.FkLoaiKhoaPhong && m.FkNgonNgu == NgonNgu)
+               .OrderBy(m => m.TenKhoaPhong)
+               .Select(t => new KhoaPhong
+               {
+                   Id = t.Id,
+                   TenKhoaPhong = t.TenKhoaPhong,
+               }).ToListAsync();
+            ;
+
+            ViewBag.listkhoaPhongKhac = listkhoaPhongKhac;
 
             return View(khoaPhong);
         }
