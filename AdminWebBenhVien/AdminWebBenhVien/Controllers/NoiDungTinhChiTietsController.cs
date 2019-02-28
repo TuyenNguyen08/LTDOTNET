@@ -56,6 +56,95 @@ namespace AdminWebBenhVien.Controllers
             var resultJson = await resultDb.ToDataSourceResultAsync(request);
             return Json(resultJson);
         }
+
+        // GET: NoiDungTinhChiTiets/Edit/5
+        [HttpGet]
+        [Route("benh-nhan/{id}")]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || !id.HasValue)
+            {
+                return NotFound();
+            }
+            var model = await _context.NoiDungTinhChiTiet.AsNoTracking()
+                 .Include(h => h.FkNoiDungTinhNavigation)
+                 .Include(h => h.FkNgonNguNavigation)
+                 .Include(h => h.FkUserChinhsuaNavigation)
+                 .Where(h => h.Id == id.Value)
+                 .Select(h => new BenhNhanEditViewModel
+                 {
+                     Id = h.Id,
+                     
+                     TenLoai = h.FkNoiDungTinhNavigation.TenNoiDung,
+
+                     TieuDe = h.TieuDe,
+                     GioiThieu = h.GioiThieu,
+                     NoiDung = h.NoiDung,
+                     Xem = h.LuotXem,
+                     
+                     NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
+
+                     NgaySua = h.NgayChinhSua,
+                     NguoiSua = h.FkUserChinhsuaNavigation.HoVaTen
+
+                 })
+                 .FirstOrDefaultAsync();
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
+        }
+
+        // POST: NoiDungTinhChiTiets/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("benh-nhan/{id}")]
+        public async Task<IActionResult> Edit(BenhNhanEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var dbItem = await _context.NoiDungTinhChiTiet.FirstOrDefaultAsync(h => h.Id == model.Id);
+            if (dbItem == null)
+            {
+                return NotFound();
+            }
+
+            dbItem.TieuDe = model.TieuDe;
+            dbItem.GioiThieu = model.GioiThieu;
+            dbItem.NoiDung = model.NoiDung;
+
+            dbItem.NgayChinhSua = DateTime.Now;
+            dbItem.FkUserChinhsua = "admin";
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Edit), new { id = model.Id });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // GET: NoiDungTinhChiTiets/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -104,71 +193,7 @@ namespace AdminWebBenhVien.Controllers
             ViewData["FkUserChinhsua"] = new SelectList(_context.User, "UserName", "UserName", noiDungTinhChiTiet.FkUserChinhsua);
             return View(noiDungTinhChiTiet);
         }
-
-        // GET: NoiDungTinhChiTiets/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var listNgonNgu = await GetListNgonNguAsync();
-            ViewBag.ListNgonNgu = listNgonNgu;
-
-            var listNoiDungTinh = await GetListNoiDungTinhAsync();
-            ViewBag.ListNoiDungTinh = listNoiDungTinh;
-            var noiDungTinhChiTiet = await _context.NoiDungTinhChiTiet.Where(t=>t.Id==id).FirstOrDefaultAsync();
-            if (noiDungTinhChiTiet == null)
-            {
-                return NotFound();
-            }
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", noiDungTinhChiTiet.FkNgonNgu);
-            ViewData["FkNoiDungTinh"] = new SelectList(_context.NoiDungTinh, "Id", "Id", noiDungTinhChiTiet.FkNoiDungTinh);
-            ViewData["FkUserChinhsua"] = new SelectList(_context.User, "UserName", "UserName", noiDungTinhChiTiet.FkUserChinhsua);
-            return View(noiDungTinhChiTiet);
-        }
-
-        // POST: NoiDungTinhChiTiets/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FkNgonNgu,FkNoiDungTinh,TieuDe,GioiThieu,NoiDung,HinhAnh,NgayChinhSua,FkUserChinhsua,Id,LuotXem")] NoiDungTinhChiTiet noiDungTinhChiTiet)
-        {
-            if (id != noiDungTinhChiTiet.FkNgonNgu)
-            {
-                return NotFound();
-            }
-            var listNgonNgu = await GetListNgonNguAsync();
-            ViewBag.ListNgonNgu = listNgonNgu;
-
-            var listNoiDungTinh = await GetListNoiDungTinhAsync();
-            ViewBag.ListNoiDungTinh = listNoiDungTinh;
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(noiDungTinhChiTiet);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!NoiDungTinhChiTietExists(noiDungTinhChiTiet.FkNgonNgu))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-             //   return RedirectToAction(nameof(Index));
-            }
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", noiDungTinhChiTiet.FkNgonNgu);
-            ViewData["FkNoiDungTinh"] = new SelectList(_context.NoiDungTinh, "Id", "Id", noiDungTinhChiTiet.FkNoiDungTinh);
-            ViewData["FkUserChinhsua"] = new SelectList(_context.User, "UserName", "UserName", noiDungTinhChiTiet.FkUserChinhsua);
-            return View(noiDungTinhChiTiet);
-        }
+       
         private Task<List<DropdownlistViewModel>> GetListNgonNguAsync()
         {
             var list = _context.NgonNgu.AsNoTracking()

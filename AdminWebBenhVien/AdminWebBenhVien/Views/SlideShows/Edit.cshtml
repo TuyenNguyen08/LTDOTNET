@@ -1,8 +1,6 @@
-﻿@model AdminWebBenhVien.EfModels.SlideShow
-@using AdminWebBenhVien.Models
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@using AdminWebBenhVien.Models
+@model SlideShowEditViewModel
+
 @section css{
     <link href="~/css/Create.css" rel="stylesheet" />
 }
@@ -16,75 +14,50 @@
         <br />
         <div class="row">
             <div class="col-lg-12">
-                <form asp-action="Edit">
+                <form asp-action="Edit" method="post">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#paneGioiThieu" aria-expanded="false">Thông tin chung</a>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#paneGioiThieu" aria-expanded="false">Thông tin</a>
                             </h4>
                         </div>
                         <div id="paneGioiThieu" class="collapse in" aria-expanded="false">
+
+                            <br />
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-success" />
+                            </div>
+
                             <div class="panel-body">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <input type="hidden" asp-for="Id" />
-                                <div class="form-group">
-                                    <label asp-for="Stt" class="control-label">STT</label>
-                                    <input asp-for="Stt" class="form-control" />
-                                    <span asp-validation-for="Stt" class="text-danger"></span>
-                                </div>
+
+
                                 <div class="form-group">
                                     <label asp-for="TieuDe" class="control-label">Tiêu đề</label>
                                     <input asp-for="TieuDe" class="form-control" />
                                     <span asp-validation-for="TieuDe" class="text-danger"></span>
                                 </div>
+
                                 <div class="form-group">
-                                    <label asp-for="HinhAnh" class="control-label">Hình ảnh</label>
-                                    <input asp-for="HinhAnh" class="form-control" type="file" />
-                                    <span asp-validation-for="HinhAnh" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="FkNgonNgu" class="control-label">Ngôn ngữ</label>
-                                    <kendo-dropdownlist for="FkNgonNgu"
-                                                        option-label="-- Chọn ngôn ngữ --"
-                                                        bind-to="@((List<DropdownlistViewModel>)ViewBag.ListNgonNgu)"
-                                                        datatextfield="@nameof(DropdownlistViewModel.Ten)"
-                                                        datavaluefield="@nameof(DropdownlistViewModel.Id)" />
-                                    <span asp-validation-for="FkNgonNgu" class="text-danger"></span>
+                                    <label asp-for="LinkSuKien" class="control-label">Đường link</label>
+                                    <input asp-for="LinkSuKien" class="form-control" />
+                                    <span asp-validation-for="LinkSuKien" class="text-danger"></span>
                                 </div>
 
                                 <div class="form-group">
-                                    <label asp-for="IsNewtab" class="control-label"></label>
-                                    <select asp-for="IsNewtab" class="form-control" asp-items="ViewBag.IsNewtab">
-                                        <option value="False">False</option>
-                                        <option value="True">True</option>
-                                    </select>
-                                    <span asp-validation-for="IsNewtab" class="text-danger"></span>
+                                    <label class="control-label">Hình ảnh</label>
                                 </div>
-                                <div class="form-group">
-                                    <label asp-for="LinkEvent" class="control-label"></label>
-                                    <input asp-for="LinkEvent" class="form-control" />
-                                    <span asp-validation-for="LinkEvent" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="IsLink" class="control-label"></label>
-                                    <select asp-for="IsLink" class="form-control" asp-items="ViewBag.IsLink">
-                                        <option value="False">False</option>
-                                        <option value="True">True</option>
-                                    </select>
-                                    <span asp-validation-for="IsLink" class="text-danger"></span>
-                                </div>
-                                <div class="form-group" id="save">
-                                    <input type="submit" value="Save" class="btn btn-success" />
-                                </div>
+
                             </div>
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-success" />
+                                <a asp-action="Index" class="btn btn-default">Trở về danh sách</a>
                             </div>
                         </div>
+                    </div>
                 </form>
             </div>
-        </div>
-
-        <div>
-            <a asp-action="Index">Back to List</a>
         </div>
     </div>
 </div>

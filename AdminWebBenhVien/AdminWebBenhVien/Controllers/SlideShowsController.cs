@@ -22,29 +22,115 @@ namespace AdminWebBenhVien.Controllers
         }
 
         // GET: SlideShows
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        [Route("slideshow-trang-chu")]
+        public IActionResult Index()
         {
-            var nBenhVien7CContext = _context.SlideShow.Include(s => s.FkNgonNguNavigation);
-            return View(await nBenhVien7CContext.ToListAsync());
+            return View();
         }
         [HttpGet]
         public async Task<IActionResult> SlideShows_Read([DataSourceRequest]DataSourceRequest request)
         {
-            var listSlideShows = _context.SlideShow.AsNoTracking()
-                .Select(t => new SlideShowViewModel
+            var resultDb = await _context.SlideShow
+                .Include(h => h.FkNgonNguNavigation)
+                .OrderBy(h => h.TieuDe)
+                .ThenBy(h => h.FkNgonNguNavigation.TenNgonNgu)
+                .Select(h => new SlideShowIndexViewModel
                 {
-                    Id = t.Id,
-                    TieuDe = t.TieuDe,
-                    HinhAnh=t.HinhAnh,
-                    FkNgonNgu = t.FkNgonNgu,
-                    Stt=t.Stt,
-                    IsNewtab=t.IsNewtab,
-                    IsLink=t.IsLink
-                });
-            var result = await listSlideShows.ToDataSourceResultAsync(request);
+                    Id = h.Id,
+
+                    TieuDe = h.TieuDe,
+                   
+                    NgonNguId = h.FkNgonNgu,
+                    NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
+
+                    LinkSuKien = h.LinkEvent                    
+                })
+                .ToListAsync();
+
+            var result = await resultDb.ToDataSourceResultAsync(request);
             return Json(result);
         }
+
+        // GET: SlideShows/Edit/5
+        [HttpGet]
+        [Route("slideshow-trang-chu/{id}")]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || !id.HasValue)
+            {
+                return NotFound();
+            }
+
+            var model = await _context.SlideShow.AsNoTracking()
+               .Include(h => h.FkNgonNguNavigation)
+               .Where(h => h.Id == id.Value)
+               .Select(h => new SlideShowEditViewModel
+               {
+                   Id = h.Id,
+
+                   TieuDe = h.TieuDe,
+
+                   NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
+
+                   LinkSuKien = h.LinkEvent
+               })
+               .FirstOrDefaultAsync();
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
+        }
+
+        // POST: SlideShows/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("slideshow-trang-chu/{id}")]
+        public async Task<IActionResult> Edit(SlideShowEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var dbItem = await _context.SlideShow.FirstOrDefaultAsync(h => h.Id == model.Id);
+            if (dbItem == null)
+            {
+                return NotFound();
+            }
+
+            dbItem.TieuDe = model.TieuDe;
+            dbItem.LinkEvent = model.LinkSuKien;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Edit), new { id = model.Id });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // GET: SlideShows/Details/5
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -87,64 +173,6 @@ namespace AdminWebBenhVien.Controllers
                 #endregion
                 _context.Add(slideShow);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", slideShow.FkNgonNgu);
-            return View(slideShow);
-        }
-
-        // GET: SlideShows/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            #region Get list master
-            var listNgonNgu = await GetListNgonNguAsync();
-            ViewBag.ListNgonNgu = listNgonNgu;
-            #endregion
-            var slideShow = await _context.SlideShow.FindAsync(id);
-            if (slideShow == null)
-            {
-                return NotFound();
-            }
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", slideShow.FkNgonNgu);
-            return View(slideShow);
-        }
-
-        // POST: SlideShows/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TieuDe,HinhAnh,FkNgonNgu,Stt,IsNewtab,LinkEvent,IsLink")] SlideShow slideShow)
-        {
-            if (id != slideShow.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    #region Get list master
-                    var listNgonNgu = await GetListNgonNguAsync();
-                    ViewBag.ListNgonNgu = listNgonNgu;
-                    #endregion
-                    _context.Update(slideShow);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!SlideShowExists(slideShow.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", slideShow.FkNgonNgu);

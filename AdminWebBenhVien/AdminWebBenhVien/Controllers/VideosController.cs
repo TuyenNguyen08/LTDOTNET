@@ -22,34 +22,131 @@ namespace AdminWebBenhVien.Controllers
         }
 
         // GET: Videos
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        [Route("video")]
+        public IActionResult Index()
         {
-            var nBenhVien7CContext = _context.Video.Include(v => v.FkNgonNguNavigation);
-            return View(await nBenhVien7CContext.ToListAsync());
+            return View();
         }
         [HttpGet]
         public async Task<IActionResult> Video_Read([DataSourceRequest]DataSourceRequest request)
         {
-            var listEvent = _context.Video.AsNoTracking()
-                .Select(t => new VideoViewModel
+            var resultDb = await _context.Video
+                .Include(h => h.FkNgonNguNavigation)
+                .OrderBy(h => h.TieuDe)
+                .ThenBy(h => h.FkNgonNguNavigation.TenNgonNgu)
+                .Select(h => new VideoIndexViewModel
                 {
-                   Id=t.Id,
-                   TieuDe=t.TieuDe,
-                   GioiThieu=t.GioiThieu,
-                   DuongDanFile=t.DuongDanFile,
-                   IsYoutube=t.IsYoutube,
-                   NoiBat=t.NoiBat,
-                   LuotXem=t.LuotXem,
-                   FkNgonNgu=t.FkNgonNgu,
-                   NgayTao=t.NgayTao,
-                   UserNguoiSua=t.UserNguoiSua,
-                   NgaySua=t.NgaySua,
-                   Stt=t.Stt,
-                   HinhAnh=t.HinhAnh
-                });
-            var result = await listEvent.ToDataSourceResultAsync(request);
+                   Id=h.Id,
+
+                   TieuDe= h.TieuDe,
+                   GioiThieu= h.GioiThieu,
+
+                   DuongDanFile = h.DuongDanFile,
+                   Xem = h.LuotXem,
+
+                   NgonNguId = h.FkNgonNgu,
+                   NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
+
+                   NgayTao = h.NgayTao,
+                   NguoiTao = h.NguoiTao,
+
+                   NgaySua = h.NgaySua,
+                   NguoiSua= h.UserNguoiSua,
+                })
+                .ToListAsync();
+
+            var result = await resultDb.ToDataSourceResultAsync(request);
             return Json(result);
         }
+
+        // GET: Videos/Edit/5
+        [HttpGet]
+        [Route("video/{id}")]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || !id.HasValue)
+            {
+                return NotFound();
+            }
+
+            var model = await _context.Video.AsNoTracking()
+                .Include(h => h.FkNgonNguNavigation)
+                .Where(h => h.Id == id.Value)
+                .Select(h => new VideoEditViewModel
+                {
+                    Id = h.Id,
+
+                    TieuDe = h.TieuDe,
+                    GioiThieu = h.GioiThieu,
+
+                    DuongDanFile = h.DuongDanFile,
+                    Xem = h.LuotXem,
+                    
+                    NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
+
+                    NgayTao = h.NgayTao,
+                    NguoiTao = h.NguoiTao,
+
+                    NgaySua = h.NgaySua,
+                    NguoiSua = h.UserNguoiSua,
+                })
+                .FirstOrDefaultAsync();
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
+        }
+
+        // POST: Videos/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("video/{id}")]
+        public async Task<IActionResult> Edit(VideoEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var dbItem = await _context.Video.FirstOrDefaultAsync(h => h.Id == model.Id);
+            if (dbItem == null)
+            {
+                return NotFound();
+            }
+
+            dbItem.TieuDe = model.TieuDe;
+            dbItem.GioiThieu = model.GioiThieu;
+            dbItem.DuongDanFile = model.DuongDanFile;
+
+
+            dbItem.NgaySua = DateTime.Now;
+            dbItem.UserNguoiSua = "admin";
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Edit), new { id = model.Id });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // GET: Videos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -96,63 +193,7 @@ namespace AdminWebBenhVien.Controllers
             ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", video.FkNgonNgu);
             return View(video);
         }
-
-        // GET: Videos/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var listNgonNgu = await GetListNgonNguAsync();
-            ViewBag.ListNgonNgu = listNgonNgu;
-            var video = await _context.Video.FindAsync(id);
-            if (video == null)
-            {
-                return NotFound();
-            }
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", video.FkNgonNgu);
-            return View(video);
-        }
-
-        // POST: Videos/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TieuDe,GioiThieu,DuongDanFile,IsYoutube,NoiBat,LuotXem,FkNgonNgu,NgayTao,NguoiTao,UserNguoiSua,NgaySua,Stt,HinhAnh")] Video video)
-        {
-            if (id != video.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var listNgonNgu = await GetListNgonNguAsync();
-                    ViewBag.ListNgonNgu = listNgonNgu;
-                    _context.Update(video);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!VideoExists(video.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", video.FkNgonNgu);
-            return View(video);
-        }
-
+      
         // GET: Videos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
