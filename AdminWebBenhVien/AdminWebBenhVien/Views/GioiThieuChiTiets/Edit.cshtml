@@ -105,7 +105,7 @@
                                             <tool name="print" />
                                         </tools>
                                         <image-browser file-types="*.png,*.gif,*.jpg,*.jpeg">
-                                            <image-browser-transport upload-url="@Url.Action("Upload", "ImageBrowser")" image-url="/ImageBrowser/GetImage/{0}/image">
+                                            <image-browser-transport upload-url="@Url.Action("Upload", "ImageBrowser")" image-url="@Constants.IMAGE_BROWSER_IMAGE_URL">
                                                 <create url="@Url.Action("Create", "ImageBrowser")" />
                                                 <read url="@Url.Action("Read", "ImageBrowser")" />
                                                 <destroy url="@Url.Action("Destroy", "ImageBrowser")" />
