@@ -6,48 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Content Remove="wwwroot\images\image_hoatdong\activity_20181207111103.jpg" />
-      <Content Remove="wwwroot\images\image_hoatdong\activity_20190123082439.JPG" />
-      <Content Remove="wwwroot\images\image_hoatdong\activity_20190125074224.jpg" />
-      <Content Remove="wwwroot\images\image_hoatdong\activity_20190213102937.jpg" />
-      <Content Remove="wwwroot\images\image_slider\slide_20130618061057.png" />
-      <Content Remove="wwwroot\images\image_slider\slide_20130618061110.png" />
-      <Content Remove="wwwroot\images\image_slider\slide_20130618061119.png" />
-      <Content Remove="wwwroot\images\image_slider\slide_20181014101114.jpg" />
-      <Content Remove="wwwroot\images\image_slider\slide_20181014105208.jpg" />
-      <Content Remove="wwwroot\images\image_slider\slide_20181016073349.jpg" />
-      <Content Remove="wwwroot\images\image_slider\slide_20181016073954.jpg" />
-      <Content Remove="wwwroot\images\image_slider\slide_20181016074946.jpg" />
-      <Content Remove="wwwroot\images\image_slider\slide_20190211083602.jpg" />
-      <Content Remove="wwwroot\images\image_video\1.jpg" />
-      <Content Remove="wwwroot\images\image_video\2.jpg" />
-      <Content Remove="wwwroot\images\image_video\3.jpg" />
-      <Content Remove="wwwroot\images\image_video\4.jpg" />
-      <Content Remove="wwwroot\images\testlogo.png" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Include="wwwroot\images\image_hoatdong\activity_20181207111103.jpg" />
-      <EmbeddedResource Include="wwwroot\images\image_hoatdong\activity_20190123082439.JPG" />
-      <EmbeddedResource Include="wwwroot\images\image_hoatdong\activity_20190125074224.jpg" />
-      <EmbeddedResource Include="wwwroot\images\image_hoatdong\activity_20190213102937.jpg" />
-      <EmbeddedResource Include="wwwroot\images\image_slider\slide_20130618061057.png" />
-      <EmbeddedResource Include="wwwroot\images\image_slider\slide_20130618061110.png" />
-      <EmbeddedResource Include="wwwroot\images\image_slider\slide_20130618061119.png" />
-      <EmbeddedResource Include="wwwroot\images\image_slider\slide_20181014101114.jpg" />
-      <EmbeddedResource Include="wwwroot\images\image_slider\slide_20181014105208.jpg" />
-      <EmbeddedResource Include="wwwroot\images\image_slider\slide_20181016073349.jpg" />
-      <EmbeddedResource Include="wwwroot\images\image_slider\slide_20181016073954.jpg" />
-      <EmbeddedResource Include="wwwroot\images\image_slider\slide_20181016074946.jpg" />
-      <EmbeddedResource Include="wwwroot\images\image_slider\slide_20190211083602.jpg" />
-      <EmbeddedResource Include="wwwroot\images\image_video\1.jpg" />
-      <EmbeddedResource Include="wwwroot\images\image_video\2.jpg" />
-      <EmbeddedResource Include="wwwroot\images\image_video\3.jpg" />
-      <EmbeddedResource Include="wwwroot\images\image_video\4.jpg" />
-      <EmbeddedResource Include="wwwroot\images\testlogo.png" />
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.App" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />

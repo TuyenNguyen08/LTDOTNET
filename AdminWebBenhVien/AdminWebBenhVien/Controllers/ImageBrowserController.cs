@@ -28,8 +28,11 @@ namespace AdminWebBenhVien.Controllers
         {
         }
 
-        [Route("ImageBrowser/GetImage/{id}/image")]
-        public IActionResult GetImage(string id)
+        [Route("ImageBrowser/GetImage/{id}")]
+        [Route("images/UploadFiles/{id}")]
+        [Route("{temp}/images/UploadFiles/{id}")]
+        [Route("{temp}/ImageBrowser/GetImage/{id}")]
+        public IActionResult GetImage(string id, string temp)
         {
             var file = System.IO.Path.Combine(_destination, id);
 
@@ -44,7 +47,7 @@ namespace AdminWebBenhVien.Controllers
         }
         
 
-        private string _destination = @"D:\FolderImageBenhVien";
+        private string _destination = @"D:\ImageWebBenhVien\images\UploadFiles";
         private string CreateUserFolder()
         {
             if (!System.IO.Directory.Exists(_destination))

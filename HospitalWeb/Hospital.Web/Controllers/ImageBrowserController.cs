@@ -8,10 +8,13 @@ namespace Hospital.Web.Controllers
 {
     public class ImageBrowserController : Controller
     {
-        private string _destination = @"D:\FolderImageBenhVien";
+        private string _destination = @"C:\ProjectAT\ImageWebBenhVien\images\UploadFiles";
 
-        [Route("ImageBrowser/GetImage/{id}/image")]
-        public IActionResult GetImage(string id)
+        [Route("ImageBrowser/GetImage/{id}")]
+        [Route("images/UploadFiles/{id}")]
+        [Route("{temp}/images/UploadFiles/{id}")]
+        [Route("{temp}/ImageBrowser/GetImage/{id}")]
+        public IActionResult GetImage(string id, string temp)
         {
             var file = System.IO.Path.Combine(_destination, id);
 
@@ -22,7 +25,12 @@ namespace Hospital.Web.Controllers
                 contentType = "application/octet-stream";
             }
 
-            return File(new System.IO.FileStream(file, System.IO.FileMode.Open), contentType);
+            if (System.IO.File.Exists(file))
+            {
+                return File(new System.IO.FileStream(file, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.Read), contentType);
+            }
+
+            return null;
         }
     }
 }
