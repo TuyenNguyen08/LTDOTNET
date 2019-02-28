@@ -38,7 +38,9 @@
                             <h4>
                                 @Html.Raw(@Model.GioiThieu)
                             </h4>
+
                         </div>
+                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=Model.HinhAnh })" />
                         <br>
                         <br>
                         <p>@Html.Raw(@Model.NoiDung)</p>
@@ -55,8 +57,10 @@
                     {
                         <li>
                             <a asp-action="@nameof(DichVusController.Details)"
-                               asp-controller="@nameof(DichVusController).Replace("Controller", "")"
-                               asp-route-id="@dichVu.Id"><i class="zmdi zmdi-play-circle"></i>@dichVu.TenDichVu</a>
+                               asp-controller="@nameof(DichVusController).Replace("Controller","")"
+                               asp-route-id="@dichVu.Id">
+                                *@dichVu.TenDichVu
+                            </a>
                         </li>
 
                     }
