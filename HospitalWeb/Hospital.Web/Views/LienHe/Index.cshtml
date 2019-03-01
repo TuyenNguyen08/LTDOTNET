@@ -1,0 +1,48 @@
+﻿@using Hospital.Web.Controllers
+@using Hospital.Web.EfModels
+@model LienHeKhachHang
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-lg-8 col-md-6">
+    <form asp-action="@nameof(LienHeController.Index)"
+          method="post"
+          asp-controller="@nameof(LienHeController).Replace("Controller","")" class="contact_form2">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Họ và tên</h3>
+                @Html.EditorFor(model => model.HoVaTen, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            <div class="col-lg-6">
+                <h3>Số điện thoại</h3>
+                @Html.EditorFor(model => model.DienThoaiDiDong, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-lg-6">
+                <h3>Email</h3>
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-lg-6">
+                <h3>Tiêu đề</h3>
+                @Html.EditorFor(model => model.TieuDe, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            <div class="col-lg-12">
+                <h3>Nội dung</h3>
+                @Html.TextAreaFor(model => model.NoiDung, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-lg-12" style="margin-left:50%">
+                <button type="submit" class="custom_btn" value="Create">Gửi</button>
+                <button type="submit" class="custom_btn">Hủy</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<br />
+<br />
+
