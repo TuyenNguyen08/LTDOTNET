@@ -87,6 +87,7 @@ namespace AdminWebBenhVien.Controllers
                     GioiThieu = h.GioiThieu,
                     NoiDung = h.NoiDung,
                     Xem = h.LuotXem,
+                    HinhAnh = h.HinhAnh,
 
                     NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
 
@@ -123,6 +124,7 @@ namespace AdminWebBenhVien.Controllers
             dbItem.Ten = model.TieuDe;
             dbItem.GioiThieu = model.GioiThieu;
             dbItem.NoiDung = model.NoiDung;
+            dbItem.HinhAnh = model.HinhAnh;
 
             dbItem.NgayChinhSua = DateTime.Now;
             dbItem.FkUserModify = "admin";

@@ -9,3 +9,7 @@
 .bv-column-align-center {
     text-align: center;
 }
+
+.k-thumb img {
+    width: 70px;
+}

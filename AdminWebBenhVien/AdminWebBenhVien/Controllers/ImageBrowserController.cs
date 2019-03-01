@@ -28,12 +28,17 @@ namespace AdminWebBenhVien.Controllers
         {
         }
 
-        [Route("ImageBrowser/GetImage/{id}")]
-        [Route("images/UploadFiles/{id}")]
-        [Route("{temp}/images/UploadFiles/{id}")]
-        [Route("{temp}/ImageBrowser/GetImage/{id}")]
+        [Route("ImageBrowser/GetImage/{*id}")]
+        [Route("images/UploadFiles/{*id}")]
+        [Route("{temp}/images/UploadFiles/{*id}")]
+        [Route("{temp}/ImageBrowser/GetImage/{*id}")]
         public IActionResult GetImage(string id, string temp)
         {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+
             var file = System.IO.Path.Combine(_destination, id);
 
             var provider = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
@@ -43,9 +48,39 @@ namespace AdminWebBenhVien.Controllers
                 contentType = "application/octet-stream";
             }
 
-            return File(new System.IO.FileStream(file, System.IO.FileMode.Open), contentType);
+            if (System.IO.File.Exists(file))
+            {
+                return File(new System.IO.FileStream(file, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.Read), contentType);
+            }
+
+            return null;
         }
-        
+
+
+        public IActionResult GetThumbnail(string path)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                return null;
+            }
+
+            var file = System.IO.Path.Combine(_destination, path);
+
+            var provider = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
+            string contentType;
+            if (!provider.TryGetContentType(file, out contentType))
+            {
+                contentType = "application/octet-stream";
+            }
+
+            if (System.IO.File.Exists(file))
+            {
+                return File(new System.IO.FileStream(file, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.Read), contentType);
+            }
+
+            return null;
+        }
+
 
         private string _destination = @"D:\ImageWebBenhVien\images\UploadFiles";
         private string CreateUserFolder()
