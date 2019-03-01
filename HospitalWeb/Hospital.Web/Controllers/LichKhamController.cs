@@ -35,7 +35,7 @@ namespace Hospital.Web.Controllers
 
             #region lsLichNgay
 
-            var lsLichNgay = await InitParam.Db.LichNgay.AsNoTracking()
+            var lsLichNgay = await InitParam.Db.LichNgay.AsNoTracking().Take(6)
               .Where(h => h.FkNgonNgu == fkNgonNgu)
                .Select(t => new LichNgay
                {
