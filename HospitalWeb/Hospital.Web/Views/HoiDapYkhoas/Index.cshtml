@@ -26,24 +26,22 @@
 <div class="faq_page_area">
     <div class="container">
         <div class="row">
-            <div class="col-md-8 ">
+            <div class="col-md-12 ">
                 @foreach (var hoidap in Model)
                 {
-                <div class="single_faq" id="faq1">
-
-                    <a asp-action="@nameof(HoiDapYkhoasController.Details)"
-                       asp-controller="@nameof(HoiDapYkhoasController).Replace("Controller", "")"
-                       asp-route-id="@hoidap.Id"><h4 style="color:#0094ea"> @Html.Raw(hoidap.TieuDe)</h4></a>
-                    <br />
-                    
-                    <span style="color: #C00">Câu hỏi:</span> @Html.Raw(hoidap.NoiDungCauHoi)
-                </div>
+                    <div class="single_faq" id="faq1">
+                        <a asp-action="@nameof(HoiDapYkhoasController.Details)"
+                           asp-controller="@nameof(HoiDapYkhoasController).Replace("Controller", "")"
+                           asp-route-id="@hoidap.Id"><h4 style="color:#0094ea"> @Html.Raw(hoidap.TieuDe)</h4></a>
+                        <br />
+                        <span style="color: #C00;">Câu hỏi:</span>@Html.Raw(hoidap.NoiDungCauHoi)
+                        <p style="border-bottom: 1px dashed #d3d3d3; width:100%; float: left; padding:20px"></p>
+                    </div>
                 }
             </div>
             <div class="col-md-6">
                 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
             </div>
-
         </div>
     </div>
 </div>

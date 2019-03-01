@@ -1,21 +1,60 @@
 ﻿@model List<Hospital.Web.EfModels.LichKham>
+@using Hospital.Web.EfModels
 
-@using Hospital.Web.Controllers
 @{
     ViewBag.Title = "Dich Vụ";
 }
+<style>
+    table, th, td {
+        border: 1px solid #478AF8;
+        text-align:center;
+    }
 
-@foreach (var item in Model)
-{
-<table border="1">
-    <tr>
-        <th>@item.FkLichNgayNavigation.TenThu</th>
-        <th>@item.FkPhongKhamNavigation</th>
-    </tr>
-    <tr>
-        <th>@item.Sang</th>
-        <th>@item.Sang</th>
-    </tr>
+    th, td {
+        width: 200px;
+    }
 
-</table>
-}
+    th {
+        background-color: #478AF8;
+        color:white;
+    }
+</style>
+<div class="container center" style="padding:10%">
+    @foreach (var item_PK in (ViewBag.listPhongKham as List<PhongKham>))
+    {
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Chuyên khoa</th>
+                    <th>Thứ</th>
+                    <th>Sáng</th>
+                    <th>Chiều</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item_LN in (ViewBag.listLichNgay as List<LichNgay>))
+                {
+                    <tr>
+                        <td>@item_PK.TenPhongKham</td>
+                        <td>@item_LN.TenThu</td>
+
+                        @foreach (var item_LK in Model)
+                        {
+                            @if (item_LK.FkLichNgay == item_LN.Id && item_LK.FkPhongKham == item_PK.Id)
+                            {
+                                <td>
+                                    @item_LK.Sang
+                                </td>
+                                <td>
+                                    @item_LK.Chieu
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>
