@@ -3,57 +3,77 @@
 @using Hospital.Web.EfModels
 
 @{
-    ViewData["Title"] = "Feedback";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Thư góp ý";
+}
+@section css {
+
+    <link href="~/css/about.css" rel="stylesheet" />
+    <link href="~/css/material-design-iconic-font.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+
 }
 
-<h2>Feedback</h2>
-
-<h4>PhanHoi</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="@nameof(PhanHoiController.Feedback)" method="post"
-              asp-controller="@nameof(PhanHoiController).Replace("Controller","")"  >
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="HoVaTen" class="control-label">Hoj va ten</label>
-                <input asp-for="HoVaTen" class="form-control" />
-                <span asp-validation-for="HoVaTen" class="text-danger"></span>
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>Thư góp ý</h1>
+              
             </div>
-            <div class="form-group">
-                <label asp-for="DiaChi" class="control-label"></label>
-                <input asp-for="DiaChi" class="form-control" />
-                <span asp-validation-for="DiaChi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DienThoai" class="control-label"></label>
-                <input asp-for="DienThoai" class="form-control" />
-                <span asp-validation-for="DienThoai" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TieuDe" class="control-label"></label>
-                <input asp-for="TieuDe" class="form-control" />
-                <span asp-validation-for="TieuDe" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="NoiDung" class="control-label"></label>
-                <input asp-for="NoiDung" class="form-control" />
-                <span asp-validation-for="NoiDung" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
+<hr />
+<h3 class="tieude">Ý KIẾN KHÁCH HÀNG</h3>
+<div class="row">
+    <div class="col-md-6">
 
-<div>
-    <a asp-action="Index">Back to List</a>
+        <form asp-action="@nameof(PhanHoiController.Feedback)" method="post"
+              asp-controller="@nameof(PhanHoiController).Replace("Controller","")">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div class="col-md-3">
+                <label asp-for="HoVaTen" class="label_Feedback">Họ và tên</label>
+                <br />
+                <label asp-for="DiaChi" class="label_Feedback">Địa chỉ</label>
+                <br />
+                <label asp-for="DienThoai" class="label_Feedback">Điện thoại</label>
+                <br />
+                <label asp-for="Email" class="label_Feedback">Email</label>
+                <br />
+                <label asp-for="TieuDe" class="label_Feedback">Tiêu đề</label>
+                <br />
+                <label asp-for="NoiDung" class="label_Feedback">Nội dung</label>
+            </div>
+
+
+            <div class="form-group col-md-9">
+                <input asp-for="HoVaTen" class="input_Feedback" />
+                <span asp-validation-for="HoVaTen" class="text-danger"></span>
+
+                <input asp-for="DiaChi" class="input_Feedback" />
+                <span asp-validation-for="DiaChi" class="text-danger"></span>
+
+                <input asp-for="DienThoai" class="input_Feedback" />
+                <span asp-validation-for="DienThoai" class="text-danger"></span>
+
+                <input asp-for="Email" class="input_Feedback" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+
+                <input asp-for="TieuDe" class="input_Feedback" />
+                <span asp-validation-for="TieuDe" class="text-danger"></span>
+
+                <input asp-for="NoiDung" class="input_Feedback" />
+                <span asp-validation-for="NoiDung" class="text-danger"></span>
+                <div class="form-group">
+                    <input type="submit" value="Gửi" class="btn_Feedback" />
+                    <input type="submit" value="Hủy" class="btn_Feedback" />
+                </div>
+            </div>
+
+        </form>
+    </div>
 </div>
 

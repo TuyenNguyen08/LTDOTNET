@@ -14,6 +14,7 @@
     <link href="~/css/about.css" rel="stylesheet" />
     <link href="~/css/material-design-iconic-font.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+    <link href="~/css/DichVuKhac.css" rel="stylesheet" />
 
 }
 <div class="breadvroumb_area">
@@ -49,25 +50,26 @@
             <p class="col-lg-12">@Html.Raw(Model.NoiDung)</p>
             <br />
         </div>
-        <div class="container" style="padding: 5%;">
-            <h1 style="border-bottom: 1px solid #8D8D8D; width:100%; float: left;">
-                Dịch vụ khác
-            </h1>
-            <ul>
-                @foreach (var dichVu in (ViewBag.lsNDChiTiet as List<NoiDungTinhChiTiet>))
-                {
-                    <li>
-
-                        <a asp-action="@nameof(NoiDungTinhChiTietsController.Details)"
-                           asp-controller="@nameof(NoiDungTinhChiTietsController).Replace("Controller", "")"
-                           asp-route-id="@dichVu.Id">@dichVu.TieuDe</a>
-                    </li>
-
-                }
-            </ul>
-        </div>
     </div>
 </div>
+
+<h1 class="header_DV">
+    Dịch vụ khác
+</h1>
+<ul>
+    @foreach (var dichVu in (ViewBag.lsNDChiTiet as List<NoiDungTinhChiTiet>))
+    {
+    <li>
+        <a asp-action="@nameof(NoiDungTinhChiTietsController.Details)"
+           class="dichVuKhac"
+           asp-controller="@nameof(NoiDungTinhChiTietsController).Replace("Controller", "")"
+           asp-route-id="@dichVu.Id">
+            <i class="zmdi zmdi-badge-check icon"></i> <span>@dichVu.TieuDe</span>
+        </a>
+    </li>
+
+    }
+</ul>
 
 @section scripts {
 

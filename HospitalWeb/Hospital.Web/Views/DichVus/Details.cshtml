@@ -6,6 +6,7 @@
     ViewBag.Title = "Dịch vụ";
 }
 @section css {
+    <link href="~/css/DichVuKhac.css" rel="stylesheet" />
 }
 <div class="breadvroumb_area">
     <div class="container">
@@ -48,28 +49,29 @@
                 </div>
             </div>
 
-            <div class="container" style="    padding: 5%;">
-                <h1 style="border-bottom: 1px solid #8D8D8D; width:100%; float: left;">
-                    Dịch vụ khác
-                </h1>
-                <ul>
-                    @foreach (var dichVu in (ViewBag.lsDichVuCT as List<DichVuChiTiet>))
-                    {
-                        <li>
-                            <a asp-action="@nameof(DichVusController.Details)"
-                               asp-controller="@nameof(DichVusController).Replace("Controller","")"
-                               asp-route-id="@dichVu.Id">
-                                *@dichVu.TenDichVu
-                            </a>
-                        </li>
 
-                    }
-                </ul>
-            </div>
+
         </div>
 
     </div>
 </div>
+<h1 class="header_DV">
+    Dịch vụ khác
+</h1>
+<ul>
+    @foreach (var dichVu in (ViewBag.lsDichVuCT as List<DichVuChiTiet>))
+    {
+        <li>
+            <a asp-action="@nameof(DichVusController.Details)"
+               class="dichVuKhac"
+               asp-controller="@nameof(DichVusController).Replace("Controller","")"
+               asp-route-id="@dichVu.Id">
+                <i class="zmdi zmdi-badge-check icon"></i> <span>@dichVu.TenDichVu</span>
+            </a>
+        </li>
+
+    }
+</ul>
 @section scripts {
 
 }

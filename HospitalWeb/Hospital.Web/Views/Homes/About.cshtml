@@ -17,14 +17,11 @@
         <div class="row text-center">
             <div class="col">
                 <h1>@Model.Ten</h1>
-                <div class="breadcroumb_link">
-                    <a href="index.html">Trang chủ </a>/ Giới thiệu
-                </div>
             </div>
         </div>
     </div>
 </div>
-<div class=" about_page">
+<div class=" about_page" >
     <div class="container">
         <div class="row">
             <div class="col-lg-5 order-lg-7">
@@ -34,19 +31,19 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-7">
+            <div class="col-lg-12">
                 <div class="about_content">
                     <h1>@Model.Ten</h1>
-                    <p>@Html.Raw(Model.GioiThieu)</p>
-                   
+                    <p style="font-weight:bold">@Html.Raw(Model.GioiThieu)</p>
+
                 </div>
             </div>
         </div>
-        <div>
-            <p class="col-lg-12">@Html.Raw(Model.NoiDung)</p>
+        <div >
+            @Html.Raw(Model.NoiDung)
             <br />
         </div>
-      
+
     </div>
 </div>
 
