@@ -7,41 +7,61 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="container">
 
-<div class="col-lg-8 col-md-6">
-    <form asp-action="@nameof(LienHeController.Index)"
-          method="post"
-          asp-controller="@nameof(LienHeController).Replace("Controller","")" class="contact_form2">
-        <div class="row">
-            <div class="col-lg-6">
-                <h3>Họ và tên</h3>
-                @Html.EditorFor(model => model.HoVaTen, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
+    <b style="color:aqua; font-size:x-large;">BỆNH VIỆN QUÂN DÂN Y MIỀN ĐÔNG</b>
+    <ul>
+        <li>Địa chỉ: 50 Lê Văn Việt, P.Hiệp Phú, Q.9, TP.HCM</li>
+        <li>Điện thoại: 08. 38 960 054 - Fax: 08. 37 307 125</li>
+        <li>Email: 7c@quandanmiendong.com</li>
+</ul>
+    
 
-            <div class="col-lg-6">
-                <h3>Số điện thoại</h3>
-                @Html.EditorFor(model => model.DienThoaiDiDong, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-            <div class="col-lg-6">
-                <h3>Email</h3>
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-            <div class="col-lg-6">
-                <h3>Tiêu đề</h3>
-                @Html.EditorFor(model => model.TieuDe, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
+    <iframe width="540"
+            height="444" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+            src="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=vi&amp;geocode=&amp;q=B%E1%BB%87nh+vi%E1%BB%87n+Qu%C3%A2n+d%C3%A2n+Mi%E1%BB%81n+%C4%90%C3%B4ng,+L%C3%AA+V%C4%83n+Vi%E1%BB%87t,+Hi%E1%BB%87p+Ph%C3%BA,+H%E1%BB%93+Ch%C3%AD+Minh,+Vi%E1%BB%87t+Nam&amp;aq=0&amp;oq=b%E1%BB%87nh+vi%E1%BB%87n+qu%C3%A2n+d%C3%A2&amp;sll=10.846014,106.777668&amp;sspn=0.005205,0.010525&amp;ie=UTF8&amp;hq=B%E1%BB%87nh+vi%E1%BB%87n+Qu%C3%A2n+d%C3%A2n+Mi%E1%BB%81n+%C4%90%C3%B4ng,+L%C3%AA+V%C4%83n+Vi%E1%BB%87t,+Hi%E1%BB%87p+Ph%C3%BA,+H%E1%BB%93+Ch%C3%AD+Minh,+Vi%E1%BB%87t+Nam&amp;t=m&amp;ll=10.844881,106.778058&amp;spn=0.006295,0.006295&amp;output=embed"></iframe>
 
-            <div class="col-lg-12">
-                <h3>Nội dung</h3>
-                @Html.TextAreaFor(model => model.NoiDung, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-            <div class="col-lg-12" style="margin-left:50%">
-                <button type="submit" class="custom_btn" value="Create">Gửi</button>
-                <button type="submit" class="custom_btn">Hủy</button>
-            </div>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="@nameof(LienHeController.Index)" method="post"
+                  asp-controller="@nameof(LienHeController).Replace("Controller","")">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="HoVaTen" class="control-label">Họ và tên</label>
+                    <input asp-for="HoVaTen" class="form-control" />
+                    <span asp-validation-for="HoVaTen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="DienThoaiDiDong" class="control-label">Điện thoại di động</label>
+                    <input asp-for="DienThoaiDiDong" class="form-control" />
+                    <span asp-validation-for="DienThoaiDiDong" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label">Email</label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TieuDe" class="control-label">Tiêu đề</label>
+                    <input asp-for="TieuDe" class="form-control" />
+                    <span asp-validation-for="TieuDe" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NoiDung" class="control-label">Nội dung</label>
+                    <input asp-for="NoiDung" class="form-control" />
+                    <span asp-validation-for="NoiDung" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
+
+
 
 <br />
 <br />

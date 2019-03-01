@@ -72,24 +72,28 @@
             </div>
             <div class="col-lg-8 col-md-6">
                 <form asp-action="@nameof(HenKhamBenhsController.Index)"
-                        method="post"
+                      method="post"
                       asp-controller="@nameof(HenKhamBenhsController).Replace("Controller","")" class="contact_form2">
                     <div class="row">
                         <div class="col-lg-6">
-                            <h3>Tên</h3>
-                            @Html.EditorFor(model => model.HoVaTen, new { htmlAttributes = new { @class = "form-control" } })
+                            <label asp-for="HoVaTen" class="control-label">Họ và tên</label>
+                            <input asp-for="HoVaTen" class="form-control" />
+                            <span asp-validation-for="HoVaTen" class="text-danger"></span>
                         </div>
                         <div class="col-lg-6">
-                            <h3>Địa chỉ</h3>
-                            @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                            <label asp-for="DiaChi" class="control-label">Địa chỉ</label>
+                            <input asp-for="DiaChi" class="form-control" />
+                            <span asp-validation-for="DiaChi" class="text-danger"></span>
                         </div>
                         <div class="col-lg-6">
-                            <h3>Số điện thoại</h3>
-                            @Html.EditorFor(model => model.SoDienThoaiDiDong, new { htmlAttributes = new { @class = "form-control" } })
+                            <label asp-for="SoDienThoaiDiDong" class="control-label">Số điện thoại</label>
+                            <input asp-for="SoDienThoaiDiDong" class="form-control" />
+                            <span asp-validation-for="SoDienThoaiDiDong" class="text-danger"></span>
                         </div>
                         <div class="col-lg-6">
-                            <h3>Email</h3>
-                            @Html.EditorFor(model => model.DiaChiEmail, new { htmlAttributes = new { @class = "form-control" } })
+                            <label asp-for="DiaChiEmail" class="control-label">Địa chỉ</label>
+                            <input asp-for="DiaChiEmail" class="form-control" />
+                            <span asp-validation-for="DiaChiEmail" class="text-danger"></span>
                         </div>
                         <div class="col-lg-6">
                             <h3>Giới tính</h3>
@@ -99,37 +103,37 @@
                         <div class="col-lg-6">
                             <h3>Năm sinh</h3>
                             @(Html.Kendo().DropDownList().Name(nameof(HenKhamBenh.FkNamSinh))
-                                                .DataTextField("Text")
-                                                .DataValueField("Value")
-                                                .Events(e => e.Change("change"))
-                                                .BindTo((List<SelectListItem>)ViewBag.listNamSinh)
-                                                .HtmlAttributes(new { style = "width: 100%" })
+                                                                .DataTextField("Text")
+                                                                .DataValueField("Value")
+                                                                .Events(e => e.Change("change"))
+                                                                .BindTo((List<SelectListItem>)ViewBag.listNamSinh)
+                                                                .HtmlAttributes(new { style = "width: 100%" })
 
                             )
                         </div>
                         <div class="col-lg-12">
                             <h3>Bác sĩ</h3>
                             @(Html.Kendo().DropDownList()
-                                               .Name(nameof(HenKhamBenh.FkBacSi))
-                                                .DataTextField("Text")
-                                                .DataValueField("Value")
-                                                .Events(e => e.Change("change"))
-                                                .BindTo((List<SelectListItem>)ViewBag.listBacSi)
-                                                .OptionLabel("Vui lòng chọn Bác sỹ")
-                                                .HtmlAttributes(new { style = "width: 100%" })
+                                                               .Name(nameof(HenKhamBenh.FkBacSi))
+                                                                .DataTextField("Text")
+                                                                .DataValueField("Value")
+                                                                .Events(e => e.Change("change"))
+                                                                .BindTo((List<SelectListItem>)ViewBag.listBacSi)
+                                                                .OptionLabel("Vui lòng chọn Bác sỹ")
+                                                                .HtmlAttributes(new { style = "width: 100%" })
                             )
                         </div>
 
                         <div class="col-lg-12">
                             <h3>Chuyên khoa</h3>
                             @(Html.Kendo().DropDownList()
-                                       .Name(nameof(HenKhamBenh.FkChuyenKhoa))
-                                        .DataTextField("Text")
-                                        .DataValueField("Value")
-                                        .Events(e => e.Change("change"))
-                                        .BindTo((List<SelectListItem>)ViewBag.listPhongKham)
-                                        .OptionLabel("Vui lòng chọn phòng khám")
-                                        .HtmlAttributes(new { style = "width: 100%" })
+                                                       .Name(nameof(HenKhamBenh.FkChuyenKhoa))
+                                                        .DataTextField("Text")
+                                                        .DataValueField("Value")
+                                                        .Events(e => e.Change("change"))
+                                                        .BindTo((List<SelectListItem>)ViewBag.listPhongKham)
+                                                        .OptionLabel("Vui lòng chọn phòng khám")
+                                                        .HtmlAttributes(new { style = "width: 100%" })
                             )
 
                         </div>
@@ -137,10 +141,10 @@
                         <div class="col-lg-6">
                             <h3>Ngày khám</h3>
                             @(Html.Kendo().DatePicker()
-                                        .Name("ngaykham")
-                                        .Value(DateTime.Now)
-                                        .HtmlAttributes(new { style = "width: 100%", title = "ngaykham" })
-                                        .DateInput()
+                                                        .Name("ngaykham")
+                                                        .Value(DateTime.Now)
+                                                        .HtmlAttributes(new { style = "width: 100%", title = "ngaykham" })
+                                                        .DateInput()
                             )
                         </div>
 
@@ -148,12 +152,12 @@
                         <div class="col-lg-6">
                             <h3>Giờ khám</h3>
                             @(Html.Kendo().DropDownList().Name(nameof(HenKhamBenh.FkGioHen))
-                                        .DataTextField("Text")
-                                        .DataValueField("Value")
-                                        .Events(e => e.Change("change"))
-                                        .BindTo((List<SelectListItem>)ViewBag.listGioKham)
-                                        .OptionLabel("Vui lòng chọn giờ khám")
-                                        
+                                                        .DataTextField("Text")
+                                                        .DataValueField("Value")
+                                                        .Events(e => e.Change("change"))
+                                                        .BindTo((List<SelectListItem>)ViewBag.listGioKham)
+                                                        .OptionLabel("Vui lòng chọn giờ khám")
+
 
                             )
                         </div>
@@ -162,7 +166,7 @@
                             <h3>Ghi chú</h3>
                             <textarea placeholder="Nội dung ghi chú"></textarea>
                         </div>
-                        <div class="col-lg-12" style="margin-left:50%">                            
+                        <div class="col-lg-12" style="margin-left:50%">
                             <button type="submit" class="custom_btn" value="Create">Gửi</button>
                             <button type="submit" class="custom_btn">Hủy</button>
                         </div>

@@ -12,6 +12,7 @@
     <link href="~/css/slicknav.min.css" rel="stylesheet" />
     <link href="~/css/nice-select.css" rel="stylesheet" />
     <link href="~/css/responsive.css" rel="stylesheet" />
+    <link href="~/css/trang-chu.css" rel="stylesheet" />
     <style>
         .cc {
             text-align: center;
@@ -23,7 +24,7 @@
             }
 
             .cc h3 {
-                color: #01f8fd;
+                color: aliceblue;
             }
 
         .col {
@@ -40,7 +41,7 @@
 <div class="welcome_areaa" style="background-image: url(../images/img/welcome_shap.png);">
     <div class="container">
         <div class="welcome_slider owl-carousel">
-            @foreach (var slide in Model.lsSLide) 
+            @foreach (var slide in Model.lsSLide)
             {
                 <div class="single_welcome_slider">
                     <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=slide.HinhAnh })" />
@@ -53,33 +54,37 @@
 <!-- Cbox Area Start-->
 <div class="cbox_area">
     <div class="container">
-        <div style="background-color: #f6fbff;">
+        <div class="col-wrap">
             @foreach (var subNote in Model.lsSubNote)
             {
                 <div class="col-md-3">
                     <div class="single_cbox">
                         <div class="cbox_title">
-                            <div class="cbox_icon"><img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=subNote.Image })" /></div>
+                            <div class="cbox_icon">
+                                <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=subNote.Image })" />
+                            </div>
 
                             <a asp-action="@nameof(HenKhamBenhsController.Index)"
-                               asp-controller="@nameof(HenKhamBenhsController).Replace("Controller", "")"><h4>@subNote.TieuDe</h4></a>
+                               asp-controller="@nameof(HenKhamBenhsController).Replace("Controller", "")">
+                                <h4>@subNote.TieuDe</h4>
+                            </a>
                         </div>
                         <p>
                             @subNote.NoiDung
                         </p>
-                        <a href="#">Xem thêm <i class="zmdi zmdi-plus"></i></a>
+
                     </div>
                 </div>
             }
         </div>
     </div>
 </div>
-<div class="container" style="background-color:#016ca0; margin:10px">
+<div class="container" style="background-color:#50acf1; margin:10px">
     @foreach (var subPhone in Model.lsSubPhone)
     {
         <div class="col-lg-4 cc">
             <h2>@subPhone.Name</h2>
-            <h3>@subPhone.SoDienThoai</h3>
+            <h3><b>@subPhone.SoDienThoai</b></h3>
         </div>
     }
 </div>
@@ -111,9 +116,18 @@
                                     <p>
                                         @hoatdong.GioiThieu
                                     </p>
+
                                 </a>
+                                <hr />
                             }
+
                         </div>
+                        <h3 class="clickadd">
+                            <a asp-action="@nameof(HoatDongsController.Index)"
+                               asp-controller="@nameof(HoatDongsController).Replace("Controller","")">
+                                <b>Xem thêm</b> <i class="zmdi zmdi-plus"></i>
+                            </a>
+                        </h3>
                     </div>
                 </div>
                 <div class="about_content">
@@ -156,7 +170,7 @@
                             <iframe src="https://www.youtube.com/embed/@video.DuongDanFile" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </li>
                     }
-                    </ul>
+                </ul>
             </div>
         </div>
     </div>
