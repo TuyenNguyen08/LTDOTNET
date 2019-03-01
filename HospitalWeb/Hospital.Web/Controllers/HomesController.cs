@@ -19,7 +19,8 @@ namespace Hospital.Web.Controllers
 
         }
 
-        // GET: HomeIndex
+        [Route("/")]
+        [Route("trang-chu")]
         public async Task<IActionResult> Index()
         {
             HomeModel model = new HomeModel();
@@ -179,7 +180,7 @@ namespace Hospital.Web.Controllers
             return View(await nBenhVien7CContext.ToListAsync());
         }
 
-        // Intro.aspx? ID = 1
+        [Route("gioi-thieu/{id}")]
         public async Task<IActionResult> About(int? id)
         {
             if (id == null)
