@@ -17,7 +17,7 @@ namespace Hospital.Web.Controllers
         {
 
         }
-
+        
         // GET: HenKhamBenhs
         public async Task<IActionResult> Index()
         {         

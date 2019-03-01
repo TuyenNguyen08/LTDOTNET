@@ -78,7 +78,7 @@ namespace Hospital.Web.Controllers
             return View(hoatDong);
         }
 
-        // GET: HoatDongs/Create
+       
   
     }
 }
