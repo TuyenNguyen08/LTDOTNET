@@ -1,0 +1,41 @@
+﻿.col-wrap {
+    display: table;
+    width: 100%;
+}
+
+
+.col-md-3 {
+    display: table-cell;
+    padding: 1rem;
+    
+}
+
+.single_cbox {
+    background: #f6fbff;
+    border-radius: 10px;
+}
+
+.single_cbox:hover {
+        background: #9dcef3;
+        color: aliceblue;
+}
+.background_grey{
+    padding-left: 35px;
+    padding-top: 20px;
+    
+}
+
+.latest_news {
+    margin-top: -70px;
+
+}
+
+a.single_latest_news, .single_latest_news
+{
+    margin-bottom: -30px;
+}
+
+.clickadd{
+    font-size:18px;
+}
+

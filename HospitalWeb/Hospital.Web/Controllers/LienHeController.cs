@@ -35,7 +35,6 @@ namespace Hospital.Web.Controllers
                 model.Email = lienHeKhachHang.Email;
                 await InitParam.Db.AddAsync(model);
                 await InitParam.Db.SaveChangesAsync();
-                RedirectToAction(nameof(Index));
             }
             return RedirectToAction(nameof(Index));
 
