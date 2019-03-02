@@ -73,6 +73,8 @@ namespace AdminWebBenhVien.Controllers
 
                    NgonNguId = h.FkNgonNgu,
 
+                   HinhAnh = h.HinhAnh,
+
                    LinkSuKien = h.LinkEvent
                })
                .FirstOrDefaultAsync();
@@ -106,6 +108,7 @@ namespace AdminWebBenhVien.Controllers
 
             dbItem.FkNgonNgu = model.NgonNguId;
             dbItem.TieuDe = model.TieuDe;
+            dbItem.HinhAnh = model.HinhAnh;
             dbItem.LinkEvent = model.LinkSuKien;
 
             await InitParam.Db.SaveChangesAsync();
@@ -138,6 +141,7 @@ namespace AdminWebBenhVien.Controllers
 
             dbItem.FkNgonNgu = model.NgonNguId;
             dbItem.TieuDe = model.TieuDe;
+            dbItem.HinhAnh = model.HinhAnh;
             dbItem.LinkEvent = model.LinkSuKien;
 
             InitParam.Db.SlideShow.Add(dbItem);

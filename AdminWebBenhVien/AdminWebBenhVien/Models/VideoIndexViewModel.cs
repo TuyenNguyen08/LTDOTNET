@@ -10,8 +10,11 @@ namespace AdminWebBenhVien.Models
         public int Id { get; set; }
 
         public string TieuDe { get; set; }
+
         public string GioiThieu { get; set; }
+
         public string DuongDanFile { get; set; }
+
         public int? Xem { get; set; }
 
         public int NgonNguId { get; set; }
@@ -30,9 +33,15 @@ namespace AdminWebBenhVien.Models
         public int Id { get; set; }
 
         public string TieuDe { get; set; }
+
         public string GioiThieu { get; set; }
+
         public string DuongDanFile { get; set; }
+
         public int? Xem { get; set; }
+
+        public string HinhAnh { get; set; }
+
         public int NgonNguId { get; set; }
 
         public DateTime? NgayTao { get; set; }
@@ -52,6 +61,8 @@ namespace AdminWebBenhVien.Models
         public string DuongDanFile { get; set; }
 
         public int? Xem { get; set; }
+
+        public string HinhAnh { get; set; }
 
         public int NgonNguId { get; set; }
 

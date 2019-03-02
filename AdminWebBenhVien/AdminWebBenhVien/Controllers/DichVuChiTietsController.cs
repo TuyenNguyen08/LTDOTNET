@@ -61,7 +61,6 @@ namespace AdminWebBenhVien.Controllers
             return Json(resultJson);
         }
 
-        // GET: DichVuChiTiets/Edit/5
         [HttpGet]
         [Route("dich-vu/{id}")]
         public async Task<IActionResult> Edit(int? id)
@@ -85,6 +84,7 @@ namespace AdminWebBenhVien.Controllers
                     TieuDe = h.TenDichVu,
                     GioiThieu = h.GioiThieu,
                     NoiDung = h.NoiDung,
+                    HinhAnh = h.HinhAnh,
                     Xem = h.LuotXem,
                     
                     NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
@@ -103,13 +103,10 @@ namespace AdminWebBenhVien.Controllers
             return View(model);
         }
 
-        // POST: DichVuChiTiets/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("dich-vu/{id}")]
-        public async Task<IActionResult> Edit(BenhNhanEditViewModel model)
+        public async Task<IActionResult> Edit(DichVuEditViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -125,6 +122,7 @@ namespace AdminWebBenhVien.Controllers
             dbItem.TenDichVu = model.TieuDe;
             dbItem.GioiThieu = model.GioiThieu;
             dbItem.NoiDung = model.NoiDung;
+            dbItem.HinhAnh = model.HinhAnh;
 
             dbItem.NgayChinhSua = DateTime.Now;
             dbItem.FkUserModify = "admin";
