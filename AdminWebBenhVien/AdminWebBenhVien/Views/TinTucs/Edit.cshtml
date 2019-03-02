@@ -1,4 +1,6 @@
 ﻿@using AdminWebBenhVien.Models
+@using AdminWebBenhVien.EfModels
+
 @model TinTucEditViewModel
 
 @section css{
@@ -33,8 +35,25 @@
                                 <input type="hidden" asp-for="Id" />
 
                                 <div class="form-group">
-                                    <label class="control-label">Loại tiêu đề</label>
-                                    <label class="control-label bv-label-content">@Model.TenLoai</label>
+                                    <label asp-for="NgonNguId" class="control-label">Ngôn ngữ</label>
+                                    <kendo-dropdownlist for="NgonNguId"
+                                                        option-label="-- Chọn ngôn ngữ --"
+                                                        bind-to="@((List<NgonNgu>)ViewBag.ListNgonNgu)"
+                                                        datatextfield="@nameof(NgonNgu.TenNgonNgu)"
+                                                        datavaluefield="@nameof(NgonNgu.Id)"
+                                                        value="@Model.NgonNguId" />
+                                    <span asp-validation-for="NgonNguId" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="TenLoaiId" class="control-label">Loại tiêu đề</label>
+                                    <kendo-dropdownlist for="TenLoaiId"
+                                                        option-label="-- Chọn loại tiêu đề --"
+                                                        bind-to="@((List<LoaiTin>)ViewBag.ListLoaiTin)"
+                                                        datatextfield="@nameof(LoaiTin.TenLoai)"
+                                                        datavaluefield="@nameof(LoaiTin.Id)"
+                                                        value="@Model.TenLoaiId" />
+                                    <span asp-validation-for="TenLoaiId" class="text-danger"></span>
                                 </div>
 
                                 <div class="form-group">
@@ -114,10 +133,10 @@
                                             <tool name="print" />
                                         </tools>
                                         <image-browser file-types="*.png,*.gif,*.jpg,*.jpeg">
-                                            <image-browser-transport upload-url="@Url.Action("Upload", "ImageBrowser")" image-url="/ImageBrowser/GetImage/{0}/image">
+                                            <image-browser-transport upload-url="@Url.Action("Upload", "ImageBrowser")" image-url="@Constants.IMAGE_BROWSER_IMAGE_URL">
                                                 <create url="@Url.Action("Create", "ImageBrowser")" />
                                                 <read url="@Url.Action("Read", "ImageBrowser")" />
-                                                <destroy url="@Url.Action("Destroy", "ImageBrowser")" />
+                                                @*<destroy url="@Url.Action("Destroy", "ImageBrowser")" />*@
                                             </image-browser-transport>
                                         </image-browser>
                                         <content>
@@ -138,3 +157,8 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

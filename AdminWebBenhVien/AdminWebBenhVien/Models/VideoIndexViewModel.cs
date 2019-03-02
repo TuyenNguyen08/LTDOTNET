@@ -33,7 +33,7 @@ namespace AdminWebBenhVien.Models
         public string GioiThieu { get; set; }
         public string DuongDanFile { get; set; }
         public int? Xem { get; set; }
-        public string NgonNgu { get; set; }
+        public int NgonNguId { get; set; }
 
         public DateTime? NgayTao { get; set; }
 
@@ -43,5 +43,20 @@ namespace AdminWebBenhVien.Models
         public string NguoiSua { get; set; }
     }
 
+    public class VideoCreateViewModel
+    {
+        public string TieuDe { get; set; }
 
+        public string GioiThieu { get; set; }
+
+        public string DuongDanFile { get; set; }
+
+        public int? Xem { get; set; }
+
+        public int NgonNguId { get; set; }
+
+        public string NguoiTao { get; set; }
+
+        public string NguoiSua { get; set; }
+    }
 }

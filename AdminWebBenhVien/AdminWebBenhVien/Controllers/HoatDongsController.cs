@@ -12,13 +12,21 @@ using Kendo.Mvc.Extensions;
 
 namespace AdminWebBenhVien.Controllers
 {
-    public class HoatDongsController : Controller
+    public class HoatDongsController : ControllerBase
     {
-        private readonly NBenhVien7CContext _context;
 
-        public HoatDongsController(NBenhVien7CContext context)
+        private List<LoaiHoatDong> ListHoatDong { get; set; }
+        public HoatDongsController(InitParam initParam) : base(initParam)
         {
-            _context = context;
+            var listHoatDong = InitParam.Db.LoaiHoatDong.AsNoTracking()
+               .OrderBy(h => h.TenLoai)
+               .Select(h => new LoaiHoatDong
+               {
+                   Id = h.Id,
+                   TenLoai = h.TenLoai
+               }).ToList();
+
+            ListHoatDong = listHoatDong;
         }
 
         // GET: HoatDongs
@@ -31,7 +39,7 @@ namespace AdminWebBenhVien.Controllers
         [HttpGet]
         public async Task<IActionResult> HoatDong_Read([DataSourceRequest]DataSourceRequest request)
         {
-            var resultDb = await _context.HoatDong
+            var resultDb = await InitParam.Db.HoatDong
                 .Include(h => h.FkLoaiHoatDongNavigation)
                 .Include(h => h.FkNgonNguNavigation)
                 .Include(h => h.FkNguoiSuaNavigation)
@@ -74,14 +82,15 @@ namespace AdminWebBenhVien.Controllers
         [Route("hoat-dong/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.ListNgonNgu = ListNgonNgu;
+            ViewBag.ListHoatDong = ListHoatDong;
+
             if (id == null || !id.HasValue)
             {
                 return NotFound();
             }
 
-            var model = await _context.HoatDong.AsNoTracking()
-                .Include(h => h.FkLoaiHoatDongNavigation)
-                .Include(h => h.FkNgonNguNavigation)
+            var model = await InitParam.Db.HoatDong.AsNoTracking()
                 .Include(h => h.FkNguoiSuaNavigation)
                 .Include(h => h.FkNguoiTaoNavigation)
                 .Where(h => h.Id == id.Value)
@@ -89,7 +98,7 @@ namespace AdminWebBenhVien.Controllers
                 {
                     Id = h.Id,
                     
-                    TenLoai = h.FkLoaiHoatDongNavigation.TenLoai,
+                    TenLoaiId = h.FkLoaiHoatDong,
 
                     TieuDe = h.TieuDe,
                     GioiThieu = h.GioiThieu,
@@ -97,7 +106,7 @@ namespace AdminWebBenhVien.Controllers
                     TacGia = h.Author,
                     NoiDung = h.NoiDung,
 
-                    NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
+                    NgonNguId = h.FkNgonNgu,
 
                     NgayTao = h.NgayTao,
                     NgaySua = h.NgaySua,
@@ -120,17 +129,22 @@ namespace AdminWebBenhVien.Controllers
         [Route("hoat-dong/{id}")]
         public async Task<IActionResult> Edit(HoatDongEditViewModel model)
         {
+            ViewBag.ListNgonNgu = ListNgonNgu;
+            ViewBag.ListHoatDong = ListHoatDong;
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var dbItem = await _context.HoatDong.FirstOrDefaultAsync(h => h.Id == model.Id);
+            var dbItem = await InitParam.Db.HoatDong.FirstOrDefaultAsync(h => h.Id == model.Id);
             if (dbItem == null)
             {
                 return NotFound();
             }
 
+            dbItem.FkNgonNgu = model.NgonNguId;
+            dbItem.FkLoaiHoatDong = model.TenLoaiId;
             dbItem.TieuDe = model.TieuDe;
             dbItem.GioiThieu = model.GioiThieu;
             dbItem.NoiDung = model.NoiDung;
@@ -139,14 +153,54 @@ namespace AdminWebBenhVien.Controllers
             dbItem.NgaySua = DateTime.Now;
             dbItem.FkNguoiSua = "admin";
 
-            await _context.SaveChangesAsync();
+            await InitParam.Db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Edit), new { id = model.Id });
         }
 
+        [HttpGet]
+        [Route("tao-moi-hoat-dong")]
+        public async Task<IActionResult> Create(int? id)
+        {
+            ViewBag.ListNgonNgu = ListNgonNgu;
+            ViewBag.ListHoatDong = ListHoatDong;
+
+            return View(new HoatDongCreateViewModel());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("tao-moi-hoat-dong")]
+        public async Task<IActionResult> Create(HoatDongCreateViewModel model)
+        {
+            ViewBag.ListNgonNgu = ListNgonNgu;
+            ViewBag.ListHoatDong = ListHoatDong;
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var dbItem = new HoatDong();
+
+            dbItem.FkNgonNgu = model.NgonNguId;
+            dbItem.FkLoaiHoatDong = model.TenLoaiId;
+            dbItem.TieuDe = model.TieuDe;
+            dbItem.GioiThieu = model.GioiThieu;
+            dbItem.NoiDung = model.NoiDung;
+            dbItem.Author = model.TacGia;
+
+            dbItem.NgayTao = DateTime.Now;
+            dbItem.FkNguoiTao = "admin";
+            dbItem.NgaySua = DateTime.Now;
+            dbItem.FkNguoiSua = "admin";
 
 
+            InitParam.Db.HoatDong.Add(dbItem);
+            await InitParam.Db.SaveChangesAsync();
 
+            return RedirectToAction(nameof(Edit), new { id = dbItem.Id });
+        }
 
 
 
@@ -177,7 +231,7 @@ namespace AdminWebBenhVien.Controllers
                 return NotFound();
             }
 
-            var hoatDong = await _context.HoatDong
+            var hoatDong = await InitParam.Db.HoatDong
                 .Include(h => h.FkLoaiHoatDongNavigation)
                 .Include(h => h.FkNgonNguNavigation)
                 .Include(h => h.FkNguoiSuaNavigation)
@@ -200,10 +254,10 @@ namespace AdminWebBenhVien.Controllers
             #endregion
             var listLoaiHoatDong = await GetListLoaiHoatDongAsync();
             ViewBag.ListLoaiHoatDong = listLoaiHoatDong;
-            ViewData["FkLoaiHoatDong"] = new SelectList(_context.LoaiHoatDong, "Id", "Id");
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id");
-            ViewData["FkNguoiSua"] = new SelectList(_context.User, "UserName", "UserName");
-            ViewData["FkNguoiTao"] = new SelectList(_context.User, "UserName", "UserName");
+            ViewData["FkLoaiHoatDong"] = new SelectList(InitParam.Db.LoaiHoatDong, "Id", "Id");
+            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id");
+            ViewData["FkNguoiSua"] = new SelectList(InitParam.Db.User, "UserName", "UserName");
+            ViewData["FkNguoiTao"] = new SelectList(InitParam.Db.User, "UserName", "UserName");
             return View();
         }
 
@@ -222,21 +276,21 @@ namespace AdminWebBenhVien.Controllers
                 #endregion
                 var listLoaiHoatDong = await GetListLoaiHoatDongAsync();
                 ViewBag.ListLoaiHoatDong = listLoaiHoatDong;
-                _context.Add(hoatDong);
-                await _context.SaveChangesAsync();
+                InitParam.Db.Add(hoatDong);
+                await InitParam.Db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FkLoaiHoatDong"] = new SelectList(_context.LoaiHoatDong, "Id", "Id", hoatDong.FkLoaiHoatDong);
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", hoatDong.FkNgonNgu);
-            ViewData["FkNguoiSua"] = new SelectList(_context.User, "UserName", "UserName", hoatDong.FkNguoiSua);
-            ViewData["FkNguoiTao"] = new SelectList(_context.User, "UserName", "UserName", hoatDong.FkNguoiTao);
+            ViewData["FkLoaiHoatDong"] = new SelectList(InitParam.Db.LoaiHoatDong, "Id", "Id", hoatDong.FkLoaiHoatDong);
+            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id", hoatDong.FkNgonNgu);
+            ViewData["FkNguoiSua"] = new SelectList(InitParam.Db.User, "UserName", "UserName", hoatDong.FkNguoiSua);
+            ViewData["FkNguoiTao"] = new SelectList(InitParam.Db.User, "UserName", "UserName", hoatDong.FkNguoiTao);
             return View(hoatDong);
         }
 
         
         private Task<List<DropdownlistViewModel>> GetListNgonNguAsync()
         {
-            var list = _context.NgonNgu.AsNoTracking()
+            var list = InitParam.Db.NgonNgu.AsNoTracking()
                 .Select(h => new DropdownlistViewModel
                 {
                     Id = h.Id,
@@ -247,7 +301,7 @@ namespace AdminWebBenhVien.Controllers
         }
         private Task<List<DropdownlistViewModel>> GetListLoaiHoatDongAsync()
         {
-            var list = _context.LoaiHoatDong.AsNoTracking()
+            var list = InitParam.Db.LoaiHoatDong.AsNoTracking()
                 .Select(h => new DropdownlistViewModel
                 {
                     Id = h.Id,
@@ -264,7 +318,7 @@ namespace AdminWebBenhVien.Controllers
                 return NotFound();
             }
 
-            var hoatDong = await _context.HoatDong
+            var hoatDong = await InitParam.Db.HoatDong
                 .Include(h => h.FkLoaiHoatDongNavigation)
                 .Include(h => h.FkNgonNguNavigation)
                 .Include(h => h.FkNguoiSuaNavigation)
@@ -283,15 +337,15 @@ namespace AdminWebBenhVien.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var hoatDong = await _context.HoatDong.FindAsync(id);
-            _context.HoatDong.Remove(hoatDong);
-            await _context.SaveChangesAsync();
+            var hoatDong = await InitParam.Db.HoatDong.FindAsync(id);
+            InitParam.Db.HoatDong.Remove(hoatDong);
+            await InitParam.Db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool HoatDongExists(int id)
         {
-            return _context.HoatDong.Any(e => e.Id == id);
+            return InitParam.Db.HoatDong.Any(e => e.Id == id);
         }
     }
 }

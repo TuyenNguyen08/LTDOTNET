@@ -12,13 +12,11 @@ using Kendo.Mvc.Extensions;
 
 namespace AdminWebBenhVien.Controllers
 {
-    public class SlideShowsController : Controller
+    public class SlideShowsController : ControllerBase
     {
-        private readonly NBenhVien7CContext _context;
 
-        public SlideShowsController(NBenhVien7CContext context)
+        public SlideShowsController(InitParam initParam) : base(initParam)
         {
-            _context = context;
         }
 
         // GET: SlideShows
@@ -31,7 +29,7 @@ namespace AdminWebBenhVien.Controllers
         [HttpGet]
         public async Task<IActionResult> SlideShows_Read([DataSourceRequest]DataSourceRequest request)
         {
-            var resultDb = await _context.SlideShow
+            var resultDb = await InitParam.Db.SlideShow
                 .Include(h => h.FkNgonNguNavigation)
                 .OrderBy(h => h.TieuDe)
                 .ThenBy(h => h.FkNgonNguNavigation.TenNgonNgu)
@@ -57,12 +55,14 @@ namespace AdminWebBenhVien.Controllers
         [Route("slideshow-trang-chu/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.ListNgonNgu = ListNgonNgu;
+
             if (id == null || !id.HasValue)
             {
                 return NotFound();
             }
 
-            var model = await _context.SlideShow.AsNoTracking()
+            var model = await InitParam.Db.SlideShow.AsNoTracking()
                .Include(h => h.FkNgonNguNavigation)
                .Where(h => h.Id == id.Value)
                .Select(h => new SlideShowEditViewModel
@@ -71,7 +71,7 @@ namespace AdminWebBenhVien.Controllers
 
                    TieuDe = h.TieuDe,
 
-                   NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
+                   NgonNguId = h.FkNgonNgu,
 
                    LinkSuKien = h.LinkEvent
                })
@@ -91,28 +91,60 @@ namespace AdminWebBenhVien.Controllers
         [Route("slideshow-trang-chu/{id}")]
         public async Task<IActionResult> Edit(SlideShowEditViewModel model)
         {
+            ViewBag.ListNgonNgu = ListNgonNgu;
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var dbItem = await _context.SlideShow.FirstOrDefaultAsync(h => h.Id == model.Id);
+            var dbItem = await InitParam.Db.SlideShow.FirstOrDefaultAsync(h => h.Id == model.Id);
             if (dbItem == null)
             {
                 return NotFound();
             }
 
+            dbItem.FkNgonNgu = model.NgonNguId;
             dbItem.TieuDe = model.TieuDe;
             dbItem.LinkEvent = model.LinkSuKien;
 
-            await _context.SaveChangesAsync();
+            await InitParam.Db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Edit), new { id = model.Id });
         }
 
+        [HttpGet]
+        [Route("tao-moi-slide-shows")]
+        public async Task<IActionResult> Create(int? id)
+        {
+            ViewBag.ListNgonNgu = ListNgonNgu;
 
+            return View(new SlideShowCreateViewModel());
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("tao-moi-slide-shows")]
+        public async Task<IActionResult> Create(SlideShowCreateViewModel model)
+        {
+            ViewBag.ListNgonNgu = ListNgonNgu;
 
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var dbItem = new SlideShow();
+
+            dbItem.FkNgonNgu = model.NgonNguId;
+            dbItem.TieuDe = model.TieuDe;
+            dbItem.LinkEvent = model.LinkSuKien;
+
+            InitParam.Db.SlideShow.Add(dbItem);
+            await InitParam.Db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Edit), new { id = dbItem.Id });
+        }
 
 
 
@@ -138,7 +170,7 @@ namespace AdminWebBenhVien.Controllers
                 return NotFound();
             }
 
-            var slideShow = await _context.SlideShow
+            var slideShow = await InitParam.Db.SlideShow
                 .Include(s => s.FkNgonNguNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (slideShow == null)
@@ -156,7 +188,7 @@ namespace AdminWebBenhVien.Controllers
             var listNgonNgu = await GetListNgonNguAsync();
             ViewBag.ListNgonNgu = listNgonNgu;
             #endregion
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id");
+            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id");
             return View();
         }
 
@@ -171,11 +203,11 @@ namespace AdminWebBenhVien.Controllers
                 var listNgonNgu = await GetListNgonNguAsync();
                 ViewBag.ListNgonNgu = listNgonNgu;
                 #endregion
-                _context.Add(slideShow);
-                await _context.SaveChangesAsync();
+                InitParam.Db.Add(slideShow);
+                await InitParam.Db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", slideShow.FkNgonNgu);
+            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id", slideShow.FkNgonNgu);
             return View(slideShow);
         }
 
@@ -187,7 +219,7 @@ namespace AdminWebBenhVien.Controllers
                 return NotFound();
             }
 
-            var slideShow = await _context.SlideShow
+            var slideShow = await InitParam.Db.SlideShow
                 .Include(s => s.FkNgonNguNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (slideShow == null)
@@ -203,19 +235,19 @@ namespace AdminWebBenhVien.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var slideShow = await _context.SlideShow.FindAsync(id);
-            _context.SlideShow.Remove(slideShow);
-            await _context.SaveChangesAsync();
+            var slideShow = await InitParam.Db.SlideShow.FindAsync(id);
+            InitParam.Db.SlideShow.Remove(slideShow);
+            await InitParam.Db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SlideShowExists(int id)
         {
-            return _context.SlideShow.Any(e => e.Id == id);
+            return InitParam.Db.SlideShow.Any(e => e.Id == id);
         }
         private Task<List<DropdownlistViewModel>> GetListNgonNguAsync()
         {
-            var list = _context.NgonNgu.AsNoTracking()
+            var list = InitParam.Db.NgonNgu.AsNoTracking()
                 .Select(h => new DropdownlistViewModel
                 {
                     Id = h.Id,

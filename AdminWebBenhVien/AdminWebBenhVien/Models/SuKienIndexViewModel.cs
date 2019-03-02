@@ -34,10 +34,23 @@ namespace AdminWebBenhVien.Models
         public int? Xem { get; set; }
 
         public string Link { get; set; } // ???
-        public string NgonNgu { get; set; }
+        public int? NgonNguId { get; set; }
 
         public DateTime? NgayTao { get; set; }
 
+        public string NguoiTao { get; set; }
+
+    }
+
+    public class SuKienCreateViewModel
+    {
+
+        public string TieuDe { get; set; }
+        public string GioiThieu { get; set; }
+        public int? Xem { get; set; }
+        public string Link { get; set; } // ???
+        public int? NgonNguId { get; set; }
+     
         public string NguoiTao { get; set; }
 
     }

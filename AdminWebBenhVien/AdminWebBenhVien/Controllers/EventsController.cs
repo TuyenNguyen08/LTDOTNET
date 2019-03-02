@@ -12,13 +12,13 @@ using Kendo.Mvc.Extensions;
 
 namespace AdminWebBenhVien.Controllers
 {
-    public class EventsController : Controller
+    public class EventsController : ControllerBase
     {
-        private readonly NBenhVien7CContext _context;
+       
 
-        public EventsController(NBenhVien7CContext context)
+        public EventsController(InitParam initParam) : base(initParam)
         {
-            _context = context;
+           
         }
 
         // GET: Events
@@ -31,7 +31,7 @@ namespace AdminWebBenhVien.Controllers
         [HttpGet]
         public async Task<IActionResult> Event_Read([DataSourceRequest]DataSourceRequest request)
         {
-            var resultDb = await _context.Event
+            var resultDb = await InitParam.Db.Event
                 .Include(h => h.FkNgonNguNavigation)
                 .Include(h => h.FkUserTaoNavigation)
                 .OrderBy(h => h.TieuDe)
@@ -47,6 +47,7 @@ namespace AdminWebBenhVien.Controllers
                     NgonNguId = h.FkNgonNgu,
                     NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
 
+                    NgayTao = h.NgayTao,
                     NguoiTaoId = h.FkUserTao,
                     NguoiTao = h.FkUserTaoNavigation.HoVaTen,
 
@@ -61,13 +62,14 @@ namespace AdminWebBenhVien.Controllers
         [Route("su-kien-quang-cao/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.ListNgonNgu = ListNgonNgu;
+
             if (id == null || !id.HasValue)
             {
                 return NotFound();
             }
 
-            var model = await _context.Event.AsNoTracking()
-                .Include(h => h.FkNgonNguNavigation)
+            var model = await InitParam.Db.Event.AsNoTracking()
                 .Include(h => h.FkUserTaoNavigation)
                 .Where(h => h.Id == id.Value)
                 .Select(h => new SuKienEditViewModel
@@ -78,8 +80,9 @@ namespace AdminWebBenhVien.Controllers
                     GioiThieu = h.GioiThieu,
                     Link = h.Link,
 
-                    NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
+                    NgonNguId = h.FkNgonNgu,
 
+                    NgayTao = h.NgayTao,
                     NguoiTao = h.FkUserTaoNavigation.HoVaTen,
 
                 }).FirstOrDefaultAsync();
@@ -101,28 +104,65 @@ namespace AdminWebBenhVien.Controllers
         [Route("su-kien-quang-cao/{id}")]
         public async Task<IActionResult> Edit(SuKienEditViewModel model)
         {
+            ViewBag.ListNgonNgu = ListNgonNgu;
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var dbItem = await _context.Event.FirstOrDefaultAsync(h => h.Id == model.Id);
+            var dbItem = await InitParam.Db.Event.FirstOrDefaultAsync(h => h.Id == model.Id);
             if (dbItem == null)
             {
                 return NotFound();
             }
 
+            dbItem.FkNgonNgu = model.NgonNguId;
             dbItem.TieuDe = model.TieuDe;
             dbItem.GioiThieu = model.GioiThieu;
+            dbItem.Link = model.Link;
 
-            await _context.SaveChangesAsync();
+            await InitParam.Db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Edit), new { id = model.Id });
         }
 
+        [HttpGet]
+        [Route("tao-moi-su-kien")]
+        public async Task<IActionResult> Create(int? id)
+        {
+            ViewBag.ListNgonNgu = ListNgonNgu;
 
+            return View(new SuKienCreateViewModel());
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("tao-moi-su-kien")]
+        public async Task<IActionResult> Create(SuKienCreateViewModel model)
+        {
+            ViewBag.ListNgonNgu = ListNgonNgu;
 
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var dbItem = new Event();
+
+            dbItem.FkNgonNgu = model.NgonNguId;
+            dbItem.TieuDe = model.TieuDe;
+            dbItem.GioiThieu = model.GioiThieu;
+            dbItem.Link = model.Link;
+
+            dbItem.NgayTao = DateTime.Now;
+            dbItem.FkUserTao = "admin";
+
+            InitParam.Db.Event.Add(dbItem);
+            await InitParam.Db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Edit), new { id = dbItem.Id });
+        }
 
 
 
@@ -153,7 +193,7 @@ namespace AdminWebBenhVien.Controllers
                 return NotFound();
             }
 
-            var tevent = await _context.Event
+            var tevent = await InitParam.Db.Event
                 .Include(t => t.FkNgonNguNavigation)
                 .Include(t => t.FkUserTaoNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -170,8 +210,8 @@ namespace AdminWebBenhVien.Controllers
         {
             var listNgonNgu = await GetListNgonNguAsync();
             ViewBag.ListNgonNgu = listNgonNgu;
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id");
-            ViewData["FkUserTao"] = new SelectList(_context.User, "UserName", "UserName");
+            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id");
+            ViewData["FkUserTao"] = new SelectList(InitParam.Db.User, "UserName", "UserName");
             return View();
         }
 
@@ -186,18 +226,18 @@ namespace AdminWebBenhVien.Controllers
             {
                 var listNgonNgu = await GetListNgonNguAsync();
                 ViewBag.ListNgonNgu = listNgonNgu;
-                _context.Add(tevent);
-                await _context.SaveChangesAsync();
+                InitParam.Db.Add(tevent);
+                await InitParam.Db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", tevent.FkNgonNgu);
-            ViewData["FkUserTao"] = new SelectList(_context.User, "UserName", "UserName", tevent.FkUserTao);
+            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id", tevent.FkNgonNgu);
+            ViewData["FkUserTao"] = new SelectList(InitParam.Db.User, "UserName", "UserName", tevent.FkUserTao);
             return View(tevent);
         }
 
         private Task<List<DropdownlistViewModel>> GetListNgonNguAsync()
         {
-            var list = _context.NgonNgu.AsNoTracking()
+            var list = InitParam.Db.NgonNgu.AsNoTracking()
                 .Select(h => new DropdownlistViewModel
                 {
                     Id = h.Id,
@@ -214,7 +254,7 @@ namespace AdminWebBenhVien.Controllers
                 return NotFound();
             }
 
-            var tevent = await _context.Event
+            var tevent = await InitParam.Db.Event
                 .Include(t => t.FkNgonNguNavigation)
                 .Include(t => t.FkUserTaoNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -231,15 +271,15 @@ namespace AdminWebBenhVien.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tevent = await _context.Event.FindAsync(id);
-            _context.Event.Remove(tevent);
-            await _context.SaveChangesAsync();
+            var tevent = await InitParam.Db.Event.FindAsync(id);
+            InitParam.Db.Event.Remove(tevent);
+            await InitParam.Db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EventExists(int id)
         {
-            return _context.Event.Any(e => e.Id == id);
+            return InitParam.Db.Event.Any(e => e.Id == id);
         }
     }
 }
