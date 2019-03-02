@@ -78,6 +78,7 @@ namespace AdminWebBenhVien.Controllers
 
                     TieuDe = h.TieuDe,
                     GioiThieu = h.GioiThieu,
+                    HinhAnh = h.HinhAnh,
                     Link = h.Link,
 
                     NgonNguId = h.FkNgonNgu,
@@ -120,6 +121,7 @@ namespace AdminWebBenhVien.Controllers
             dbItem.FkNgonNgu = model.NgonNguId;
             dbItem.TieuDe = model.TieuDe;
             dbItem.GioiThieu = model.GioiThieu;
+            dbItem.HinhAnh = model.HinhAnh;
             dbItem.Link = model.Link;
 
             await InitParam.Db.SaveChangesAsync();
@@ -153,6 +155,7 @@ namespace AdminWebBenhVien.Controllers
             dbItem.FkNgonNgu = model.NgonNguId;
             dbItem.TieuDe = model.TieuDe;
             dbItem.GioiThieu = model.GioiThieu;
+            dbItem.HinhAnh = model.HinhAnh;
             dbItem.Link = model.Link;
 
             dbItem.NgayTao = DateTime.Now;

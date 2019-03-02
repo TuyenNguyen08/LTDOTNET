@@ -18,7 +18,6 @@ namespace AdminWebBenhVien.Controllers
         {
         }
 
-        // GET: Videos
         [HttpGet]
         [Route("video")]
         public IActionResult Index()
@@ -57,7 +56,6 @@ namespace AdminWebBenhVien.Controllers
             return Json(result);
         }
 
-        // GET: Videos/Edit/5
         [HttpGet]
         [Route("video/{id}")]
         public async Task<IActionResult> Edit(int? id)
@@ -81,6 +79,7 @@ namespace AdminWebBenhVien.Controllers
 
                     DuongDanFile = h.DuongDanFile,
                     Xem = h.LuotXem,
+                    HinhAnh = h.HinhAnh,
                     
                     NgonNguId = h.FkNgonNgu,
 
@@ -100,9 +99,6 @@ namespace AdminWebBenhVien.Controllers
             return View(model);
         }
 
-        // POST: Videos/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("video/{id}")]
@@ -122,6 +118,7 @@ namespace AdminWebBenhVien.Controllers
             dbItem.FkNgonNgu = model.NgonNguId;
             dbItem.TieuDe = model.TieuDe;
             dbItem.GioiThieu = model.GioiThieu;
+            dbItem.HinhAnh = model.HinhAnh;
             dbItem.DuongDanFile = model.DuongDanFile;
 
             dbItem.NgaySua = DateTime.Now;
@@ -156,6 +153,7 @@ namespace AdminWebBenhVien.Controllers
             dbItem.FkNgonNgu = model.NgonNguId;
             dbItem.TieuDe = model.TieuDe;
             dbItem.GioiThieu = model.GioiThieu;
+            dbItem.HinhAnh = model.HinhAnh;
             dbItem.DuongDanFile = model.DuongDanFile;
 
             dbItem.NgayTao = DateTime.Now;

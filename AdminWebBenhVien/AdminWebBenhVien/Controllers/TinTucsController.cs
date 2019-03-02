@@ -100,6 +100,7 @@ namespace AdminWebBenhVien.Controllers
                    TieuDe = h.TieuDe,
                    GioiThieu = h.GioiThieu,
                    Xem = h.LuotXem,
+                   HinhAnh = h.HinhAnhMinhHoa,
                    NoiDung = h.NoiDung,
                    TacGia = h.Author,
 
@@ -146,6 +147,7 @@ namespace AdminWebBenhVien.Controllers
             dbItem.FkLoaiTin = model.TenLoaiId;
             dbItem.TieuDe = model.TieuDe;
             dbItem.GioiThieu = model.GioiThieu;
+            dbItem.HinhAnhMinhHoa = model.HinhAnh;
             dbItem.NoiDung = model.NoiDung;
             dbItem.Author = model.TacGia;
 
@@ -187,6 +189,7 @@ namespace AdminWebBenhVien.Controllers
             dbItem.TieuDe = model.TieuDe;
             dbItem.GioiThieu = model.GioiThieu;
             dbItem.NoiDung = model.NoiDung;
+            dbItem.HinhAnhMinhHoa = model.HinhAnh;
             dbItem.Author = model.TacGia;
 
             dbItem.NgayTao = DateTime.Now;
