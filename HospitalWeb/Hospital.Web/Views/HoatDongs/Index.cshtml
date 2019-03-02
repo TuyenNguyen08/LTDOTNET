@@ -11,73 +11,173 @@
 }
 @section css {
     <link href="~/css/PagedList.css" rel="stylesheet" />
+    <style>
+        .Link_TinTuc {
+            display: inline-block;
+            padding: 10px;
+            text-align: center;
+            width: 80px;
+            padding: 6px 0;
+            margin-bottom: 5px;
+            width: 100%;
+        }
+
+        img.img_TinTuc {
+            width: 100%;
+            margin-bottom: 0px !important;
+            height: 300px;
+        }
+
+        .Details_TieuDe {
+            color: #0095EB;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .GioiThieu_Detail {
+            font-size: 16px;
+        }
+
+        hr {
+            margin-top: -16px;
+            margin-bottom: 1rem;
+            border: 0;
+            border-top: 1px solid rgba(0,0,0,.1);
+        }
+
+        .col_Detail {
+            height: 540px;
+            margin-top: 25px;
+        }
+
+        .button {
+            backface-visibility: hidden;
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+            white-space: nowrap;
+            background: #fdd655;
+            border-radius: 2px;
+            border: 0px solid #444;
+            border-width: 0px 0px 0px 0px;
+            padding: 10px 49px 10px 15px;
+            color: #fff;
+            font-size: 16px;
+            font-family: Helvetica Neue;
+            font-weight: 900;
+            font-style: normal;
+            float: right
+        }
+
+            .button > div {
+                color: #999;
+                font-size: 10px;
+                font-family: Helvetica Neue;
+                font-weight: initial;
+                font-style: normal;
+                text-align: center;
+                margin: 0px 0px 0px 0px
+            }
+
+            .button > i {
+                font-size: 1em;
+                background: #f9b633;
+                border-radius: 0px;
+                border: 0px solid transparent;
+                border-width: 0px 0px 0px 0px;
+                padding: 14px 8px 14px 8px;
+                margin: 0px 0px 0px 0px;
+                position: absolute;
+                top: 0px;
+                bottom: 0px;
+                right: 0px;
+                text-align: center;
+                width: 38px;
+            }
+
+            .button > .ld {
+                font-size: initial
+            }
+        a.date {
+            background-color: #EDF7FF;
+            padding: 6px;
+        }
+    </style>
 }
-    <div class="breadvroumb_area">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col">
-                    <h1>Hoạt Động</h1>
-                    <div class="breadcroumb_link">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- breadcroumb Area End-->
-<!-- Blog page Area Start-->
-<div class="blog_area">
+<div class="breadvroumb_area">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12 order-md-12">
-                <div class="row">
-
-                    @foreach (var hoatdong in Model)
-                    {
-                        <div class="col-md-6">
-                            <div class="single_blog">
-                                <div class="blog_img">
-                                    <a class="date" asp-action="@nameof(HoatDongsController.Details)"
-                                       asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
-                                       asp-route-id="@hoatdong.Id"
-                                       target="_blank">
-                                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=hoatdong.HinhAnhMinhHoa })" alt="">
-                                    </a>
-                                </div>
-                                <div class="blog_content">
-                                    <div class="blog_meta">
-                                        <a class="date" asp-action="@nameof(HoatDongsController.Details)"
-                                           asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
-                                           asp-route-id="@hoatdong.Id"
-                                           target="_blank">@hoatdong.NgayTao?.ToString("dd/MM/yy hh:mm:ss")</a>
-                                    </div>
-                                    <h4>
-                                        <a asp-action="@nameof(HoatDongsController.Details)"
-                                           asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
-                                           asp-route-id="@hoatdong.Id"
-                                           target="_blank">@hoatdong.TieuDe</a>
-                                    </h4>
-                                    <p asp-action="@nameof(HoatDongsController.Details)"
-                                       asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
-                                       asp-route-id="@hoatdong.Id"
-                                       target="_blank">@hoatdong.GioiThieu</p>
-                                    <a class="read_btn" asp-action="@nameof(HoatDongsController.Details)"
-                                       asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
-                                       asp-route-id="@hoatdong.Id"
-                                       target="_blank">Xem thêm<i class="zmdi zmdi-plus"></i></a>
-                                </div>
-                            </div>
-
-                        </div>
-                    }
-
-                    <div class="col-md-12">
-                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-                    </div>
-
-
+        <div class="row text-center">
+            <div class="col">
+                <h1>Hoạt Động</h1>
+                <div class="breadcroumb_link">
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Blog page Area End-->
+<!-- breadcroumb Area End-->
+<!-- Blog page Area Start-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 ">
+
+
+            @foreach (var hoatdong in Model)
+            {
+            <div class="col-md-6">
+                <div class="col_Detail">
+                    <div class="blog_img">
+                        <a class="Link_TinTuc" asp-action="@nameof(HoatDongsController.Details)"
+                           asp-controller="@nameof(HoatDongsController).Replace("Controller", "")"
+                           asp-route-id="@hoatdong.Id"
+                           target="_blank">
+                            <img src="@Url.Action("GetImage", "ImageBrowser", new { id = hoatdong.HinhAnhMinhHoa })" alt="" class="img_TinTuc">
+                        </a>
+                        <div class="row">
+                            <div class="col-md-2 blog_meta">
+                                <a class="date" asp-action="@nameof(HoatDongsController.Details)"
+                                   asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
+                                   asp-route-id="@hoatdong.Id"
+                                   target="_blank">@hoatdong.NgayTao?.ToString("dd/MM/yy hh:mm:ss")</a>
+                            </div>
+                            <h2 class="col-md-10">
+                                <a asp-action="@nameof(HoatDongsController.Details)"
+                                   asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
+                                   class="Details_TieuDe"
+                                   asp-route-id="@hoatdong.Id"
+                                   target="_blank">@hoatdong.TieuDe</a>
+                            </h2>
+
+                        </div>
+                        <hr />
+                        <p asp-action="@nameof(HoatDongsController.Details)"
+                           asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
+                           class="GioiThieu_Detail"
+                           asp-route-id="@hoatdong.Id"
+                           target="_blank">
+                            @hoatdong.GioiThieu
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <a class="button" asp-action="@nameof(HoatDongsController.Details)"
+                   asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
+                   asp-route-id="@hoatdong.Id"
+                   target="_blank">
+                    Xem thêm<i class="zmdi zmdi-mail-send icon_next"></i>
+
+                </a>
+                
+            </div>
+              
+            }
+            <div class="col-md-12">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            </div>
+
+        </div>
+    </div>
+</div>
