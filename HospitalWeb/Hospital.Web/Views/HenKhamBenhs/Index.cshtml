@@ -77,22 +77,22 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <label asp-for="HoVaTen" class="control-label">Họ và tên</label>
-                            <input asp-for="HoVaTen" class="form-control" />
+                            <input asp-for="HoVaTen" class="form-control" style="font-size:15px;"/>
                             <span asp-validation-for="HoVaTen" class="text-danger"></span>
                         </div>
                         <div class="col-lg-6">
                             <label asp-for="DiaChi" class="control-label">Địa chỉ</label>
-                            <input asp-for="DiaChi" class="form-control" />
+                            <input asp-for="DiaChi" class="form-control" style="font-size:15px;" />
                             <span asp-validation-for="DiaChi" class="text-danger"></span>
                         </div>
                         <div class="col-lg-6">
                             <label asp-for="SoDienThoaiDiDong" class="control-label">Số điện thoại</label>
-                            <input asp-for="SoDienThoaiDiDong" class="form-control" />
+                            <input asp-for="SoDienThoaiDiDong" class="form-control" style="font-size:15px;"/>
                             <span asp-validation-for="SoDienThoaiDiDong" class="text-danger"></span>
                         </div>
                         <div class="col-lg-6">
                             <label asp-for="DiaChiEmail" class="control-label">Địa chỉ</label>
-                            <input asp-for="DiaChiEmail" class="form-control" />
+                            <input asp-for="DiaChiEmail" class="form-control" style="font-size:15px;"/>
                             <span asp-validation-for="DiaChiEmail" class="text-danger"></span>
                         </div>
                         <div class="col-lg-6">
@@ -141,7 +141,7 @@
                         <div class="col-lg-6">
                             <h3>Ngày khám</h3>
                             @(Html.Kendo().DatePicker()
-                                                        .Name("ngaykham")
+                                                        .Name(nameof(HenKhamBenh.NgayHen))
                                                         .Value(DateTime.Now)
                                                         .HtmlAttributes(new { style = "width: 100%", title = "ngaykham" })
                                                         .DateInput()
