@@ -1,13 +1,15 @@
-﻿@model List<Hospital.Web.EfModels.LichKham>
+﻿@model List<Hospital.Web.Controllers.LichKhamVm>
 @using Hospital.Web.EfModels
 
 @{
-    ViewBag.Title = "Dich Vụ";
+    ViewBag.Title = "Lịch khám bệnh";
 }
 <style>
     table, th, td {
         border: 1px solid #478AF8;
-        text-align:center;
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top20px;
     }
 
     th, td {
@@ -16,45 +18,49 @@
 
     th {
         background-color: #478AF8;
-        color:white;
+        color: white;
     }
 </style>
-<div class="container center" style="padding:10%">
-    @foreach (var item_PK in (ViewBag.listPhongKham as List<PhongKham>))
-    {
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>Lịch khám bệnh</h1>
+                <div class="breadcroumb_link">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Chuyên khoa</th>
-                    <th>Thứ</th>
-                    <th>Sáng</th>
-                    <th>Chiều</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item_LN in (ViewBag.listLichNgay as List<LichNgay>))
+<div class="container">
+    <div class="row">
+        <table class="col-md-12">
+            @foreach (var item_PK in Model)
+            {
+                if (item_PK.Loai == "TieuDe")
                 {
                     <tr>
-                        <td>@item_PK.TenPhongKham</td>
-                        <td>@item_LN.TenThu</td>
-
-                        @foreach (var item_LK in Model)
-                        {
-                            @if (item_LK.FkLichNgay == item_LN.Id && item_LK.FkPhongKham == item_PK.Id)
-                            {
-                                <td>
-                                    @item_LK.Sang
-                                </td>
-                                <td>
-                                    @item_LK.Chieu
-                                </td>
-                            }
-                        }
+                        <th>Phòng khám</th>
+                        <th>Thứ</th>
+                        <th>Sáng</th>
+                        <th>Chiều</th>
                     </tr>
                 }
-            </tbody>
-        </table>
-    }
+                else
+                {
 
+                    <tr>
+                        @if (item_PK.Loai == "PhongKham")
+                        {
+                            <td rowspan="6" style="height: 280px;">@item_PK.PhongKham</td>
+                        }
+                        <td>@item_PK.Ngay</td>
+                        <td>@item_PK.Sang</td>
+                        <td>@item_PK.Chieu</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
 </div>

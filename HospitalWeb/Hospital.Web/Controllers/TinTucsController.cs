@@ -56,11 +56,8 @@ namespace Hospital.Web.Controllers
                 return NotFound();
             }
 
-            var tinTuc = await InitParam.Db.TinTuc.AsNoTracking()
-                .Include(t => t.FkLoaiTinNavigation)
-                .Include(t => t.FkNgonNguNavigation)
-                .Include(t => t.FkUserNguoiSuaNavigation)
-                .Include(t => t.FkUserNguoiTaoNavigation)
+            var tinTuc = await InitParam.Db.TinTuc.AsNoTracking()                
+                .Where(t => t.Id == id && t.FkNgonNgu == NgonNgu)
                 .Select(t => new TinTuc
                 {
                     TieuDe = t.TieuDe,
