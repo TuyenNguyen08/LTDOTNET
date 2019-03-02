@@ -5,20 +5,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Hỏi đáp y khoa";
 }
+@section css {
+    <link href="~/css/DichVuKhac.css" rel="stylesheet" />
+}
 <div class="breadvroumb_area">
     <div class="container">
         <div class="row text-center">
             <div class="col">
                 <h1>@Model.TieuDe</h1>
-                <div class="breadcroumb_link">
-                </div>
             </div>
         </div>
     </div>
 </div>
 <div>
     <div class="container" style="padding:20px">
-        <div class="col-lg-9">
+        <div class="col-lg-8">
             <div class="form-group">
                 <h1>@Model.TieuDe</h1>
             </div>
@@ -34,20 +35,29 @@
             </div>
         </div>
 
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <h1 style="border-bottom: 1px solid #8D8D8D; width:100%; float: left;">
                 Câu hỏi khác
             </h1>
             <ul>
-                @foreach (var item in (ViewBag.listsHoiDap as List<HoiDapYkhoa>))
+                @foreach (var item in (ViewBag.listsHoiDap as List
+            <HoiDapYkhoa>
+                ))
                 {
                     <li>
                         <a asp-action="@nameof(HoiDapYkhoasController.Details)"
-                           asp-controller="@nameof(HoiDapYkhoasController).Replace("Controller", "")"
-                           asp-route-id="@item.Id">* @item.TieuDe</a>
+                           asp-controller="@nameof(HoiDapYkhoasController).Replace(" Controller", "" )"
+                           asp-route-id="@item.Id">
+                            <i class="zmdi zmdi-badge-check icon"></i> <span> @item.TieuDe</span>
+                        </a>
                     </li>
                 }
             </ul>
         </div>
     </div>
 </div>
+<!-- News Area Start-->
+@section scripts {
+
+
+}
