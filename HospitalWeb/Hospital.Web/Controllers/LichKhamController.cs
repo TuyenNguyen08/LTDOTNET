@@ -2,6 +2,7 @@
 using Hospital.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,7 +62,42 @@ namespace Hospital.Web.Controllers
 
             #endregion
 
-            return View(lslichKham);
+            var litsLichKham = new List<LichKhamVm>();
+            foreach (var itemPhongKham in lsPhongKham)
+            {
+                litsLichKham.Add(new LichKhamVm { Loai = "TieuDe"});
+                var flag = true;
+
+                foreach (var itemNgay in lsLichNgay)
+                {
+                    var ngay = lslichKham.FirstOrDefault( c => c.FkPhongKham == itemPhongKham.Id && c.FkLichNgay == itemNgay.Id);
+                    var lichKham = new LichKhamVm {
+                        Loai = flag ? "PhongKham" : "",
+                        PhongKham = itemPhongKham.TenPhongKham,
+                        Ngay = itemNgay.TenThu,
+                        Sang = ngay.Sang,
+                        Chieu = ngay.Chieu
+                    };
+                    litsLichKham.Add(lichKham);
+                    flag = false;
+                }
+            }
+
+            return View(litsLichKham);
         }
+        
     }
+    public class LichKhamVm {
+
+        public string Loai { get; set; }
+
+        public string PhongKham { get; set; }
+        public string Ngay { get; set; }
+
+        public string Sang { get; set; }
+
+        public string Chieu { get; set; }
+
+    }
+
 }
