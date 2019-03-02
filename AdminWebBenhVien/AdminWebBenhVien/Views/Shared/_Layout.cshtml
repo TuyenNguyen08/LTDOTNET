@@ -141,8 +141,8 @@
                                    asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Hỏi đáp sức khỏe</a>
                             </li>
                             <li>
-                                <a asp-action=""
-                                   asp-controller=""><i class="fa fa-briefcase fa-fw"></i>Đặt hẹn lịch khám</a>
+                                <a asp-action="@nameof(HenKhamBenhsController.Index)"
+                                   asp-controller="@nameof(HenKhamBenhsController).Replace("Controller","")"><i class="fa fa-briefcase fa-fw"></i>Đặt hẹn lịch khám</a>
                             </li>
                             <li>
                                 <a asp-action=""

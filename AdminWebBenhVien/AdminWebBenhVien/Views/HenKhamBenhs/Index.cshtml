@@ -1,7 +1,7 @@
-﻿@model IEnumerable<AdminWebBenhVien.EfModels.HenKhamBenh>
-
-@using AdminWebBenhVien.Controllers
+﻿@using AdminWebBenhVien.Controllers
 @using AdminWebBenhVien.Models
+
+@model HenKhamBenhIndexViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -26,13 +26,33 @@
                             <read url="@Url.Action(nameof(HenKhamBenhsController.HenKhamBenh_Read))" type="get" />
                         </transport>
                         <schema>
-                            <model id="@nameof(HenKhamBenhViewModel.Id)">
+                            <model id="@nameof(HenKhamBenhIndexViewModel.Id)">
                                 <fields>
-                                    <field name="@nameof(HenKhamBenhViewModel.Id)" />
-                                    <field name="@nameof(HenKhamBenhViewModel.HoVaTen)" />
-                                    <field name="@nameof(HenKhamBenhViewModel.NgayHen)" />
-                                    <field name="@nameof(HenKhamBenhViewModel.BacSi)" />
-                                    <field name="@nameof(HenKhamBenhViewModel.DiaChi)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.Id)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.ChuyenKhoaId)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.TenChuyenKhoa)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.BacSiId)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.TenBacSi)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.NgayHen)" type="number" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.GioHenId)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.GioHen)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.MoTaTrieuChung)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.NgayGui)" type="date" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.DiaChiEmail)" type="date" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.HoVaTen)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.NamSinhId)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.NamSinh)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.GioiTinh)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.TinhTrangHonNhanId)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.TinhTrangHonNhan)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.QuocTichId)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.QuocTich)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.SoDienThoaiDiDong)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.SoDienThoaiNha)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.DiaChi)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.BacSi)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.TrangThaiId)" />
+                                    <field name="@nameof(HenKhamBenhIndexViewModel.TenTrangThai)" />
                                 </fields>
                             </model>
                         </schema>
@@ -45,15 +65,32 @@
                     </pageable>
                     <filterable enabled="true" />
                     <columns>
-                        <column field="@nameof(HenKhamBenhViewModel.Id)" title="ID" width="80" />
-                        <column field="@nameof(HenKhamBenhViewModel.HoVaTen)" title="Họ và tên" width="200" />
-                        <column field="@nameof(HenKhamBenhViewModel.NgayHen)" title="Ngày hẹn" width="200" />
-                        <column field="@nameof(HenKhamBenhViewModel.BacSi)" title="Bác sĩ" width="150" />
-                        <column field="@nameof(HenKhamBenhViewModel.DiaChi)" title="Địa chỉ" width="150" />
-                        <column title="Thao tác" width="200">
+                        <column title="Thao tác" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'>
                             <commands>
-                                <column-command text="Sửa" name="btnCapNhat" class-name="k-primary" click="btnCapNhat_Click"></column-command>
-                                <column-command text="Xóa" name="btnXoa" class-name="k-primary" click="btnXoa_Click"></column-command>
+                                <column-command text="Sửa" name="btnCapNhat1" class-name="k-primary" click="btnCapNhat_Click"></column-command>
+                            </commands>
+                        </column>
+                        <column field="@nameof(HenKhamBenhIndexViewModel.Id)" title="ID" width="80" />
+                        <column field="@nameof(HenKhamBenhIndexViewModel.HoVaTen)" title="Họ và tên" width="200" />
+                        <column field="@nameof(HenKhamBenhIndexViewModel.DiaChi)" title="Địa Chỉ" width="300" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-ellipsis" }' />
+                        <column field="@nameof(HenKhamBenhIndexViewModel.NgayHen)" title="Ngày hẹn" width="150" format="{0:dd/MM/yy HH:mm:ss}" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }' />
+                        <column field="@nameof(HenKhamBenhIndexViewModel.SoDienThoaiDiDong)" title="Số điện thoại di động" width="200" />
+                        <column field="@nameof(HenKhamBenhIndexViewModel.SoDienThoaiNha)" title="Số điện thoại nhà" width="200" />
+                        <column field="@nameof(HenKhamBenhIndexViewModel.DiaChiEmail)" title="Email" width="200" />
+                        <column field="@nameof(HenKhamBenhIndexViewModel.GioiTinh)" title="Giới tính" width="150" />
+                        <column field="@nameof(HenKhamBenhIndexViewModel.NamSinh)" title="Năm sinh" width="150" />
+                        <column field="@nameof(HenKhamBenhIndexViewModel.TenChuyenKhoa)" title="Chuyên khoa" width="200" />
+                        <column field="@nameof(HenKhamBenhIndexViewModel.TenBacSi)" title="Bác sĩ" width="200" />
+                        <column field="@nameof(HenKhamBenhIndexViewModel.NgayGui)" title="Ngày gửi" width="150" format="{0:dd/MM/yy HH:mm:ss}" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'/>
+                        <column field="@nameof(HenKhamBenhIndexViewModel.GioHen)" title="Giờ hẹn" width="200" />
+                        <column field="@nameof(HenKhamBenhIndexViewModel.MoTaTrieuChung)" title="Triệu chứng" width="300" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-ellipsis" }' />
+                        <column field="@nameof(HenKhamBenhIndexViewModel.TinhTrangHonNhan)" title="Tình trạng hôn nhân" width="200" />
+                        <column field="@nameof(HenKhamBenhIndexViewModel.QuocTich)" title="Quốc tịch" width="200" />
+                        <column field="@nameof(HenKhamBenhIndexViewModel.TenTrangThai)" title="Trạng thái" width="200" />
+
+                        <column title="Thao tác" width="100" html-attributes='new Dictionary<string, object>{ ["class"] = "bv-column-align-center" }'>
+                            <commands>
+                                <column-command text="Sửa" name="btnCapNhat1" class-name="k-primary" click="btnCapNhat_Click"></column-command>
                             </commands>
                         </column>
                     </columns>
