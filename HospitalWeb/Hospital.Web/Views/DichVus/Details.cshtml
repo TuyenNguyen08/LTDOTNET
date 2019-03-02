@@ -3,7 +3,7 @@
 @using Hospital.Web.EfModels
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Dịch vụ";
+    ViewBag.Title = "Chi tiết dịch vụ";
 }
 @section css {
     <link href="~/css/DichVuKhac.css" rel="stylesheet" />
@@ -14,14 +14,12 @@
             <div class="col">
                 <h1>@Model.TenDichVu</h1>
                 <div class="breadcroumb_link">
-                    <a asp-action="@nameof(HomesController.Index)"
-                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>/ Chi tiết dịch vụ
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- breadcroumb Area End-->
+
 <!-- ServiceDetailss Area Start-->
 <div class="service_details_area">
     <div class="container">
