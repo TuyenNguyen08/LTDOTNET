@@ -56,14 +56,23 @@
         </div>
     </div>
 </div>
-<div class="container" style="background-color:#50acf1; margin:10px">
-    @foreach (var subPhone in Model.lsSubPhone)
-    {
-        <div class="col-lg-4 cc">
-            <h2>@subPhone.Name</h2>
-            <h3><b>@subPhone.SoDienThoai</b></h3>
+<div class="container" style="background-color:#016ca0; margin:10px">
+    <div class="row">
+        <div class="col-lg-2">
+            <img src="~/images/icon-slider.jpg" />
         </div>
-    }
+        <div class="col-lg-10">
+            @foreach (var subPhone in Model.lsSubPhone)
+            {
+                <div class="col-sm-4 cc">
+                    <h2>@subPhone.Name</h2>
+                    <h3><b>@subPhone.SoDienThoai</b></h3>
+                </div>
+
+            }
+        </div>
+    </div>
+
 </div>
 <!-- Cbox Area end-->
 <!-- About Area Start-->
@@ -135,7 +144,7 @@
                                     </p>
 
                                 </a>
-                                <hr class="line_tintuc"/>
+                                <hr class="line_tintuc" />
                             }
                         </div>
                         <a asp-action="@nameof(TinTucsController.Index)"
@@ -153,7 +162,7 @@
 
             </div>
             <div class="col-lg-4 list_video">
-                <div >
+                <div>
                     <h1 class="section_title_video">Video</h1>
                 </div>
                 <ul>

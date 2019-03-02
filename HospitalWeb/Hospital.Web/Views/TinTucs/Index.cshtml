@@ -14,11 +14,7 @@
     <div class="container">
         <div class="row text-center">
             <div class="col">
-                <h1>Tin tức y khoa</h1>
-                <div class="breadcroumb_link">
-                    <a asp-action="@nameof(HomesController.Index)"
-                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>/Tin tức mới nhất
-                </div>
+                <h1>Tin tức y khoa</h1>              
             </div>
         </div>
     </div>
@@ -41,7 +37,8 @@
                                     <div class="blog_meta">
                                         <a class="date" asp-action="@nameof(TinTucsController.Details)"
                                            asp-controller="@nameof(TinTucsController).Replace("Controller","")"
-                                           asp-route-id="@tinTuc.Id">@tinTuc.NgayTao</a>
+                                           asp-route-id="@tinTuc.Id">
+                                        @tinTuc.NgayTao?.ToString("dd/MM/yyyy HH:mm:ss")</a>
                                         @*<a href="#" class="comment_box">
                                     <i class="zmdi zmdi-comments"></i> 3
                                 </a>*@
