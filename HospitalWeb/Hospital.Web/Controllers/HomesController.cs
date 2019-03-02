@@ -118,7 +118,7 @@ namespace Hospital.Web.Controllers
                 {
                     Id = t.Id,
                     TieuDe = t.TieuDe,
-                    NoiDung = t.NoiDung.Substring(0, 200) + "...",
+                    NoiDung = t.NoiDung.Substring(0, 154) + "...",
                     Image = t.Image,
                 })
                 .ToListAsync();
