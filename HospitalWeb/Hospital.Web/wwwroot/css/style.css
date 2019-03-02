@@ -221,7 +221,7 @@ body {
     font-size: 15px;
     font-weight: normal;
     line-height: 1.7;
-    color: #808080;
+    color: black;
 }
 
 
@@ -253,26 +253,29 @@ body {
  ====/========        =======/====/*/
 
 .header_top_area {
-    background: #EAF6FF;
+    background: #50acf1;
     font-size: 14px;
     color: #515151;
     font-weight: 600;
     padding: 15px 0;
+    color:white;
 }
-
+.tilte_BenhVien{
+    color: white;
+}
 a.htr_single_contact {
     padding: 0 25px;
     border-right: 1px solid #ADADAD;
 }
 
     a.htr_single_contact i {
-        color: #44a6f0;
+        color: white;
         margin-right: 5px;
     }
 
 .htr a {
     font-size: 14px;
-    color: #515151;
+    color: white;
 }
 
 ul.htr_language {

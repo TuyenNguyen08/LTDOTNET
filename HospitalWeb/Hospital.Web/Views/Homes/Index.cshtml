@@ -14,157 +14,149 @@
     <link href="~/css/responsive.css" rel="stylesheet" />
     <link href="~/css/trang-chu.css" rel="stylesheet" />
 }
-
-<div class="welcome_areaa" style="background-image: url(../images/img/welcome_shap.png);">
-    <div class="container">
-        <div class="welcome_slider owl-carousel">
-            @foreach (var slide in Model.lsSLide)
-            {
-                <div class="single_welcome_slider">
-                    <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=slide.HinhAnh })" />
-                </div>
-            }
+<div class="container">
+    <div class="welcome_areaa" style="background-image: url(../images/img/welcome_shap.png);">
+        <div class="container">
+            <div class="welcome_slider owl-carousel">
+                @foreach (var slide in Model.lsSLide)
+                {
+                    <div class="single_welcome_slider">
+                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=slide.HinhAnh })" />
+                    </div>
+                }
+            </div>
         </div>
     </div>
-</div>
-<!-- Welcome Area End-->
-<!-- Cbox Area Start-->
-<div class="cbox_area">
-    <div class="container">
-        <div class="col-wrap">
-            @foreach (var subNote in Model.lsSubNote)
-            {
-                <div class="col-md-3">
-                    <div class="single_cbox">
-                        <div class="cbox_title">
-                            <div class="cbox_icon">
-                                <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=subNote.Image })" />
+    <!-- Welcome Area End-->
+    <!-- Cbox Area Start-->
+    <div class="cbox_area">
+        <div class="container">
+            <div class="row">
+                @foreach (var subNote in Model.lsSubNote)
+                {
+                    <div class="col-md-3">
+                        <div class="single_cbox">
+                            <div class="cbox_title">
+                                <div class="cbox_icon"><img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=subNote.Image })" /></div>
+                                <a asp-action="@nameof(HenKhamBenhsController.Index)"
+                                   asp-controller="@nameof(HenKhamBenhsController).Replace("Controller", "")">
+                                    <h4>@subNote.TieuDe</h4>
+                                </a>
                             </div>
+                            <p>
+                                @subNote.NoiDung
+                            </p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="container" style="background-color:#50acf1; margin:10px">
+        @foreach (var subPhone in Model.lsSubPhone)
+        {
+            <div class="col-lg-4 cc">
+                <h2>@subPhone.Name</h2>
+                <h3><b>@subPhone.SoDienThoai</b></h3>
+            </div>
+        }
+    </div>
+    <!-- Cbox Area end-->
+    <!-- About Area Start-->
+    <div class="about_area ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="about_content">
+                        <div class="col background_grey">
+                            <div class="section_title">
+                                <h1>Hoạt động</h1>
+                            </div>
+                            <div class="latest_news">
+                                @foreach (var hoatdong in Model.lsHoatDong)
+                                {
+                                    <a asp-action="@nameof(HoatDongsController.Details)"
+                                       asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
+                                       asp-route-id="@hoatdong.Id"
+                                       target="_blank" class="single_latest_news">
+                                        <span class="l_img">
+                                            <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=hoatdong.HinhAnhMinhHoa })" />
+                                        </span>
+                                        <h5>
+                                            @hoatdong.TieuDe
+                                        </h5>
+                                        <span>@hoatdong.NgayTao?.ToString("dd/MM/yyyy HH:mm:ss")</span>
+                                        <p>
+                                            @hoatdong.GioiThieu
+                                        </p>
 
-                            <a asp-action="@nameof(HenKhamBenhsController.Index)"
-                               asp-controller="@nameof(HenKhamBenhsController).Replace("Controller", "")">
-                                <h4>@subNote.TieuDe</h4>
+                                    </a>
+                                    <hr />
+                                }
+
+                            </div>
+                            <a asp-action="@nameof(HoatDongsController.Index)"
+                               class="add"
+                               asp-controller="@nameof(HoatDongsController).Replace("Controller","")">
+                                <div class="button">
+                                    Xem thêm
+                                </div>
                             </a>
                         </div>
-                        <p>
-                            @subNote.NoiDung
-                        </p>
-
                     </div>
-                </div>
-            }
-        </div>
-    </div>
-</div>
-<div class="container" style="background-color:#50acf1; margin:10px">
-    @foreach (var subPhone in Model.lsSubPhone)
-    {
-        <div class="col-lg-4 cc">
-            <h2>@subPhone.Name</h2>
-            <h3><b>@subPhone.SoDienThoai</b></h3>
-        </div>
-    }
-</div>
-<!-- Cbox Area end-->
-<!-- About Area Start-->
-<div class="about_area ">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="about_content">
-                    <div class="col background_grey">
-                        <div class="section_title">
-                            <h1>Hoạt động</h1>
-                        </div>
-                        <div class="latest_news">
-                            @foreach (var hoatdong in Model.lsHoatDong)
-                            {
-                                <a asp-action="@nameof(HoatDongsController.Details)"
-                                   asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
-                                   asp-route-id="@hoatdong.Id"
-                                   target="_blank" class="single_latest_news">
-                                    <span class="l_img">
-                                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=hoatdong.HinhAnhMinhHoa })" />
-                                    </span>
-                                    <h5>
-                                        @hoatdong.TieuDe
-                                    </h5>
-                                    <span>@hoatdong.NgayTao?.ToString("dd/MM/yyyy HH:mm:ss")</span>
-                                    <p>
-                                        @hoatdong.GioiThieu
-                                    </p>
 
-                                </a>
-                                <hr />
-                            }
-
-                        </div>
-                        <a asp-action="@nameof(HoatDongsController.Index)"
-                           class="add"
-                           asp-controller="@nameof(HoatDongsController).Replace("Controller","")">
-                            <div class="button">
-                                Xem thêm
+                    <div class="about_content">
+                        <div class="col background_grey">
+                            <div class="section_title">
+                                <h1>Tin tức mới nhất</h1>
                             </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="about_content">
-                    <div class="col background_grey">
-                        <div class="section_title">
-                            <h1>Tin tức mới nhất</h1>
-                        </div>
-                        <div class="latest_news">
+                            <div class="latest_news">
 
 
-                            @foreach (var tinTuc in Model.lsTinTuc)
-                            {
-                                <a asp-action="@nameof(TinTucsController.Details)"
-                                   asp-controller="@nameof(TinTucsController).Replace("Controller","")"
-                                   asp-route-id="@tinTuc.Id"
-                                   target="_blank" class="single_latest_news">
-                                    <span class="l_img">
-                                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=tinTuc.HinhAnhMinhHoa })" />
-                                    </span>
-                                    <h5>
-                                        @tinTuc.TieuDe
-                                    </h5>
-                                    <span>@tinTuc.NgayTao?.ToString("dd/MM/yyyy HH:mm:ss")</span>
-                                    <p>
-                                        @tinTuc.GioiThieu
-                                    </p>
+                                @foreach (var tinTuc in Model.lsTinTuc)
+                                {
+                                    <a asp-action="@nameof(TinTucsController.Details)"
+                                       asp-controller="@nameof(TinTucsController).Replace("Controller","")"
+                                       asp-route-id="@tinTuc.Id"
+                                       target="_blank" class="single_latest_news">
+                                        <span class="l_img">
+                                            <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=tinTuc.HinhAnhMinhHoa })" />
+                                        </span>
+                                        <h5>
+                                            @tinTuc.TieuDe
+                                        </h5>
+                                        <span>@tinTuc.NgayTao?.ToString("dd/MM/yyyy HH:mm:ss")</span>
+                                        <p>
+                                            @tinTuc.GioiThieu
+                                        </p>
 
-                                </a>
-                                <hr class="line_tintuc"/>
-                            }
-                        </div>
-                        <a asp-action="@nameof(TinTucsController.Index)"
-                           class="add"
-                           asp-controller="@nameof(TinTucsController).Replace("Controller","")">
-                            <div class="button">
-                                Xem thêm
+                                    </a>
+                                    <hr class="line_tintuc" />
+                                }
                             </div>
-                        </a>
+                            <a asp-action="@nameof(TinTucsController.Index)"
+                               class="add"
+                               asp-controller="@nameof(TinTucsController).Replace("Controller","")">
+                                <div class="button">
+                                    Xem thêm
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
-
-
-
-
-            </div>
-            <div class="col-lg-4 list_video">
-                <div >
-                    <h1 class="section_title_video">Video</h1>
+                <div class="col-lg-4 list_video">
+                    <div>
+                        <h1 class="section_title_video">Video</h1>
+                    </div>
+                    <ul>
+                        @foreach (var video in Model.lsVideo)
+                        {
+                            <li class="youtube_video">
+                                <iframe src="https://www.youtube.com/embed/@video.DuongDanFile" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </li>
+                        }
+                    </ul>
                 </div>
-                <ul>
-                    @foreach (var video in Model.lsVideo)
-                    {
-                        <li class="youtube_video">
-                            <iframe src="https://www.youtube.com/embed/@video.DuongDanFile" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </li>
-                        <hr>
-                    }
-                </ul>
             </div>
         </div>
     </div>
