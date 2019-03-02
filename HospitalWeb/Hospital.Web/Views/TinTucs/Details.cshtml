@@ -3,7 +3,7 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Tin tức";
+    ViewBag.Title = "Tin tức chi tiết";
 
 }
 
@@ -18,11 +18,7 @@
     <div class="container">
         <div class="row text-center">
             <div class="col">
-                <h1>@Model.TieuDe</h1>
-                <div class="breadcroumb_link">
-                    <a asp-action="@nameof(HomesController.Index)"
-                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>/ Tin tức mới nhất
-                </div>
+                <h1>@Model.TieuDe</h1>                
             </div>
         </div>
     </div>
@@ -33,10 +29,10 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="blog_detaisl_area">
-                    <div class="blog_full_content">
-                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=Model.HinhAnhMinhHoa })" />
+                    <div class="blog_full_content">                       
                         <div class="blog_meta">
-                            <a href="#">@Model.NgayTao?.ToString("dd/MM/yy hh:mm:ss")</a>
+                            <h3><b>Ngày đăng: @Model.NgayTao?.ToString("dd/MM/yyyy HH:mm:ss") | Ngày cập nhật: @Model.NgaySua?.ToString("dd/MM/yyyy HH:mm:ss")
+                                | Lượt xem: @Model.LuotXem | Nguồn: @Model.Author</b></h3>
                         </div>
                         <div class="blog_quote">
                             <p>@Model.GioiThieu</p>

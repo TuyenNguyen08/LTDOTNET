@@ -1,7 +1,7 @@
 ﻿@model Hospital.Web.EfModels.Video
 @using Hospital.Web.Controllers
 @{
-    ViewData["Title"] = "Details";
+    ViewBag.Title = "Chi tiết video";
 }
 
 
@@ -21,11 +21,7 @@
     <div class="container">
         <div class="row text-center">
             <div class="col">
-                <h1>@Model.TieuDe</h1>
-                <div class="breadcroumb_link">
-                    <a asp-action="@nameof(HomesController.Index)"
-                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>/ Sự kiện mới nhất
-                </div>
+                <h1>@Model.TieuDe</h1>               
             </div>
         </div>
     </div>
@@ -37,14 +33,13 @@
             <div class="col-md-12">
                 <div class="blog_detaisl_area">
                     <div class="blog_full_content">
-                        
-                         <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=Model.HinhAnh})" />
                         <h4>@Model.TieuDe</h4>
                         <div class="blog_meta">
-                            <a href="#">@Model.NgayTao.ToString("dd/MM/yyyy HH:mm:ss")</a> <a href="#">Lượt xem: @Model.LuotXem</a> 
+                            <h3><b>@Model.NgayTao.ToString("dd/MM/yyyy HH:mm:ss") | Ngày cập nhật: @Model.NgaySua | Lượt xem: @Model.LuotXem</b></h3>
+                            
                         </div>
                         
-                        <iframe width="420" height="315" src="https://www.youtube.com/embed/@Model.DuongDanFile" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="500" height="350" src="https://www.youtube.com/embed/@Model.DuongDanFile" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                           
                     </div>
                     

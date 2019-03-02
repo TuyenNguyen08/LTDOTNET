@@ -5,7 +5,7 @@
 @using Hospital.Web.Controllers
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Tin Tức";
 }
 @section css {
     <link href="~/css/PagedList.css" rel="stylesheet" />
@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row text-center">
             <div class="col">
-                <h1>Tin tức y khoa</h1>              
+                <h1>Tin tức y khoa</h1>
             </div>
         </div>
     </div>
@@ -38,10 +38,11 @@
                                         <a class="date" asp-action="@nameof(TinTucsController.Details)"
                                            asp-controller="@nameof(TinTucsController).Replace("Controller","")"
                                            asp-route-id="@tinTuc.Id">
-                                        @tinTuc.NgayTao?.ToString("dd/MM/yyyy HH:mm:ss")</a>
+                                            @tinTuc.NgayTao?.ToString("dd/MM/yyyy HH:mm:ss")
+                                        </a>
                                         @*<a href="#" class="comment_box">
-                                    <i class="zmdi zmdi-comments"></i> 3
-                                </a>*@
+                                                <i class="zmdi zmdi-comments"></i> 3
+                                            </a>*@
                                     </div>
                                     <h4>
                                         <a asp-action="@nameof(TinTucsController.Details)"

@@ -5,7 +5,7 @@
 @using Hospital.Web.Controllers
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Video";
 }
 @section css {
     <link href="~/css/PagedList.css" rel="stylesheet" />
@@ -15,11 +15,7 @@
     <div class="container">
         <div class="row text-center">
             <div class="col">
-                <h1>Video nổi bật</h1>
-                <div class="breadcroumb_link">
-                    <a asp-action="@nameof(HomesController.Index)"
-                       asp-controller="@nameof(HomesController).Replace("Controller","")">Trang chủ</a>/Video mới nhất
-                </div>
+                <h1>Video nổi bật</h1>                
             </div>
         </div>
     </div>
