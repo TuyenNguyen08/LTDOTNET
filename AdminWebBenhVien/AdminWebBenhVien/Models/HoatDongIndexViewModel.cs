@@ -47,6 +47,9 @@ namespace AdminWebBenhVien.Models
         public string GioiThieu { get; set; }
 
         public string NoiDung { get; set; }
+
+        public string HinhAnh { get; set; }
+
         public int? Xem { get; set; }
 
         public string TacGia { get; set; }
@@ -71,6 +74,9 @@ namespace AdminWebBenhVien.Models
         public string GioiThieu { get; set; }
 
         public string NoiDung { get; set; }
+
+        public string HinhAnh { get; set; }
+
         public int? Xem { get; set; }
 
         public string TacGia { get; set; }

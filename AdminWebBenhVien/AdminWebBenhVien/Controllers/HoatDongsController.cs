@@ -105,6 +105,7 @@ namespace AdminWebBenhVien.Controllers
                     Xem = h.LuotXem,
                     TacGia = h.Author,
                     NoiDung = h.NoiDung,
+                    HinhAnh = h.HinhAnhMinhHoa,
 
                     NgonNguId = h.FkNgonNgu,
 
@@ -149,6 +150,7 @@ namespace AdminWebBenhVien.Controllers
             dbItem.GioiThieu = model.GioiThieu;
             dbItem.NoiDung = model.NoiDung;
             dbItem.Author = model.TacGia;
+            dbItem.HinhAnhMinhHoa = model.HinhAnh;
 
             dbItem.NgaySua = DateTime.Now;
             dbItem.FkNguoiSua = "admin";
@@ -188,6 +190,8 @@ namespace AdminWebBenhVien.Controllers
             dbItem.TieuDe = model.TieuDe;
             dbItem.GioiThieu = model.GioiThieu;
             dbItem.NoiDung = model.NoiDung;
+            dbItem.HinhAnhMinhHoa = model.HinhAnh;
+
             dbItem.Author = model.TacGia;
 
             dbItem.NgayTao = DateTime.Now;
