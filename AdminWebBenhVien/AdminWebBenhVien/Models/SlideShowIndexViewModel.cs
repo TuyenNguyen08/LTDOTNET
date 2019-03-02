@@ -12,6 +12,7 @@ namespace AdminWebBenhVien.Models
         public string TieuDe { get; set; }
 
         public int? NgonNguId { get; set; }
+
         public string NgonNgu { get; set; }
 
         public string LinkSuKien { get; set; }
@@ -23,7 +24,16 @@ namespace AdminWebBenhVien.Models
 
         public string TieuDe { get; set; }
 
-        public string NgonNgu { get; set; }
+        public int? NgonNguId { get; set; }
+
+        public string LinkSuKien { get; set; }
+    }
+
+    public class SlideShowCreateViewModel
+    { 
+        public string TieuDe { get; set; }
+
+        public int? NgonNguId { get; set; }
 
         public string LinkSuKien { get; set; }
     }

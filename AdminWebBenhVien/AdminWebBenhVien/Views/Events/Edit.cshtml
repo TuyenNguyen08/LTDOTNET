@@ -1,4 +1,6 @@
 ﻿@using AdminWebBenhVien.Models
+@using AdminWebBenhVien.EfModels
+
 @model SuKienEditViewModel
 
 @{
@@ -36,6 +38,17 @@
                                 <input type="hidden" asp-for="Id" />
 
                                 <div class="form-group">
+                                    <label asp-for="NgonNguId" class="control-label">Ngôn ngữ</label>
+                                    <kendo-dropdownlist for="NgonNguId"
+                                                        option-label="-- Chọn ngôn ngữ --"
+                                                        bind-to="@((List<NgonNgu>)ViewBag.ListNgonNgu)"
+                                                        datatextfield="@nameof(NgonNgu.TenNgonNgu)"
+                                                        datavaluefield="@nameof(NgonNgu.Id)"
+                                                        value="@Model.NgonNguId" />
+                                    <span asp-validation-for="NgonNguId" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
                                     <label asp-for="TieuDe" class="control-label">Tiêu đề</label>
                                     <input asp-for="TieuDe" class="form-control" />
                                     <span asp-validation-for="TieuDe" class="text-danger"></span>
@@ -46,6 +59,13 @@
                                     @Html.TextAreaFor(h => h.GioiThieu, 5, 1, new { @class = "k-textbox" })
                                     <span asp-validation-for="GioiThieu" class="text-danger"></span>
                                 </div>
+
+                                <div class="form-group">
+                                    <label asp-for="Link" class="control-label">Đường link</label>
+                                    <input asp-for="Link" class="form-control" />
+                                    <span asp-validation-for="Link" class="text-danger"></span>
+                                </div>
+
                                 <div class="form-group">
                                     <label class="control-label">Hình ảnh</label>
                                 </div>
@@ -69,3 +89,8 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

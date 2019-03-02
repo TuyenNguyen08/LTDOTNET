@@ -43,7 +43,7 @@ namespace AdminWebBenhVien.Controllers
                 contentType = "application/octet-stream";
             }
 
-            return File(new System.IO.FileStream(file, System.IO.FileMode.Open), contentType);
+            return File(new System.IO.FileStream(file, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.Read), contentType);
         }
         
 

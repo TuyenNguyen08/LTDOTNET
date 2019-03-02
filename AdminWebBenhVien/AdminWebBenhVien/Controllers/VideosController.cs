@@ -12,13 +12,10 @@ using Kendo.Mvc.Extensions;
 
 namespace AdminWebBenhVien.Controllers
 {
-    public class VideosController : Controller
-    {
-        private readonly NBenhVien7CContext _context;
-
-        public VideosController(NBenhVien7CContext context)
+    public class VideosController : ControllerBase
+    {     
+        public VideosController(InitParam initParam) : base(initParam)
         {
-            _context = context;
         }
 
         // GET: Videos
@@ -31,7 +28,7 @@ namespace AdminWebBenhVien.Controllers
         [HttpGet]
         public async Task<IActionResult> Video_Read([DataSourceRequest]DataSourceRequest request)
         {
-            var resultDb = await _context.Video
+            var resultDb = await InitParam.Db.Video
                 .Include(h => h.FkNgonNguNavigation)
                 .OrderBy(h => h.TieuDe)
                 .ThenBy(h => h.FkNgonNguNavigation.TenNgonNgu)
@@ -65,12 +62,14 @@ namespace AdminWebBenhVien.Controllers
         [Route("video/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.ListNgonNgu = ListNgonNgu;
+
             if (id == null || !id.HasValue)
             {
                 return NotFound();
             }
 
-            var model = await _context.Video.AsNoTracking()
+            var model = await InitParam.Db.Video.AsNoTracking()
                 .Include(h => h.FkNgonNguNavigation)
                 .Where(h => h.Id == id.Value)
                 .Select(h => new VideoEditViewModel
@@ -83,7 +82,7 @@ namespace AdminWebBenhVien.Controllers
                     DuongDanFile = h.DuongDanFile,
                     Xem = h.LuotXem,
                     
-                    NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
+                    NgonNguId = h.FkNgonNgu,
 
                     NgayTao = h.NgayTao,
                     NguoiTao = h.NguoiTao,
@@ -114,28 +113,61 @@ namespace AdminWebBenhVien.Controllers
                 return View(model);
             }
 
-            var dbItem = await _context.Video.FirstOrDefaultAsync(h => h.Id == model.Id);
+            var dbItem = await InitParam.Db.Video.FirstOrDefaultAsync(h => h.Id == model.Id);
             if (dbItem == null)
             {
                 return NotFound();
             }
 
+            dbItem.FkNgonNgu = model.NgonNguId;
             dbItem.TieuDe = model.TieuDe;
             dbItem.GioiThieu = model.GioiThieu;
             dbItem.DuongDanFile = model.DuongDanFile;
 
-
             dbItem.NgaySua = DateTime.Now;
             dbItem.UserNguoiSua = "admin";
 
-            await _context.SaveChangesAsync();
+            await InitParam.Db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Edit), new { id = model.Id });
         }
 
+        [HttpGet]
+        [Route("tao-moi-video")]
+        public async Task<IActionResult> Create(int? id)
+        {
+            ViewBag.ListNgonNgu = ListNgonNgu;
 
+            return View(new VideoCreateViewModel());
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("tao-moi-video")]
+        public async Task<IActionResult> Create(VideoCreateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
+            var dbItem = new Video();
+
+            dbItem.FkNgonNgu = model.NgonNguId;
+            dbItem.TieuDe = model.TieuDe;
+            dbItem.GioiThieu = model.GioiThieu;
+            dbItem.DuongDanFile = model.DuongDanFile;
+
+            dbItem.NgayTao = DateTime.Now;
+            dbItem.NguoiTao = "admin";
+            dbItem.NgaySua = DateTime.Now;
+            dbItem.UserNguoiSua = "admin";
+
+            InitParam.Db.Video.Add(dbItem);
+            await InitParam.Db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Edit), new { id = dbItem.Id });
+        }
 
 
 
@@ -155,7 +187,7 @@ namespace AdminWebBenhVien.Controllers
                 return NotFound();
             }
 
-            var video = await _context.Video
+            var video = await InitParam.Db.Video
                 .Include(v => v.FkNgonNguNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (video == null)
@@ -171,7 +203,7 @@ namespace AdminWebBenhVien.Controllers
         {
             var listNgonNgu = await GetListNgonNguAsync();
             ViewBag.ListNgonNgu = listNgonNgu;
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id");
+            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id");
             return View();
         }
 
@@ -186,11 +218,11 @@ namespace AdminWebBenhVien.Controllers
             {
                 var listNgonNgu = await GetListNgonNguAsync();
                 ViewBag.ListNgonNgu = listNgonNgu;
-                _context.Add(video);
-                await _context.SaveChangesAsync();
+                InitParam.Db.Add(video);
+                await InitParam.Db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", video.FkNgonNgu);
+            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id", video.FkNgonNgu);
             return View(video);
         }
       
@@ -202,7 +234,7 @@ namespace AdminWebBenhVien.Controllers
                 return NotFound();
             }
 
-            var video = await _context.Video
+            var video = await InitParam.Db.Video
                 .Include(v => v.FkNgonNguNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (video == null)
@@ -218,19 +250,19 @@ namespace AdminWebBenhVien.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var video = await _context.Video.FindAsync(id);
-            _context.Video.Remove(video);
-            await _context.SaveChangesAsync();
+            var video = await InitParam.Db.Video.FindAsync(id);
+            InitParam.Db.Video.Remove(video);
+            await InitParam.Db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool VideoExists(int id)
         {
-            return _context.Video.Any(e => e.Id == id);
+            return InitParam.Db.Video.Any(e => e.Id == id);
         }
         private Task<List<DropdownlistViewModel>> GetListNgonNguAsync()
         {
-            var list = _context.NgonNgu.AsNoTracking()
+            var list = InitParam.Db.NgonNgu.AsNoTracking()
                 .Select(h => new DropdownlistViewModel
                 {
                     Id = h.Id,

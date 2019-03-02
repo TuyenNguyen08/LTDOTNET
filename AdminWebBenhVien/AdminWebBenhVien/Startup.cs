@@ -38,6 +38,9 @@ namespace AdminWebBenhVien
 
             // Add Kendo UI services to the services container
             services.AddKendo();
+
+            services.AddScoped<InitParam>();
+
             var connection = Configuration.GetConnectionString("NBenhVien7CContext");
             services.AddDbContext<NBenhVien7CContext>(options => options.UseSqlServer(connection));
         }

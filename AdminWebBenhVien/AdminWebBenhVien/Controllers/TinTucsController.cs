@@ -12,16 +12,22 @@ using Kendo.Mvc.Extensions;
 
 namespace AdminWebBenhVien.Controllers
 {
-    public class TinTucsController : Controller
+    public class TinTucsController : ControllerBase
     {
-        private readonly NBenhVien7CContext _context;
-
-        public TinTucsController(NBenhVien7CContext context)
+        private List<LoaiTin> ListLoaiTin { get; set; }
+        public TinTucsController(InitParam initParam) : base(initParam)
         {
-            _context = context;
+            var listLoaiTin = InitParam.Db.LoaiTin.AsNoTracking()
+                .OrderBy(h => h.TenLoai)
+                .Select(h => new LoaiTin
+                {
+                    Id = h.Id,
+                    TenLoai = h.TenLoai
+                }).ToList();
+
+            ListLoaiTin = listLoaiTin;
         }
 
-        // GET: TinTucs
         [HttpGet]
         [Route("tin-tuc")]
         public IActionResult Index()
@@ -31,7 +37,7 @@ namespace AdminWebBenhVien.Controllers
         [HttpGet]
         public async Task<IActionResult> TinTuc_Read([DataSourceRequest]DataSourceRequest request)
         {
-            var resultDb = await _context.TinTuc
+            var resultDb = await InitParam.Db.TinTuc
                 .Include(h => h.FkLoaiTinNavigation)
                 .Include(h => h.FkNgonNguNavigation)
                 .Include(h => h.FkUserNguoiSuaNavigation)
@@ -63,48 +69,47 @@ namespace AdminWebBenhVien.Controllers
 
                     NguoiTaoId = h.FkUserNguoiTao,
                     NguoiTao = h.FkUserNguoiTaoNavigation.HoVaTen
-
                 })
                 .ToListAsync();
             var result = await resultDb.ToDataSourceResultAsync(request);
             return Json(result);
         }
 
-        // GET: TinTucs/Edit/5
         [HttpGet]
         [Route("tin-tuc/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.ListNgonNgu = ListNgonNgu;
+            ViewBag.ListLoaiTin = ListLoaiTin;
+
             if (id == null || !id.HasValue)
             {
                 return NotFound();
             }
 
-            var model = await _context.TinTuc.AsNoTracking()
-               .Include(h => h.FkLoaiTinNavigation)
-               .Include(h => h.FkNgonNguNavigation)
+            var model = await InitParam.Db.TinTuc.AsNoTracking()
                .Include(h => h.FkUserNguoiSuaNavigation)
                .Include(h => h.FkUserNguoiTaoNavigation)
                .Where(h => h.Id == id.Value)
                .Select(h => new TinTucEditViewModel
                {
                    Id = h.Id,
-                   
-                   TenLoai = h.FkLoaiTinNavigation.TenLoai,
+
+                   TenLoaiId = h.FkLoaiTin,
 
                    TieuDe = h.TieuDe,
                    GioiThieu = h.GioiThieu,
                    Xem = h.LuotXem,
                    NoiDung = h.NoiDung,
                    TacGia = h.Author,
-                   
-                   NgonNgu = h.FkNgonNguNavigation.TenNgonNgu,
+
+                   NgonNguId = h.FkNgonNgu,
 
                    NgayTao = h.NgayTao,
                    NgaySua = h.NgaySua,
-                   
+
                    NguoiSua = h.FkUserNguoiSuaNavigation.HoVaTen,
-                   
+
                    NguoiTao = h.FkUserNguoiTaoNavigation.HoVaTen
 
                })
@@ -118,25 +123,27 @@ namespace AdminWebBenhVien.Controllers
             return View(model);
         }
 
-        // POST: TinTucs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("tin-tuc/{id}")]
         public async Task<IActionResult> Edit(TinTucEditViewModel model)
         {
+            ViewBag.ListNgonNgu = ListNgonNgu;
+            ViewBag.ListLoaiTin = ListLoaiTin;
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var dbItem = await _context.TinTuc.FirstOrDefaultAsync(h => h.Id == model.Id);
+            var dbItem = await InitParam.Db.TinTuc.FirstOrDefaultAsync(h => h.Id == model.Id);
             if (dbItem == null)
             {
                 return NotFound();
             }
 
+            dbItem.FkNgonNgu = model.NgonNguId;
+            dbItem.FkLoaiTin = model.TenLoaiId;
             dbItem.TieuDe = model.TieuDe;
             dbItem.GioiThieu = model.GioiThieu;
             dbItem.NoiDung = model.NoiDung;
@@ -145,11 +152,53 @@ namespace AdminWebBenhVien.Controllers
             dbItem.NgaySua = DateTime.Now;
             dbItem.FkUserNguoiSua = "admin";
 
-            await _context.SaveChangesAsync();
+            await InitParam.Db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Edit), new { id = model.Id });
         }
 
+        [HttpGet]
+        [Route("tao-moi-tin-tuc")]
+        public async Task<IActionResult> Create(int? id)
+        {
+            ViewBag.ListNgonNgu = ListNgonNgu;
+            ViewBag.ListLoaiTin = ListLoaiTin;
+
+            return View(new TinTucCreateViewModel());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("tao-moi-tin-tuc")]
+        public async Task<IActionResult> Create(TinTucCreateViewModel model)
+        {
+            ViewBag.ListNgonNgu = ListNgonNgu;
+            ViewBag.ListLoaiTin = ListLoaiTin;
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var dbItem = new TinTuc();
+
+            dbItem.FkNgonNgu = model.TenLoaiId;
+            dbItem.FkLoaiTin = model.NgonNguId;
+            dbItem.TieuDe = model.TieuDe;
+            dbItem.GioiThieu = model.GioiThieu;
+            dbItem.NoiDung = model.NoiDung;
+            dbItem.Author = model.TacGia;
+
+            dbItem.NgayTao = DateTime.Now;
+            dbItem.FkUserNguoiTao = "admin";
+            dbItem.NgaySua = dbItem.NgayTao;
+            dbItem.FkUserNguoiSua = "admin";
+
+            InitParam.Db.TinTuc.Add(dbItem);
+            await InitParam.Db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Edit), new { id = dbItem.Id });
+        }
 
 
 
@@ -186,7 +235,7 @@ namespace AdminWebBenhVien.Controllers
                 return NotFound();
             }
 
-            var tinTuc = await _context.TinTuc
+            var tinTuc = await InitParam.Db.TinTuc
                 .Include(t => t.FkLoaiTinNavigation)
                 .Include(t => t.FkNgonNguNavigation)
                 .Include(t => t.FkUserNguoiSuaNavigation)
@@ -203,19 +252,19 @@ namespace AdminWebBenhVien.Controllers
         // GET: TinTucs/Create
         public async Task<IActionResult> Create()
         {
-          
+
             #region Get list master
             var listNgonNgu = await GetListNgonNguAsync();
             ViewBag.ListNgonNgu = listNgonNgu;
             #endregion
             var listLoaiTin = await GetListLoaiTinAsync();
             ViewBag.ListLoaiTin = listLoaiTin;
-           
 
-            ViewData["FkLoaiTin"] = new SelectList(_context.LoaiTin, "Id", "Id");
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id");
-            ViewData["FkUserNguoiSua"] = new SelectList(_context.User, "UserName", "UserName");
-            ViewData["FkUserNguoiTao"] = new SelectList(_context.User, "UserName", "UserName");
+
+            ViewData["FkLoaiTin"] = new SelectList(InitParam.Db.LoaiTin, "Id", "Id");
+            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id");
+            ViewData["FkUserNguoiSua"] = new SelectList(InitParam.Db.User, "UserName", "UserName");
+            ViewData["FkUserNguoiTao"] = new SelectList(InitParam.Db.User, "UserName", "UserName");
 
             return View();
         }
@@ -225,7 +274,7 @@ namespace AdminWebBenhVien.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TieuDe,GioiThieu,HinhAnhMinhHoa,FkNgonNgu,FkLoaiTin,NgayTao,FkUserNguoiTao,NoiDung,Stt,LuotXem,Author,FkUserNguoiSua,NgaySua")] TinTuc tinTuc)
         {
-           
+
             if (ModelState.IsValid)
             {
                 #region Get list master
@@ -234,21 +283,21 @@ namespace AdminWebBenhVien.Controllers
                 #endregion
                 var listLoaiTin = await GetListLoaiTinAsync();
                 ViewBag.ListLoaiTin = listLoaiTin;
-                _context.Add(tinTuc);
-                await _context.SaveChangesAsync();
+                InitParam.Db.Add(tinTuc);
+                await InitParam.Db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FkLoaiTin"] = new SelectList(_context.LoaiTin, "Id", "Id", tinTuc.FkLoaiTin);
-            ViewData["FkNgonNgu"] = new SelectList(_context.NgonNgu, "Id", "Id", tinTuc.FkNgonNgu);
-            ViewData["FkUserNguoiSua"] = new SelectList(_context.User, "UserName", "UserName", tinTuc.FkUserNguoiSua);
-            ViewData["FkUserNguoiTao"] = new SelectList(_context.User, "UserName", "UserName", tinTuc.FkUserNguoiTao);
+            ViewData["FkLoaiTin"] = new SelectList(InitParam.Db.LoaiTin, "Id", "Id", tinTuc.FkLoaiTin);
+            ViewData["FkNgonNgu"] = new SelectList(InitParam.Db.NgonNgu, "Id", "Id", tinTuc.FkNgonNgu);
+            ViewData["FkUserNguoiSua"] = new SelectList(InitParam.Db.User, "UserName", "UserName", tinTuc.FkUserNguoiSua);
+            ViewData["FkUserNguoiTao"] = new SelectList(InitParam.Db.User, "UserName", "UserName", tinTuc.FkUserNguoiTao);
             return View(tinTuc);
         }
 
-        
+
         private Task<List<DropdownlistViewModel>> GetListNgonNguAsync()
         {
-            var list = _context.NgonNgu.AsNoTracking()
+            var list = InitParam.Db.NgonNgu.AsNoTracking()
                 .Select(h => new DropdownlistViewModel
                 {
                     Id = h.Id,
@@ -259,7 +308,7 @@ namespace AdminWebBenhVien.Controllers
         }
         private Task<List<DropdownlistViewModel>> GetListLoaiTinAsync()
         {
-            var list = _context.LoaiTin.AsNoTracking()
+            var list = InitParam.Db.LoaiTin.AsNoTracking()
                 .Select(h => new DropdownlistViewModel
                 {
                     Id = h.Id,
@@ -276,7 +325,7 @@ namespace AdminWebBenhVien.Controllers
                 return NotFound();
             }
 
-            var tinTuc = await _context.TinTuc
+            var tinTuc = await InitParam.Db.TinTuc
                 .Include(t => t.FkLoaiTinNavigation)
                 .Include(t => t.FkNgonNguNavigation)
                 .Include(t => t.FkUserNguoiSuaNavigation)
@@ -295,15 +344,15 @@ namespace AdminWebBenhVien.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tinTuc = await _context.TinTuc.FindAsync(id);
-            _context.TinTuc.Remove(tinTuc);
-            await _context.SaveChangesAsync();
+            var tinTuc = await InitParam.Db.TinTuc.FindAsync(id);
+            InitParam.Db.TinTuc.Remove(tinTuc);
+            await InitParam.Db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TinTucExists(int id)
         {
-            return _context.TinTuc.Any(e => e.Id == id);
+            return InitParam.Db.TinTuc.Any(e => e.Id == id);
         }
     }
 }
