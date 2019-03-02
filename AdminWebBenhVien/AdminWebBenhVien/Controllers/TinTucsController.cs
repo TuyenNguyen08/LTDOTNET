@@ -34,6 +34,7 @@ namespace AdminWebBenhVien.Controllers
         {
             return View();
         }
+
         [HttpGet]
         public async Task<IActionResult> TinTuc_Read([DataSourceRequest]DataSourceRequest request)
         {

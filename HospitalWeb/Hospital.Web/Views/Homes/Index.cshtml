@@ -29,18 +29,16 @@
 </div>
 <!-- Welcome Area End-->
 <!-- Cbox Area Start-->
+
 <div class="cbox_area">
     <div class="container">
-        <div class="col-wrap">
+        <div class="row">
             @foreach (var subNote in Model.lsSubNote)
             {
                 <div class="col-md-3">
                     <div class="single_cbox">
                         <div class="cbox_title">
-                            <div class="cbox_icon">
-                                <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=subNote.Image })" />
-                            </div>
-
+                            <div class="cbox_icon"><img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=subNote.Image })" /></div>
                             <a asp-action="@nameof(HenKhamBenhsController.Index)"
                                asp-controller="@nameof(HenKhamBenhsController).Replace("Controller", "")">
                                 <h4>@subNote.TieuDe</h4>
@@ -49,16 +47,16 @@
                         <p>
                             @subNote.NoiDung
                         </p>
-
                     </div>
                 </div>
             }
         </div>
     </div>
 </div>
+
 <div class="container" style="background-color:#016ca0; margin:10px">
     <div class="row">
-        <div class="col-lg-2">
+        <div class="col-lg-2 cc">
             <img src="~/images/icon-slider.jpg" />
         </div>
         <div class="col-lg-10">
@@ -95,7 +93,7 @@
                                     <span class="l_img">
                                         <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=hoatdong.HinhAnhMinhHoa })" />
                                     </span>
-                                    <h5>
+                                    <h5 class="tieude-TT">
                                         @hoatdong.TieuDe
                                     </h5>
                                     <span>@hoatdong.NgayTao?.ToString("dd/MM/yyyy HH:mm:ss")</span>
@@ -135,7 +133,7 @@
                                     <span class="l_img">
                                         <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=tinTuc.HinhAnhMinhHoa })" />
                                     </span>
-                                    <h5>
+                                    <h5  class="tieude-TT">
                                         @tinTuc.TieuDe
                                     </h5>
                                     <span>@tinTuc.NgayTao?.ToString("dd/MM/yyyy HH:mm:ss")</span>

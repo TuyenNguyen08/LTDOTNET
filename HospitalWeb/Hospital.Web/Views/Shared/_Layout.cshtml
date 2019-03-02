@@ -34,13 +34,13 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/responsive.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/style.css" />
     <link href="~/css/animate.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/owl.carousel.min.css">
     <link href="~/css/material-design-iconic-font.min.css" rel="stylesheet" />
     <link href="~/css/slicknav.min.css" rel="stylesheet" />
     <link href="~/css/nice-select.css" rel="stylesheet" />
-    <link href="~/css/responsive.css" rel="stylesheet" />
     <link href="~/css/Feedback.css" rel="stylesheet" />
 
     <link href="~/css/benhvien.css" rel="stylesheet" />
@@ -55,7 +55,7 @@
     </div>
     <!-- header Area Start-->
     <header>
-        <div class="header_top_area" style="background:#50acf1; color:aliceblue;">
+        <div class="header_top_area">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-md-12">
@@ -129,7 +129,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-2 col-6">
-                        <a href="index.html" class="site_logo">
+                        <a href="#" class="site_logo">
                             <img src="~/images/HinhAnhTinh/testlogo.png" />
                         </a>
                     </div>
@@ -139,11 +139,6 @@
                                 var listMenu = await MenuHelper.GetListMenuAsync(initParam, (int)ViewBag.NgonNgu);
                             }
                             <partial name="_MenuPartial" model="listMenu" />
-
-                            @*<form action="#" class="search_form">
-                                    <input type="search" placeholder="Tìm kiếm">
-                                    <button type="submit"><i class="zmdi zmdi-search"></i></button>
-                                </form>*@
                         </nav>
                     </div>
                 </div>
@@ -248,6 +243,9 @@
     @RenderSection("scripts", required: false)
 
     <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/jquery.slicknav.min.js"></script>
+    <link href="~/css/responsive.css" rel="stylesheet" />
+
     <script src="~/js/active.js"></script>
     <script type="text/javascript">
         function add_chatinline() { var hccid = 32478947; var nt = document.createElement("script"); nt.async = true; nt.src = "https://mylivechat.com/chatinline.aspx?hccid=" + hccid; var ct = document.getElementsByTagName("script")[0]; ct.parentNode.insertBefore(nt, ct); }
