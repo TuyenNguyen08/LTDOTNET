@@ -13,6 +13,8 @@
     background: #f6fbff;
     border-radius: 10px;
     height: 320px;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
 }
 
     .single_cbox:hover {
@@ -23,6 +25,7 @@
 .background_grey {
     padding-left: 35px;
     padding-top: 20px;
+    background: none;
 }
 
 .latest_news {
@@ -70,9 +73,7 @@ a.single_latest_news, .single_latest_news {
     display: inline-block;
     white-space: nowrap;
     background: #58c;
-    border-radius: 0px;
-    border: 0px solid #246;
-    border-width: 0px 0px 4px 0px;
+    border-radius: 15px;
     padding: 10px 20px 10px 20px;
     color: #fff;
     font-size: initial;
