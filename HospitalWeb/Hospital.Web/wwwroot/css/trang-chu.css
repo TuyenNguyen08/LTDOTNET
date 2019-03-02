@@ -141,3 +141,9 @@ a.single_latest_news, .single_latest_news {
 .youtube_video {
     margin: 10px 20px;
 }
+.tieude-TT {
+    color: #007bff;
+}
+.single_latest_news h5:hover {
+    color: #0056b3;
+}
