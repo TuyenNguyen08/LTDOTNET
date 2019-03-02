@@ -8,7 +8,7 @@ namespace Hospital.Web.Controllers
 {
     public class ImageBrowserController : Controller
     {
-        private string _destination = @"D:\ImageWebBenhVien\images\UploadFiles";
+        private string _destination = @"C:\ProjectAT\ImageWebBenhVien\images\UploadFiles";
 
         [Route("ImageBrowser/GetImage/{*id}")]
         [Route("images/UploadFiles/{*id}")]
