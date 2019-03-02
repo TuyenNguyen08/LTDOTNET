@@ -3,6 +3,7 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Dịch vụ";
 }
 @section css {
 }
@@ -40,14 +41,13 @@
             {
                 <div class="col-md-4">
                     <a asp-action="@nameof(DichVusController.Details)"
-                               asp-controller="@nameof(DichVusController).Replace("Controller", "")"
-                               asp-route-id="@dichVuChiTiet.Id"
-                               target="_blank" class="single_service">
-                        <div class="service_icon"><img src="~/images/img/service1.png" alt=""></div>
+                       asp-controller="@nameof(DichVusController).Replace("Controller", "")"
+                       asp-route-id="@dichVuChiTiet.Id"
+                       target="_blank" class="single_service">
+                        <div class="service_icon"> <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=dichVuChiTiet.HinhAnh })" /></div>
                         <h4>
-                           @dichVuChiTiet.TenDichVu
+                            @dichVuChiTiet.TenDichVu
                         </h4>
-                        <p>Tất cả các ngày trong tuần (kể cả chủ nhật và ngày lễ)</p>
                     </a>
                 </div>
             }

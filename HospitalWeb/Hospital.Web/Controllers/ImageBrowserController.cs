@@ -8,14 +8,21 @@ namespace Hospital.Web.Controllers
 {
     public class ImageBrowserController : Controller
     {
-        private string _destination = @"C:\ProjectAT\ImageWebBenhVien\images\UploadFiles";
+        private string _destination = @"D:\ImageWebBenhVien\images\UploadFiles";
 
-        [Route("ImageBrowser/GetImage/{id}")]
-        [Route("images/UploadFiles/{id}")]
-        [Route("{temp}/images/UploadFiles/{id}")]
-        [Route("{temp}/ImageBrowser/GetImage/{id}")]
-        public IActionResult GetImage(string id, string temp)
+        [Route("ImageBrowser/GetImage/{*id}")]
+        [Route("images/UploadFiles/{*id}")]
+        [Route("{temp}/{temp1}/images/UploadFiles/{*id}")]
+        [Route("{temp}/{temp1}/ImageBrowser/GetImage/{*id}")]
+        [Route("{temp}/images/UploadFiles/{*id}")]
+        [Route("{temp}/ImageBrowser/GetImage/{*id}")]
+        public IActionResult GetImage(string id, string temp, string temp1)
         {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+
             var file = System.IO.Path.Combine(_destination, id);
 
             var provider = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();

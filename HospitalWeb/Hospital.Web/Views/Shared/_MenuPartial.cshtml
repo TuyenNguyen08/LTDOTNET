@@ -5,13 +5,29 @@
     @foreach (var menuCha in Model)
     {
         <li>
-            <a href="@Url.Action(menuCha.Menu.ActionName, menuCha.Menu.ControllerName, new { id = menuCha.Menu.ParamId })">@menuCha.Menu.Name</a>
+            @if (string.IsNullOrWhiteSpace(menuCha.Menu.ParamId) || menuCha.Menu.ParamId == "0")
+            {
+                <a href="@Url.Action(menuCha.Menu.ActionName, menuCha.Menu.ControllerName)">@menuCha.Menu.Name</a>
+            }
+            else
+            {
+                <a href="@Url.Action(menuCha.Menu.ActionName, menuCha.Menu.ControllerName, new { id = menuCha.Menu.ParamId })">@menuCha.Menu.Name</a>
+            }
+
             @if (menuCha.ListMenu.Count > 0)
             {
                 <ul>
                     @foreach (var menuCon in menuCha.ListMenu)
                     {
-                        <li><a href="@Url.Action(menuCon.Menu.ActionName, menuCon.Menu.ControllerName, new { id = menuCon.Menu.ParamId })">@menuCon.Menu.Name</a></li>
+
+                        if (string.IsNullOrWhiteSpace(menuCon.Menu.ParamId) || menuCon.Menu.ParamId == "0")
+                        {
+                            <li><a href="@Url.Action(menuCon.Menu.ActionName, menuCon.Menu.ControllerName)">@menuCon.Menu.Name</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action(menuCon.Menu.ActionName, menuCon.Menu.ControllerName, new { id = menuCon.Menu.ParamId })">@menuCon.Menu.Name</a></li>
+                        }
                     }
                 </ul>
             }

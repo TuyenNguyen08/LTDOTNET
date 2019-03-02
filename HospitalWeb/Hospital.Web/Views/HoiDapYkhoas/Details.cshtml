@@ -1,114 +1,55 @@
 ﻿@model Hospital.Web.EfModels.HoiDapYkhoa
-
+@using Hospital.Web.Controllers
+@using Hospital.Web.EfModels
 @{
-    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Hỏi đáp y khoa";
 }
-
-<h2>Details</h2>
-
-<div>
-    <h4>HoiDapYkhoa</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TieuDe)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TieuDe)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NoiDungCauHoi)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NoiDungCauHoi)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.HoTenNguoiHoi)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.HoTenNguoiHoi)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.GioiTinh)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.GioiTinh)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NoiDungTraLoi)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NoiDungTraLoi)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayGuiCauHoi)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NgayGuiCauHoi)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayTraLoi)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NgayTraLoi)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NguoiTraLoi)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NguoiTraLoi)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IsShow)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IsShow)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DaTraLoi)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DaTraLoi)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DiaChi)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DiaChi)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SoDienThoai)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SoDienThoai)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FkChuyenKhoaNavigation)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FkChuyenKhoaNavigation.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FkNamSinhNavigation)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FkNamSinhNavigation.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FkUserTraLoiNavigation)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FkUserTraLoiNavigation.UserName)
-        </dd>
-    </dl>
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>@Model.TieuDe</h1>
+                <div class="breadcroumb_link">
+                    <a asp-action="@nameof(HomesController.Index)"
+                       asp-controller="@nameof(HomesController).Replace("Controller","")">Hỏi đáp y khoa</a>/ trả lời
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <div class="container" style="padding:20px">
+        <div class="col-lg-9">
+            <div class="form-group">
+                <h1>@Model.TieuDe</h1>
+            </div>
+            <div class="form-group">
+                <span style="color: #C00">Người hỏi: </span> @Model.HoTenNguoiHoi
+                <h4>@Model.NgayGuiCauHoi?.ToString("dd/MM/yy hh:mm:ss")</h4><br />
+            </div>
+            <div class="form-group">
+                <span style="color: #C00">Câu hỏi:</span> @Html.Raw(Model.NoiDungCauHoi)
+            </div>
+            <div class="form-group">
+                <span style="color: #C00">Trả lời:</span> @Html.Raw(Model.NoiDungTraLoi)
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <h1 style="border-bottom: 1px solid #8D8D8D; width:100%; float: left;">
+                Câu hỏi khác
+            </h1>
+            <ul>
+                @foreach (var item in (ViewBag.listsHoiDap as List<HoiDapYkhoa>))
+                {
+                    <li>
+                        <a asp-action="@nameof(HoiDapYkhoasController.Details)"
+                           asp-controller="@nameof(HoiDapYkhoasController).Replace("Controller", "")"
+                           asp-route-id="@item.Id">* @item.TieuDe</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
 </div>

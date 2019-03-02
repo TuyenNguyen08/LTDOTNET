@@ -22,6 +22,7 @@ namespace Hospital.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var listKhoaPhong = await InitParam.Db.KhoaPhong.AsNoTracking()
+                .Where(t => t.FkNgonNgu == NgonNgu)
                 .Select(t => new KhoaPhong
                 {
                     Id = t.Id,

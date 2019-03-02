@@ -1,11 +1,8 @@
 ﻿@model Hospital.Web.EfModels.HoatDong
 @using Hospital.Web.Controllers
 @{
-    ViewData["Title"] = "Details";
-}
-
-@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Hoạt động";
 }
 
 @section css {
@@ -48,6 +45,95 @@
                             <br>
 
                             <br>
+                            <div class="tag_and_social_bar">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="blog_tag">
+                                            <i class="zmdi zmdi-label"></i>
+                                            <a href="#">Loiich</a>
+                                            <a href="#">Moitruong</a>
+                                            <a href="#">Xuly</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="share_with">
+                                            <a href="#"><i class="zmdi zmdi-twitter"></i></a>
+                                            <a href="#"><i class="zmdi zmdi-facebook"></i></a>
+                                            <a href="#"><i class="zmdi zmdi-instagram"></i></a>
+                                            <a href="#"><i class="zmdi zmdi-linkedin"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="comment_area">
+                        <h4>4 Bình luận</h4>
+                        <div class="comment_wraper">
+                            <div class="single_comment">
+                                <div class="comment_content">
+                                    <div class="user_photo" style="background-image: url(../images/img/user1.jpg);"></div>
+                                    <div class="user_details">
+                                        <strong class="u_name">Kiên Nguyễn</strong>
+                                        <div class="date"><i class="zmdi zmdi-calendar-note"></i> 28/02/2017</div>
+                                        <a href="#" class="replay_btn"><i class="zmdi zmdi-mail-reply"></i>Trả lời</a>
+                                    </div>
+                                    <p>LÀm thế nào để trể con nín khóc</p>
+                                </div>
+                            </div>
+                            <div class="single_comment">
+                                <div class="comment_content">
+                                    <div class="user_photo" style="background-image: url(../images/img/user2.jpg);"></div>
+                                    <div class="user_details">
+                                        <strong class="u_name">Kiên Nguyễn</strong>
+                                        <div class="date"><i class="zmdi zmdi-calendar-note"></i> 28/02/2017</div>
+                                        <a href="#" class="replay_btn"><i class="zmdi zmdi-mail-reply"></i>Trả lời</a>
+                                    </div>
+                                    <p>LÀm thế nào để trể con nín khóc</p>
+                                </div>
+                                <div class="single_comment">
+                                    <div class="comment_content">
+                                        <div class="user_photo" style="background-image: url(../images/img/user3.jpg);"></div>
+                                        <div class="user_details">
+                                            <strong class="u_name">Kiên Nguyễn</strong>
+                                            <div class="date"><i class="zmdi zmdi-calendar-note"></i> 28/02/2017</div>
+                                            <a href="#" class="replay_btn"><i class="zmdi zmdi-mail-reply"></i>Trả lời</a>
+                                        </div>
+                                        <p>LÀm thế nào để trể con nín khóc</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single_comment">
+                                <div class="comment_content">
+                                    <div class="user_photo" style="background-image: url(../images/img/user4.jpg);"></div>
+                                    <div class="user_details">
+                                        <strong class="u_name">Kiên Nguyễn</strong>
+                                        <div class="date"><i class="zmdi zmdi-calendar-note"></i> 28/02/2017</div>
+                                        <a href="#" class="replay_btn"><i class="zmdi zmdi-mail-reply"></i>Trả lời</a>
+                                    </div>
+                                    <p>LÀm thế nào để trể con nín khóc</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment_form">
+                            <h4>Để lại một bình luận</h4>
+                            <form action="#" class="contact_form">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12">
+                                        <input type="text" placeholder="Tên bạn">
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <input type="email" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col"><textarea placeholder="Nhập nội dung"></textarea></div>
+
+                                </div>
+                                <div class="col-lg-12" style="margin-left:70%; margin-top:50px">
+                                    <button type="submit" class="custom_btn">Gửi</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

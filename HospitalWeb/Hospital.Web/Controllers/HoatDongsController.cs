@@ -60,7 +60,7 @@ namespace Hospital.Web.Controllers
                   .Include(t =>t.FkLoaiHoatDongNavigation)
                   .Include(t => t.FkNguoiSuaNavigation)
                   .Include(t => t.FkNguoiTaoNavigation)
-                  .Where(t => t.Id == id)
+                  .Where(t => t.Id == id && t.FkNgonNgu == NgonNgu)
                    .Select(t => new HoatDong
                    {
                        Id = t.Id,
@@ -78,7 +78,7 @@ namespace Hospital.Web.Controllers
             return View(hoatDong);
         }
 
-        // GET: HoatDongs/Create
+       
   
     }
 }

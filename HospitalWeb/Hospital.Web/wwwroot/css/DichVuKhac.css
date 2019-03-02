@@ -1,0 +1,24 @@
+﻿.icon {
+    font-size: 1.2em;
+}
+
+span {
+    font-size: 1em;
+    margin-left: 10px;
+    color: #565656;
+}
+
+    span:hover {
+        color: #0056B3;
+    }
+
+.dichVuKhac {
+    margin-bottom: 10px;
+}
+
+.header_DV {
+    margin-bottom: 20px;
+}
+ul{
+    margin-bottom:50px;
+}

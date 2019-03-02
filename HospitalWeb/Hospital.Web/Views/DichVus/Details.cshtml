@@ -3,8 +3,10 @@
 @using Hospital.Web.EfModels
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Dịch vụ";
 }
 @section css {
+    <link href="~/css/DichVuKhac.css" rel="stylesheet" />
 }
 <div class="breadvroumb_area">
     <div class="container">
@@ -37,37 +39,39 @@
                             <h4>
                                 @Html.Raw(@Model.GioiThieu)
                             </h4>
+
                         </div>
+                        <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=Model.HinhAnh })" />
                         <br>
                         <br>
                         <p>@Html.Raw(@Model.NoiDung)</p>
                     </div>
                 </div>
             </div>
-            
-            <div class="container" style="    padding: 5%;">
-                <h1 style="border-bottom: 1px solid #8D8D8D; width:100%; float: left;">
-                    Dịch vụ khác
-                </h1>
-                <ul>
-                    @foreach (var dichVu in (ViewBag.lsDichVu as List<DichVu>))
-                    {
-                        <li>
-                            <a asp-action="@nameof(DichVusController.Details)"
-                               asp-controller="@nameof(DichVusController).Replace("Controller","")"
-                               asp-route-id="@dichVu.Id"
-                               target="_blank">
-                                *@dichVu.MoTa
-                            </a>
-                        </li>
 
-                    }
-                </ul>
-            </div>
+
+
         </div>
 
     </div>
 </div>
+<h1 class="header_DV">
+    Dịch vụ khác
+</h1>
+<ul>
+    @foreach (var dichVu in (ViewBag.lsDichVuCT as List<DichVuChiTiet>))
+    {
+        <li>
+            <a asp-action="@nameof(DichVusController.Details)"
+               class="dichVuKhac"
+               asp-controller="@nameof(DichVusController).Replace("Controller","")"
+               asp-route-id="@dichVu.Id">
+                <i class="zmdi zmdi-badge-check icon"></i> <span>@dichVu.TenDichVu</span>
+            </a>
+        </li>
+
+    }
+</ul>
 @section scripts {
 
 }

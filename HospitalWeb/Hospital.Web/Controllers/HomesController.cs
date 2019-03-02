@@ -19,7 +19,8 @@ namespace Hospital.Web.Controllers
 
         }
 
-        // GET: HomeIndex
+        [Route("/")]
+        [Route("trang-chu")]
         public async Task<IActionResult> Index()
         {
             HomeModel model = new HomeModel();
@@ -179,7 +180,7 @@ namespace Hospital.Web.Controllers
             return View(await nBenhVien7CContext.ToListAsync());
         }
 
-        // Intro.aspx? ID = 1
+        [Route("gioi-thieu/{id}")]
         public async Task<IActionResult> About(int? id)
         {
             if (id == null)
@@ -190,6 +191,7 @@ namespace Hospital.Web.Controllers
             var tinTuc = await InitParam.Db.GioiThieuChiTiet.AsNoTracking()
                 .Include(t => t.FkNgonNguNavigation)
                 .Include(t => t.FkGioiThieuNavigation)
+                .Include(t => t.FkUserModifyNavigation)
                 .Where(t => t.Id == id)
                 .Select(t => new GioiThieuChiTiet
                 {
@@ -197,6 +199,9 @@ namespace Hospital.Web.Controllers
                     GioiThieu = t.GioiThieu,
                     NoiDung = t.NoiDung,
                     HinhAnh = t.HinhAnh,
+                    NgayTao = t.NgayTao,
+                    NgayChinhSua = t.NgayChinhSua,
+                    FkUserModifyNavigation = t.FkUserModifyNavigation
                 }).FirstOrDefaultAsync();
             if (tinTuc == null)
             {
@@ -219,7 +224,13 @@ namespace Hospital.Web.Controllers
             }
             else
             {
-                base.NgonNgu = -1;
+                base.NgonNgu = 1; // Mac dinh la tieng viet
+            }
+
+            // Chi co tieng viet va tieng anh
+            if (base.NgonNgu > 2)
+            {
+                base.NgonNgu = 1; // Mac dinh la tieng viet
             }
 
             ViewBag.NgonNgu = base.NgonNgu;

@@ -20,7 +20,9 @@ namespace Hospital.Web.Controllers
         // GET: DichVus
         public async Task<IActionResult> Index()
         {
+            var fkNgonNgu = base.NgonNgu;
             var lstDichVuChiTiet = await InitParam.Db.DichVuChiTiet.AsNoTracking()
+                   .Where(h => h.FkNgonNgu == fkNgonNgu)
                 .Select(t => new DichVuChiTiet
                 {
                    Id = t.Id,
@@ -32,20 +34,15 @@ namespace Hospital.Web.Controllers
         // GET: DichVus/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            var fkNgonNgu = base.NgonNgu;
             if (id == null)
             {
                 return NotFound();
             }
 
             #region lsDichVuChiTiet
-            var lstdichVuChiTiet = await InitParam.Db.DichVuChiTiet.AsNoTracking()
-                .Include(t => t.FkDichVu)
-                .Include(t => t.FkDichVuNavigation)
-                .Include(t => t.FkNgonNgu)
-                .Include(t => t.FkNgonNguNavigation)
-                .Include(t => t.FkUserModify)
-                .Include(t => t.FkUserModifyNavigation)
-                .Where(t => t.Id == id)
+            var lstdichVuChiTiet = await InitParam.Db.DichVuChiTiet.AsNoTracking()                
+                .Where(t => t.Id == id && t.FkNgonNgu == fkNgonNgu  )
                 .Select(t => new DichVuChiTiet
                 {
                     Id = t.Id,
@@ -61,20 +58,26 @@ namespace Hospital.Web.Controllers
             {
                 return NotFound();
             }
+
+            var lsDichVuDetail = await InitParam.Db.DichVuChiTiet.AsNoTracking()
+               .Where( t => t.FkNgonNgu == fkNgonNgu )
+               .Take(10)
+               .Select(t => new DichVuChiTiet
+               {
+                   Id = t.Id,
+                   TenDichVu = t.TenDichVu,
+
+               })
+               .OrderByDescending( t => t.NgayTao)
+               .ThenByDescending( t => t.NgayChinhSua)
+               
+               .ToListAsync();
+
             #endregion
 
-            #region lsDichVu
+            lsDichVuDetail.RemoveAll(c => c.Id == id);
 
-            var listDichVu = await InitParam.Db.DichVu.AsNoTracking().Take(9).Select(t => new DichVu
-            {
-                Id = t.Id,
-                MoTa = t.MoTa
-                
-            }).ToListAsync();
-
-            ViewBag.lsDichVu = listDichVu;
-
-            #endregion
+            ViewBag.lsDichVuCT = lsDichVuDetail;
 
             return View(lstdichVuChiTiet);
         }
