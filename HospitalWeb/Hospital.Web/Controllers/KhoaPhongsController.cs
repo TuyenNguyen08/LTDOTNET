@@ -40,11 +40,11 @@ namespace Hospital.Web.Controllers
             {
                 return NotFound();
             }
-
+            var fkNgonNgu = base.NgonNgu;
             var khoaPhong = await InitParam.Db.KhoaPhong.AsNoTracking()
                 .Include(k => k.FkLoaiKhoaPhongNavigation)
                 .Include(k => k.FkNgonNguNavigation)
-                .Where(m => m.Id == id && m.FkNgonNgu == NgonNgu )
+               .Where(t => t.Id == id && t.FkNgonNgu == fkNgonNgu)
                 .Select(t => new KhoaPhong
                 {
                     Id = t.Id,
@@ -55,7 +55,6 @@ namespace Hospital.Web.Controllers
                     FkLoaiKhoaPhong = t.FkLoaiKhoaPhong,
                     FkLoaiKhoaPhongNavigation = t.FkLoaiKhoaPhongNavigation
                 }).FirstOrDefaultAsync();
-            ;
 
             if (khoaPhong == null)
             {
@@ -64,7 +63,7 @@ namespace Hospital.Web.Controllers
 
             //load danh sach cac khoa phong cung loai
             var listkhoaPhongKhac = await InitParam.Db.KhoaPhong.AsNoTracking()
-               .Where(m => m.FkLoaiKhoaPhong == khoaPhong.FkLoaiKhoaPhong && m.FkNgonNgu == NgonNgu)
+               .Where(m => m.FkLoaiKhoaPhong == khoaPhong.FkLoaiKhoaPhong && m.FkNgonNgu == fkNgonNgu)
                .OrderBy(m => m.TenKhoaPhong)
                .Select(t => new KhoaPhong
                {
@@ -72,12 +71,10 @@ namespace Hospital.Web.Controllers
                    TenKhoaPhong = t.TenKhoaPhong,
                }).ToListAsync();
             ;
-
+            listkhoaPhongKhac.RemoveAll(c => c.Id == id);
             ViewBag.listkhoaPhongKhac = listkhoaPhongKhac;
 
             return View(khoaPhong);
         }
-
-
     }
 }

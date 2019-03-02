@@ -13,29 +13,6 @@
     <link href="~/css/nice-select.css" rel="stylesheet" />
     <link href="~/css/responsive.css" rel="stylesheet" />
     <link href="~/css/trang-chu.css" rel="stylesheet" />
-    <style>
-        .cc {
-            text-align: center;
-            padding: 30px;
-        }
-
-            .cc h2 {
-                color: #ffbc09;
-            }
-
-            .cc h3 {
-                color: aliceblue;
-            }
-
-        .col {
-            margin-bottom: 50px;
-        }
-
-        .video ul {
-            width: 100%;
-            height: 200px;
-        }
-    </style>
 }
 
 <div class="welcome_areaa" style="background-image: url(../images/img/welcome_shap.png);">
@@ -92,7 +69,7 @@
 <!-- About Area Start-->
 <div class="about_area ">
     <div class="container">
-        <div>
+        <div class="row">
             <div class="col-lg-8">
                 <div class="about_content">
                     <div class="col background_grey">
@@ -122,20 +99,24 @@
                             }
 
                         </div>
-                        <h3 class="clickadd">
-                            <a asp-action="@nameof(HoatDongsController.Index)"
-                               asp-controller="@nameof(HoatDongsController).Replace("Controller","")">
-                                <b>Xem thêm</b> <i class="zmdi zmdi-plus"></i>
-                            </a>
-                        </h3>
+                        <a asp-action="@nameof(HoatDongsController.Index)"
+                           class="add"
+                           asp-controller="@nameof(HoatDongsController).Replace("Controller","")">
+                            <div class="button">
+                                Xem thêm
+                            </div>
+                        </a>
                     </div>
                 </div>
+
                 <div class="about_content">
                     <div class="col background_grey">
                         <div class="section_title">
                             <h1>Tin tức mới nhất</h1>
                         </div>
                         <div class="latest_news">
+
+
                             @foreach (var tinTuc in Model.lsTinTuc)
                             {
                                 <a asp-action="@nameof(TinTucsController.Details)"
@@ -152,23 +133,36 @@
                                     <p>
                                         @tinTuc.GioiThieu
                                     </p>
+
                                 </a>
+                                <hr class="line_tintuc"/>
                             }
                         </div>
+                        <a asp-action="@nameof(TinTucsController.Index)"
+                           class="add"
+                           asp-controller="@nameof(TinTucsController).Replace("Controller","")">
+                            <div class="button">
+                                Xem thêm
+                            </div>
+                        </a>
                     </div>
-
                 </div>
+
+
+
+
             </div>
-            <div class="col-lg-4 video">
-                <div class="section_title">
-                    <h1>Video</h1>
+            <div class="col-lg-4 list_video">
+                <div >
+                    <h1 class="section_title_video">Video</h1>
                 </div>
                 <ul>
                     @foreach (var video in Model.lsVideo)
                     {
-                        <li>
+                        <li class="youtube_video">
                             <iframe src="https://www.youtube.com/embed/@video.DuongDanFile" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </li>
+                        <hr>
                     }
                 </ul>
             </div>
