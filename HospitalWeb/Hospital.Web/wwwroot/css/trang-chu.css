@@ -12,10 +12,16 @@
 .single_cbox {
     background: #f6fbff;
     border-radius: 10px;
-    height: 320px;
     border-right: 1px solid #000000;
     border-bottom: 1px solid #000000;
 }
+
+@media (min-width: 995px) {
+    .single_cbox {
+        min-height: 400px;
+    }
+}
+
 
     .single_cbox:hover {
         background: #9dcef3;
@@ -42,7 +48,11 @@ a.single_latest_news, .single_latest_news {
 
 .cc {
     text-align: center;
-    padding: 30px;
+}
+.col-lg-9 {
+    text-align: center;
+    display: inline-block;
+    margin-top: 1%;
 }
 
     .cc h2 {

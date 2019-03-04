@@ -54,15 +54,15 @@
     </div>
 </div>
 
-<div class="container" style="background-color:#016ca0; margin:10px">
+<div class="container" style="background-color:#016ca0;">
     <div class="row">
-        <div class="col-lg-2 cc">
+        <div class="col-lg-3 cc">
             <img src="~/images/icon-slider.jpg" />
         </div>
-        <div class="col-lg-10">
+        <div class="col-lg-9">
             @foreach (var subPhone in Model.lsSubPhone)
             {
-                <div class="col-sm-4 cc"> 
+                <div class="col-lg-3 cc"> 
                     <h2>@subPhone.Name</h2>
                     <h3><b>@subPhone.SoDienThoai</b></h3>
                 </div>
@@ -104,7 +104,6 @@
                                 </a>
                                 <hr />
                             }
-
                         </div>
                         <a asp-action="@nameof(HoatDongsController.Index)"
                            class="add"
@@ -122,8 +121,6 @@
                             <h1>Tin tức mới nhất</h1>
                         </div>
                         <div class="latest_news">
-
-
                             @foreach (var tinTuc in Model.lsTinTuc)
                             {
                                 <a asp-action="@nameof(TinTucsController.Details)"
