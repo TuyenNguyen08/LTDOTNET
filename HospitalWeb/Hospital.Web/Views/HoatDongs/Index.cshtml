@@ -35,7 +35,7 @@
                                asp-controller="@nameof(HoatDongsController).Replace("Controller", "")"
                                asp-route-id="@hoatdong.Id"
                                target="_blank">
-                                <img src="@Url.Action("GetImage", "ImageBrowser", new { id = hoatdong.HinhAnhMinhHoa })" alt="" class="img_TinTuc">
+                                <img class="img_index" src="@Url.Action("GetImage", "ImageBrowser", new { id = hoatdong.HinhAnhMinhHoa })" alt="" class="img_TinTuc">
                             </a>
                             <div class="row">
                                 <div class="col-md-12 blog_meta">
@@ -59,10 +59,9 @@
                                target="_blank">
                                 @hoatdong.GioiThieu
                             </p>
-
                         </div>
-
                     </div>
+                    <hr/>
                     <a class="button" asp-action="@nameof(HoatDongsController.Details)"
                        asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
                        asp-route-id="@hoatdong.Id"

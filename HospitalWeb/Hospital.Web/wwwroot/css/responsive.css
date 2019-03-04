@@ -722,6 +722,9 @@
 */
 
 @media only screen and (min-width: 0px) and (max-width: 767px) {
+    .img_index{
+        max-height:150px;
+    }
     .breadvroumb_area h1 {
         font-size: 20px;
     }
@@ -734,6 +737,7 @@
         padding: 6px 0;
         margin-bottom: 5px;
         width: 100%;
+        max-height:150px;
     }
 
     img.img_TinTuc {
@@ -755,7 +759,7 @@
 
 
     .col_Detail {
-        min-height: 340px;
+        min-height: 240px;
         margin-top: 25px;
     }
 
