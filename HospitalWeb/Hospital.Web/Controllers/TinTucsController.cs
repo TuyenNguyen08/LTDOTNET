@@ -36,7 +36,7 @@ namespace Hospital.Web.Controllers
             {
                 Id = t.Id,
                 TieuDe = t.TieuDe,
-                GioiThieu = t.GioiThieu,
+                GioiThieu = t.GioiThieu.Substring(0,150)+"...",
                 HinhAnhMinhHoa = t.HinhAnhMinhHoa,
                 NgayTao = t.NgayTao,
             });

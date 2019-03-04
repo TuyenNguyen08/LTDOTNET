@@ -9,84 +9,7 @@
 }
 @section css {
     <link href="~/css/PagedList.css" rel="stylesheet" />
-    <style>
-        .Link_TinTuc {
-            display: inline-block;
-            padding: 10px;
-            text-align: center;
-            width: 80px;
-            padding: 6px 0;
-            margin-bottom: 5px;
-            width: 100%;
-        }
-
-        img.img_TinTuc {
-            width: 100%;
-            margin-bottom: 0px !important;
-            height: 300px;
-        }
-
-        .Details_TieuDe {
-            color: #0095EB;
-            margin-bottom: 30px;
-            font-weight: bold;
-        }
-
-        .GioiThieu_Detail {
-            font-size: 16px;
-        }
-
-
-
-        .col_Detail {
-            height: 540px;
-            margin-top: 25px;
-        }
-
-        .button {
-            backface-visibility: hidden;
-            position: relative;
-            cursor: pointer;
-            display: inline-block;
-            white-space: nowrap;
-            background: #0095eb;
-            border-radius: 0px;
-            border: 0px solid #246;
-            border-width: 0px 0px 4px 0px;
-            padding: 10px 20px 10px 20px;
-            color: #fff;
-            font-size: initial;
-            font-family: Helvetica Neue;
-            font-weight: 900;
-            font-style: normal;
-            float: right;
-        }
-
-            .button:hover {
-                color: #fff;
-                color: #007bff;
-                text-decoration: none;
-                background-color: transparent;
-            }
-
-        a.date {
-            background-color: #9DCEF3;
-            padding: 6px;
-        }
-
-        .Box_HoatDong {
-            padding: 10px 15px !important;
-            background-color: #EDF7FF !important;
-            -moz-border-radius: 7px !important;
-            -webkit-border-radius: 7px !important;
-            border-radius: 7px !important;
-            -moz-box-shadow: 3px 3px #888888;
-            -webkit-box-shadow: 3px 3px #888888;
-            box-shadow: 3px 3px #888888;
-            width: 530px;
-            margin: 5px;
-        }
-    </style>
+   
 }
 <div class="breadvroumb_area">
     <div class="container">
@@ -117,7 +40,7 @@
                             <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=tinTuc.HinhAnhMinhHoa })" />
                         </a>
                         <div class="row">
-                            <div class="col-md-2 blog_meta">
+                            <div class="col-md-12 blog_meta">
                                 <a class="date" asp-action="@nameof(TinTucsController.Details)"
                                    asp-controller="@nameof(TinTucsController).Replace("Controller","")"
                                    asp-route-id="@tinTuc.Id"
@@ -125,7 +48,7 @@
                                     @tinTuc.NgayTao?.ToString("dd/MM/yy HH:mm:ss")
                                 </a>
                             </div>
-                            <h2 class="col-md-10">
+                            <h2 class="col-md-12">
                                 <a asp-action="@nameof(TinTucsController.Details)"
                                    asp-controller="@nameof(TinTucsController).Replace("Controller","")"
                                    class="Details_TieuDe"
