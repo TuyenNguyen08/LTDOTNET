@@ -62,14 +62,13 @@
                         </div>
                     </div>
                     <hr/>
-                    <a class="button" asp-action="@nameof(HoatDongsController.Details)"
+                    <a class="button_XT" asp-action="@nameof(HoatDongsController.Details)"
                        asp-controller="@nameof(HoatDongsController).Replace("Controller","")"
                        asp-route-id="@hoatdong.Id"
                        target="_blank">
                         Xem thêm
                     </a>
                 </div>
-
             }
             <div class="col-md-12">
                 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

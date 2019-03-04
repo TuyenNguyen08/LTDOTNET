@@ -82,7 +82,7 @@ namespace AdminWebBenhVien.Controllers
         }
 
 
-        private string _destination = @"D:\ImageWebBenhVien\images\UploadFiles";
+        private string _destination = @"C:\ProjectAT\ImageWebBenhVien\images\UploadFiles";
         private string CreateUserFolder()
         {
             if (!System.IO.Directory.Exists(_destination))

@@ -218,9 +218,8 @@ ul {
 
 body {
     font-family: 'Muli', sans-serif;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: normal;
-    line-height: 1.7;
     color: black;
 }
 
@@ -1075,7 +1074,6 @@ a.read_btn,
     z-index: 1;
     width: 100%;
     display: inline-block;
-    margin-bottom: 30px;
     height: 58px;
 }
 
@@ -1152,10 +1150,6 @@ footer {
         font-size: 16px;
     }
 
-.footer_logo {
-    margin-bottom: 35px;
-}
-
 .footer_contact_inf {
     margin-top: 25px;
 }
@@ -1175,11 +1169,10 @@ footer {
 .footer_widget h4 {
     font-weight: 700;
     font-size: 20px;
-    margin-bottom: 56px;
+    margin-bottom: 16px;
 }
 
 .footer_widget .widget_menu li {
-    margin-bottom: 10px;
     position: relative;
     z-index: 1;
     padding-left: 25px;

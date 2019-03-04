@@ -84,7 +84,7 @@ a.single_latest_news, .single_latest_news {
     white-space: nowrap;
     background: #58c;
     border-radius: 15px;
-    padding: 10px 20px 10px 20px;
+    padding: 5px;
     color: #fff;
     font-size: initial;
     font-family: Helvetica Neue;
@@ -147,9 +147,7 @@ a.single_latest_news, .single_latest_news {
     margin-left: 20px;
 }
 
-.youtube_video {
-    margin: 10px 20px;
-}
+
 .tieude-TT {
     color: #007bff;
 }

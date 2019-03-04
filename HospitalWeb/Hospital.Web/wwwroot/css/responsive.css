@@ -8,6 +8,7 @@
     .list_video {
         margin: 0px -15px 10px 15px;
     }
+
         .Link_TinTuc {
         display: inline-block;
         padding: 10px;
@@ -41,7 +42,7 @@
         margin-top: 25px;
     }
 
-    .button {
+    .button_XT {
         backface-visibility: hidden;
         position: relative;
         cursor: pointer;
@@ -187,7 +188,9 @@
 */
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-
+    p{
+        font-size:18px;
+    }
     .Link_TinTuc {
         display: inline-block;
         padding: 10px;
@@ -221,7 +224,7 @@
         margin-top: 25px;
     }
 
-    .button {
+    .button_XT {
         backface-visibility: hidden;
         position: relative;
         cursor: pointer;
@@ -234,7 +237,7 @@
         font-size: initial;
         font-family: Helvetica Neue;
         font-weight: 900;
-        font-style: normal
+        font-style: normal;
     }
 
         .button:hover {
@@ -724,10 +727,16 @@
 */
 
 @media only screen and (min-width: 0px) and (max-width: 767px) {
-    h1{
-        font-size:20px;
+    .single_latest_news h5 {
+        font-size: 15px;
     }
-    p, b{
+    h1 {
+        font-size: 20px;
+    }
+    b{
+        font-size:11px;
+    }
+    p{
         font-size:15px;
     }
     .img_index{
@@ -757,11 +766,11 @@
     .Details_TieuDe {
         color: #0095EB;
         font-weight: bold;
-        font-size: 15px;
+        font-size: 17px;
     }
 
     .GioiThieu_Detail {
-        font-size: 11px;
+        font-size: 15px;
     }
 
 
@@ -777,10 +786,8 @@
         cursor: pointer;
         display: inline-block;
         white-space: nowrap;
-        background: #58c;
-        border-radius: 15px;
         padding: 5px;
-        color: #fff;
+        color: #58c;
         font-size: initial;
         font-family: Helvetica Neue;
         font-weight: 900;
@@ -1015,7 +1022,7 @@
     }
 
     .section_title h1 {
-        font-size: 30px;
+        font-size: 25px;
         margin-bottom: 15px;
     }
 
@@ -1230,7 +1237,7 @@
     }
 
     .blog_area {
-        padding: 60px 0;
+        padding: 2px 0;
     }
 
     .widget_raper {
