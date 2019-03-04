@@ -5,8 +5,10 @@
 */
 
 @media only screen and (min-width: 1200px) and (max-width: 1500px) {
-
-    .Link_TinTuc {
+    .list_video {
+        margin: 0px -15px 10px 15px;
+    }
+        .Link_TinTuc {
         display: inline-block;
         padding: 10px;
         text-align: center;
@@ -423,10 +425,10 @@
             font-size: 30px;
         }
 
-    a.single_latest_news,
+    /*a.single_latest_news,
     .single_latest_news {
         padding-left: 162px;
-    }
+    }*/
 
     .l_img {
         width: 150px;
@@ -722,6 +724,12 @@
 */
 
 @media only screen and (min-width: 0px) and (max-width: 767px) {
+    h1{
+        font-size:20px;
+    }
+    p, b{
+        font-size:15px;
+    }
     .img_index{
         max-height:150px;
     }
@@ -763,7 +771,7 @@
         margin-top: 25px;
     }
 
-    .button {
+    .button_XT {
         backface-visibility: hidden;
         position: relative;
         cursor: pointer;
@@ -776,7 +784,7 @@
         font-size: initial;
         font-family: Helvetica Neue;
         font-weight: 900;
-        font-style: normal
+        font-style: normal;
     }
 
         .button:hover {
@@ -818,9 +826,7 @@
         min-height: 180px;
     }
 
-    body {
-        font-size: 80%;
-    }
+  
 
     .htl {
         text-align: center;

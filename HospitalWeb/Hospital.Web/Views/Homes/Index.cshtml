@@ -100,7 +100,6 @@
                                     <p>
                                         @hoatdong.GioiThieu
                                     </p>
-
                                 </a>
                                 <hr />
                             }
@@ -130,16 +129,16 @@
                                     <span class="l_img">
                                         <img src="@Url.Action("GetImage" ,"ImageBrowser",new {id=tinTuc.HinhAnhMinhHoa })" />
                                     </span>
-                                    <h5  class="tieude-TT">
+                                    <h5 class="tieude-TT">
                                         @tinTuc.TieuDe
                                     </h5>
                                     <span>@tinTuc.NgayTao?.ToString("dd/MM/yyyy HH:mm:ss")</span>
                                     <p>
                                         @tinTuc.GioiThieu
                                     </p>
-
                                 </a>
-                                <hr class="line_tintuc" />
+                                <hr />
+
                             }
                         </div>
                         <a asp-action="@nameof(TinTucsController.Index)"
@@ -151,10 +150,6 @@
                         </a>
                     </div>
                 </div>
-
-
-
-
             </div>
             <div class="col-lg-4 list_video">
                 <div>

@@ -26,8 +26,6 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 ">
-
-
             @foreach (var tinTuc in Model)
             {
                 <div class="col-md-6 Box_HoatDong">
@@ -66,7 +64,7 @@
                         </div>
                     </div>
                     <hr />
-                    <a class="button" asp-action="@nameof(TinTucsController.Details)"
+                    <a class="button_XT" asp-action="@nameof(TinTucsController.Details)"
                        asp-controller="@nameof(TinTucsController).Replace("Controller","")"
                        asp-route-id="@tinTuc.Id"
                        target="_blank">
